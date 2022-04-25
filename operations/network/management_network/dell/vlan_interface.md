@@ -32,4 +32,3 @@ switch# show interface vlan
 5. Administrators can ping from the switch to the client and from the client to the switch
 
 [Back to Index](index.md)
-
