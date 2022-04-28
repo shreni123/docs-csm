@@ -4,7 +4,7 @@ Customize the NCN images by changing the root password or adding different SSH k
 This procedure shows this process being done any time after the first time installation of the CSM
 software has been completed and the PIT node is booted as a regular master node. To change the NCN image
 during an installation while the PIT node is booted as the PIT node,
-see [Change_NCN_Image_Root_Password_and_SSH_Keys_PIT](#Change_NCN_Image_Root_Password_and_SSH_Keys_PIT.md).
+see [Change_NCN_Image_Root_Password_and_SSH_Keys_on_PIT_Node](Change_NCN_Image_Root_Password_and_SSH_Keys_on_PIT_Node.md).
 
 There is some common preparation before making the Kubernetes image for master nodes and worker nodes, making the Ceph image for utility storage nodes, and then some common cleanup afterwards.
 
@@ -46,6 +46,7 @@ The Kubernetes image `k8s-image` is used by the master and worker nodes.
    ```
 
    This example uses k8s/0.1.109 for the current version and adds a suffix for the new version.
+
    ```bash
    ncn-m# export K8SVERSION=0.1.109
    ncn-m# export K8SNEW=0.1.109-2
@@ -159,7 +160,7 @@ The Kubernetes image `k8s-image` is used by the master and worker nodes.
    ncn-m# chmod -v 644 k8s/${K8SNEW}/initrd.img.xz
    ```
 
-1. Put the new squashfs, kernel, and initrd into S3
+1. Put the new `squashfs`, `kernel`, and `initrd` into S3
 
    ```bash
    ncn-m# cd k8s/${K8SNEW}
