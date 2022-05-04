@@ -41,7 +41,7 @@ boot-check nodes to dump network device information without an operating system.
 2. BMC MAC addresses already collected
 3. LiveCD ConMan is configured for each BMC
 
-For help with either of those, see [LiveCD Setup](bootstrap_livecd_remote_iso.md).
+For help with either of those, see [LiveCD Setup](bootstrap_livecd.md).
 
 <a name="mac-collection"></a>
 #### MAC Collection

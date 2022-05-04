@@ -19,11 +19,10 @@ Once the CSM installation has completed, other product streams for the HPE Cray 
 ## Topics
 
 1. [Validate SHCD](../operations/network/management_network/validate_shcd.md)
+1. [Bootstrap PIT Node](#bootstrap_pit_node)
 1. [Prepare Configuration Payload](#prepare_configuration_payload)
 1. [Prepare Management Nodes](#prepare_management_nodes)
-1. [Bootstrap PIT Node](#bootstrap_pit_node)
 1. [Configure Management Network Switches](#configure_management_network)
-1. [Collect MAC Addresses for NCNs](#collect_mac_addresses_for_ncns)
 1. [Deploy Management Nodes](#deploy_management_nodes)
 1. [Install CSM Services](#install_csm_services)
 1. [Validate CSM Health Before Final NCN Deployment](#validate_csm_health_before_final_ncn_deploy)
@@ -57,6 +56,14 @@ sections, but there is also a general troubleshooting topic.
       **Note**: If a reinstall or fresh install of this software release is being done on this system and the management
       network cabling has already been validated, then this topic could be skipped and instead move to
       [Prepare Configuration Payload](#prepare_configuration_payload)
+
+    <a name="bootstrap_pit_node"></a>
+
+   1. Bootstrap PIT Node
+
+      The Pre-Install Toolkit (PIT) node needs to be bootstrapped from the LiveCD. See [Bootstrapping the RemoteISO](bootstrap_livecd.md)
+      * **Intel BMCs** should not use the RemoteISO method, the ISO only works in LEGACY BIOS mode.
+
    <a name="prepare_configuration_payload"></a>
 
    1. Prepare Configuration Payload
@@ -68,31 +75,7 @@ sections, but there is also a general troubleshooting topic.
       to assemble the components of the system and connect appropriately labeled cables.
 
       See [Prepare Configuration Payload](prepare_configuration_payload.md)
-   <a name="prepare_management_nodes"></a>
 
-   1. Prepare Management Nodes
-
-      Some preparation of the management nodes might be needed before starting an install or reinstall.
-      The preparation includes checking and updating the firmware on the PIT node, quiescing the compute nodes
-      and application nodes, scaling back DHCP on the management nodes, wiping the storage on the management nodes,
-      powering off the management nodes, and possibly powering off the PIT node.
-
-      See [Prepare Management Nodes](prepare_management_nodes.md)
-   <a name="bootstrap_pit_node"></a>
-
-   1. Bootstrap PIT Node
-   The Pre-Install Toolkit (PIT) node needs to be bootstrapped from the LiveCD. There are two media available
-   to bootstrap the PIT node--the RemoteISO or a bootable USB device. The recommended media is the RemoteISO
-   because it does not require any physical media to prepare. However, remotely mounting an ISO on a BMC does not
-   work smoothly for nodes from all vendors. It is recommended to try the RemoteISO first.
-
-      Use one of these procedures to bootstrap the PIT node from the LiveCD.
-      * [Bootstrap PIT Node from LiveCD Remote ISO](bootstrap_livecd_remote_iso.md) (recommended)
-         * **Gigabyte BMCs** should not use the RemoteISO method.
-         * **Intel BMCs** should not use the RemoteISO method.
-      * [Bootstrap PIT Node from LiveCD USB](bootstrap_livecd_usb.md) (fallback)
-
-      Using the LiveCD USB method requires a USB 3.0 device with at least 1TB of space to create a bootable LiveCD.
    <a name="configure_management_network"></a>
 
    1. Configure Management Network Switches
@@ -106,23 +89,19 @@ sections, but there is also a general troubleshooting topic.
       **Note**: If a reinstall of this software release is being done on this system and the management network switches
       have already been configured, then this topic could be skipped and instead move to
       [Collect MAC Addresses for NCNs](#collect_mac_addresses_for_ncns)
-   <a name="collect_mac_addresses_for_ncns"></a>
 
-   1. Collect MAC Addresses for NCNs
-   Now that the PIT node has been booted with the LiveCD and the management network switches have been configured,
-   the actual MAC addresses for the management nodes can be collected. This process will include repetition of some
-   of the steps done up to this point because `csi config init` will need to be run with the proper
-   MAC addresses.
+    
+<a name="prepare_management_nodes"></a>
 
-      See [Collect MAC Addresses for NCNs](collect_mac_addresses_for_ncns.md)
+   1. Prepare Management Nodes
 
-      **Note**: If a reinstall of this software release is being done on this system and the `ncn_metadata.csv`
-      file already had valid MAC addresses for both BMC and node interfaces before `csi config init` was run, then
-      this topic could be skipped and instead move to [Deploy Management Nodes](#deploy_management_nodes).
+   Some preparation of the management nodes might be needed before starting an install or reinstall.
+   The preparation includes checking and updating the firmware on the PIT node, quiescing the compute nodes
+   and application nodes, scaling back DHCP on the management nodes, wiping the storage on the management nodes,
+   powering off the management nodes, and possibly powering off the PIT node.
 
-      **Note**: If a first time install of this software release is being done on this system and the `ncn_metadata.csv`
-      file already had valid MAC addresses for both BMC and node interfaces before `csi config init` was run, then
-      this topic could be skipped and instead move to [Deploy Management Nodes](#deploy_management_nodes).
+   See [Prepare Management Nodes](prepare_management_nodes.md)
+
    <a name="deploy_management_nodes"></a>
 
    1. Deploy Management Nodes
@@ -133,8 +112,8 @@ sections, but there is also a general troubleshooting topic.
    [Deploy Final NCN](#deploy_final_ncn).
 
       See [Deploy Management Nodes](deploy_management_nodes.md)
-   <a name="install_csm_services"></a>
 
+   <a name="install_csm_services"></a>
    1. Install CSM Services
    Now that deployment of management nodes is complete with initialized Ceph storage and a running Kubernetes
    cluster on all worker and master nodes, except the PIT node, the CSM services can be installed. The Nexus
