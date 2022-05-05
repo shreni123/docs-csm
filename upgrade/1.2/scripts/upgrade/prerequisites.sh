@@ -27,7 +27,7 @@ set -e
 BASEDIR=$(dirname $0)
 . ${BASEDIR}/upgrade-state.sh
 . ${BASEDIR}/ncn-upgrade-common.sh $(hostname)
-trap 'err_report' ERR
+trap 'err_report' ERR EXIT
 # array for paths to unmount after chrooting images
 declare -a UNMOUNTS=()
 
