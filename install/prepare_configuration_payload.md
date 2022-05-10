@@ -44,29 +44,39 @@ command during the installation process.
 | `system_config.yaml` | other | Inputs from the site-survey |
 
 <a name="steps-for-collection"></a>
+
 ### Steps for Collection
 
-The process to install for the first time must collect the information needed to create these files.
+The process to install for the first time must collect the information needed to create these files.  These files can be created using `canu` and `csi` with a valid SHCD file.
 
-1. Collect data for `application_node_config.yaml`.
+#### Generate A Paddle File
 
-   See [Create Application Node YAML](create_application_node_config_yaml.md) for instructions about creating this file.
+1. Generate a Paddle file using `canu`:
+
+```bash
+canu validate <options> --shcd <shcd.xlsx>
+```
+
+#### Generate Seed Files From A Paddle File
+
+The Paddle file is a machine-readable representation of the SHCD.  The `csi` command can interpret this file and produce the seed files needed for an installation.
+
+1. Automatically create `application_node_config.yaml`, `hmn_connections.json`, `ncn_metadata.csv`, and `switch_metadata.csv`.
+
+```bash
+csi config shcd paddle.json -AHNS
+```
+
+The manual steps to create these files can be found here as reference:
+
+- See [Create Application Node YAML](create_application_node_config_yaml.md) for instructions about creating this file.
+- See [Create HMN Connections JSON](create_hmn_connections_json.md) for instructions about creating this file.
+- See [Create NCN Metadata CSV](create_ncn_metadata_csv.md) for instructions about creating this file.
+- See [Create Switch Metadata CSV](create_switch_metadata_csv.md) for instructions about creating this file.
 
 1. Collect data for `cabinets.yaml`.
 
    See [Create Cabinets YAML](create_cabinets_yaml.md) for instructions about creating this file.
-
-1. Collect data for `hmn_connections.json`.
-
-   See [Create HMN Connections JSON](create_hmn_connections_json.md) for instructions about creating this file.
-
-1. Collect data for `ncn_metadata.csv`.
-
-   See [Create NCN Metadata CSV](create_ncn_metadata_csv.md) for instructions about creating this file.
-
-1. Collect data for `switch_metadata.csv`.
-
-   See [Create Switch Metadata CSV](create_switch_metadata_csv.md) for instructions about creating this file.
 
 1. Create a `system_config.yaml` if one is not already present from a previous install.
 
