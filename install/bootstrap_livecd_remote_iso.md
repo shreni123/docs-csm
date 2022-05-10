@@ -285,7 +285,7 @@ On first login (over SSH or at local console) the LiveCD will prompt the adminis
 
 1. Mount local disk.
 
-   > **Note:** The FSLabel `PITDATA` is already in `/etc/fstab`, so the path is omitted in the following call to `mount`.
+   > **Note:** The `FSLabel` value `PITDATA` is already in `/etc/fstab`, so the path is omitted in the following call to `mount`.
 
    ```bash
    pit# mount -vL PITDATA &&
@@ -582,16 +582,16 @@ and [Configuration Payload Files](prepare_configuration_payload.md#configuration
 
 1. Copy the new `system_config.yaml` file somewhere safe to facilitate re-installs.
 
-1. Continue to the next step to [Prepare Site Init](#prepare-site-init).
+1. Continue to the next step to [Prepare `site-init`](#prepare-site-init).
 
 <a name="prepare-site-init"></a>
 
-### 4.3 Prepare Site Init
+### 4.3 Prepare `site-init`
 
 > **Important:** Although the command prompts in this procedure are `linux#`, the procedure should be
 > performed on the PIT node.
 
-Prepare the `site-init` directory by performing the [Prepare Site Init](prepare_site_init.md) procedures.
+Prepare the `site-init` directory by performing the [Prepare `site-init`](prepare_site_init.md) procedures.
 
 <a name="bring---up-the-pit-services-and-validate-pit-health"></a>
 
