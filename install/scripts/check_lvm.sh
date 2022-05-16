@@ -22,7 +22,7 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
-echo "When prompted, please enter the NCN password for ncn-m002"
+echo "If prompted, enter the NCN password for ncn-m002"
 if ! SCRIPT=$(cat /usr/share/doc/csm/install/scripts/check_lvm_helper); then
     echo "ERROR: Unable to read /usr/share/doc/csm/install/scripts/check_lvm_helper" 1>&2
     exit 1

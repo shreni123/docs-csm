@@ -29,8 +29,6 @@ the number of storage and worker nodes.
    1. [Deploy management nodes](#deploy_management_nodes)
       1. [Deploy workflow](#deploy-workflow)
       1. [Deploy](#deploy)
-      1. [Check LVM on Kubernetes NCNs](#check-lvm-on-masters-and-workers)
-      1. [Check for unused drives on utility storage nodes](#check-for-unused-drives-on-utility-storage-nodes)
    1. [Configure after management node deployment](#configure_after_management_node_deployment)
       1. [LiveCD cluster authentication](#livecd-cluster-authentication)
       1. [Install tests and test server on NCNs](#install-tests)
@@ -38,6 +36,7 @@ the number of storage and worker nodes.
    1. [Validate management node deployment](#validate_management_node_deployment)
    1. [Important checkpoint](#important-checkpoint)
    1. [Next topic](#next-topic)
+   1. [Troubleshooting and remediation](#troubleshooting_and_remediation)
 
 <a name="prepare_for_management_node_deployment"></a>
 
@@ -549,251 +548,43 @@ be performed are in the [Deploy](#deploy) section.
     pit#
     ```
 
-<a name="check-lvm-on-masters-and-workers"></a>
+1. <a name="check-lvm-on-masters-and-workers"></a>Check LVM on Kubernetes NCNs.
 
-### 3.3 Check LVM on Kubernetes NCNs
+    Run the following command on the PIT node to validate that the expected LVM labels are present on disks on the master and worker nodes.
 
-#### 3.3.1 Run the check
-
-Run the following command on the PIT node to validate that the expected LVM labels are present on disks on the master and worker nodes.
-
-```bash
-pit# /usr/share/doc/csm/install/scripts/check_lvm.sh
-```
-
-#### 3.3.2 Expected check output
-
-Expected output looks similar to the following:
-
-```text
-When prompted, please enter the NCN password for ncn-m002
-Warning: Permanently added 'ncn-m002,10.252.1.11' (ECDSA) to the list of known hosts.
-Password:
-Checking ncn-m002...
-ncn-m002: OK
-Checking ncn-m003...
-Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
-ncn-m003: OK
-Checking ncn-w001...
-Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
-ncn-w001: OK
-Checking ncn-w002...
-Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
-ncn-w002: OK
-Checking ncn-w003...
-Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
-ncn-w003: OK
-SUCCESS: LVM checks passed on all master and worker NCNs
-```
-
-If the check succeeds, skip the manual check procedure and recovery steps.
-
-**If the check fails for any nodes, the problem must be resolved before continuing.** See [LVM Check Failure Recovery](#lvm-check-failure-recovery).
-
-<a name="manual-lvm-check-procedure"></a>
-
-#### 3.3.3 Manual LVM check procedure
-
-If needed, the LVM checks can be performed manually on the master and worker nodes.
-
-* Manual check on master nodes:
+    > **IMPORTANT:** If this check fails for any nodes, the problem must be resolved before continuing. See [LVM Check Failure Recovery](#lvm-check-failure-recovery).
 
     ```bash
-    ncn-m# blkid -L ETCDLVM
-    /dev/sdc
+    pit# /usr/share/doc/csm/install/scripts/check_lvm.sh
     ```
 
-* Manual check on worker nodes:
-
-    ```bash
-    ncn-w# blkid -L CONLIB
-    /dev/sdb2
-    ncn-w# blkid -L CONRUN
-    /dev/sdb1
-    ncn-w# blkid -L K8SLET
-    /dev/sdb3
-    ```
-
-The manual checks are considered successful if all of the `blkid` commands report a disk device (such as `/dev/sdc` -- the particular device is unimportant).
-If any of the `lsblk` commands return no output, then the check is a failure. **Any failures must be resolved before continuing.** See the following section
-for details on how to do so.
-
-<a name="lvm-check-failure-recovery"></a>
-
-#### 3.3.4 LVM check failure recovery
-
-If there are LVM check failures, then the problem must be resolved before continuing with the install.
-
-* If **any master node** has the problem, then wipe and redeploy **all** of the NCNs before continuing the installation:
-    1. Wipe each worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Wipe each master node (**except** `ncn-m001` because it is the PIT node) using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Wipe each storage node using the 'Full Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#full-wipe).
-    1. Return to the [Set each node to always UEFI Network Boot, and ensure they are powered off](#set-uefi-and-power-off) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
-
-* If **only worker nodes** have the problem, then wipe and redeploy the affected worker nodes before continuing the installation:
-    1. Wipe each affected worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Power off each affected worker node.
-    1. Return to the [Boot the Master and Worker Nodes](#boot-master-and-worker-nodes) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
-        * Note: The `ipmitool` command will give errors trying to power on the unaffected nodes, because they are already powered on -- this is expected and not a problem.
-
-<a name="check-for-unused-drives-on-utility-storage-nodes"></a>
-
-### 3.4 Check for unused drives on utility storage nodes
-
-> **IMPORTANT:** Do the following if NCNs are Gigabyte hardware. It is suggested (but optional) for HPE NCNs.
->
-> **IMPORTANT:** Estimate the expected number of OSDs using the following table and using this equation:
->
-> `total_osds` = `(number of utility storage/Ceph nodes)` `*` `(OSD count from table below for the appropriate hardware)`
-
-| Hardware Manufacturer | OSD Drive Count (not including OS drives)|
-| :-------------------: | :---------------------------------------: |
-| GigaByte              | 12 |
-| HPE                   | 8  |
-
-#### Option 1
-
-  If there are OSDs on each node (`ceph osd tree` can show this), then all the nodes are in Ceph. That means the orchestrator can be used to look for the devices.
-
-1. Get the number of OSDs in the cluster.
-
-    ```bash
-    ncn-s# ceph -f json-pretty osd stat |jq .num_osds
-    24
-    ```
-
-   **IMPORTANT:** If the returned number of OSDs is equal to `total_osds` calculated, then skip the following steps. If not, then proceed with the below additional checks and remediation steps.
-
-1. Compare the number of OSDs to the output (which should resemble the example below). The number of drives will depend on the server hardware.
-
-    > **NOTE:** If the Ceph cluster is large and has a lot of nodes, a node may be specified after the below command to limit the results.
-
-    ```bash
-    ncn-s# ceph orch device ls
-    Hostname  Path      Type  Serial              Size   Health   Ident  Fault  Available
-    ncn-s001  /dev/sda  ssd   PHYF015500M71P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdb  ssd   PHYF016500TZ1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdc  ssd   PHYF016402EB1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdd  ssd   PHYF016504831P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sde  ssd   PHYF016500TV1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdf  ssd   PHYF016501131P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdi  ssd   PHYF016500YB1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s001  /dev/sdj  ssd   PHYF016500WN1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sda  ssd   PHYF0155006W1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdb  ssd   PHYF0155006Z1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdc  ssd   PHYF015500L61P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdd  ssd   PHYF015502631P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sde  ssd   PHYF0153000G1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdf  ssd   PHYF016401T41P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdi  ssd   PHYF016504C21P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s002  /dev/sdj  ssd   PHYF015500GQ1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sda  ssd   PHYF016402FP1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdb  ssd   PHYF016401TE1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdc  ssd   PHYF015500N51P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdd  ssd   PHYF0165010Z1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sde  ssd   PHYF016500YR1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdf  ssd   PHYF016500X01P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdi  ssd   PHYF0165011H1P9DGN  1920G  Unknown  N/A    N/A    No
-    ncn-s003  /dev/sdj  ssd   PHYF016500TQ1P9DGN  1920G  Unknown  N/A    N/A    No
-    ```
-
-    If there are devices that show `Available` as `Yes` and they are not being automatically added, that device may need to be zapped.
-
-    **IMPORTANT:** Prior to zapping any device, ensure that it is not being used.
-
-1. Check to see if the number of devices is less than the number of listed drives in the output from step 1.
-
-   ```bash
-    ncn-s# ceph orch device ls|grep dev|wc -l
-    24
-    ```
-
-    If the numbers are equal, but less than the `total_osds` calculated, then the `ceph-mgr` daemon may need to be failed in order to get a fresh inventory.
-
-    ```bash
-    ncn-s# ceph mgr fail $(ceph mgr dump | jq -r .active_name)
-    ```
-
-    Wait 5 minutes and then re-check `ceph orch device ls`. See if the drives are still showing as `Available`. If so, then proceed to the next step.
-
-1. `ssh` to the host and look at `lsblk` output and check against the device from the above `ceph orch device ls`
-
-    ```bash
-    ncn-s# lsblk
-    NAME                                                                                                 MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
-    loop0                                                                                                   7:0    0   4.2G  1 loop  / run/    rootfsbase
-    loop1                                                                                                  7:1    0    30G  0 loop
-     └─live-overlay-pool                                                                                  254:8    0   300G  0 dm
-    loop2                                                                                                  7:2    0   300G  0 loop
-     └─live-overlay-pool                                                                                  254:8    0   300G  0 dm
-    sda                                                                                                    8:0    0   1.8T  0 disk
-     └─ceph--0a476f53--8b38--450d--8779--4e587402f8a8-osd--data--b620b7ef--184a--46d7--9a99--771239e7a323 254:7    0   1.8T  0 lvm
-    ```
-
-    * If it has an LVM volume like above, then it may be in use. In that case, do the option 2 check below to make sure that the drive can be wiped.
-
-#### Option 2
-
-1. Log into **each** `ncn-s` node and check for unused drives.
-
-    ```bash
-    ncn-s# cephadm shell -- ceph-volume inventory
-    ```
-
-    **IMPORTANT:** The `cephadm` command may output this warning `WARNING: The same type, major and minor should not be used for multiple devices.`. Ignore this warning.
-
-    The field `available` would be `True` if Ceph sees the drive as empty and can
-    be used. For example:
+    Expected output starts similarly to the following:
 
     ```text
-    Device Path               Size         rotates available Model name
-    /dev/sda                  447.13 GB    False   False     SAMSUNG MZ7LH480
-    /dev/sdb                  447.13 GB    False   False     SAMSUNG MZ7LH480
-    /dev/sdc                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
-    /dev/sdd                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
-    /dev/sde                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
-    /dev/sdf                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
-    /dev/sdg                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
-    /dev/sdh                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    If prompted, enter the NCN password for ncn-m002
+    Warning: Permanently added 'ncn-m002,10.252.1.11' (ECDSA) to the list of known hosts.
+    Password:
+    Checking ncn-m002...
+    ncn-m002: OK
+    Checking ncn-m003...
+    Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
     ```
 
-    Alternatively, just dump the paths of available drives:
+    On success, the script exits with zero status code and its output ends with the following line:
 
-    ```bash
-    ncn-s# cephadm shell -- ceph-volume inventory --format json-pretty | jq -r '.[]|select(.available==true)|.path'
+    ```text
+    SUCCESS: LVM checks passed on all master and worker NCNs
     ```
-
-##### Wipe and add drives
-
-1. Wipe the drive **ONLY after confirming that the drive is not being used by the current Ceph cluster** using options 1, 2, or both.
-
-    > The following example wipes drive `/dev/sdc` on `ncn-s002`. Replace these values with the appropriate ones for the situation.
-
-    ```bash
-    ncn-s# ceph orch device zap ncn-s002 /dev/sdc --force
-    ```
-
-1. Add unused drives.
-
-    ```bash
-    ncn-s# cephadm shell -- ceph-volume lvm create --data /dev/sd<drive to add> --bluestore
-    ```
-
-More information can be found at [the `cephadm` reference page](../operations/utility_storage/Cephadm_Reference_Material.md).
 
 <a name="configure_after_management_node_deployment"></a>
 
-## 4. Configure after management node deployment
+## 3. Configure after management node deployment
 
 After the management nodes have been deployed, configuration can be applied to the booted nodes.
 
 <a name="livecd-cluster-authentication"></a>
 
-### 4.1 LiveCD cluster authentication
+### 3.1 LiveCD cluster authentication
 
 The LiveCD needs to authenticate with the cluster to facilitate the rest of the CSM installation.
 
@@ -836,7 +627,7 @@ The LiveCD needs to authenticate with the cluster to facilitate the rest of the 
 
 <a name="install-tests"></a>
 
-### 4.2 Install tests and test server on NCNs
+### 3.2 Install tests and test server on NCNs
 
 Run the following commands on the PIT node.
 
@@ -849,7 +640,7 @@ pit# popd
 
 <a name="remove-default-ntp-pool"></a>
 
-### 4.3 Remove the default NTP pool
+### 3.3 Remove the default NTP pool
 
 Run the following command on the PIT node to remove the default pool, which can cause contention issues with NTP.
 
@@ -866,7 +657,7 @@ SUCCESS
 
 <a name="validate_management_node_deployment"></a>
 
-## 5. Validate management node deployment
+## 4. Validate management node deployment
 
 The following `csi pit validate` commands will run a series of remote tests on the other nodes to validate they are healthy and configured correctly.
 
@@ -931,14 +722,218 @@ Observe the output of the checks. If there are any failures, remediate them.
 
 <a name="important-checkpoint"></a>
 
-## Important checkpoint
+## 5. Important checkpoint
 
 Before proceeding, be aware that this is the last point where the other NCN nodes can be rebuilt without also having to rebuild the PIT node. Therefore, take time to double check both the cluster and the validation test results
 
 <a name="next-topic"></a>
 
-## Next topic
+## 6. Next topic
 
 After completing the deployment of the management nodes, the next step is to install the CSM services.
 
 See [Install CSM Services](index.md#install_csm_services)
+
+<a name="troubleshooting_and_remediation"></a>
+
+## 7. Troubleshooting and remediation
+
+<a name="manual-lvm-check-procedure"></a>
+
+### 7.1 LVM check issues
+
+#### 7.1.1 Manual LVM check procedure
+
+If needed, the LVM checks can be performed manually on the master and worker nodes.
+
+* Manual check on master nodes:
+
+    ```bash
+    ncn-m# blkid -L ETCDLVM
+    /dev/sdc
+    ```
+
+* Manual check on worker nodes:
+
+    ```bash
+    ncn-w# blkid -L CONLIB
+    /dev/sdb2
+    ncn-w# blkid -L CONRUN
+    /dev/sdb1
+    ncn-w# blkid -L K8SLET
+    /dev/sdb3
+    ```
+
+The manual checks are considered successful if all of the `blkid` commands report a disk device (such as `/dev/sdc` -- the particular device is unimportant).
+If any of the `lsblk` commands return no output, then the check is a failure. **Any failures must be resolved before continuing.** See the following section
+for details on how to do so.
+
+<a name="lvm-check-failure-recovery"></a>
+
+#### 7.1.2 LVM check failure recovery
+
+If there are LVM check failures, then the problem must be resolved before continuing with the install.
+
+* If **any master node** has the problem, then wipe and redeploy **all** of the NCNs before continuing the installation:
+    1. Wipe each worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Wipe each master node (**except** `ncn-m001` because it is the PIT node) using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Wipe each storage node using the 'Full Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#full-wipe).
+    1. Return to the [Set each node to always UEFI Network Boot, and ensure they are powered off](#set-uefi-and-power-off) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
+
+* If **only worker nodes** have the problem, then wipe and redeploy the affected worker nodes before continuing the installation:
+    1. Wipe each affected worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Power off each affected worker node.
+    1. Return to the [Boot the Master and Worker Nodes](#boot-master-and-worker-nodes) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
+        * Note: The `ipmitool` command will give errors trying to power on the unaffected nodes, because they are already powered on -- this is expected and not a problem.
+
+<a name="check-for-unused-drives-on-utility-storage-nodes"></a>
+
+### 7.2 Unused drives on utility storage nodes
+
+> **IMPORTANT:** Estimate the expected number of OSDs using the following table and using this equation:
+>
+> `total_osds` = `(number of utility storage/Ceph nodes)` `*` `(OSD count from table below for the appropriate hardware)`
+
+| Hardware Manufacturer | OSD Drive Count (not including OS drives)|
+| :-------------------: | :---------------------------------------: |
+| GigaByte              | 12 |
+| HPE                   | 8  |
+
+#### 7.2.1 Manual check
+
+There are two options for manually checking the number of OSDs.
+
+##### 7.2.1.1 Option 1
+
+If there are OSDs on each node (`ceph osd tree` can show this), then all the nodes are in Ceph. That means the orchestrator can be used to look for the devices.
+
+1. Get the number of OSDs in the cluster.
+
+    ```bash
+    ncn-s# ceph -f json-pretty osd stat |jq .num_osds
+    24
+    ```
+
+   **IMPORTANT:** If the returned number of OSDs is equal to `total_osds` calculated, then nothing further needs to be done. Otherwise, proceed with the below additional checks and remediation steps.
+
+1. Compare the number of OSDs to the output (which should resemble the example below). The number of drives will depend on the server hardware.
+
+    > **NOTE:** If the Ceph cluster is large and has a lot of nodes, a node may be specified after the below command to limit the results.
+
+    ```bash
+    ncn-s# ceph orch device ls
+    ```
+
+    Example output:
+
+    ```text
+    Hostname  Path      Type  Serial              Size   Health   Ident  Fault  Available
+    ncn-s001  /dev/sda  ssd   PHYF015500M71P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdb  ssd   PHYF016500TZ1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdc  ssd   PHYF016402EB1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdd  ssd   PHYF016504831P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sde  ssd   PHYF016500TV1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdf  ssd   PHYF016501131P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdi  ssd   PHYF016500YB1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s001  /dev/sdj  ssd   PHYF016500WN1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sda  ssd   PHYF0155006W1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdb  ssd   PHYF0155006Z1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdc  ssd   PHYF015500L61P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdd  ssd   PHYF015502631P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sde  ssd   PHYF0153000G1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdf  ssd   PHYF016401T41P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdi  ssd   PHYF016504C21P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s002  /dev/sdj  ssd   PHYF015500GQ1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sda  ssd   PHYF016402FP1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdb  ssd   PHYF016401TE1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdc  ssd   PHYF015500N51P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdd  ssd   PHYF0165010Z1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sde  ssd   PHYF016500YR1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdf  ssd   PHYF016500X01P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdi  ssd   PHYF0165011H1P9DGN  1920G  Unknown  N/A    N/A    No
+    ncn-s003  /dev/sdj  ssd   PHYF016500TQ1P9DGN  1920G  Unknown  N/A    N/A    No
+    ```
+
+    If there are devices that show `Available` as `Yes` and they are not being automatically added, then that device may need to be zapped.
+
+    **IMPORTANT:** Prior to zapping any device, ensure that it is not being used.
+
+1. Check to see if the number of devices is less than the number of listed drives in the output from step 1.
+
+   ```bash
+    ncn-s# ceph orch device ls|grep dev|wc -l
+    24
+    ```
+
+    If the numbers are equal, but less than the `total_osds` calculated, then the `ceph-mgr` daemon may need to be failed in order to get a fresh inventory.
+
+    ```bash
+    ncn-s# ceph mgr fail $(ceph mgr dump | jq -r .active_name)
+    ```
+
+    Wait 5 minutes and then re-check `ceph orch device ls`. See if the drives are still showing as `Available`. If so, then proceed to the next step.
+
+1. `ssh` to the host and look at `lsblk` output and check against the device from the above `ceph orch device ls`
+
+    ```bash
+    ncn-s# lsblk
+    NAME                                                                                                 MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
+    loop0                                                                                                   7:0    0   4.2G  1 loop  / run/    rootfsbase
+    loop1                                                                                                  7:1    0    30G  0 loop
+     └─live-overlay-pool                                                                                  254:8    0   300G  0 dm
+    loop2                                                                                                  7:2    0   300G  0 loop
+     └─live-overlay-pool                                                                                  254:8    0   300G  0 dm
+    sda                                                                                                    8:0    0   1.8T  0 disk
+     └─ceph--0a476f53--8b38--450d--8779--4e587402f8a8-osd--data--b620b7ef--184a--46d7--9a99--771239e7a323 254:7    0   1.8T  0 lvm
+    ```
+
+    * If it has an LVM volume like above, then it may be in use. In that case, do the option 2 check below to make sure that the drive can be wiped.
+
+##### 7.2.1.1 Option 2
+
+1. Log into **each** `ncn-s` node and check for unused drives.
+
+    ```bash
+    ncn-s# cephadm shell -- ceph-volume inventory
+    ```
+
+    **IMPORTANT:** The `cephadm` command may output this warning `WARNING: The same type, major and minor should not be used for multiple devices.`. Ignore this warning.
+
+    The field `available` would be `True` if Ceph sees the drive as empty and can
+    be used. For example:
+
+    ```text
+    Device Path               Size         rotates available Model name
+    /dev/sda                  447.13 GB    False   False     SAMSUNG MZ7LH480
+    /dev/sdb                  447.13 GB    False   False     SAMSUNG MZ7LH480
+    /dev/sdc                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    /dev/sdd                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    /dev/sde                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    /dev/sdf                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    /dev/sdg                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    /dev/sdh                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
+    ```
+
+    Alternatively, just dump the paths of available drives:
+
+    ```bash
+    ncn-s# cephadm shell -- ceph-volume inventory --format json-pretty | jq -r '.[]|select(.available==true)|.path'
+    ```
+
+#### 7.2.2 Wipe and add drives
+
+1. Wipe the drive **ONLY after confirming that the drive is not being used by the current Ceph cluster** using one or both of the above manual options.
+
+    > The following example wipes drive `/dev/sdc` on `ncn-s002`. Replace these values with the appropriate ones for the situation.
+
+    ```bash
+    ncn-s# ceph orch device zap ncn-s002 /dev/sdc --force
+    ```
+
+1. Add unused drives.
+
+    ```bash
+    ncn-s# cephadm shell -- ceph-volume lvm create --data /dev/sd<drive to add> --bluestore
+    ```
+
+More information can be found at [the `cephadm` reference page](../operations/utility_storage/Cephadm_Reference_Material.md).
