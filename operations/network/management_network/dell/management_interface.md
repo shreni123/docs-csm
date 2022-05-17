@@ -9,13 +9,13 @@ Alternatively, a loopback interface can be configured to be used as management i
 
 Configure the Management interface in CONFIGURATION mode:
 
-```
+```text
 interface mgmt 1/1/1
 ```
 
 Configure an IP address and mask on the Management interface in INTERFACE mode:
 
-```
+```text
 ip address A.B.C.D/prefix-length
 ```
 
@@ -25,7 +25,7 @@ dhcp
 
 Enable the Management interface in INTERFACE mode:
 
-```
+```text
 no shutdown
 ```
 
