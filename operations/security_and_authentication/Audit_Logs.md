@@ -3,7 +3,10 @@
 
 How to enable/disable audit logging for host and Kubernetes APIs.
 
-Audit logs are used to monitor the system and search for suspicious behavior. Host and Kubernetes API audit logging can be enabled to produce extra audit logs for analysis. Enabling audit logging is optional and will generate some load and data on the non-compute nodes \(NCNs\). Host and Kubernetes API audit logging is not enabled by default.
+Audit logs are used to monitor the system and search for suspicious behavior.
+Host and Kubernetes API audit logging can be enabled to produce extra audit logs for analysis.
+Enabling audit logging is optional and will generate some load and data on the non-compute nodes \(NCNs\).
+Host and Kubernetes API audit logging is not enabled by default.
 
 To enable or disable host and Kubernetes API audit logging, change the CSI setting:
 
