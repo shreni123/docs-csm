@@ -1,7 +1,6 @@
-
 # Audit Logs
 
-How to enable/disable audit logging for host and Kubernetes APIs.
+How to enable and disable audit logging for host and Kubernetes APIs.
 
 Audit logs are used to monitor the system and search for suspicious behavior.
 Host and Kubernetes API audit logging can be enabled to produce extra audit logs for analysis.
