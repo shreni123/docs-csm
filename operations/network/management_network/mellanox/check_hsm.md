@@ -2,18 +2,20 @@
 
 Hardware State Manager has two important parts:
 
-* SLS - Systems Layout Service: This is the "expected" state of the system (as populated by networks.yaml and other sources).
+* SLS - Systems Layout Service: This is the "expected" state of the system.
 * SMD - State Manager Daemon:  This is the "discovered" or active state of the system during runtime.
+
+For each of the commands replace `SYSTEM_DOMAIN_NAME` with the system domain name.
 
 SLS:
 
-```
-curl  -H "Authorization: Bearer ${TOKEN}" https://api_gw_service.local/apis/sls/v1/hardware | jq | less
+```bash
+curl  -H "Authorization: Bearer ${TOKEN}" https://api.nmnlb.SYSTEM_DOMAIN_NAME/apis/sls/v1/hardware | jq | less
 ```
 
 The output from SLS should look like this:
 
-```
+```text
 {
   "Parent": "x1000c7s1b0",
   "Xname": "x1000c7s1b0n0",
@@ -32,13 +34,13 @@ The output from SLS should look like this:
 
 SMD:
 
-```
-curl -s -k -H "Authorization: Bearer ${TOKEN}" https://api_gw_service.local/apis/smd/hsm/v1/Inventory/EthernetInterfaces | jq | less
+```bash
+curl -s -k -H "Authorization: Bearer ${TOKEN}" https://api.nmnlb.SYSTEM_DOMAIN_NAME/apis/smd/hsm/v1/Inventory/EthernetInterfaces | jq | less
 ```
 
 Your output from SMD should look like this:
 
-```
+```text
 {
   "ID": "0040a6838b0e",
   "Description": "",
