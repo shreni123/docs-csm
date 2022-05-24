@@ -228,6 +228,24 @@ The take-away here is: any change done to `/root/` will persist through `/run/ov
 
 These features or toggles are passable on the kernel command line, and change the behavior of the overlayFS.
 
+##### Making a New OverlayFS
+
+Each overlayFS is paired with a squashFS image, when a new squashFS image is downloaded a new, clean overlayFS is created.
+The overlayFS is named by the name of the squashFS, meaning both the SquashFS file and OverlayFS creation is dependent on the
+kernel parameter `rd.live.squashimg`.
+
+If the value `rd.live.squashimg` is changed, then a new overlayFS is created using that name.
+
+For example: Setting `rd.live.squashimg=filesystem.squashfs` will download a squashFS file named `filesystem.squashfs` and create an overlayFS using that same name:
+```bash
+# overlay-SQFSRAID-4e235133-33c6-41f4-83ec-fcc905b83fba is what dmsquash-live looks for, in this case it points to the custom named overlayFS.
+ncn-w002:/run/initramfs/overlayfs/LiveOS # ll
+total 0
+drwxr-xr-x 8 root root 74 May 24 16:34 filesystem.squashfs-overlayFS
+lrwxrwxrwx 1 root root 29 May 24 16:34 overlay-SQFSRAID-4e235133-33c6-41f4-83ec-fcc905b83fba -> filesystem.squashfs-overlayFS
+drwxr-xr-x 3 root root 18 May 24 16:34 ovlwork
+```
+
 <a name="reset-toggles"></a>
 ##### Reset Toggles
 
