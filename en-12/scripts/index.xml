@@ -6,11 +6,11 @@
     <description>Recent content in Scripts on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 29 May 2022 03:29:39 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 May 2022 03:30:04 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Library For SLS Network Data</title>
       <link>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</link>
-      <pubDate>Sun, 29 May 2022 03:29:39 +0000</pubDate>
+      <pubDate>Mon, 30 May 2022 03:30:04 +0000</pubDate>
       
       <guid>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</guid>
       <description>Python Library for SLS Network Data This is a reusable Python library for safely interacting with SLS network data (in JSON format).
