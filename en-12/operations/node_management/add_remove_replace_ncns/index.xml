@@ -6,11 +6,32 @@
     <description>Recent content in Add Remove Replace NCNs on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 06 Jun 2022 03:27:20 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Jun 2022 03:26:19 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collect NCN Mac Addresses</title>
+      <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/collect_ncn_mac_addresses/</link>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/collect_ncn_mac_addresses/</guid>
+      <description>Collect NCN MAC Addresses This procedure can be used to to collect MAC addresses from the NCNs along with their assigned interface names for use with the Add NCN Data procedure. A temporary MAC address collection iPXE bootscript is put into place on the system to discover the MAC addresses of the NCNs, along with their associated interface names (such as mgmt0).
+WARNING This procedure will temporarily break the system&amp;rsquo;s ability to properly boot nodes in the system.</description>
+    </item>
+    
+    <item>
+      <title>Redeploy Services Impacted By Adding Or Permanently Removing Storage Nodes</title>
+      <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/redeploy_services/</link>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/redeploy_services/</guid>
+      <description>Redeploy Services Impacted by Adding or Permanently Removing Storage Nodes This procedure redeploys S3 and sysmgmt-health services to add or remove storage node endpoints.
+This procedure can be skipped if a worker or master node has been added. In that case, proceed to the next step to Validate NCN or return to the main Add, Remove, Replace, or Move NCNs page.
+This procedure can be skipped if a worker or master node have been removed.</description>
+    </item>
+    
     <item>
       <title>Remove NCN Data</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_ncn_data/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_ncn_data/</guid>
       <description>Remove NCN Data Description Remove NCN data to System Layout Service (SLS), Boot Script Service (BSS), and Hardware State Manager (HSM) as needed to remove an NCN.
@@ -22,7 +43,7 @@ ncn-mw# cd /usr/share/docs/csm/scripts/operations/node_management/Add_Remove_Rep
     <item>
       <title>Remove NCN From Role</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_ncn_from_role/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_ncn_from_role/</guid>
       <description>Remove NCN from Role Description Remove a master, worker, or storage NCN from current roles. Select the procedure below based on the node type, complete the remaining steps to wipe the drives, and then power off the node.
@@ -33,7 +54,7 @@ Procedure IMPORTANT: The following procedures assume that you have set the varia
     <item>
       <title>Remove Switch Configuration For NCN</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_switch_config/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/remove_switch_config/</guid>
       <description>Remove Switch Configuration for NCN Description Update the network switches for the NCN that was removed.
@@ -44,7 +65,7 @@ Next Step Proceed to the next step to Redeploy Services or return to the main Ad
     <item>
       <title>Update Firmware</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/update_firmware/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/update_firmware/</guid>
       <description>Update Firmware Description Use FAS to update the firmware and set the BMC password.
@@ -55,7 +76,7 @@ Proceed to the next step to Boot NCN and Configure or return to the main Add, Re
     <item>
       <title>Validate Added NCN</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/validate_ncn/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/validate_ncn/</guid>
       <description>Validate Added NCN Only follow the steps in the section for the node type that was added:
@@ -67,7 +88,7 @@ Run the following command from any master or worker node that is already in the 
     <item>
       <title>Validate Health</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/validate_health/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:36 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:45 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/validate_health/</guid>
       <description>Validate Health Description Validate that the system is healthy.
@@ -79,7 +100,7 @@ ncn-mw# /opt/cray/platform-utils/ncnHealthChecks.sh ncn-mw# /opt/cray/platform-u
     <item>
       <title>Add NCN Data</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/add_ncn_data/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:44 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/add_ncn_data/</guid>
       <description>Add NCN Data Description Add NCN data to System Layout Service (SLS), Boot Script Service (BSS), and Hardware State Manager (HSM) as needed, in order to add an NCN to the system.
@@ -91,7 +112,7 @@ Scenarios where this procedure is applicable:
     <item>
       <title>Add Switch Configuration For NCN</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/add_switch_config/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:44 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/add_switch_config/</guid>
       <description>Add Switch Configuration for NCN Description Update the network switches for the NCN that is being added.
@@ -102,7 +123,7 @@ Next Step Proceed to the next step to Add NCN Data or return to the main Add, Re
     <item>
       <title>Allocate NCN Ip Addresses</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/allocate_ncn_ip_addresses/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:44 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/allocate_ncn_ip_addresses/</guid>
       <description>Allocate NCN IP Addresses Description This procedure allocates IP addresses for an NCN being added to a system to the applicable networks (HMN, NMN, MTL, CAN, etc.) to the System Layout Service (SLS) and the Boot Script Service (BSS).
@@ -113,34 +134,13 @@ This procedure will perform and verify the following:
     <item>
       <title>Boot NCN</title>
       <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/boot_ncn/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
+      <pubDate>Tue, 07 Jun 2022 03:25:44 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/boot_ncn/</guid>
       <description>Boot NCN Description Boot a master, worker, or storage non-compute node (NCN) that is to be added to the cluster.
 Procedure Open and Watch the console for the Node Being Rebuilt   Log in to a second session in order to watch the console.
 Open this link in a new tab or page: Log in to a Node Using ConMan
 The first session will be needed to run the commands in the following Rebuild Node steps.</description>
-    </item>
-    
-    <item>
-      <title>Collect NCN Mac Addresses</title>
-      <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/collect_ncn_mac_addresses/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/collect_ncn_mac_addresses/</guid>
-      <description>Collect NCN MAC Addresses This procedure can be used to to collect MAC addresses from the NCNs along with their assigned interface names for use with the Add NCN Data procedure. A temporary MAC address collection iPXE bootscript is put into place on the system to discover the MAC addresses of the NCNs, along with their associated interface names (such as mgmt0).
-WARNING This procedure will temporarily break the system&amp;rsquo;s ability to properly boot nodes in the system.</description>
-    </item>
-    
-    <item>
-      <title>Redeploy Services Impacted By Adding Or Permanently Removing Storage Nodes</title>
-      <link>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/redeploy_services/</link>
-      <pubDate>Mon, 06 Jun 2022 03:26:35 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/node_management/add_remove_replace_ncns/redeploy_services/</guid>
-      <description>Redeploy Services Impacted by Adding or Permanently Removing Storage Nodes This procedure redeploys S3 and sysmgmt-health services to add or remove storage node endpoints.
-This procedure can be skipped if a worker or master node has been added. In that case, proceed to the next step to Validate NCN or return to the main Add, Remove, Replace, or Move NCNs page.
-This procedure can be skipped if a worker or master node have been removed.</description>
     </item>
     
   </channel>
