@@ -32,7 +32,7 @@ import subprocess
 import os.path
 import subprocess
 import pexpect
-from ssh_host import SshHost
+from pyscripts.core.ssh.ssh_host import SshHost
 from pyscripts.core.log_config import LOG_LEVEL
 import time
 import re

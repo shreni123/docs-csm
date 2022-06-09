@@ -23,7 +23,7 @@
 #
 
 from pyscripts.core.csm_api_utils import get_api_gateway_uri, get_access_token, CsmApiError
-from ssh_host import SshHost
+from pyscripts.core.ssh.ssh_host import SshHost
 import requests
 import urllib3
 import json

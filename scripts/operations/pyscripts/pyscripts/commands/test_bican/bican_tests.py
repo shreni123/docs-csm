@@ -24,12 +24,12 @@
 
 from pyscripts.core.ssh.ssh_targets import SshTargets
 from pyscripts.core.ssh.ssh_connection import SshConnection
-import pyscripts.core.csm_api_utils
+from pyscripts.core import csm_api_utils
 import yaml
 import time
 import logging
 import sys
-
+import os
 
 
 TEST_PLAN = None
@@ -58,7 +58,9 @@ def load_test_plan():
     global SSH_TARGETS
 
     # TODO: need to check whether CHN or CAN toggle is on.
-    f = open("chn_toggle_tests.yaml", "r")
+    filename = "chn_toggle_tests.yaml"
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), filename))
+    f = open(path, "r")
     TEST_PLAN = yaml.safe_load(f.read())["tests"]
 
     SSH_TARGETS = SshTargets()
@@ -78,7 +80,7 @@ def execute_test_plan():
 
     total_time = time.time() - start_time
 
-    logging.error(f"\n\nRan {total_ran} tests in {total_time:0.3f}s")
+    print(f"\n\nRan {total_ran} tests in {total_time:0.3f}s")
 
 def collect_passwords_from_node_type(from_node_type, config):
     for network in config:
@@ -114,12 +116,12 @@ def test_from_node_type_over_network(from_node_type, network, config):
             from_node = get_ssh_host_for_node_type(from_node_type, ["ncn-m001"])
 
             if not from_node:
-                logging.error("""\nTesting SSH access:
+                print("""\nTesting SSH access:
         From node type {}
         Over network {}""".format(
                     from_node_type, network_suffix))
 
-                logging.error("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(from_node_type))
+                print("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(from_node_type))
                 OVERALL_PASS = False
                 continue
 
@@ -145,20 +147,20 @@ def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fro
     to_node = get_ssh_host_for_node_type(to_node_type, ["ncn-m001", from_node.hostname])
 
     if not to_node:
-        logging.error("""\nTesting SSH access:
+        print("""\nTesting SSH access:
         From node type {}, using {}
         Over network {}
         To node type {}
         Expected to work: {}""".format(
             from_node_type, from_node.get_full_domain_name(), network_suffix, to_node_type, expected))
 
-        logging.error("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(to_node_type))
+        print("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(to_node_type))
         OVERALL_PASS = False
         return 0
 
     to_node = to_node.with_domain_suffix(network_suffix)
 
-    logging.error("""\nTesting SSH access:
+    print("""\nTesting SSH access:
         From node type {}, using {}
         Over network {}
         To node type {}, using {}
@@ -171,17 +173,17 @@ def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fro
         toNodeSshConnection.run_test_command("echo hello", "hello")
 
         if expected:
-            logging.error("""\t\t^^^^ PASSED ^^^^""")
+            print("""\t\t^^^^ PASSED ^^^^""")
         else:
             OVERALL_PASS = False
-            logging.error(f"\t\t^^^^ FAILED: accessible but SHOULD NOT have been accessible ^^^^")
+            print(f"\t\t^^^^ FAILED: accessible but SHOULD NOT have been accessible ^^^^")
     except Exception as err:
         if not expected:
-            logging.error("""\t\t^^^^ PASSED ^^^^""")
+            print("""\t\t^^^^ PASSED ^^^^""")
         else:
             OVERALL_PASS = False
-            logging.error("\t\t^^^^ FAILED: not accessible but SHOULD have been accessible ^^^^\n")
-            logging.error("{}".format(str(err)))
+            print("\t\t^^^^ FAILED: not accessible but SHOULD have been accessible ^^^^\n")
+            print("{}".format(str(err)))
     finally:
         toNodeSshConnection.close_connection(False)
 
