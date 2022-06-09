@@ -34,7 +34,7 @@ Host and Kubernetes API audit logging is not enabled by default.
 
    * Post-install
 
-     If a system is installed, aduit logging can be enabled via the Boot Script Service (BSS).
+     If a system is installed, audit logging can be enabled via the Boot Script Service (BSS).
 
      * `ncn-mgmt-node-auditing-enabled`
      * `k8s-api-auditing-enabled`
@@ -57,6 +57,9 @@ Host and Kubernetes API audit logging is not enabled by default.
 
    Follow the [Reboot NCNs](../node_management/Reboot_NCNs.md) procedure.
 
-Host audit logs are stored in the `/var/log/audit/HostOS` directory on each NCN. Host audit logging uses a maximum of 60GB on each NCN when using log rotation settings. The log rotation settings are enabled after editing the CSI settings and rebooting the NCNs.
+Host audit logs are stored in the `/var/log/audit/HostOS` directory on each NCN.
+Host audit logging uses a maximum of 60GB on each NCN when using log rotation settings.
+The log rotation settings are enabled after editing the CSI settings and rebooting the NCNs.
 
-The Kubernetes API audit logs are stored in the `/var/log/audit/kl8s/apiserver` directory on each master NCN. Kubernetes API audit logging uses a maximum of 1GB on each master NCN when using log rotation settings.
+The Kubernetes API audit logs are stored in the `/var/log/audit/kl8s/apiserver` directory on each master NCN.
+Kubernetes API audit logging uses a maximum of 1GB on each master NCN when using log rotation settings.
