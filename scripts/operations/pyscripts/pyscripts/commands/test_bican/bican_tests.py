@@ -36,9 +36,9 @@ TEST_PLAN = None
 SSH_TARGETS = None
 FROM_APPLICABLE_NODE_TYPES = ["ncn_master", "uan", "cn", "spine_switch"]
 TO_APPLICABLE_NODE_TYPES = ["ncn_master"]
-APPLICABLE_NETWORK_TYPES = ["can", "chn", "cmn", "nmn", "hmn", "hmnlb"]
+APPLICABLE_NETWORK_TYPES = ["can", "chn", "cmn", "nmn", "hmn", "hmnlb", "nmnlb"]
 
-OVERALL_PASS = True
+TOTAL_PASS = 0
 
 def start_test(from_types, to_types, networks):
     global FROM_APPLICABLE_NODE_TYPES
@@ -57,8 +57,13 @@ def load_test_plan():
     global TEST_PLAN
     global SSH_TARGETS
 
-    # TODO: need to check whether CHN or CAN toggle is on.
-    filename = "chn_toggle_tests.yaml"
+    if csm_api_utils.is_bican_chm():
+        print("BICAN:CHN detected.")
+        filename = "chn_toggle_tests.yaml"
+    else:
+        print("BICAN:CAN detected.")
+        filename = "can_toggle_tests.yaml"
+    
     path = os.path.abspath(os.path.join(os.path.dirname(__file__), filename))
     f = open(path, "r")
     TEST_PLAN = yaml.safe_load(f.read())["tests"]
@@ -80,7 +85,7 @@ def execute_test_plan():
 
     total_time = time.time() - start_time
 
-    print(f"\n\nRan {total_ran} tests in {total_time:0.3f}s. Overall status: %s" % ("PASSED" if OVERALL_PASS else "FAILED"))
+    print(f"\n\nRan {total_ran} tests in {total_time:0.3f}s. Overall status: %s (Passed: {TOTAL_PASS}, Failed: {total_ran - TOTAL_PASS})" % ("PASSED" if TOTAL_PASS == total_ran else "FAILED"))
 
 def collect_passwords_from_node_type(from_node_type, config):
     for network in config:
@@ -122,7 +127,6 @@ def test_from_node_type_over_network(from_node_type, network, config):
                     from_node_type, network_suffix))
 
                 print("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(from_node_type))
-                OVERALL_PASS = False
                 continue
 
             from_node = from_node.with_domain_suffix(None)
@@ -144,7 +148,7 @@ def collect_passwords_from_node_type_to_node_type_over_network(from_node_type, f
         to_node.get_password()
 
 def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fromNodeSshConnection, to_node_type, network, expected):
-    global OVERALL_PASS
+    global TOTAL_PASS
 
     network_suffix = "{}.{}".format(network, csm_api_utils.get_system_domain())
 
@@ -159,7 +163,6 @@ def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fro
             from_node_type, from_node.get_full_domain_name(), network_suffix, to_node_type, expected))
 
         print("\t\t^^^^ FAILED: Cannot find a suitable node for node type {} ^^^^".format(to_node_type))
-        OVERALL_PASS = False
         return 0
 
     to_node = to_node.with_domain_suffix(network_suffix)
@@ -182,14 +185,14 @@ def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fro
 
         if expected:
             print("""\t\t^^^^ PASSED ^^^^""")
+            TOTAL_PASS += 1
         else:
-            OVERALL_PASS = False
             print(f"\t\t^^^^ FAILED: accessible but SHOULD NOT have been accessible ^^^^")
     except Exception as err:
         if not expected:
             print("""\t\t^^^^ PASSED ^^^^""")
+            TOTAL_PASS += 1
         else:
-            OVERALL_PASS = False
             print("\t\t^^^^ FAILED: not accessible but SHOULD have been accessible ^^^^\n")
             print("{}".format(str(err)))
     finally:

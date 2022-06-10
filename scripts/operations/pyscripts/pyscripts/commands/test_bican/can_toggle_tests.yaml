@@ -8,9 +8,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -30,9 +30,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -86,9 +86,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -108,9 +108,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -164,9 +164,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -186,9 +186,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -242,9 +242,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -264,9 +264,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -320,9 +320,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -342,9 +342,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -398,9 +398,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -420,9 +420,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -476,9 +476,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: true
       ncn_worker: true
@@ -498,9 +498,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: true
       ncn_worker: true
@@ -554,9 +554,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: false
       ncn_worker: false
@@ -576,9 +576,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: false
       ncn_worker: false
@@ -632,9 +632,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: false
       ncn_worker: false
@@ -654,9 +654,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: false
       ncn_worker: false
@@ -710,9 +710,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: false
-      uai: false
-      cn: false
+      uan: true
+      uai: true
+      cn: true
     cmn:
       ncn_master: false
       ncn_worker: false
@@ -732,9 +732,9 @@ tests:
       leaf_switch: false
       leaf_BMC: false
       CDU: false
-      uan: true
-      uai: true
-      cn: true
+      uan: false
+      uai: false
+      cn: false
     nmn:
       ncn_master: false
       ncn_worker: false

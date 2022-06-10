@@ -81,7 +81,7 @@ class SshConnection:
         self.ssh_conn = ssh_conn
         self.child_process = None if not ssh_conn else ssh_conn.child_process
         self.connected = False
-        self.command_prompt_host_pattern = r"((.|\n)*)(({}\:)|({}\#))((.|\n)*)".format(re.escape(ssh_host.hostname), re.escape(ssh_host.hostname))
+        self.command_prompt_host_pattern = ssh_host.get_target_hostname_command_prompt()
 
     def connect(self):
         if self.connected:
@@ -111,7 +111,7 @@ class SshConnection:
                 # Enable extra parameters if we are allowed to
                 extra_params = ""
 
-            # normalize the hostname if necessary...workaround that should be removed. See ssh_host#get_target_hostname for more info
+            # normalize the hostname if necessary
             hostname = self.ssh_conn.ssh_host.get_target_hostname(self.ssh_host)
 
             self.child_process.sendline("ssh%s %s@%s%s" %
@@ -184,18 +184,18 @@ class SshConnection:
 
         logging.info("Connecting to {}".format(self.ssh_host.get_full_domain_name()))
 
-        pattern_list = [PASSWORD_PROMPT, pexpect.TIMEOUT, SSH_NEWKEY, self.command_prompt_host_pattern, UNRESOLVED_HOSTNAME]
+        pattern_list = [PASSWORD_PROMPT, pexpect.TIMEOUT, SSH_NEWKEY, UNRESOLVED_HOSTNAME, self.command_prompt_host_pattern]
         if self.ssh_conn:
             pattern_list.append(self.ssh_conn.command_prompt_host_pattern)
 
         i = self.__expect(pattern_list)
 
-        if i == 5 or i == 4:
-            raise UnresolvedHostname
-        elif i == 3:
+        if i == 4:
             logging.info("Connected to {}".format(self.ssh_host.get_full_domain_name()))
             self.connected = True
             return
+        elif i == 3:
+            raise UnresolvedHostname
         elif i == 2:
             self.child_process.sendline("yes")
             i = self.__expect([PASSWORD_PROMPT, pexpect.TIMEOUT], timeout=DEFAULT_TIMEOUT)
