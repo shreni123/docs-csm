@@ -120,7 +120,9 @@ class SshHost:
         """
         if self.vrf and "cmn." in target_ssh_host.domain_suffix and "switch" in target_ssh_host.type:
             return socket.gethostbyname(target_ssh_host.get_full_domain_name())
-        elif "nmnlb." in target_ssh_host.domain_suffix or "hmnlb." in target_ssh_host.domain_suffix:
+        elif "hmnlb." in target_ssh_host.domain_suffix:
+            return "hmcollector.{}".format(target_ssh_host.domain_suffix)
+        elif "nmnlb." in target_ssh_host.domain_suffix:
             return "api.{}".format(target_ssh_host.domain_suffix)
         else:
             return target_ssh_host.get_full_domain_name()
