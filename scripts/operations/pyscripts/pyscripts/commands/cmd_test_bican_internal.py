@@ -23,36 +23,34 @@
 #
 
 from pyscripts.cli import pass_environment
-from pyscripts.commands.test_bican import bican_tests
+from pyscripts.commands.test_bican_internal import test_bican_internal
 import logging
 import click
 
 
-@click.command("test_bican", short_help="Tests the isolation of SSH access across networks in CAN-toggled or CHN-toggled environments.")
-# @click.argument("path", required=False, type=click.Path(resolve_path=True))
+@click.command("test_bican_internal", short_help="Tests the isolation of internal SSH access across networks in CAN-toggled or CHN-toggled environments.")
 @click.option(
     "--from-types",
     type=click.Choice(["ncn_master", "ncn_worker", "ncn_storage", "cn", "uan", "uai", "spine_switch", "leaf_switch", "leaf_BMC", "CDU"], case_sensitive=False),
     multiple=True,
     default=["ncn_master", "cn", "uan", "spine_switch"],
-    help="What types of nodes to run the tests from."
+    help="What types of nodes to run the tests from. Defaults: ('ncn_master', 'cn', 'uan', 'spine_switch')"
 )
 @click.option(
     "--to-types",
     type=click.Choice(["ncn_master", "ncn_worker", "ncn_storage", "cn", "uan", "uai", "spine_switch", "leaf_switch", "leaf_BMC", "CDU"], case_sensitive=False),
     multiple=True,
     default=["ncn_master", "cn", "uan", "spine_switch"],
-    help="What types of nodes to test SSH access to."
+    help="What types of nodes to test SSH access to. Defaults: ('ncn_master', 'cn', 'uan', 'spine_switch')"
 )
 @click.option(
     "--networks",
     type=click.Choice(["can", "chn", "cmn", "nmn", "nmnlb", "hmn", "hmnlb"], case_sensitive=False),
     multiple=True,
     default=["can", "chn", "cmn", "nmn", "nmnlb", "hmn", "hmnlb"],
-    help="What networks to test with. You can "
+    help="What networks to test with. Defaults: ('can', 'chn', 'cmn', 'nmn', 'nmnlb', 'hmn', 'hmnlb')"
 )
 @pass_environment
 def cli(ctx, from_types, to_types, networks):
-    """Tests the isolation of SSH access across networks in a CAN-toggled environment."""
     print(f"Going to test from node types {from_types} to node types {to_types} on networks {networks}.")
-    bican_tests.start_test(from_types, to_types, networks)
+    test_bican_internal.start_test(from_types, to_types, networks)
