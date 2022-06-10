@@ -33,7 +33,7 @@ import os.path
 import subprocess
 import pexpect
 from pyscripts.core.ssh.ssh_host import SshHost
-from pyscripts.core.log_config import LOG_LEVEL
+from pyscripts.core.log_config import get_logging_level
 import time
 import re
 
@@ -91,7 +91,7 @@ class SshConnection:
             self.child_process = pexpect.spawn("ssh -o LogLevel=error -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s@%s" %
                 (self.ssh_host.username, self.ssh_host.get_full_domain_name()), encoding="utf-8")
 
-            if LOG_LEVEL == logging.INFO:
+            if get_logging_level() == logging.INFO:
                 self.child_process.logfile = sys.stdout
         else:
             if not self.ssh_conn.connected:
@@ -99,8 +99,23 @@ class SshConnection:
                 self.ssh_conn.connect()
                 self.child_process = self.ssh_conn.child_process
 
-            self.child_process.sendline("ssh -o LogLevel=error -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s@%s" %
-                (self.ssh_host.username, self.ssh_host.get_full_domain_name()))
+            vrf = ""
+            extra_params = "  -o LogLevel=error -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+            hostname = self.ssh_host.get_full_domain_name()
+
+            if self.ssh_conn.ssh_host.vrf:
+                # add " vrf Customer" at the end of the SSH connection if the underlying connection requires it.
+                vrf = " vrf {}".format(self.ssh_conn.ssh_host.vrf)
+
+            if not self.ssh_conn.ssh_host.use_extra_params:
+                # Enable extra parameters if we are allowed to
+                extra_params = ""
+
+            # normalize the hostname if necessary...workaround that should be removed. See ssh_host#get_target_hostname for more info
+            hostname = self.ssh_conn.ssh_host.get_target_hostname(self.ssh_host)
+
+            self.child_process.sendline("ssh%s %s@%s%s" %
+                (extra_params, self.ssh_host.username, hostname, vrf))
 
         self.__open_connection_dance()
 

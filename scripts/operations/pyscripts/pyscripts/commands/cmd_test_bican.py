@@ -54,5 +54,5 @@ import click
 @pass_environment
 def cli(ctx, from_types, to_types, networks):
     """Tests the isolation of SSH access across networks in a CAN-toggled environment."""
-    logging.info(f"Going to test from node types {from_types} to node types {to_types} on networks {networks}.")
+    print(f"Going to test from node types {from_types} to node types {to_types} on networks {networks}.")
     bican_tests.start_test(from_types, to_types, networks)

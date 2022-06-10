@@ -80,7 +80,7 @@ def execute_test_plan():
 
     total_time = time.time() - start_time
 
-    print(f"\n\nRan {total_ran} tests in {total_time:0.3f}s")
+    print(f"\n\nRan {total_ran} tests in {total_time:0.3f}s. Overall status: %s" % ("PASSED" if OVERALL_PASS else "FAILED"))
 
 def collect_passwords_from_node_type(from_node_type, config):
     for network in config:
@@ -127,6 +127,10 @@ def test_from_node_type_over_network(from_node_type, network, config):
 
             from_node = from_node.with_domain_suffix(None)
 
+            if from_node_type == "spine_switch" or from_node_type == "leaf_switch" or from_node_type == "leaf_BMC" or from_node_type == "CDU":
+                from_node.vrf = "Customer"
+                from_node.use_extra_params = False
+
             fromNodeSshConnection = SshConnection(from_node)
 
             total_ran += test_from_node_type_to_node_type_over_network(from_node_type, from_node, fromNodeSshConnection, to_node_type, network, config[to_node_type])
@@ -170,7 +174,11 @@ def test_from_node_type_to_node_type_over_network(from_node_type, from_node, fro
     try:
         toNodeSshConnection = SshConnection(to_node, fromNodeSshConnection)
         toNodeSshConnection.connect()
-        toNodeSshConnection.run_test_command("echo hello", "hello")
+
+        if "switch" in to_node.type:
+            toNodeSshConnection.run_test_command("show hostname", to_node.hostname)
+        else:
+            toNodeSshConnection.run_test_command("echo hello", "hello")
 
         if expected:
             print("""\t\t^^^^ PASSED ^^^^""")

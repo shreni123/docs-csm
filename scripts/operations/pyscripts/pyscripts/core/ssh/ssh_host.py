@@ -23,6 +23,7 @@
 #
 
 import getpass
+import socket
 
 class SshHost:
     """
@@ -47,6 +48,8 @@ class SshHost:
         self.no_password_needed = False
         self.domain_suffix = domain_suffix
         self.original_host = None
+        self.vrf = None # whether to add a vrf suffix to commands executed on this host
+        self.use_extra_params = True # whether to connect to this host using parameters such as '-o LogLevel=error -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
     def get_password(self, reset_cached = False):
         password = self.password
@@ -74,6 +77,8 @@ class SshHost:
     def with_domain_suffix(self, domain_suffix):
         newHost = SshHost(self.hostname, self.username, self.rawdata, domain_suffix)
         newHost.original_host = self if not self.original_host else self.original_host
+        newHost.vrf = self.vrf
+        newHost.use_extra_params = self.use_extra_params
         return newHost
 
     def get_state(self):
@@ -97,3 +102,16 @@ class SshHost:
             return "{}.{}".format(self.hostname, self.domain_suffix)
         else:
             return self.hostname
+
+    def get_target_hostname(self, target_ssh_host):
+        """
+        This is a workaround that substitutes the IP of the target host instead of the hostname to connect.
+        It is so we can get around the bug https://jira-pro.its.hpecorp.net:8443/browse/CASMNET-1600
+
+        Once that bug is resolved, either this entire method and the logic to use this method in ssh_connection should be removed,
+        or everything except the last line in this method that returns target_ssh_host.hostname should be removed.
+        """
+        if self.vrf and "cmn." in target_ssh_host.domain_suffix and "switch" in target_ssh_host.type:
+            return socket.gethostbyname(target_ssh_host.get_full_domain_name())
+        else:
+            return target_ssh_host.get_full_domain_name()

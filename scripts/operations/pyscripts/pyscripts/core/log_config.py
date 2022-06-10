@@ -25,14 +25,17 @@
 import logging
 import sys
 
-LOG_LEVEL = logging.ERROR
+__LOG_LEVEL = logging.ERROR
+
+def get_logging_level():
+    return __LOG_LEVEL
 
 def set_logging_level(verbose):
-    global LOG_LEVEL
+    global __LOG_LEVEL
     if (verbose):
-        LOG_LEVEL = logging.INFO
+        __LOG_LEVEL = logging.INFO
     else:
-        LOG_LEVEL = logging.ERROR
+        __LOG_LEVEL = logging.ERROR
 
-    logging.basicConfig(filename='/tmp/' + sys.argv[0].split('/')[-1] + '.log',  level=LOG_LEVEL)
+    logging.basicConfig(filename='/tmp/' + sys.argv[0].split('/')[-1] + '.log',  level=__LOG_LEVEL)
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
