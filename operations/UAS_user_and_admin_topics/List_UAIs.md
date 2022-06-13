@@ -29,7 +29,7 @@ For Legacy Mode user procedures:
     Use a command of the following form:
 
     ```bash
-    ncn-m001-pit# cray uas admin uais list OPTIONS
+    ncn-m001-cray uas admin uais list OPTIONS
     ```
 
     OPTIONS includes includes the following selection options:
@@ -40,7 +40,7 @@ For Legacy Mode user procedures:
     The following lists Broker UAIs on a system where administrators follow a convention that a Broker UAI is created with an owner called `broker`:
 
     ```bash
-    ncn-m001-pit# cray uas admin uais list --owner broker
+    ncn-m001-cray uas admin uais list --owner broker
     ```
 
     Example output:
@@ -77,8 +77,8 @@ For Legacy Mode user procedures:
     uai_name = "uai-vers-4a38a807"
     uai_status = "Running: Ready"
     username = "vers"
-    ````
+    ```
 
-[Top: User Access Service (UAS)](index.md)
+[Top: User Access Service (UAS)](README.md)
 
 [Next Topic: Creating a UAI](Create_a_UAI.md)

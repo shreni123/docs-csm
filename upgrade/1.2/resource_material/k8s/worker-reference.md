@@ -5,13 +5,11 @@
    nodes `ncn-w001`, `ncn-w002`, and `ncn-w003` have the pod.
 
    > NOTE: If the command below does not return any pod names, proceed to step 2.
-
    > NOTE: A 404 error is expected if the COS product is not installed on the system. In this case, proceed to step 2.
-
    > NOTE: If the `cray` command is not initialized, see [Initialize the CLI Configuration](../../../../operations/configure_cray_cli.md)
 
     ```bash
-    ncn# cray cps deployment list --format json | jq '.[] | [.node,.podname]'
+    cray cps deployment list --format json | jq '.[] | [.node,.podname]'
     [
       "ncn-w003",
       "cray-cps-cm-pm-9tdg5"
@@ -31,7 +29,7 @@
    > Do not run this command now. It is part of the manual instructions for upgrading a worker node. This example uses `ncn-w002`.
 
    ```bash
-   ncn# cray cps deployment update --nodes "ncn-w002"
+   cray cps deployment update --nodes "ncn-w002"
    ```
 
 2. Confirm the CFS `configurationStatus` for **all** worker nodes before shutting down this worker node. If the state is `pending`,
@@ -42,9 +40,9 @@
    This example uses `ncn-w002`.
 
    ```bash
-   ncn# export NODE=ncn-w002
-   ncn# export XNAME=$(ssh $NODE cat /etc/cray/xname)
-   ncn# cray cfs components describe $XNAME --format json
+   export NODE=ncn-w002
+   export XNAME=$(ssh $NODE cat /etc/cray/xname)
+   cray cfs components describe $XNAME --format json
    {
      "configurationStatus": "configured",
      "desiredConfig": "ncn-personalization-full",
@@ -52,5 +50,4 @@
      "errorCount": 0,
      "id": "x3000c0s7b0n0",
      "retryPolicy": 3,
-    ```
-
+   ```
