@@ -176,7 +176,7 @@ class SshConnection:
         output = output.replace("Timeout exceeded.", "")
 
         for i in range(len(regex_list)):
-            if regex_list[i] != pexpect.TIMEOUT and regex_list[i] != pexpect.EOF and re.match(regex_list[i], output):
+            if regex_list[i] != pexpect.TIMEOUT and regex_list[i] != pexpect.EOF and re.match(regex_list[i], output, re.IGNORECASE):
                 return i
 
     def __open_connection_dance(self):

@@ -35,7 +35,7 @@ import os
 TEST_PLAN = None
 SSH_TARGETS = None
 FROM_APPLICABLE_NODE_TYPES = ["ncn_master", "uan", "cn", "spine_switch"]
-TO_APPLICABLE_NODE_TYPES = ["ncn_master"]
+TO_APPLICABLE_NODE_TYPES = ["ncn_master", "uan", "cn", "spine_switch"]
 APPLICABLE_NETWORK_TYPES = ["can", "chn", "cmn", "nmn", "hmn", "hmnlb", "nmnlb"]
 
 TOTAL_PASS = 0

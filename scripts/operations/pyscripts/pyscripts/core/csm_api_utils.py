@@ -48,17 +48,22 @@ except:
 
 SYSTEM_NAME = None
 SITE_DOMAIN = None
+SYSTEM_DOMAIN = None
 ADMIN_SECRET = None
 ACCESS_TOKEN = None
 API_GATEWAY_BASE_DOMAIN = None
 
 def get_system_domain():
     """
-    Gets the system domain. Assumes this code is run on a machine with craysys installed.
+    Gets the system domain. Assumes this code is run on a machine with craysys installed or that set_system_domain is called
     """
 
     global SYSTEM_NAME
     global SITE_DOMAIN
+    global SYSTEM_DOMAIN
+
+    if SYSTEM_DOMAIN:
+        return SYSTEM_DOMAIN
 
     if not SYSTEM_NAME:
         __calculate_system_name()
@@ -66,7 +71,17 @@ def get_system_domain():
     if not SITE_DOMAIN:
         __calculate_site_domain()
 
-    return "{}.{}".format(SYSTEM_NAME, SITE_DOMAIN)
+    SYSTEM_DOMAIN = "{}.{}".format(SYSTEM_NAME, SITE_DOMAIN)
+
+    return SYSTEM_DOMAIN
+
+def set_system_domain(system_domain):
+    """
+    Sets the system domain.
+    """
+
+    global SYSTEM_DOMAIN
+    SYSTEM_DOMAIN = system_domain
 
 def get_api_gateway_uri():
     """
@@ -101,6 +116,14 @@ def get_admin_secret(force_refresh = False):
         print(f"An unanticipated exception occurred while retrieving k8s secrets {err}")
         logging.error(f"An unanticipated exception occurred while retrieving k8s secrets {err}")
         raise CsmApiError from None
+
+def set_admin_secret(admin_secret):
+    """
+    Sets the admin secret for k8s.
+    """
+
+    global ADMIN_SECRET
+    ADMIN_SECRET = admin_secret
 
 def get_access_token(force_refresh = False):
     """
