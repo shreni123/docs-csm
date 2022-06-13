@@ -39,18 +39,18 @@ Host and Kubernetes API audit logging is not enabled by default.
      * `ncn-mgmt-node-auditing-enabled`
      * `k8s-api-auditing-enabled`
 
-1. Verify if audit logging is enabled.
+1. (`ncn#`) Verify if audit logging is enabled.
 
    * `ncn-mgmt-node-auditing-enabled`
   
      ```bash
-     ncn# cray bss bootparameters list --format json --hosts Global | jq '.[]."cloud-init"."meta-data"."k8s-api-auditing-enabled"'
+     cray bss bootparameters list --format json --hosts Global | jq '.[]."cloud-init"."meta-data"."k8s-api-auditing-enabled"'
      ```
 
    * `k8s-api-auditing-enabled`
 
      ```bash
-     ncn# cray bss bootparameters list --format json --hosts Global | jq '.[]."cloud-init"."meta-data"."ncn-mgmt-node-auditing-enabled"'
+     cray bss bootparameters list --format json --hosts Global | jq '.[]."cloud-init"."meta-data"."ncn-mgmt-node-auditing-enabled"'
      ```
 
 1. Restart each NCN to apply the new settings after the CSI setting is changed.
