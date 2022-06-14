@@ -6,11 +6,21 @@
     <description>Recent content in Compute Rolling Upgrades on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 13 Jun 2022 03:30:33 +0000</lastBuildDate><atom:link href="/docs-csm/en-10/operations/compute_rolling_upgrades/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Jun 2022 03:36:54 +0000</lastBuildDate><atom:link href="/docs-csm/en-10/operations/compute_rolling_upgrades/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upgrade Compute Nodes With CRUS</title>
+      <link>/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</link>
+      <pubDate>Tue, 14 Jun 2022 03:36:07 +0000</pubDate>
+      
+      <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</guid>
+      <description>Upgrade Compute Nodes with CRUS Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
+Upgrade a set of compute nodes with the Compute Rolling Upgrade Service (CRUS). Manage the workload management status of nodes and quiesce each node before taking the node out of service and upgrading it. Then reboot it into the upgraded state and return it to service within the workload manager (WLM).</description>
+    </item>
+    
     <item>
       <title>Compute Rolling Upgrades</title>
       <link>/docs-csm/en-10/operations/compute_rolling_upgrades/compute_rolling_upgrades/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
+      <pubDate>Tue, 14 Jun 2022 03:36:06 +0000</pubDate>
       
       <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/compute_rolling_upgrades/</guid>
       <description>Compute Rolling Upgrades Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
@@ -20,7 +30,7 @@ The Compute Rolling Upgrade Service (CRUS) upgrades sets of compute nodes withou
     <item>
       <title>CRUS Workflow</title>
       <link>/docs-csm/en-10/operations/compute_rolling_upgrades/crus_workflow/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
+      <pubDate>Tue, 14 Jun 2022 03:36:06 +0000</pubDate>
       
       <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/crus_workflow/</guid>
       <description>CRUS Workflow Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
@@ -30,7 +40,7 @@ The following workflow is intended to be a high-level overview of how to upgrade
     <item>
       <title>Troubleshoot A Failed CRUS Session Because Of Bad Parameters</title>
       <link>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_bad_parameters/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
+      <pubDate>Tue, 14 Jun 2022 03:36:06 +0000</pubDate>
       
       <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_bad_parameters/</guid>
       <description>Troubleshoot a Failed CRUS Session Because of Bad Parameters Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
@@ -42,7 +52,7 @@ The following are examples of incorrect parameters:
     <item>
       <title>Troubleshoot A Failed CRUS Session Because Of Unmet Conditions</title>
       <link>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_unmet_conditions/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
+      <pubDate>Tue, 14 Jun 2022 03:36:06 +0000</pubDate>
       
       <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_unmet_conditions/</guid>
       <description>Troubleshoot a Failed CRUS Session Because of Unmet Conditions Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
@@ -52,22 +62,12 @@ If a CRUS session has any unmet conditions, adding or fixing them will cause the
     <item>
       <title>Troubleshoot Nodes Failing To Upgrade In A CRUS Session</title>
       <link>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_nodes_failing_to_upgrade_in_a_crus_session/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
+      <pubDate>Tue, 14 Jun 2022 03:36:06 +0000</pubDate>
       
       <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/troubleshoot_nodes_failing_to_upgrade_in_a_crus_session/</guid>
       <description>Troubleshoot Nodes Failing to Upgrade in a CRUS Session Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
 Troubleshoot compute nodes failing to upgrade during a Compute Rolling Upgrade Service (CRUS) session and rerun the session on the failed nodes.
 When nodes are marked as failed they are added to the failed node group associated with the upgrade session, and the nodes are marked as down in the workload manager (WLM).</description>
-    </item>
-    
-    <item>
-      <title>Upgrade Compute Nodes With CRUS</title>
-      <link>/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</link>
-      <pubDate>Mon, 13 Jun 2022 03:29:44 +0000</pubDate>
-      
-      <guid>/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</guid>
-      <description>Upgrade Compute Nodes with CRUS Note: CRUS is deprecated in CSM 1.2.0. It will be removed in a future CSM release and replaced with BOS V2, which will provide similar functionality.
-Upgrade a set of compute nodes with the Compute Rolling Upgrade Service (CRUS). Manage the workload management status of nodes and quiesce each node before taking the node out of service and upgrading it. Then reboot it into the upgraded state and return it to service within the workload manager (WLM).</description>
     </item>
     
   </channel>
