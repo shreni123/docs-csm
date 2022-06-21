@@ -6,22 +6,11 @@
     <description>Recent content in Customer Accessible Networks on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 17 Jun 2022 03:28:56 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/customer_accessible_networks/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Bi-CAN Aruba/arista Configuration</title>
-      <link>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_aruba_config/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_aruba_config/</guid>
-      <description>BI-CAN Aruba/Arista Configuration This is an example configuration of how to connect two Aruba spine switches to two Arista switches. This example is from a running system utilizing the bifurcated CAN feature offered in CSM 1.2.
-Summary:
- Two Aruba 8325 switches running in a VSX cluster. Two Arista 7060CX2-32S switches running MLAG. The Arista switches are connected to the Slingshot/HSN network via static MLAG. The Aruba Spine switches are connected to the Arista switches with point-to-point OSPF links.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 21 Jun 2022 18:41:12 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/customer_accessible_networks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Metallb Peering With Arista Edge Router</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_metallb_peering/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:10 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:22 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_metallb_peering/</guid>
       <description>MetalLB Peering with Arista Edge Router This is an example configuration of how to connect a pair of Arista switches to MetalLB running inside of Kubernetes.
@@ -30,9 +19,20 @@ Prerequisites  Pair of Arista switches already connected to the high-speed netwo
     </item>
     
     <item>
+      <title>Bi-CAN Aruba/arista Configuration</title>
+      <link>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_aruba_config/</link>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_aruba_config/</guid>
+      <description>BI-CAN Aruba/Arista Configuration This is an example configuration of how to connect two Aruba spine switches to two Arista switches. This example is from a running system utilizing the bifurcated CAN feature offered in CSM 1.2.
+Summary:
+ Two Aruba 8325 switches running in a VSX cluster. Two Arista 7060CX2-32S switches running MLAG. The Arista switches are connected to the Slingshot/HSN network via static MLAG. The Aruba Spine switches are connected to the Arista switches with point-to-point OSPF links.</description>
+    </item>
+    
+    <item>
       <title>CAN/cmn With Dual-spine Configuration</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/dual_spine_configuration/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:09 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/dual_spine_configuration/</guid>
       <description>CAN/CMN with Dual-Spine Configuration The Customer Access Network (CAN) and Customer Management Network (CMN) needs to be connected to both spines in a dual-spine configuration so that each spine can access the outside network. However, the NCNs should only have one default gateway. Therefore, the multi-active gateway protocol (MAGP) on the Mellanox spines can be used to create a virtual router gateway IP address that can direct to either of the spines, depending on the state of the spines.</description>
@@ -41,7 +41,7 @@ Prerequisites  Pair of Arista switches already connected to the high-speed netwo
     <item>
       <title>Connect To The Cmn And CAN</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/connect_to_the_cmn_can/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:09 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/connect_to_the_cmn_can/</guid>
       <description>Connect to the CMN and CAN How to connect to the CMN and CAN physically and via layer 3.
@@ -52,7 +52,7 @@ Physical Connection to the CMN and CAN The physical connection to the CMN and CA
     <item>
       <title>Customer Accessible Networks</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/customer_accessible_networks/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:09 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/customer_accessible_networks/</guid>
       <description>Customer Accessible Networks There are generally two networks accessible by devices outside of the CSM cluster. One network is for administrators managing the cluster and one is for users accessing user services provided by the cluster.
@@ -63,7 +63,7 @@ Customer Management Network The Customer Management Network (CMN) provides acces
     <item>
       <title>Externally Exposed Services</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/externally_exposed_services/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:09 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/externally_exposed_services/</guid>
       <description>Externally Exposed Services The following services are exposed on one or more of the external networks (CMN, CAN, and CHN). Each of these services requires an IP address in the relevant subnets so they are reachable on that network. This IP address is allocated by the MetalLB component.
@@ -73,7 +73,7 @@ Services under Istio Ingress Gateway and OAuth2 Proxy Ingress share an ingress, 
     <item>
       <title>Troubleshoot Cmn Issues</title>
       <link>/docs-csm/en-12/operations/network/customer_accessible_networks/troubleshoot_cmn_issues/</link>
-      <pubDate>Fri, 17 Jun 2022 03:28:09 +0000</pubDate>
+      <pubDate>Tue, 21 Jun 2022 18:40:21 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/customer_accessible_networks/troubleshoot_cmn_issues/</guid>
       <description>Troubleshoot CMN issues Various connection points to check when using the CMN and how to fix any issues that arise.
