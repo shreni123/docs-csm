@@ -54,8 +54,21 @@ usage()
    echo
 }
 
+usage_err()
+{
+    usage
+    err_exit "usage: $*"
+}
+
 while [[ $# -gt 0 ]]; do
   key="$1"
+
+  # Make sure that flags which require arguments get them
+  case $key in
+    --csm-release|--csm-config-version|--git-commit|--git-clone-url|--ncn-config-file)
+      [[ $# -lt 2 ]] && usage_err "$key requires an argument"
+      [[ -z "$2" ]] && usage_err "Argument to $key may not be blank"
+      ;;
 
   case $key in
     --csm-release)
@@ -79,11 +92,20 @@ while [[ $# -gt 0 ]]; do
       shift # past value
       ;;
     --ncn-config-file)
+      # Make sure the file exists, is a regular file, is not empty, and 
+      # contains valid JSON data
+      [[ -e "$2" ]] || usage_err "NCN config file ($2) does not exist"
+      [[ -f "$2" ]] || usage_err "NCN config file ($2) exists but is not a regular file"
+      [[ -s "$2" ]] || usage_err "NCN config file ($2) has zero size"
+      json=$(cat "$2" | jq) || usage_err "NCN config file ($2) is not valid JSON format"
+      [[ -z "$json" ]] && usage_err "NCN config file ($2) contains no JSON data"
       OLD_NCN_CONFIG_FILE="$2"
       shift # past argument
       shift # past value
       ;;
     --xnames)
+      [[ $# -lt 2 ]] && usage_err "$key requires an argument"
+      [[ -z "$2" ]] && usage_err "Argument to $key may not be blank"
       XNAMES="$2"
       shift # past argument
       shift # past value
@@ -97,7 +119,7 @@ while [[ $# -gt 0 ]]; do
       exit 0
       ;;
     *) # unknown option
-      usage
+      usage_err "Unknown argument: '$key'"
       exit 1
       ;;
   esac
