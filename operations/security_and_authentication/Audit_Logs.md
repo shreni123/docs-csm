@@ -9,27 +9,49 @@ Host and Kubernetes API audit logging is not enabled by default.
 
 ## Procedure
 
-1. Enable or disable host and Kubernetes API audit logging.
+1. (`ncn#`) Enable or disable host and Kubernetes API audit logging.
 
    The method for updating the audit log settings will vary depending on the state of the system.
    Select one of the following options based on the installation status of the system:
 
    * Install
 
-     During the install, audit logging is enabled or disabled by changing the CSI settings.
-     Use the following flags with the `csi config init` command to enable or disable audit logging.
-     Refer to `csi config init -h` for more information on using flags.
+     Use one of the following options to update the audit log settings during the install:
 
-     * `ncn-mgmt-node-auditing-enabled`: Set to `true` to enable host logging or to `false` to disable host logging.
+     * **Option 1**
+
+       During the install, audit logging is enabled or disabled by changing the CSI settings.
+       Use the following flags with the `csi config init` command to enable or disable audit logging.
+       Refer to `csi config init -h` for more information on using flags.
+
+       `ncn-mgmt-node-auditing-enabled`: Set to `true` to enable host logging or to `false` to disable host logging.
 
        ```console
-       initCmd.Flags().Bool("ncn-mgmt-node-auditing-enabled", true, "Enable management node auditing")
+       csi config init --ncn-mgmt-node-auditing-enabled=true [other config init options]
        ```
 
-     * `k8s-api-auditing-enabled`: Set to `true` to enable Kubernetes API logging or to `false` to disable Kubernetes API logging.
+       `k8s-api-auditing-enabled`: Set to `true` to enable Kubernetes API logging or to `false` to disable Kubernetes API logging.
 
        ```console
-       initCmd.Flags().Bool("k8s-api-auditing-enabled", true, "Enable the kubernetes auditing API")
+       csi config init --k8s-api-auditing-enabled=true [other config init options]
+       ```
+
+     * **Option 2**
+
+       Adjust the audit log settings by editing the `system_config.yaml` file.
+
+       View the current settings with the following command:
+
+       ```bash
+       # cd /var/www/ephemeral/prep
+       # grep audit system_config.yaml
+       ```
+
+       Example output:
+
+       ```text
+       k8s-api-auditing-enabled: false
+       ncn-mgmt-node-auditing-enabled: false
        ```
 
    * Post-install
@@ -39,7 +61,7 @@ Host and Kubernetes API audit logging is not enabled by default.
      * `ncn-mgmt-node-auditing-enabled`
      * `k8s-api-auditing-enabled`
 
-1. (`ncn#`) Verify if audit logging is enabled.
+2. (`ncn#`) Verify if audit logging is enabled.
 
    * `ncn-mgmt-node-auditing-enabled`
   
@@ -53,7 +75,7 @@ Host and Kubernetes API audit logging is not enabled by default.
      cray bss bootparameters list --format json --hosts Global | jq '.[]."cloud-init"."meta-data"."ncn-mgmt-node-auditing-enabled"'
      ```
 
-1. Restart each NCN to apply the new settings after the CSI setting is changed.
+3. Restart each NCN to apply the new settings after the CSI setting is changed.
 
    Follow the [Reboot NCNs](../node_management/Reboot_NCNs.md) procedure.
 
