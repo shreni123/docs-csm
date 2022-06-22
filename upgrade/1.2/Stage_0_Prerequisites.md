@@ -1,6 +1,10 @@
 # Stage 0 - Prerequisites and Preflight Checks
 
-> **`NOTE`** CSM 1.0.1 or higher is required in order to upgrade to CSM 1.2.0.
+> **Reminders:**
+>
+> - CSM 1.0.1 or higher is required in order to upgrade to CSM 1.2.0.
+> - If any problems are encountered and the procedure or command output does not provide relevant guidance, see
+>   [Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 ## Abstract (Stage 0)
 
@@ -11,11 +15,12 @@ backup of Workload Manager configuration data and files is created. Once complet
 
 ### Stages
 
-- [Stage 0.1 - Prepare assets](#prepare-assets)
-- [Stage 0.2 - Update SLS](#update-sls)
-- [Stage 0.3 - Upgrade Management Network](#update-management-network)
-- [Stage 0.4 - Prerequisites Check](#prerequisites-check)
-- [Stage 0.5 - Backup Workload Manager Data](#backup-workload-manager)
+- [Stage 0.1 - Prepare assets](#stage-01---prepare-assets)
+- [Stage 0.2 - Plan and coordinate network upgrade](#stage-02---plan-and-coordinate-network-upgrade)
+- [Stage 0.3 - Update SLS](#stage-03---update-sls)
+- [Stage 0.4 - Upgrade management network](#stage-04---upgrade-management-network)
+- [Stage 0.5 - Prerequisites check](#stage-05---prerequisites-check)
+- [Stage 0.6 - Backup workload manager data](#stage-06---backup-workload-manager-data)
 - [Stage completed](#stage-completed)
 
 ## Stage 0.1 - Prepare assets
@@ -23,8 +28,19 @@ backup of Workload Manager configuration data and files is created. Once complet
 1. (`ncn-m001#`) Set the `CSM_RELEASE` variable to the **target** CSM version of this upgrade.
 
    ```bash
-    CSM_RELEASE=1.2.0
+   CSM_RELEASE=1.2.0
    ```
+
+1. If there are space concerns on the node, then add an `rbd` device on the node for the CSM tarball.
+
+    See [Create a storage pool](../../operations/utility_storage/Alternate_Storage_Pools.md#create-a-storage-pool)
+    and [Create and map an `rbd` device](../../operations/utility_storage/Alternate_Storage_Pools.md#create-and-map-an-rbd-device).
+
+    **Note:** This same `rbd` device can be remapped to `ncn-m002` later in the upgrade procedure, when the CSM tarball is needed on that node.
+    However, by default the `prepare-assets.sh` script will delete the CSM tarball in order to free space on the node.
+    If using an `rbd` device, this is not necessary or desirable, as it will require the CSM tarball to be downloaded again later in the
+    procedure. Therefore, **if using an `rbd` device to store the CSM tarball, then run the `prepare-assets.sh` script with the
+    `--no-delete-tarball-file` argument.**
 
 1. Follow either the [Direct download](#direct-download) or [Manual copy](#manual-copy) procedure.
 
@@ -40,14 +56,14 @@ backup of Workload Manager configuration data and files is created. Once complet
    ```bash
    wget https://artifactory.algol60.net/artifactory/csm-rpms/hpe/stable/sle-15sp2/docs-csm/1.2/noarch/docs-csm-latest.noarch.rpm \
                 -O /root/docs-csm-latest.noarch.rpm &&
-             rpm -Uvh --force /root/docs-csm-latest.noarch.rpm
+   rpm -Uvh --force /root/docs-csm-latest.noarch.rpm
    ```
 
 1. (`ncn-m001#`) Set the `ENDPOINT` variable to the URL of the directory containing the CSM release `tar` file.
 
    In other words, the full URL to the CSM release `tar` file must be `${ENDPOINT}${CSM_RELEASE}.tar.gz`
 
-  > **`NOTE`** This step is optional for Cray/HPE internal installs, if `ncn-m001` can reach the internet.
+   > **`NOTE`** This step is optional for Cray/HPE internal installs, if `ncn-m001` can reach the internet.
 
    ```bash
    ENDPOINT=https://put.the/url/here/
@@ -55,7 +71,7 @@ backup of Workload Manager configuration data and files is created. Once complet
 
 1. (`ncn-m001#`) Run the script.
 
-  > **`NOTE`** For Cray/HPE internal installs, if `ncn-m001` can reach the internet, then the `--endpoint` argument may be omitted.
+   > **`NOTE`** For Cray/HPE internal installs, if `ncn-m001` can reach the internet, then the `--endpoint` argument may be omitted.
 
    ```bash
    /usr/share/doc/csm/upgrade/1.2/scripts/upgrade/prepare-assets.sh --csm-version csm-${CSM_RELEASE} --endpoint "${ENDPOINT}"
@@ -78,7 +94,7 @@ backup of Workload Manager configuration data and files is created. Once complet
 
    ```bash
    cp PATH_TO_DOCS_RPM /root/docs-csm-latest.noarch.rpm &&
-             rpm -Uvh --force /root/docs-csm-latest.noarch.rpm
+   rpm -Uvh --force /root/docs-csm-latest.noarch.rpm
    ```
 
 1. (`ncn-m001#`) Set the `CSM_TAR_PATH` variable to the full path to the CSM `tar` file on `ncn-m001`.
@@ -88,7 +104,10 @@ backup of Workload Manager configuration data and files is created. Once complet
    ```
 
 1. (`ncn-m001#`) Run the script.
-   
+
+   > If using an `rbd` device to store the CSM tarball (or if not wanting the tarball file deleted for other reasons), then append the
+   `--no-delete-tarball-file` argument when running the script.
+
    ```bash
    /usr/share/doc/csm/upgrade/1.2/scripts/upgrade/prepare-assets.sh --csm-version csm-${CSM_RELEASE} --tarball-file "${CSM_TAR_PATH}"
    ```
@@ -105,7 +124,8 @@ decision making, see the [Management Network User Guide](../../operations/networ
 
 One detail which must not be overlooked is that the existing Customer Access Network (CAN) will be migrated or retrofitted into the new Customer Management Network (CMN) while
 minimizing changes. A new CAN (or CHN) network is then created. Pivoting the existing CAN to the new CMN allows administrative traffic (already on the CAN) to remain as-is while
-moving standard user traffic to a new site-routable network.
+moving standard user traffic to a new site-routable network. You can read more about this, as well as steps to ensure undisrupted access to UANs during upgrade, in
+[Plan and coordinate network upgrade](plan_and_coordinate_network_upgrade.md).
 
 > **Important:** If this is the first time performing the SLS update to CSM 1.2, review the [SLS upgrade `README`](scripts/sls/README.SLS_Upgrade.md) in order to ensure
 the correct options for the specific environment are used. Two examples are given below. To see all options from the update script, run `./sls_updater_csm_1.2.py --help`.
@@ -134,6 +154,9 @@ the correct options for the specific environment are used. Two examples are give
 
 ### Migrate SLS data JSON to CSM 1.2
 
+You can now migrate SLS data to CSM 1.2, using the `sls_input_file.json` obtained above, as well as using the desired
+network (new CAN or CHN) and its chosen subnet as per [Decide on subnet ranges for new CAN/CHN](#decide-on-subnet-ranges-for-new-canchn).
+
 - (`ncn-m001#`) Example 1: The CHN as the system default route (will by default output to `migrated_sls_file.json`).
 
    ```bash
@@ -153,7 +176,7 @@ the correct options for the specific environment are used. Two examples are give
                          --preserve-existing-subnet-for-cmn external-dns
    ```
 
-- **`NOTE`**: A detailed review of the migrated/upgraded data (using `vimdiff` or otherwise) for production systems and for systems which have many add-on components (UANs, login
+- **NOTE**: A detailed review of the migrated/upgraded data (using `vimdiff` or otherwise) for production systems and for systems which have many add-on components (UANs, login
   nodes, storage integration points, etc.) is strongly recommended. Particularly, ensure that subnet reservations are correct in order to prevent any data mismatches.
 
 ### Upload migrated SLS file to SLS service
@@ -196,7 +219,7 @@ curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-se
 
    Set it to the password for `admin` user on the switches. This is needed for preflight tests within the check script.
 
-   > **`NOTE`** `read -s` is used to prevent the password from being written to the screen or the shell history.
+   > **NOTE** `read -s` is used to prevent the password from being written to the screen or the shell history.
 
    ```bash
    read -s SW_ADMIN_PASSWORD
