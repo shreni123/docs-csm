@@ -6,11 +6,11 @@
     <description>Recent content in 1.2.6 on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 27 Jun 2022 20:17:02 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jun 2022 03:31:52 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.2.6 Patch Installation Instructions</title>
       <link>/docs-csm/en-12/upgrade/1.2.6/readme/</link>
-      <pubDate>Mon, 27 Jun 2022 20:17:00 +0000</pubDate>
+      <pubDate>Tue, 28 Jun 2022 03:31:51 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.6/readme/</guid>
       <description>CSM 1.2.6 Patch Installation Instructions Introduction This document guides an administrator through the upgrade to Cray Systems Management v1.2.6 from v1.2.0. Earlier version of CSM must first be upgraded to at least v1.2.0. For information on how to do that, see Upgrade CSM.
