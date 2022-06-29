@@ -6,45 +6,11 @@
     <description>Recent content in Management Network User Guide on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 29 Jun 2022 03:34:56 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/management_network/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Validate Switch Configurations</title>
-      <link>/docs-csm/en-12/operations/network/management_network/validate_switch_configs/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:03 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/validate_switch_configs/</guid>
-      <description>Validate Switch Configurations Prerequisites  SSH access to the switches or the running configuration file. Generated switch configurations.  Generate Switch Configurations   CANU installed with version 1.1.11 or greater.  Run canu --version to see version. If doing a CSM install or upgrade, a CANU RPM is located in the release tarball. For more information, see this procedure: Update CANU From CSM Tarball    Compare CSM 1.</description>
-    </item>
-    
-    <item>
-      <title>Validate The Shcd</title>
-      <link>/docs-csm/en-12/operations/network/management_network/validate_shcd/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:03 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/validate_shcd/</guid>
-      <description>Validate the SHCD Use the CSM Automated Network Utility (CANU) to validate the SHCD. SHCD validation is required to ensure Plan-of-Record network configurations are generated. This is an iterative process to create a model of the entire network topology connection-by-connection.
-Topics  Prerequisites before validating the SHCD Begin validation in the following order Checks and Validations Logging and Updates Output SHD to JSON  Prerequisites  Up to date SHCD. CANU installed with version 1.</description>
-    </item>
-    
-    <item>
-      <title>Wipe Management Switch Configuration</title>
-      <link>/docs-csm/en-12/operations/network/management_network/wipe_mgmt_switches/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:03 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/wipe_mgmt_switches/</guid>
-      <description>Wipe Management Switch Configuration This procedure describes how to wipe Aruba, Dell, and Mellanox switch configurations.
-Prerequisites Out-of-band access to the switches (console)
-Aruba   Create a checkpoint before erasing the switch configuration.
-More information related to backing up configuration can be found on the Configuration Management procedure.
-sw-spine-001# copy running-config checkpoint CSM1_0   Verify the checkpoint was created.
-sw-spine-001# show checkpoint Example output:
-NAME TYPE WRITER DATE(YYYY/MM/DD) IMAGE VERSION CSM1_0 latest User 2022-01-27T18:52:31Z GL.</description>
-    </item>
-    
+    <lastBuildDate>Wed, 29 Jun 2022 18:43:13 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/management_network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Network Tests</title>
       <link>/docs-csm/en-12/operations/network/management_network/network_tests/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/network_tests/</guid>
       <description>Network Tests The CSM Automatic Network Utility (CANU) has the ability to run tests against the management network.
@@ -55,7 +21,7 @@ The switch inventory is dynamically created from either a System Layout Service 
     <item>
       <title>Prometheus Snmp Exporter</title>
       <link>/docs-csm/en-12/operations/network/management_network/snmp_exporter_configs/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/snmp_exporter_configs/</guid>
       <description>Prometheus SNMP Exporter The Prometheus SNMP Exporter is deployed by the the cray-sysmgmt-health chart to the sysmgmt-health namespace as part of the Cray System Management (CSM) release.
@@ -66,7 +32,7 @@ This procedure assumes that this is being done as part of a CSM install as part 
     <item>
       <title>Reinstall</title>
       <link>/docs-csm/en-12/operations/network/management_network/reinstall/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/reinstall/</guid>
       <description>Reinstall Reinstall the same CSM version.
@@ -80,7 +46,7 @@ Refer to Validate switch configs.
     <item>
       <title>Replace Switch</title>
       <link>/docs-csm/en-12/operations/network/management_network/replace_switch/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/replace_switch/</guid>
       <description>Replace Switch  CAUTION: Do not plug in a switch that is not configured. This can cause unpredictable behavior and network outages.
@@ -92,7 +58,7 @@ See Update Management Network Firmware.</description>
     <item>
       <title>Save A Configuration</title>
       <link>/docs-csm/en-12/operations/network/management_network/saving_config/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/saving_config/</guid>
       <description>Save a Configuration Write Memory To keep track of what configuration version is running on the switch, create a new configuration file using the CSN version and the CANU version from the MOTD banner from the running config.
@@ -104,7 +70,7 @@ Banners: Message of the Day (MOTD): ############################################
     <item>
       <title>Upgrade Switches From 1.0 To 1.2 Preconfig</title>
       <link>/docs-csm/en-12/operations/network/management_network/upgrade/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/upgrade/</guid>
       <description>Upgrade Switches From 1.0 to 1.2 Preconfig Use the following procedure to upgrade switches from 1.0 to 1.2 preconfig.
@@ -115,7 +81,7 @@ To check if the management network is using generated switch configurations, log
     <item>
       <title>Validate Cabling</title>
       <link>/docs-csm/en-12/operations/network/management_network/validate_cabling/</link>
-      <pubDate>Wed, 29 Jun 2022 03:35:02 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/validate_cabling/</guid>
       <description>Validate Cabling  Warning: If this step is completed when NCNs are offline or shutdown, the information compared here will not match the actual connections. Therefore, this step should be re-run again once the whole system is up.
@@ -124,9 +90,57 @@ canu validate shcd-cabling --shcd ./SHCD.xlsx --tabs 40G_10G --corners J12,T36 -
     </item>
     
     <item>
+      <title>Validate Switch Configurations</title>
+      <link>/docs-csm/en-12/operations/network/management_network/validate_switch_configs/</link>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/validate_switch_configs/</guid>
+      <description>Validate Switch Configurations Prerequisites  SSH access to the switches or the running configuration file. Generated switch configurations.  Generate Switch Configurations   CANU installed with version 1.1.11 or greater.  Run canu --version to see version. If doing a CSM install or upgrade, a CANU RPM is located in the release tarball. For more information, see this procedure: Update CANU From CSM Tarball    Compare CSM 1.</description>
+    </item>
+    
+    <item>
+      <title>Validate The Shcd</title>
+      <link>/docs-csm/en-12/operations/network/management_network/validate_shcd/</link>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/validate_shcd/</guid>
+      <description>Validate the SHCD Use the CSM Automated Network Utility (CANU) to validate the SHCD. SHCD validation is required to ensure Plan-of-Record network configurations are generated. This is an iterative process to create a model of the entire network topology connection-by-connection.
+Topics  Prerequisites before validating the SHCD Begin validation in the following order Checks and Validations Logging and Updates Output SHD to JSON  Prerequisites  Up to date SHCD. CANU installed with version 1.</description>
+    </item>
+    
+    <item>
+      <title>Wipe Management Switch Configuration</title>
+      <link>/docs-csm/en-12/operations/network/management_network/wipe_mgmt_switches/</link>
+      <pubDate>Wed, 29 Jun 2022 18:43:20 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/wipe_mgmt_switches/</guid>
+      <description>Wipe Management Switch Configuration This procedure describes how to wipe Aruba, Dell, and Mellanox switch configurations.
+Prerequisites Out-of-band access to the switches (console)
+Aruba   Create a checkpoint before erasing the switch configuration.
+More information related to backing up configuration can be found on the Configuration Management procedure.
+sw-spine-001# copy running-config checkpoint CSM1_0   Verify the checkpoint was created.
+sw-spine-001# show checkpoint Example output:
+NAME TYPE WRITER DATE(YYYY/MM/DD) IMAGE VERSION CSM1_0 latest User 2022-01-27T18:52:31Z GL.</description>
+    </item>
+    
+    <item>
+      <title>Load Saved Switch Configuration</title>
+      <link>/docs-csm/en-12/operations/network/management_network/load_saved_switch_config/</link>
+      <pubDate>Wed, 29 Jun 2022 18:43:13 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/load_saved_switch_config/</guid>
+      <description>Load Saved Switch Configuration This procedure shows how to switch between already saved switch configurations.
+To save switch configurations, refer to the Configuration Management procedure.
+This procedure is intended for internal use only. It is used to quickly switch between configurations that are already loaded on the switches.
+This procedure needs to be done on all mgmt switches.
+  Spine switches will have three total configuration files/checkpoints.
+ 1.2 fresh install 1.</description>
+    </item>
+    
+    <item>
       <title>Manual Switch Configuration</title>
       <link>/docs-csm/en-12/operations/network/management_network/manual_switch_config/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:57 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:13 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/manual_switch_config/</guid>
       <description>Manual Switch Configuration Some of the switch configuration is not generated by CANU and needs to be manually applied.
@@ -138,7 +152,7 @@ Once these credentials are retrieved from vault, fill in the xxxxxx fields below
     <item>
       <title>External User Guides</title>
       <link>/docs-csm/en-12/operations/network/management_network/external_user_guides/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:56 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:12 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/external_user_guides/</guid>
       <description>External User Guides Refer to the following vendor-specific user guides for more information on Aruba, Dell, and Mellanox switches.
@@ -148,7 +162,7 @@ Aruba  https://asp.arubanetworks.com/downloads  Dell  https://www.dell.com/suppo
     <item>
       <title>Fresh Install</title>
       <link>/docs-csm/en-12/operations/network/management_network/fresh_install/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:56 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:12 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/fresh_install/</guid>
       <description>Fresh Install Use this procedure for either a first-time install or in the event a previous CSM was wiped and requires a new install.
@@ -161,7 +175,7 @@ Refer to Update Management Network Firmware.
     <item>
       <title>Generate Switch Configurations</title>
       <link>/docs-csm/en-12/operations/network/management_network/generate_switch_configs/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:56 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:12 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/generate_switch_configs/</guid>
       <description>Generate Switch Configurations Generating configuration files can be done for singular switch or for the full system.
@@ -170,36 +184,9 @@ Prerequisites  CANU installed with version 1.1.11 or greater.  Run canu --versio
     </item>
     
     <item>
-      <title>Load Saved Switch Configuration</title>
-      <link>/docs-csm/en-12/operations/network/management_network/load_saved_switch_config/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:56 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/load_saved_switch_config/</guid>
-      <description>Load Saved Switch Configuration This procedure shows how to switch between already saved switch configurations.
-To save switch configurations, refer to the Configuration Management procedure.
-This procedure is intended for internal use only. It is used to quickly switch between configurations that are already loaded on the switches.
-This procedure needs to be done on all mgmt switches.
-  Spine switches will have three total configuration files/checkpoints.
- 1.2 fresh install 1.</description>
-    </item>
-    
-    <item>
-      <title>Collect Data</title>
-      <link>/docs-csm/en-12/operations/network/management_network/collect_data/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:54 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/collect_data/</guid>
-      <description>Collect Data Collect the input data needed to generate switch configurations.
-Prerequisites  SSH access to the switches System Layout Service (SLS) API access  Procedure   Retrieve the most up-to-date SHCD spreadsheet. Accuracy in this spreadsheet is critical.
-For example:
- Internal repository Customer repository    Get an SLS file from a Shasta system.
-Log into any NCN where the Cray CLI is configured. Then run this command to create an SLS file named sls_file.</description>
-    </item>
-    
-    <item>
       <title>Configuration Management</title>
       <link>/docs-csm/en-12/operations/network/management_network/config_management/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:54 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:10 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/config_management/</guid>
       <description>Configuration Management This page is designed for:
@@ -211,7 +198,7 @@ Prerequisites It is recommended to do a show run on each switch and save that co
     <item>
       <title>Configure Snmp</title>
       <link>/docs-csm/en-12/operations/network/management_network/configure_snmp/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:54 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:10 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/configure_snmp/</guid>
       <description>Configure SNMP SNMP configuration is required for hardware discovery of the HPE Cray EX system.
@@ -221,9 +208,22 @@ Dell SNMP sw-leaf-bmc-001# conf t snmp-server group cray-reds-group 3 noauth rea
     </item>
     
     <item>
+      <title>Collect Data</title>
+      <link>/docs-csm/en-12/operations/network/management_network/collect_data/</link>
+      <pubDate>Wed, 29 Jun 2022 18:43:09 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/collect_data/</guid>
+      <description>Collect Data Collect the input data needed to generate switch configurations.
+Prerequisites  SSH access to the switches System Layout Service (SLS) API access  Procedure   Retrieve the most up-to-date SHCD spreadsheet. Accuracy in this spreadsheet is critical.
+For example:
+ Internal repository Customer repository    Get an SLS file from a Shasta system.
+Log into any NCN where the Cray CLI is configured. Then run this command to create an SLS file named sls_file.</description>
+    </item>
+    
+    <item>
       <title>Backup A Custom Configuration</title>
       <link>/docs-csm/en-12/operations/network/management_network/backup_custom_configurations/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/backup_custom_configurations/</guid>
       <description>Backup a Custom Configuration Prerequisites  Access to the switches.  If you are doing a fresh install of CSM but previously had a different version of CSM installed, then you will need to backup/restore certain switch configurations after the switch has been wiped.
@@ -235,7 +235,7 @@ This includes:
     <item>
       <title>BiCAN Summary</title>
       <link>/docs-csm/en-12/operations/network/management_network/bican_technical_summary/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/bican_technical_summary/</guid>
       <description>BICAN Summary Bifurcated CAN was designed to separate administrative network traffic and user network traffic.
@@ -245,7 +245,7 @@ BICAN terminology  BICAN – Bifurcated Customer Access Network CAN – Customer
     <item>
       <title>BiCAN Support Matrix - Shasta Customer Access Networks</title>
       <link>/docs-csm/en-12/operations/network/management_network/bican_support_matrix/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/bican_support_matrix/</guid>
       <description>BICAN Support Matrix - Shasta Customer Access Networks Data sheet - Shasta networking - Customer Access Networks Overview Customer Access Networks provide the interface between Shasta system networking and the customer site network. Customer Access Networks (CANs) are routed networks with broadcast domain separation. Customer Access Networks provide higher availability and more flexibility in accessing cloud services compared to traditional &amp;ldquo;bastion hosts&amp;rdquo;, and are more in line with the cloud-native architecture of Shasta as whole.</description>
@@ -254,7 +254,7 @@ BICAN terminology  BICAN – Bifurcated Customer Access Network CAN – Customer
     <item>
       <title>Bifurcating The CAN - 1.2 Feature Details</title>
       <link>/docs-csm/en-12/operations/network/management_network/bican_technical_details/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/bican_technical_details/</guid>
       <description>Bifurcating the CAN - CSM 1.2 Feature Details  CAN new features overview High Speed CAN (CHN)  CHN system ingress endpoints accessible in CSM 1.2 CHN system egress endpoints accessible in CSM 1.2 Endpoint Naming  Touchpoints: effects and changes When naming occurs Ability to change post-install   Endpoint addressing  Touchpoints: effects and changes When addressing occurs Ability to change post-install   Traffic separation and routing  Touchpoints: effects and changes When configuration occurs Ability to change post-install     Management CAN (CMN)  Traffic separation and routing Endpoint naming Endpoint addressing Changes  Touchpoints: effects and changes When configuration occurs Ability to change post install     CAN external/site access (site DNS, LDAP, etc.</description>
@@ -263,7 +263,7 @@ BICAN terminology  BICAN – Bifurcated Customer Access Network CAN – Customer
     <item>
       <title>Enabling Customer High Speed Network Routing</title>
       <link>/docs-csm/en-12/operations/network/management_network/bican_enable/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/bican_enable/</guid>
       <description>Enabling Customer High Speed Network Routing  Prerequisites Configuration tasks  Configure SLS Configure UAN Minimize UAN downtime Configure UAI Configure compute nodes  Retrieve SLS data as JSON Add compute IP addresses to CHN SLS data Upload migrated SLS file to SLS service Enable CFS layer   Configure NCNs Configure the API gateways   Validation tasks  Validating SLS Validating UAN Validating UAI Validate compute nodes Validate NCNs Validate the API gateways Disabling VLAN7 for UANs    Prerequisites  Many of the procedures use the Cray Command Line Interface.</description>
@@ -272,41 +272,16 @@ BICAN terminology  BICAN – Bifurcated Customer Access Network CAN – Customer
     <item>
       <title>Remove UAN Access To The Cmn</title>
       <link>/docs-csm/en-12/operations/network/management_network/bican_disable_uan_vlan7/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:53 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:43:08 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/bican_disable_uan_vlan7/</guid>
       <description>Remove UAN Access to the CMN To minimize downtime for UANs during an upgrade from CSM 1.0 to CSM 1.2, switch configurations allow UANs to run on both the CSM 1.0 CAN (which becomes the CSM 1.2 CMN) as well as the new CSM 1.2 CAN. At the end of upgrade, switch configurations for UAN ports must be updated to remove the transitionally allowed access of UANs to the CMN. Manual removal of this port access is described in this document.</description>
     </item>
     
     <item>
-      <title>Apply Custom Switch Configuration 1.2</title>
-      <link>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.2/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:46 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.2/</guid>
-      <description>Apply Custom Switch Configuration CSM 1.2 Apply the backed up site connection configuration with a couple modifications. Since virtual routing and forwarding (VRF) is now used to separate customer traffic, the site ports and default routes must be added to that VRF.
-Prerequisites   Access to the switches
-  Custom switch configurations
- Backup Custom Configuration    Generated switch configurations already applied
- Apply Switch Configurations    Aruba apply configurations vrf attach Customer will be added to the port configuration that connects to the site.</description>
-    </item>
-    
-    <item>
-      <title>Apply Switch Configurations</title>
-      <link>/docs-csm/en-12/operations/network/management_network/apply_switch_configurations/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:46 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/apply_switch_configurations/</guid>
-      <description>Apply Switch Configurations This process is generally straightforward and requires the user to copy and paste the generated switch configuration into the terminal.
-All ports will be shutdown before applying switch configuration. If the port is in the SHCD and being used, it will be enabled when the configuration is applied.
-There are some caveats that are mentioned below.
-Prerequisites  Switch without any configuration  Wipe Management Switches   Generated switch configurations  Generate Switch Configuration    Aruba   Shutdown all ports.</description>
-    </item>
-    
-    <item>
       <title>Added Hardware</title>
       <link>/docs-csm/en-12/operations/network/management_network/added_hardware/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:45 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:42:59 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/added_hardware/</guid>
       <description>Added Hardware Follow this procedure when new hardware is added to the system.
@@ -320,9 +295,22 @@ Refer to Validate Switch Configs.</description>
     </item>
     
     <item>
+      <title>Apply Custom Switch Configuration 1.2</title>
+      <link>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.2/</link>
+      <pubDate>Wed, 29 Jun 2022 18:42:59 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.2/</guid>
+      <description>Apply Custom Switch Configuration CSM 1.2 Apply the backed up site connection configuration with a couple modifications. Since virtual routing and forwarding (VRF) is now used to separate customer traffic, the site ports and default routes must be added to that VRF.
+Prerequisites   Access to the switches
+  Custom switch configurations
+ Backup Custom Configuration    Generated switch configurations already applied
+ Apply Switch Configurations    Aruba apply configurations vrf attach Customer will be added to the port configuration that connects to the site.</description>
+    </item>
+    
+    <item>
       <title>Apply Custom Switch Configurations For 1.0</title>
       <link>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.0/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:45 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:42:59 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.0/</guid>
       <description>Apply Custom Switch Configurations for CSM 1.0 Apply the backed up site connection configuration with a couple modifications. Since virtual routing and forwarding (VRF) is now used to separate customer traffic, the site ports and default routes must be added to that VRF.
@@ -330,9 +318,21 @@ Prerequisites  Access to the switches Custom switch configurations  Backup Custo
     </item>
     
     <item>
+      <title>Apply Switch Configurations</title>
+      <link>/docs-csm/en-12/operations/network/management_network/apply_switch_configurations/</link>
+      <pubDate>Wed, 29 Jun 2022 18:42:59 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/apply_switch_configurations/</guid>
+      <description>Apply Switch Configurations This process is generally straightforward and requires the user to copy and paste the generated switch configuration into the terminal.
+All ports will be shutdown before applying switch configuration. If the port is in the SHCD and being used, it will be enabled when the configuration is applied.
+There are some caveats that are mentioned below.
+Prerequisites  Switch without any configuration  Wipe Management Switches   Generated switch configurations  Generate Switch Configuration    Aruba   Shutdown all ports.</description>
+    </item>
+    
+    <item>
       <title>Management Network 1.0 (1.2 Preconfig) To 1.2</title>
       <link>/docs-csm/en-12/operations/network/management_network/1.0_to_1.2_upgrade/</link>
-      <pubDate>Wed, 29 Jun 2022 03:34:45 +0000</pubDate>
+      <pubDate>Wed, 29 Jun 2022 18:42:59 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/1.0_to_1.2_upgrade/</guid>
       <description>Management Network 1.0 (1.2 Preconfig) to 1.2  Prerequisites Mellanox  Mellanox Manual Configuration   Dell  Dell Manual Configuration   Aruba Spine  Aruba Manual Configuration   Aruba Leaf and Leaf BMC  Prerequisites  System is already running with CANU-generated 1.0 configurations (1.2 Preconfig). Generated switch configurations for 1.2.  Generate Switch Configurations   CANU installed with version 1.1.11 or greater.  Run canu --version to see version.</description>
