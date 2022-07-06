@@ -23,7 +23,7 @@
  *  OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-@Library('csm-shared-library') _
+@Library('csm-shared-library@casminst-4895') _
 
 def sleVersion = '15.3'
 def major
