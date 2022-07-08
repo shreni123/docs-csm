@@ -6,11 +6,69 @@
     <description>Recent content in Aruba Installation And Configuration Guide on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 07 Jul 2022 03:34:48 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/management_network/aruba/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jul 2022 03:30:30 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/network/management_network/aruba/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Message-of-the-day (motd)</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/motd/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/motd/</guid>
+      <description>Message-Of-The-Day (MOTD) Banners are custom messages displayed to users attempting to connect to the management interfaces. MOTD banners are displayed pre-login while exec banners are displayed post-login. Multiple lines of text can be stored using a custom delimiter to mark the end of message.
+Configuration Commands Create a banner:
+switch(config)# banner &amp;lt;motd|exec&amp;gt; DELIM Show commands to validate functionality:
+switch# show banner &amp;lt;motd|exec&amp;gt; Example Output switch(config)# banner motd $ Enter a new banner, when you are done enter a new line containing only your chosen delimiter.</description>
+    </item>
+    
+    <item>
+      <title>Multi-chassis Link Aggregation Group (mclag)</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/mlag/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mlag/</guid>
+      <description>Multi-Chassis Link Aggregation Group (MCLAG) Multi-Chassis Link Aggregation Group (MCLAG) is a link aggregation technique where two or more links across two switches are aggregated together to form a trunk.
+Configuration Commands Create the MCLAG interface:
+switch(config)# interface lag LAG multi-chassis switch(config-lag-if)# no shutdown Associate member links with the MCLAG interface:
+switch(config)# interface IFACE switch(config-if)# no shutdown switch(config-if)# lag LAG Show commands to validate functionality:
+switch# show mclag &amp;lt;brief|configuration|status&amp;gt; Example Output switch(config)# interface lag 23 multi-chassis switch(config-lag-if)# no shutdown switch(config-lag-if)# exit switch(config)# interface 1/1/10 switch(config-if)# no shutdown switch(config-if)# lag 23 switch(config-if)# end Expected Results  Administrators can configure MCLAG Administrators can create an MCLAG interface Administrators can add ports to the MCLAG interface The output of the show commands is correct  Back to Index</description>
+    </item>
+    
+    <item>
+      <title>Multicast Source Discovery Protocol (msdp)</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/msdp/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/msdp/</guid>
+      <description>Multicast Source Discovery Protocol (MSDP) The Multicast Source Discovery Protocol (MSDP) describes a mechanism to connect multiple IP Version 4 Protocol Independent Multicast Sparse-Mode (PIM-SM) domains together. Each PIM-SM domain uses its own independent Rendezvous Point (RP) and does not have to depend on RPs in other domains. When an RP in a PIM-SM domain first learns of a new sender, e.g., via PIM register messages, it constructs a &amp;ldquo;Source-Active&amp;rdquo; (SA) message and sends it to its MSDP peers.</description>
+    </item>
+    
+    <item>
+      <title>Vsx Member Power Failure</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_power_failure/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_power_failure/</guid>
+      <description>VSX: Member Power Failure The intent here is to showcase a complete member failure scenario where the spine-01 switch is completely down.
+The following is a visualization of the powered down spine-01:
+The following is expected in this scenario:
+ After disconnecting the power supply from one member the other member should be able to detect the member is down and continue a normal operation without any problems. If traffic was originally flowing through the member that was shut down, a small percentage of packets may be dropped.</description>
+    </item>
+    
+    <item>
+      <title>Vsx Split</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_split/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_split/</guid>
+      <description>VSX: Split The intent here is to showcase a complete inter-switch-link (ISL) link failure scenario where both of the ISL links between spine switches goes down.
+The following is a visualization of a disconnected ISL link and how the traffic pattern would look:
+The following is expected in this scenario:
+ After disconnecting both ISL Links and Keepalive is up and properly configured the VSX Secondary Switch should put all its MCLAGs into lacp-blocked state and traffic should only flow through VSX Primary.</description>
+    </item>
+    
     <item>
       <title>Example Of How To Configure Scenario A Or B</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/management_network_configuration_example/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:49 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/management_network_configuration_example/</guid>
       <description>Example of How to Configure Scenario A or B This section provides an example of how to configure the management network.
@@ -20,87 +78,9 @@ If there is an existing CAN interface configuration, it will be deleted the inte
     </item>
     
     <item>
-      <title>System Management Network Functions</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:49 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</guid>
-      <description>System Management Network Functions The following is a description of the system management network functions:
-  Edge - Any interactions with the Customer network or Internet
- Customer Jobs - Customer Access Network (CAN) User-facing cloud APIs  User Access Instances (UAIs)   Customer Administration - Customer Management Network (CMN)  Administrative Access to the system by Customer Admins Access from the system to external services:  Customer/Internet DNS LDAP authentication System installation and upgrade media (e.</description>
-    </item>
-    
-    <item>
-      <title>Vsx Isl Ha</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:49 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</guid>
-      <description>VSX: ISL HA The intent here is to showcase an inter-switch-link (ISL) link failover scenario where one of the two links between spine switches goes down, but ISL is still connected with single link.
-The following image is a visualization of disconnected ISL link:
-The following things are expected to be seen in this scenario:
- After disconnecting one ISL, the VSX functionality should not be affected A small percentage of packets will be dropped when disconnecting the cable where traffic is flowing; A sub second value is expected during this event When connecting back the cable, the hashing needs to be recalculated and some packets may be dropped during this event as well; A sub second value is expected during this event  Back to Index</description>
-    </item>
-    
-    <item>
-      <title>Vsx Mclag Link Ha</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:49 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Check For Duplicate Ip Addresses</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</guid>
-      <description>Check for Duplicate IP Addresses It is common to get an IP address that is not the correct one. A sign of a duplicate IP address is seeing a DECLINE message from the client to the server.
-For example:
-10.40.0.0.337 &amp;gt; 10.42.0.58.67: BOOTP/DHCP, Request from b4:2e:99:be:1a:d3, length 301, hops 1, xid 0x9d1210d, Flags [none] Gateway-IP 10.252.0.2 Client-Ethernet-Address b4:2e:99:be:1a:d3 Vendor-rfc1048 Extensions Magic Cookie 0x63825363 DHCP-Message Option 53, length 1: Decline Client-ID Option 61, length 19: hardware-type 255, 99:be:1a:d3:00:01:00:01:26:c8:55:c3:b4:2e:99:be:1a:d3 Server-ID Option 54, length 4: 10.</description>
-    </item>
-    
-    <item>
-      <title>Configure Exec Banners</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</guid>
-      <description>Configure Exec Banners Exec banners are custom messages displayed to users attempting to connect to the management interfaces. Multiple lines of text can be stored using a custom delimiter to mark the end of message.
-Configuration Commands Create a banner:
-switch(config)# banner &amp;lt;motd|exec&amp;gt; DELIM Show commands to validate functionality:
-switch# show banner &amp;lt;motd|exec&amp;gt; Example Output switch(config)# banner exec $ Enter a new banner, when you are done enter a new line containing only your chosen delimiter.</description>
-    </item>
-    
-    <item>
-      <title>Configure Hostnames</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</guid>
-      <description>Configure Hostnames A hostname is a human-friendly name used to identify a device. An example of a hostname could be the name &amp;ldquo;Test.&amp;rdquo;
-Configuration Commands Create a hostname:
-switch(config)# hostname &amp;lt;NAME&amp;gt; Show commands to validate functionality:
-switch# show hostname Example Output switch(config)# hostname switch-test switch-test# show hostname switch-test Expected Results  Administrators can configure the hostname The output of all show commands is correct  Back to Index</description>
-    </item>
-    
-    <item>
-      <title>Configure Internet Group Multicast Protocol (igmp)</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</guid>
-      <description>Configure Internet Group Multicast Protocol (IGMP) The Internet Group Multicast Protocol (IGMP) is a communications protocol used by hosts and adjacent routers on IP networks to establish multicast group memberships. The host joins a multicast-group by sending a join request message towards the network router, and responds to queries sent from the network router by dispatching a join report.
-General notes:
- In ArubaOS-CX igmp snooping is disabled by default IGMP v3 is used by default, supported configuration allows v2 and v3  Configuration Commands switch(config)# interface vlan 1 switch(config-if-vlan)# igmp Expected Results show ip igmp-snooping vlan 1 should show IGMP enabled on the VLAN, but no IGMP Querier set.</description>
-    </item>
-    
-    <item>
       <title>Initial Prioritization</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/initial_prioritization/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/initial_prioritization/</guid>
       <description>Initial Prioritization For most switches, the local-priority has eight levels (0-7). Zero is the lowest priority. The allowed maximum will vary per product family. Local priority is used to determine which queue a packet will use. There are multiple options to configure the local-priority:
@@ -110,7 +90,7 @@ General notes:
     <item>
       <title>Introduction</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/intro/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/intro/</guid>
       <description>Introduction The intent for the this documentation is to help install and manage Aruba CX network devices in an HPE Cray EX system installation.
@@ -120,7 +100,7 @@ The HPE Cray recommended way of configuring the network is with the CANU tool. T
     <item>
       <title>Key Features Used In The Management Network Configuration</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/key_features/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/key_features/</guid>
       <description>Key Features Used in the Management Network Configuration The following is a list of key features used in the management network configuration.
@@ -130,7 +110,7 @@ Feature List    Feature Notes Description     VSX MLAG  Layer 2 Redundancy, Allo
     <item>
       <title>Link Aggregation Group (lag)</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/lag/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/lag/</guid>
       <description>Link Aggregation Group (LAG) Link Aggregation allows you to assign multiple physical links to one logical link that functions as a single, higher-speed link providing dramatically increased bandwidth.
@@ -143,7 +123,7 @@ switch# show lacp &amp;lt;interfaces|aggregates|configuration&amp;gt; Example Ou
     <item>
       <title>Link Layer Discovery Protocol (lldp)</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/lldp/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/lldp/</guid>
       <description>Link Layer Discovery Protocol (LLDP) LLDP is used to advertise the device&amp;rsquo;s identity and abilities and read other devices connected to the same network.
@@ -156,7 +136,7 @@ switch# show lldp [local-device|neighbor-info|statistics] Example Output switch#
     <item>
       <title>Locator Led</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/locator_led/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/locator_led/</guid>
       <description>Locator LED The Locator LED is an LED in the front of the chassis that you can turn on or make flash. This is a handy feature when guiding someone to your switch during a &amp;ldquo;remote hands&amp;rdquo; situation, such as asking data center engineer to run a cable to your switch.
@@ -168,7 +148,7 @@ switch# show environment led Example output switch# show environment led Name St
     <item>
       <title>Loopback Interface</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/loopback/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/loopback/</guid>
       <description>Loopback Interface Loopbacks are essentially internal virtual interfaces. Loopback interfaces are not bound to a physical port and are used for device management and routing protocols.
@@ -178,7 +158,7 @@ Configuration Commands switch(config)# interface loopback LOOPBACK switch(config
     <item>
       <title>Mac Authentication</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/mac_auth/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/mac_auth/</guid>
       <description>MAC Authentication MAC Authentication (MAC Auth) is a method of authenticating devices for access to the network. The default mode of authentication is RADIUS, through which clients are authenticated by an external RADIUS server.
@@ -192,7 +172,7 @@ switch(config-macauth)# password &amp;lt;plaintext|ciphertext&amp;gt; PASSWORD C
     <item>
       <title>Management Interface</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/management_interface/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:48 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/management_interface/</guid>
       <description>Management Interface The management interface can be used to gain remote management access to the switch. The management interface is accessible using the &amp;ldquo;mgmt&amp;rdquo; VRF and is separate from the data plane interfaces, which are in the &amp;ldquo;default&amp;rdquo; VRF.
@@ -201,42 +181,42 @@ Address Mode Admin State Mac Address IPv4 address/subnet-mask Default gateway IP
     </item>
     
     <item>
-      <title>Bluetooth Capabilities</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <title>System Management Network Functions</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</guid>
-      <description>Bluetooth Capabilities The Bluetooth feature allows Bluetooth enabled devices to connect to and manage the switch on a wireless Bluetooth Personal Area Network (PAN). The user needs a supported USB Bluetooth dongle and to enable both the USB port and Bluetooth on the switch to use this feature. Bluetooth and REST write permissions for Bluetooth clients are both enabled by default.
-Configuration Commands Turn on the USB port:
-switch# usb mount Enable Bluetooth:</description>
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</guid>
+      <description>System Management Network Functions The following is a description of the system management network functions:
+  Edge - Any interactions with the Customer network or Internet
+ Customer Jobs - Customer Access Network (CAN) User-facing cloud APIs  User Access Instances (UAIs)   Customer Administration - Customer Management Network (CMN)  Administrative Access to the system by Customer Admins Access from the system to external services:  Customer/Internet DNS LDAP authentication System installation and upgrade media (e.</description>
     </item>
     
     <item>
-      <title>Border Gateway Protocol (BGP) Basics</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <title>Vsx Isl Ha</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</guid>
-      <description>Border Gateway Protocol (BGP) Basics &amp;ldquo;The primary function of a Border Gateway Protocol (BGP) speaking system is to exchange network reachability information with other BGP systems. This network reachability information includes information on the list of Autonomous Systems (ASes) that reachability information traverses. This information is sufficient for constructing a graph of AS connectivity for this reachability, from which routing loops may be pruned and, at the AS level, some policy decisions may be enforced.</description>
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</guid>
+      <description>VSX: ISL HA The intent here is to showcase an inter-switch-link (ISL) link failover scenario where one of the two links between spine switches goes down, but ISL is still connected with single link.
+The following image is a visualization of disconnected ISL link:
+The following things are expected to be seen in this scenario:
+ After disconnecting one ISL, the VSX functionality should not be affected A small percentage of packets will be dropped when disconnecting the cable where traffic is flowing; A sub second value is expected during this event When connecting back the cable, the hashing needs to be recalculated and some packets may be dropped during this event as well; A sub second value is expected during this event  Back to Index</description>
     </item>
     
     <item>
-      <title>Cable Diagnostics</title>
-      <link>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <title>Vsx Mclag Link Ha</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:30 +0000</pubDate>
       
-      <guid>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</guid>
-      <description>Cable Diagnostics Use the cable-diagnostic feature to test cables in the event where there might be a bad copper cable.
- NOTE: This feature is only available on non-SFP copper ports.
- Procedure Enter diagnostics to open up the diagnostics menu:
-switch# diagnostics Once done, the diagnostics command set is now available for use, and the cable-diagnostics command can be executed:
-switch# diag cable-diagnostic &amp;lt;IFACE&amp;gt; Example output 6300# diagnostics &amp;lt;CR&amp;gt; 6300# diag ?</description>
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</guid>
+      <description>VSX: MCLAG Link HA The intent here is to showcase a typical MCLAG link failover scenario, where one of the links goes to the edge device, whether that is the connected switch or server.
+In the following image, a typical traffic pattern coming off from MCLAG connected device is shown. The traffic is going north to south and ISL is not carrying any traffic. The only time ISL will carry traffic is if one of the links to downstream devices is down.</description>
     </item>
     
     <item>
       <title>Check BGP And Metallb</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/check_bgp_and_metallb/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/check_bgp_and_metallb/</guid>
       <description>Check BGP and MetalLB Use the following procedure to verify if the spine switches are available and that MetalLB peering to the spine switches via Border Gateway Protocol (BGP) is established.
@@ -250,7 +230,7 @@ sw-spine# show ip bgp summary All the neighbors should be in the Established sta
     <item>
       <title>Check Current DHCP Leases</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/check_current_dhcp_leases/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/check_current_dhcp_leases/</guid>
       <description>Check Current DHCP Leases Use the Kea API to retrieve data from the DHCP lease database.
@@ -261,7 +241,7 @@ export TOKEN=$(curl -s -k -S -d grant_type=client_credentials -d client_id=admin
     <item>
       <title>Check DHCP Lease Is Getting Allocated</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/check_dhcp_lease_is_getting_allocated/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/check_dhcp_lease_is_getting_allocated/</guid>
       <description>Check DHCP Lease is Getting Allocated Checking Check the Kea logs and verify that the DHCP lease is getting allocated.
@@ -270,9 +250,20 @@ ncn-mw# KEA_POD=$(kubectl get pods -n services -l app.kubernetes.io/name=cray-dh
     </item>
     
     <item>
+      <title>Check For Duplicate Ip Addresses</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</guid>
+      <description>Check for Duplicate IP Addresses It is common to get an IP address that is not the correct one. A sign of a duplicate IP address is seeing a DECLINE message from the client to the server.
+For example:
+10.40.0.0.337 &amp;gt; 10.42.0.58.67: BOOTP/DHCP, Request from b4:2e:99:be:1a:d3, length 301, hops 1, xid 0x9d1210d, Flags [none] Gateway-IP 10.252.0.2 Client-Ethernet-Address b4:2e:99:be:1a:d3 Vendor-rfc1048 Extensions Magic Cookie 0x63825363 DHCP-Message Option 53, length 1: Decline Client-ID Option 61, length 19: hardware-type 255, 99:be:1a:d3:00:01:00:01:26:c8:55:c3:b4:2e:99:be:1a:d3 Server-ID Option 54, length 4: 10.</description>
+    </item>
+    
+    <item>
       <title>Check Kea DHCP Logs</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/check_kea_dhcp_logs/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/check_kea_dhcp_logs/</guid>
       <description>Check KEA DHCP Logs Use this procedure to check the logs for a cray-dhcp-kea pod.
@@ -285,7 +276,7 @@ kubectl logs -n services -l app.kubernetes.io/instance=cray-dhcp-kea -c cray-dhc
     <item>
       <title>Check The Hardware State Manager (HSM)</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/check_hsm/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/check_hsm/</guid>
       <description>Check the Hardware State Manager (HSM) The Hardware State Manager (HSM) has two important parts:
@@ -296,7 +287,7 @@ ncn# curl -H &amp;#34;Authorization: Bearer ${TOKEN}&amp;#34; https://api-gw-ser
     <item>
       <title>Classifier Policies</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/classifier_policies/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/classifier_policies/</guid>
       <description>Classifier Policies Classifier policies allow a network administrator to define sets of rules based on network traffic addressing or other header content and use these rules to restrict or alter the passage of traffic through the switch.
@@ -307,7 +298,7 @@ Classification is achieved by creating a traffic class. There are three types of
     <item>
       <title>Configure Domain Name Service (DNS) Clients</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/dns-client/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/dns-client/</guid>
       <description>Configure Domain Name Service (DNS) Clients The Domain Name Service (DNS) translates domain and host names to and from IP addresses. A DNS client resolves hostnames to IP addresses by querying assigned DNS servers for the appropriate IP address.
@@ -319,7 +310,7 @@ switch(config)# ip dns domain-name NAME Show commands to validate functionality:
     <item>
       <title>Configure Domain Names</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/domain_name/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/domain_name/</guid>
       <description>Configure Domain Names A domain name is a name to identify the person, group, or organization that controls the devices within an area. An example of a domain name could be us.cray.com.
@@ -329,9 +320,44 @@ switch# show domain-name Expected Results  Administrators can configure the doma
     </item>
     
     <item>
+      <title>Configure Exec Banners</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</guid>
+      <description>Configure Exec Banners Exec banners are custom messages displayed to users attempting to connect to the management interfaces. Multiple lines of text can be stored using a custom delimiter to mark the end of message.
+Configuration Commands Create a banner:
+switch(config)# banner &amp;lt;motd|exec&amp;gt; DELIM Show commands to validate functionality:
+switch# show banner &amp;lt;motd|exec&amp;gt; Example Output switch(config)# banner exec $ Enter a new banner, when you are done enter a new line containing only your chosen delimiter.</description>
+    </item>
+    
+    <item>
+      <title>Configure Hostnames</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</guid>
+      <description>Configure Hostnames A hostname is a human-friendly name used to identify a device. An example of a hostname could be the name &amp;ldquo;Test.&amp;rdquo;
+Configuration Commands Create a hostname:
+switch(config)# hostname &amp;lt;NAME&amp;gt; Show commands to validate functionality:
+switch# show hostname Example Output switch(config)# hostname switch-test switch-test# show hostname switch-test Expected Results  Administrators can configure the hostname The output of all show commands is correct  Back to Index</description>
+    </item>
+    
+    <item>
+      <title>Configure Internet Group Multicast Protocol (igmp)</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</guid>
+      <description>Configure Internet Group Multicast Protocol (IGMP) The Internet Group Multicast Protocol (IGMP) is a communications protocol used by hosts and adjacent routers on IP networks to establish multicast group memberships. The host joins a multicast-group by sending a join request message towards the network router, and responds to queries sent from the network router by dispatching a join report.
+General notes:
+ In ArubaOS-CX igmp snooping is disabled by default IGMP v3 is used by default, supported configuration allows v2 and v3  Configuration Commands switch(config)# interface vlan 1 switch(config-if-vlan)# igmp Expected Results show ip igmp-snooping vlan 1 should show IGMP enabled on the VLAN, but no IGMP Querier set.</description>
+    </item>
+    
+    <item>
       <title>Large Number Of DHCP Declines During A Node Boot</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/dhcp_decline/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/dhcp_decline/</guid>
       <description>Large Number of DHCP Declines During a Node Boot If something similar to the following is in the logs, this indicates an issue that an IP address being allocated is already being used and is not able to get the IP assigned to the device as previously set.
@@ -341,7 +367,7 @@ dracut-initqueue[1902]: wicked: eth0: Declining DHCPv4 lease with address 10.252
     <item>
       <title>Verify Computes/UANs/application Nodes</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/compute_uan_application_nodes/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:47 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/compute_uan_application_nodes/</guid>
       <description>Verify Computes/UANs/Application Nodes If the computes make it past PXE and go into the PXE shell, verify DNS and connectivity.
@@ -354,7 +380,7 @@ iPXE&amp;gt; nslookup address api-gw-service-nmn.local iPXE&amp;gt; echo ${addre
     <item>
       <title>802.1x</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/8021x/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:46 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/8021x/</guid>
       <description>802.1X IEEE 802.1X is an IEEE standard for port-based network access control (PNAC). This standard provides an authentication mechanism to devices wishing to attach to a LAN or WLAN. IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol (EAP) over IEEE 802, which is known as EAP over LAN (EAPOL).
@@ -364,7 +390,7 @@ iPXE&amp;gt; nslookup address api-gw-service-nmn.local iPXE&amp;gt; echo ${addre
     <item>
       <title>Access Control Lists (ACLs)</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/acl/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:46 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/acl/</guid>
       <description>Access Control Lists (ACLs) ACLs are used to help improve network performance and restrict network usage by creating policies to eliminate unwanted IP traffic by filtering packets where they enter the switch on layer 2 and layer 3 interfaces. An ACL is an ordered list of one or more access control list entries (ACEs) prioritized by sequence number. An incoming packet is matched sequentially against each entry in an ACL.</description>
@@ -373,7 +399,7 @@ iPXE&amp;gt; nslookup address api-gw-service-nmn.local iPXE&amp;gt; echo ${addre
     <item>
       <title>Address Resolution Protocol (arp)</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/arp/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:46 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/arp/</guid>
       <description>Address Resolution Protocol (ARP) ARP is commonly used for mapping IPv4 addresses to MAC addresses.
@@ -385,12 +411,45 @@ switch# show arp   Expected Results  Administrators are able to ping the connect
     <item>
       <title>Backup A Switch Configuration</title>
       <link>/docs-csm/en-12/operations/network/management_network/aruba/backup/</link>
-      <pubDate>Thu, 07 Jul 2022 03:34:46 +0000</pubDate>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/network/management_network/aruba/backup/</guid>
       <description>Backup a Switch Configuration Copies the running configuration or the startup configuration to a remote location as a file. The configuration can be exported to a file of either type CLI or type JSON format. The &amp;lt;VRF-NAME&amp;gt; is used for the configuration of interfaces on a particular VRF.
 Procedure Create a copy of a running configuration or the startup configuration using the following command:
 copy {running-config | startup-config} &amp;lt;REMOTE-URL&amp;gt; {cli | json} [vrf &amp;lt;VRF-NAME&amp;gt;] The parameters/syntax of the copy command are described below:</description>
+    </item>
+    
+    <item>
+      <title>Bluetooth Capabilities</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</guid>
+      <description>Bluetooth Capabilities The Bluetooth feature allows Bluetooth enabled devices to connect to and manage the switch on a wireless Bluetooth Personal Area Network (PAN). The user needs a supported USB Bluetooth dongle and to enable both the USB port and Bluetooth on the switch to use this feature. Bluetooth and REST write permissions for Bluetooth clients are both enabled by default.
+Configuration Commands Turn on the USB port:
+switch# usb mount Enable Bluetooth:</description>
+    </item>
+    
+    <item>
+      <title>Border Gateway Protocol (BGP) Basics</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</guid>
+      <description>Border Gateway Protocol (BGP) Basics &amp;ldquo;The primary function of a Border Gateway Protocol (BGP) speaking system is to exchange network reachability information with other BGP systems. This network reachability information includes information on the list of Autonomous Systems (ASes) that reachability information traverses. This information is sufficient for constructing a graph of AS connectivity for this reachability, from which routing loops may be pruned and, at the AS level, some policy decisions may be enforced.</description>
+    </item>
+    
+    <item>
+      <title>Cable Diagnostics</title>
+      <link>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</link>
+      <pubDate>Fri, 08 Jul 2022 03:30:28 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</guid>
+      <description>Cable Diagnostics Use the cable-diagnostic feature to test cables in the event where there might be a bad copper cable.
+ NOTE: This feature is only available on non-SFP copper ports.
+ Procedure Enter diagnostics to open up the diagnostics menu:
+switch# diagnostics Once done, the diagnostics command set is now available for use, and the cable-diagnostics command can be executed:
+switch# diag cable-diagnostic &amp;lt;IFACE&amp;gt; Example output 6300# diagnostics &amp;lt;CR&amp;gt; 6300# diag ?</description>
     </item>
     
   </channel>

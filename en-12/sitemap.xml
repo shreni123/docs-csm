@@ -2,186 +2,146 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/management_network_configuration_example/</loc>
-    <lastmod>2022-07-07T03:34:49+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/motd/</loc>
+    <lastmod>2022-07-08T03:30:31+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</loc>
-    <lastmod>2022-07-07T03:34:49+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mlag/</loc>
+    <lastmod>2022-07-08T03:30:31+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</loc>
-    <lastmod>2022-07-07T03:34:49+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/msdp/</loc>
+    <lastmod>2022-07-08T03:30:31+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</loc>
-    <lastmod>2022-07-07T03:34:49+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_power_failure/</loc>
+    <lastmod>2022-07-08T03:30:31+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_split/</loc>
+    <lastmod>2022-07-08T03:30:31+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/management_network_configuration_example/</loc>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/initial_prioritization/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/intro/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/key_features/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/lag/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/lldp/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/locator_led/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/loopback/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/mac_auth/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/management_interface/</loc>
-    <lastmod>2022-07-07T03:34:48+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/management_network_function_in_detail/</loc>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_isl_ha/</loc>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/mclag_link_ha/</loc>
+    <lastmod>2022-07-08T03:30:30+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/check_bgp_and_metallb/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/check_current_dhcp_leases/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/check_dhcp_lease_is_getting_allocated/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/duplicate_ip/</loc>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/check_kea_dhcp_logs/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/check_hsm/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/classifier_policies/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/dns-client/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/domain_name/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/exec_banner/</loc>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/hostname/</loc>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/igmp/</loc>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/dhcp_decline/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/compute_uan_application_nodes/</loc>
-    <lastmod>2022-07-07T03:34:47+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:29+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/8021x/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/acl/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/added_hardware/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/arp/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.2/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/apply_custom_config_1.0/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/apply_switch_configurations/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/aruba/backup/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/bluetooth/</loc>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/bgp_basic/</loc>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/management_network/aruba/cable_diagnostics/</loc>
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/gateway_testing/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/external_dns/ingress_routing/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/external_dns/ingress_routing/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/external_dns/ingress_routing/"
-                />
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/management_network/1.0_to_1.2_upgrade/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/external_dns/troubleshoot_dns_configuration_issues/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/external_dns/troubleshoot_dns_configuration_issues/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/external_dns/troubleshoot_dns_configuration_issues/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/external_dns/update_the_cmn-external-dns_value_post-installation/</loc>
-    <lastmod>2022-07-07T03:34:46+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/network/dhcp/dhcp/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/dhcp/dhcp/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/dhcp/dhcp/"
-                />
+    <lastmod>2022-07-08T03:30:28+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/dns/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -194,7 +154,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/enable_ncsd_on_uans/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -207,7 +167,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/external_dns/external_dns/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -220,7 +180,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/external_dns/external_dns_csi_config_init_input_values/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -233,7 +193,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/external_dns/external_dns_failing_to_discover_services_workaround/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -245,8 +205,21 @@
                 href="/docs-csm/en-12/operations/network/external_dns/external_dns_failing_to_discover_services_workaround/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/network/external_dns/ingress_routing/</loc>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/network/external_dns/ingress_routing/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/network/external_dns/ingress_routing/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/manage_the_dns_unbound_resolver/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -258,17 +231,14 @@
                 href="/docs-csm/en-12/operations/network/dns/manage_the_dns_unbound_resolver/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_metallb_peering/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
-  </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/powerdns_configuration/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/powerdns_migration/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/troubleshoot_common_dns_issues/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -280,46 +250,49 @@
                 href="/docs-csm/en-12/operations/network/dns/troubleshoot_common_dns_issues/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/dhcp/troubleshoot_dhcp_issues/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/</loc>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/dhcp/troubleshoot_dhcp_issues/"
+                href="/docs-csm/en-10/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/dhcp/troubleshoot_dhcp_issues/"
+                href="/docs-csm/en-12/operations/network/external_dns/troubleshoot_systems_not_provisioned_with_external_ip_addresses/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/external_dns/troubleshoot_dns_configuration_issues/</loc>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/network/external_dns/troubleshoot_dns_configuration_issues/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/network/external_dns/troubleshoot_dns_configuration_issues/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/dns/troubleshoot_powerdns/</loc>
-    <lastmod>2022-07-07T03:34:45+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/network/access_to_system_management_services/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/network/access_to_system_management_services/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/network/access_to_system_management_services/"
-                />
+    <loc>/docs-csm/en-12/operations/network/external_dns/update_the_cmn-external-dns_value_post-installation/</loc>
+    <lastmod>2022-07-08T03:30:27+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_aruba_config/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/dual_spine_configuration/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/connect_to_the_cmn_can/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/connect_to_the_hpe_cray_ex_environment/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -332,13 +305,13 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/create_a_csm_configuration_upgrade_plan/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/customer_accessible_networks/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/default_ip_address_ranges/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -350,11 +323,27 @@
                 href="/docs-csm/en-12/operations/network/default_ip_address_ranges/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/network/dhcp/dhcp/</loc>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/network/dhcp/dhcp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/network/dhcp/dhcp/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/externally_exposed_services/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/bi-can_arista_metallb_peering/</loc>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/network/network/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -367,62 +356,36 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/network/customer_accessible_networks/troubleshoot_cmn_issues/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/troubleshoot_postgres_database/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/dhcp/troubleshoot_dhcp_issues/</loc>
+    <lastmod>2022-07-08T03:30:26+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/troubleshoot_postgres_database/"
+                href="/docs-csm/en-10/operations/network/dhcp/troubleshoot_dhcp_issues/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/troubleshoot_postgres_database/"
+                href="/docs-csm/en-12/operations/network/dhcp/troubleshoot_dhcp_issues/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/view_postgres_information_for_system_databases/</loc>
-    <lastmod>2022-07-07T03:34:44+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/network/access_to_system_management_services/</loc>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/view_postgres_information_for_system_databases/"
+                href="/docs-csm/en-10/operations/network/access_to_system_management_services/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/view_postgres_information_for_system_databases/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/kubernetes_storage/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/kubernetes_storage/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/kubernetes_storage/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/pod_resource_limits/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/pod_resource_limits/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/pod_resource_limits/"
+                href="/docs-csm/en-12/operations/network/access_to_system_management_services/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/rebalance_healthy_etcd_clusters/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -435,7 +398,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/rebuild_unhealthy_etcd_clusters/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -448,7 +411,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/recover_from_postgres_wal_event/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -461,7 +424,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/repopulate_data_in_etcd_clusters_when_rebuilding_them/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -474,7 +437,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/report_the_endpoint_status_for_etcd_clusters/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -487,7 +450,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/restore_an_etcd_cluster_from_a_backup/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -500,7 +463,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/restore_bare-metal_etcd_clusters_from_an_s3_snapshot/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -513,7 +476,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/restore_postgres/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -526,7 +489,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/retrieve_cluster_health_information_using_kubernetes/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -539,7 +502,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/tds_lower_cpu_requests/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -552,7 +515,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/troubleshoot_intermittent_503s/</loc>
-    <lastmod>2022-07-07T03:34:43+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -564,21 +527,34 @@
                 href="/docs-csm/en-12/operations/kubernetes/troubleshoot_intermittent_503s/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/backups_for_etcd-operator_clusters/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/kubernetes/troubleshoot_postgres_database/</loc>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/backups_for_etcd-operator_clusters/"
+                href="/docs-csm/en-10/operations/kubernetes/troubleshoot_postgres_database/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/backups_for_etcd-operator_clusters/"
+                href="/docs-csm/en-12/operations/kubernetes/troubleshoot_postgres_database/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/kubernetes/view_postgres_information_for_system_databases/</loc>
+    <lastmod>2022-07-08T03:30:25+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/kubernetes/view_postgres_information_for_system_databases/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/kubernetes/view_postgres_information_for_system_databases/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/check_for_and_clear_etcd_cluster_alarms/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -591,7 +567,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/check_the_health_and_balance_of_etcd_clusters/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -604,7 +580,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/clear_space_in_an_etcd_cluster_database/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -617,7 +593,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/configure_kubectl_credentials_to_access_the_kubernetes_apis/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -630,7 +606,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/containerd/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -643,7 +619,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/create_a_manual_backup_of_a_healthy_etcd_cluster/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -656,7 +632,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/determine_if_pods_are_hitting_resource_limits/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -669,7 +645,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/disaster_recovery_postgres/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -682,7 +658,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/increase_kafka_pod_resource_limits/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -695,7 +671,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/increase_pod_resource_limits/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -708,7 +684,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/kubernetes/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -720,26 +696,8 @@
                 href="/docs-csm/en-12/operations/kubernetes/kubernetes/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-09"
-                href="/docs-csm/en-09/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/kubernetes_networking/</loc>
-    <lastmod>2022-07-07T03:34:42+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -751,8 +709,34 @@
                 href="/docs-csm/en-12/operations/kubernetes/kubernetes_networking/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/kubernetes/kubernetes_storage/</loc>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/kubernetes/kubernetes_storage/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/kubernetes/kubernetes_storage/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/kubernetes/pod_resource_limits/</loc>
+    <lastmod>2022-07-08T03:30:24+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/kubernetes/pod_resource_limits/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/kubernetes/pod_resource_limits/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/about_etcd/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -765,7 +749,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/about_kubectl/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -778,7 +762,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/about_kubernetes_taints_and_labels/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -791,7 +775,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/kubernetes/about_postgres/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -803,24 +787,21 @@
                 href="/docs-csm/en-12/operations/kubernetes/about_postgres/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/image_management/configure_ims_to_validate_rpms/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/image_management/convert_tgz_archives_to_squashfs_images/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/kubernetes/backups_for_etcd-operator_clusters/</loc>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/image_management/convert_tgz_archives_to_squashfs_images/"
+                href="/docs-csm/en-10/operations/kubernetes/backups_for_etcd-operator_clusters/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/image_management/convert_tgz_archives_to_squashfs_images/"
+                href="/docs-csm/en-12/operations/kubernetes/backups_for_etcd-operator_clusters/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -837,21 +818,8 @@
                 href="/docs-csm/en-12/operations/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/image_management/create_uan_boot_images/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/image_management/create_uan_boot_images/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/image_management/create_uan_boot_images/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/image_management/customize_an_image_root_using_ims/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -864,7 +832,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/delete_or_recover_deleted_ims_content/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -877,7 +845,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/image_management/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -890,7 +858,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/image_management_workflows/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -903,7 +871,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/import_external_image_to_ims/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -915,8 +883,26 @@
                 href="/docs-csm/en-12/operations/image_management/import_external_image_to_ims/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/</loc>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-09"
+                href="/docs-csm/en-09/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/kubernetes/cert_renewal_for_kubernetes_and_bare_metal_etcd/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/image_management/upload_and_register_an_image_recipe/</loc>
-    <lastmod>2022-07-07T03:34:41+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:23+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -929,7 +915,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hmcollector/adjust_hmcollector_resource_limits_requests/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -947,7 +933,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/build_a_new_uan_image_using_the_default_recipe/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -960,7 +946,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/image_management/build_an_image_using_ims_rest_service/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -972,37 +958,40 @@
                 href="/docs-csm/en-12/operations/image_management/build_an_image_using_ims_rest_service/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/image_management/configure_ims_to_validate_rpms/</loc>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/image_management/convert_tgz_archives_to_squashfs_images/</loc>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/hardware_state_manager/hardware_state_manager/"
+                href="/docs-csm/en-10/operations/image_management/convert_tgz_archives_to_squashfs_images/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager/"
+                href="/docs-csm/en-12/operations/image_management/convert_tgz_archives_to_squashfs_images/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/image_management/create_uan_boot_images/</loc>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/"
+                href="/docs-csm/en-10/operations/image_management/create_uan_boot_images/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/"
+                href="/docs-csm/en-12/operations/image_management/create_uan_boot_images/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hpe_pdu/hpe_pdu_admin_procedures/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/lock_and_unlock_management_nodes/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1015,7 +1004,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/manage_component_groups/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1028,7 +1017,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/manage_component_partitions/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1041,7 +1030,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/manage_hms_locks/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1054,7 +1043,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/restore_hsm_postgres_from_backup/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1067,7 +1056,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/restore_hsm_postgres_without_a_backup/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1080,7 +1069,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/set_bmc_management_role/</loc>
-    <lastmod>2022-07-07T03:34:40+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:22+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1093,7 +1082,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/add_a_switch_to_the_hsm_database/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1106,7 +1095,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/add_an_ncn_to_the_hsm_database/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1119,7 +1108,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/component_group_members/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1132,7 +1121,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/component_groups_and_partitions/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1145,7 +1134,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/component_memberships/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1158,7 +1147,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/component_partition_members/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1171,7 +1160,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/create_a_backup_of_the_hsm_postgres_database/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1184,7 +1173,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/hardware_management_services_hms_locking_api/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1196,8 +1185,34 @@
                 href="/docs-csm/en-12/operations/hardware_state_manager/hardware_management_services_hms_locking_api/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager/</loc>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/hardware_state_manager/hardware_state_manager/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/</loc>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/hardware_state_manager/hardware_state_manager_hsm_state_and_flag_fields/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/hardware_state_manager/hsm_roles_and_subroles/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1209,24 +1224,8 @@
                 href="/docs-csm/en-12/operations/hardware_state_manager/hsm_roles_and_subroles/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/firmware/updating_firmware_m001/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/firmware/updating_firmware_m001/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/firmware/updating_firmware_m001/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/firmware/updating_firmware_without_fas/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
-  </url><url>
     <loc>/docs-csm/en-12/operations/firmware/upload_olympus_bmc_recovery_firmware_into_tftp_server/</loc>
-    <lastmod>2022-07-07T03:34:39+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:21+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1239,7 +1238,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/firmware/fas_admin_procedures/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1252,7 +1251,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/firmware/fas_cli/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1265,7 +1264,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/firmware/fas_filters/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1277,21 +1276,8 @@
                 href="/docs-csm/en-12/operations/firmware/fas_filters/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/firmware/fas_use_cases/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/firmware/fas_use_cases/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/firmware/fas_use_cases/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/firmware/fas_recipes/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1303,34 +1289,21 @@
                 href="/docs-csm/en-12/operations/firmware/fas_recipes/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/firmware/fas_use_cases/</loc>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/"
+                href="/docs-csm/en-10/operations/firmware/fas_use_cases/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/"
+                href="/docs-csm/en-12/operations/firmware/fas_use_cases/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/troubleshoot_conman_failing_to_connect_to_a_console/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1343,7 +1316,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/firmware/update_firmware_with_fas/</loc>
-    <lastmod>2022-07-07T03:34:38+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1355,8 +1328,24 @@
                 href="/docs-csm/en-12/operations/firmware/update_firmware_with_fas/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/firmware/updating_firmware_m001/</loc>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/firmware/updating_firmware_m001/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/firmware/updating_firmware_m001/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/firmware/updating_firmware_without_fas/</loc>
+    <lastmod>2022-07-08T03:30:20+00:00</lastmod>
+  </url><url>
     <loc>/docs-csm/en-12/operations/conman/access_compute_node_logs/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1369,7 +1358,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/access_console_log_data_via_the_system_monitoring_framework_smf/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1381,21 +1370,8 @@
                 href="/docs-csm/en-12/operations/conman/access_console_log_data_via_the_system_monitoring_framework_smf/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/configure_cray_cli/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/configure_cray_cli/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/configure_cray_cli/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/conman/conman/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1408,7 +1384,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/disable_conman_after_system_software_installation/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1421,7 +1397,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/establish_a_serial_connection_to_ncns/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1434,7 +1410,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/log_in_to_a_node_using_conman/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1447,7 +1423,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/conman/manage_node_consoles/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1459,47 +1435,47 @@
                 href="/docs-csm/en-12/operations/conman/manage_node_consoles/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/configuration_management/write_ansible_code_for_cfs/</loc>
-    <lastmod>2022-07-07T03:34:37+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/</loc>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/configuration_management/write_ansible_code_for_cfs/"
+                href="/docs-csm/en-10/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/configuration_management/write_ansible_code_for_cfs/"
+                href="/docs-csm/en-12/operations/conman/troubleshoot_conman_asking_for_password_on_ssh_connection/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/</loc>
+    <lastmod>2022-07-08T03:30:19+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/"
+                href="/docs-csm/en-10/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/"
+                href="/docs-csm/en-12/operations/conman/troubleshoot_conman_blocking_access_to_a_node_bmc/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/configure_cray_cli/</loc>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/"
+                href="/docs-csm/en-10/operations/configure_cray_cli/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/"
+                href="/docs-csm/en-12/operations/configure_cray_cli/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/update_a_cfs_configuration/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1512,7 +1488,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/update_the_privacy_settings_for_gitea_configuration_content_repositories/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1525,7 +1501,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/use_a_custom_ansible-cfg_file/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1538,7 +1514,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/use_a_specific_inventory_in_a_configuration_session/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1551,7 +1527,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/vcs_branching_strategy/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1564,7 +1540,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/version_control_service_vcs/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1577,7 +1553,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/view_configuration_session_logs/</loc>
-    <lastmod>2022-07-07T03:34:36+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1589,21 +1565,21 @@
                 href="/docs-csm/en-12/operations/configuration_management/view_configuration_session_logs/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/configuration_management/delete_cfs_sessions/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/configuration_management/write_ansible_code_for_cfs/</loc>
+    <lastmod>2022-07-08T03:30:18+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/configuration_management/delete_cfs_sessions/"
+                href="/docs-csm/en-10/operations/configuration_management/write_ansible_code_for_cfs/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/configuration_management/delete_cfs_sessions/"
+                href="/docs-csm/en-12/operations/configuration_management/write_ansible_code_for_cfs/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/enable_ansible_profiling/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1616,7 +1592,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/git_operations/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1629,7 +1605,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/manage_multiple_inventories_in_a_single_location/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1642,7 +1618,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/set_limits_for_a_configuration_session/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1655,7 +1631,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/set_the_ansible-cfg_for_a_session/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1668,7 +1644,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/specifying_hosts_and_groups/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1681,7 +1657,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/target_ansible_tasks_for_image_customization/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1694,7 +1670,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/track_the_status_of_a_session/</loc>
-    <lastmod>2022-07-07T03:34:35+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1706,8 +1682,34 @@
                 href="/docs-csm/en-12/operations/configuration_management/track_the_status_of_a_session/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/</loc>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/configuration_management/troubleshoot_ansible_play_failures_in_cfs_sessions/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/</loc>
+    <lastmod>2022-07-08T03:30:17+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/configuration_management/troubleshoot_cfs_session_failing_to_complete/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/configuration_management_of_system_components/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1720,7 +1722,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/configuration_management_with_the_cfs_batcher/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1733,7 +1735,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/configuration_sessions/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1746,7 +1748,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/create_a_cfs_configuration/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1759,7 +1761,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/create_a_cfs_session_with_dynamic_inventory/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1772,7 +1774,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/create_an_image_customization_cfs_session/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1785,7 +1787,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/create_and_populate_a_vcs_configuration_repository/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1798,7 +1800,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/customize_configuration_values/</loc>
-    <lastmod>2022-07-07T03:34:34+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1810,8 +1812,21 @@
                 href="/docs-csm/en-12/operations/configuration_management/customize_configuration_values/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/configuration_management/delete_cfs_sessions/</loc>
+    <lastmod>2022-07-08T03:30:16+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/configuration_management/delete_cfs_sessions/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/configuration_management/delete_cfs_sessions/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/ansible_execution_environments/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1824,7 +1839,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/ansible_inventory/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1837,7 +1852,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/automatic_session_deletion_with_sessionttl/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1850,7 +1865,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/cfs_flow_diagrams/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1863,7 +1878,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/cfs_global_options/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1876,7 +1891,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/cfs_key_management/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1889,7 +1904,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/change_the_ansible_verbosity_logs/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1902,7 +1917,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/configuration_layers/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -1920,7 +1935,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/configuration_management/configuration_management/</loc>
-    <lastmod>2022-07-07T03:34:33+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1932,8 +1947,21 @@
                 href="/docs-csm/en-12/operations/configuration_management/configuration_management/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</loc>
+    <lastmod>2022-07-08T03:30:15+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/compute_rolling_upgrades/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1946,7 +1974,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/crus_workflow/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1959,7 +1987,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_bad_parameters/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1972,7 +2000,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/troubleshoot_a_failed_crus_session_due_to_unmet_conditions/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1985,7 +2013,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/troubleshoot_nodes_failing_to_upgrade_in_a_crus_session/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -1998,7 +2026,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_uan_boot_issues/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2010,21 +2038,8 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/troubleshoot_uan_boot_issues/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/compute_rolling_upgrades/upgrade_compute_nodes_with_crus/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/upload_node_boot_information_to_boot_script_service_bss/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -2042,7 +2057,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/view_the_status_of_a_bos_session/</loc>
-    <lastmod>2022-07-07T03:34:32+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2054,8 +2069,21 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/view_the_status_of_a_bos_session/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/boot_orchestration/sessions/</loc>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/boot_orchestration/sessions/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/boot_orchestration/sessions/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/stage_changes_without_bos/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -2073,7 +2101,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/tools_for_resolving_boot_issues/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2086,7 +2114,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_booting_nodes_with_hardware_issues/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2099,7 +2127,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_related_to_dynamic_host_configuration_protocol_dhcp/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2112,7 +2140,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_related_to_slow_boot_times/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2125,7 +2153,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_related_to_the_boot_script_service_bss/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2138,7 +2166,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_related_to_trivial_file_transfer_protocol_tftp/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2151,7 +2179,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_related_to_unified_extensible_firmware_interface_uefi/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2164,7 +2192,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/troubleshoot_compute_node_boot_issues_using_kubernetes/</loc>
-    <lastmod>2022-07-07T03:34:31+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:13+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2177,7 +2205,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/limitations_for_gigabyte_bmc_hardware/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2190,7 +2218,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/session_templates/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2202,21 +2230,21 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/session_templates/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/boot_orchestration/sessions/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/boot_orchestration/kernel_boot_parameters/</loc>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/boot_orchestration/sessions/"
+                href="/docs-csm/en-10/operations/boot_orchestration/kernel_boot_parameters/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/boot_orchestration/sessions/"
+                href="/docs-csm/en-12/operations/boot_orchestration/kernel_boot_parameters/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/limit_the_scope_of_a_bos_session/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2229,7 +2257,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/log_file_locations_and_ports_used_in_compute_node_boot_troubleshooting/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2242,7 +2270,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/manage_a_bos_session/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2255,7 +2283,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/manage_a_session_template/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2268,7 +2296,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/node_boot_root_cause_analysis/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2281,7 +2309,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/redeploy_the_ipxe_and_tftp_services/</loc>
-    <lastmod>2022-07-07T03:34:30+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:12+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2293,8 +2321,21 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/redeploy_the_ipxe_and_tftp_services/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/</loc>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/compute_node_boot_issue_symptom_duplicate_address_warnings_and_declined_dhcp_offers_in_logs/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2307,7 +2348,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/compute_node_boot_issue_symptom_message_about_invalid_eeprom_checksum_in_node_console_or_log/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2320,7 +2361,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/compute_node_boot_issue_symptom_node_is_not_able_to_download_the_required_artifacts/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2333,7 +2374,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/compute_node_boot_sequence/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2346,7 +2387,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/configure_the_bos_timeout_when_booting_nodes/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2359,7 +2400,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/create_a_session_template_to_boot_compute_nodes_with_cps/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2372,7 +2413,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/edit_the_ipxe_embedded_boot_script/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2385,7 +2426,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/healthy_compute_node_boot_process/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:11+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2397,21 +2438,8 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/healthy_compute_node_boot_process/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/boot_orchestration/kernel_boot_parameters/</loc>
-    <lastmod>2022-07-07T03:34:29+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/boot_orchestration/kernel_boot_parameters/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/boot_orchestration/kernel_boot_parameters/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/boot_issue_symptom_node_hsn_interface_does_not_appear_or_shows_no_link_detected/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2424,7 +2452,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/boot_orchestration/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2437,7 +2465,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/boot_uans/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2450,7 +2478,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/bos_workflows/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2463,7 +2491,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/check_the_progress_of_bos_session_operations/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2476,7 +2504,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/clean_up_after_a_bos-boa_job_is_completed_or_cancelled/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2488,21 +2516,8 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/clean_up_after_a_bos-boa_job_is_completed_or_cancelled/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/boot_orchestration/clean_up_logs_after_a_boa_kubernetes_job/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/boot_orchestration/boot_issue_symptom_node_console_or_logs_indicate_that_the_server_response_has_timed_out/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2514,8 +2529,21 @@
                 href="/docs-csm/en-12/operations/boot_orchestration/boot_issue_symptom_node_console_or_logs_indicate_that_the_server_response_has_timed_out/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/artifact_management/manage_artifacts_with_the_cray_cli/</loc>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/artifact_management/manage_artifacts_with_the_cray_cli/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/artifact_management/manage_artifacts_with_the_cray_cli/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/artifact_management/use_s3_libraries_and_clients/</loc>
-    <lastmod>2022-07-07T03:34:28+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:10+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2528,7 +2556,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/artifact_management/artifact_management/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2541,7 +2569,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/artifact_management/generate_temporary_s3_credentials/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2553,21 +2581,21 @@
                 href="/docs-csm/en-12/operations/artifact_management/generate_temporary_s3_credentials/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/artifact_management/manage_artifacts_with_the_cray_cli/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_resource_specification/</loc>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/artifact_management/manage_artifacts_with_the_cray_cli/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/update_a_resource_specification/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/artifact_management/manage_artifacts_with_the_cray_cli/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_resource_specification/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_uai_image_registration/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2580,7 +2608,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_uas_volume/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2593,10 +2621,10 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/view_a_uai_class/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2609,7 +2637,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/volumes/</loc>
-    <lastmod>2022-07-07T03:34:27+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:09+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2621,8 +2649,21 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/volumes/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_host_node_selection/</loc>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/uai_host_node_selection/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_host_node_selection/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_host_nodes/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2635,10 +2676,10 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_image_customization/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_images/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2651,7 +2692,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_macvlans_network_attachments/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2664,7 +2705,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_management/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2677,7 +2718,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_network_attachments/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2690,7 +2731,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uas_and_uai_health_checks/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2703,7 +2744,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uas_limitations/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2715,186 +2756,8 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/uas_limitations/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_resource_specification/</loc>
-    <lastmod>2022-07-07T03:34:26+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/update_a_resource_specification/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/update_a_resource_specification/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_classes/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/uai_classes/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_classes/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_host_node_selection/</loc>
-    <lastmod>2022-07-07T03:34:25+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/uai_host_node_selection/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_host_node_selection/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/setting_up_multi-replica_brokers/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/setting_uai_timeouts/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/special_purpose_uais/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/special_purpose_uais/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/special_purpose_uais/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/start_a_broker_uai/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/start_a_broker_uai/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/start_a_broker_uai/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_broker_sssd_cant_use_sssd_conf/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_duplicate_mount_paths_in_a_uai/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2907,7 +2770,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_missing_or_incorrect_uai_images/</loc>
-    <lastmod>2022-07-07T03:34:24+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2919,73 +2782,115 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_missing_or_incorrect_uai_images/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_stale_brokered_uais/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_stuck_in_containercreating/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/modify_a_uai_class/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/modify_a_uai_class/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/modify_a_uai_class/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_by_viewing_log_output/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uais_with_administrative_access/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/register_a_uai_image/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/register_a_uai_image/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/register_a_uai_image/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uai_authentication_issues/"
                 />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_by_viewing_log_output/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_uas_issues/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_classes/</loc>
+    <lastmod>2022-07-08T03:30:07+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/uai_classes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/uai_classes/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/setting_up_multi-replica_brokers/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/resource_specifications/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -2998,7 +2903,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/retrieve_resource_specification_details/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3011,7 +2916,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/retrieve_uai_image_registration_information/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3023,86 +2928,66 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/retrieve_uai_image_registration_information/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/</loc>
-    <lastmod>2022-07-07T03:34:23+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/setting_uai_timeouts/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/special_purpose_uais/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/special_purpose_uais/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/special_purpose_uais/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/start_a_broker_uai/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/start_a_broker_uai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/start_a_broker_uai/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_broker_sssd_cant_use_sssd_conf/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/</loc>
+    <lastmod>2022-07-08T03:30:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/troubleshoot_common_mistakes_when_creating_a_custom_end-user_uai_image/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_classes/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_available_uai_classes/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_classes/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_registered_uai_images/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_registered_uai_images/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_registered_uai_images/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/reset_the_uas_configuration_to_original_installed_settings/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_uai_resource_specifications/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3115,7 +3000,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_uais/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3128,7 +3013,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_uas_information/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3141,7 +3026,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_volumes_registered_in_uas/</loc>
-    <lastmod>2022-07-07T03:34:22+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3153,73 +3038,73 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_volumes_registered_in_uas/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_end-user_uai_images/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/customize_end-user_uai_images/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_end-user_uai_images/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/log_in_to_a_broker_uai/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/modify_a_uai_class/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/modify_a_uai_class/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/modify_a_uai_class/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/obtain_configuration_of_a_uas_volume/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_class/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/register_a_uai_image/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai_class/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/register_a_uai_image/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_class/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/register_a_uai_image/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/</loc>
+    <lastmod>2022-07-08T03:30:05+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/login_to_a_users_uai_to_troubleshoot_issues/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_resource_specification/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3232,7 +3117,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_volume_configuration/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3245,7 +3130,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/elements_of_a_uai/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3258,7 +3143,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/end_user_uais/</loc>
-    <lastmod>2022-07-07T03:34:21+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3270,60 +3155,73 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/end_user_uais/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/</loc>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/examine_a_uai_using_a_direct_administrative_command/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/</loc>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/legacy_mode_user-driven_uai_management/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_uais_in_uas/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_classes/</loc>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_uais_in_uas/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_available_uai_classes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_uais_in_uas/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_classes/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/</loc>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/create_a_uai/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_available_uai_images_in_legacy_mode/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/list_registered_uai_images/</loc>
+    <lastmod>2022-07-08T03:30:04+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/list_registered_uai_images/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/list_registered_uai_images/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai_class/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3336,7 +3234,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai_resource_specification/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3349,7 +3247,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai_with_additional_ports/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3362,7 +3260,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_and_use_default_uais_in_legacy_mode/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3374,34 +3272,73 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/create_and_use_default_uais_in_legacy_mode/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/</loc>
-    <lastmod>2022-07-07T03:34:20+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_end-user_uai_images/</loc>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/customize_end-user_uai_images/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_end-user_uai_images/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/add_a_volume_to_uas/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/</loc>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/add_a_volume_to_uas/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/add_a_volume_to_uas/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/customize_the_broker_uai_image/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai/</loc>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_class/</loc>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai_class/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_class/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/</loc>
+    <lastmod>2022-07-08T03:30:03+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/delete_a_uai_image_registration/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/broker_mode_uai_management/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3414,26 +3351,39 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/choosing_uai_resource_settings/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/common_uai_config/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
   </url><url>
-    <loc>/docs-csm/en-12/operations/component_names_xnames/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/</loc>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/operations/component_names_xnames/"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/operations/component_names_xnames/"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_broker_uai_class/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/</loc>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_a_default_uai_class_for_legacy_mode/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_end-user_uai_classes_for_broker_mode/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3445,8 +3395,102 @@
                 href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_end-user_uai_classes_for_broker_mode/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_uais_in_uas/</loc>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/configure_uais_in_uas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/configure_uais_in_uas/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai/</loc>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/create_a_uai/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/create_a_uai/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/</loc>
+    <lastmod>2022-07-08T03:30:02+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/create_uais_from_specific_uai_images_in_legacy_mode/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/uas_user_and_admin_topics/add_a_volume_to_uas/</loc>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/uas_user_and_admin_topics/add_a_volume_to_uas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/uas_user_and_admin_topics/add_a_volume_to_uas/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/component_names_xnames/</loc>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/component_names_xnames/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/component_names_xnames/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/csm_product_management/configure_keycloak_account/</loc>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/csm_product_management/configure_keycloak_account/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/csm_product_management/configure_keycloak_account/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/csm_product_management/configure_non-compute_nodes_with_cfs/</loc>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/operations/csm_product_management/configure_non-compute_nodes_with_cfs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/operations/csm_product_management/configure_non-compute_nodes_with_cfs/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/operations/csm_product_management/configure_csm_packages_with_cfs/</loc>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
+  </url><url>
     <loc>/docs-csm/en-12/operations/csm_product_management/perform_ncn_personalization/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3459,7 +3503,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/csm_product_management/post_install_customizations/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3472,7 +3516,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/csm_product_management/remove_artifacts_from_product_installations/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3485,7 +3529,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/csm_product_management/validate_signed_rpms/</loc>
-    <lastmod>2022-07-07T03:34:19+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:01+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3498,7 +3542,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/operations/access_livecd_usb_device_after_reboot/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3510,8 +3554,21 @@
                 href="/docs-csm/en-12/operations/access_livecd_usb_device_after_reboot/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/introduction/capmc_deprecation/</loc>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/introduction/capmc_deprecation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/introduction/capmc_deprecation/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/operations/csm_product_management/change_passwords_and_credentials/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -3528,37 +3585,8 @@
                 href="/docs-csm/en-12/operations/csm_product_management/change_passwords_and_credentials/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/operations/csm_product_management/configure_keycloak_account/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/csm_product_management/configure_keycloak_account/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/csm_product_management/configure_keycloak_account/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/csm_product_management/configure_non-compute_nodes_with_cfs/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/operations/csm_product_management/configure_non-compute_nodes_with_cfs/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/operations/csm_product_management/configure_non-compute_nodes_with_cfs/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/operations/csm_product_management/configure_csm_packages_with_cfs/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
-  </url><url>
     <loc>/docs-csm/en-12/introduction/differences/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3571,7 +3599,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/introduction/documentation_conventions/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3584,7 +3612,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/introduction/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3596,34 +3624,8 @@
                 href="/docs-csm/en-12/introduction/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/introduction/scenarios/</loc>
-    <lastmod>2022-07-07T03:34:18+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/introduction/scenarios/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/introduction/scenarios/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/introduction/capmc_deprecation/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/introduction/capmc_deprecation/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/introduction/capmc_deprecation/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/introduction/csm_overview/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3635,73 +3637,21 @@
                 href="/docs-csm/en-12/introduction/csm_overview/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/set_gigabyte_node_bmc_to_factory_defaults/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
+    <loc>/docs-csm/en-12/introduction/scenarios/</loc>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/set_gigabyte_node_bmc_to_factory_defaults/"
+                href="/docs-csm/en-10/introduction/scenarios/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/set_gigabyte_node_bmc_to_factory_defaults/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/shcd_hmn_connections_rules/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/shcd_hmn_connections_rules/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/shcd_hmn_connections_rules/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/switch_pxe_boot_from_onboard_nic_to_pcie/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/switch_pxe_boot_from_onboard_nic_to_pcie/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/switch_pxe_boot_from_onboard_nic_to_pcie/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/troubleshooting_installation/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/troubleshooting_installation/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/troubleshooting_installation/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/utility_storage_node_installation_troubleshooting/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/utility_storage_node_installation_troubleshooting/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/utility_storage_node_installation_troubleshooting/"
+                href="/docs-csm/en-12/introduction/scenarios/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/wipe_ncn_disks_for_reinstallation/</loc>
-    <lastmod>2022-07-07T03:34:17+00:00</lastmod>
+    <lastmod>2022-07-08T03:30:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3713,86 +3663,8 @@
                 href="/docs-csm/en-12/install/wipe_ncn_disks_for_reinstallation/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/prepare_compute_nodes/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/prepare_compute_nodes/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/prepare_compute_nodes/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/prepare_configuration_payload/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/prepare_configuration_payload/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/prepare_configuration_payload/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/prepare_management_nodes/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/prepare_management_nodes/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/prepare_management_nodes/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/prepare_site_init/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/prepare_site_init/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/prepare_site_init/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/pxe_boot_troubleshooting/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/pxe_boot_troubleshooting/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/pxe_boot_troubleshooting/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/install/reinstall_livecd/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/install/reinstall_livecd/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/install/reinstall_livecd/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/install/reset_root_password_on_livecd/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3805,7 +3677,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/restart_network_services_and_interfaces_on_ncns/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3818,7 +3690,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/safeguards_for_csm_ncn_upgrades/</loc>
-    <lastmod>2022-07-07T03:34:16+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3830,50 +3702,73 @@
                 href="/docs-csm/en-12/install/safeguards_for_csm_ncn_upgrades/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/create_hmn_connections_json/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/set_gigabyte_node_bmc_to_factory_defaults/</loc>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/create_hmn_connections_json/"
+                href="/docs-csm/en-10/install/set_gigabyte_node_bmc_to_factory_defaults/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/create_hmn_connections_json/"
+                href="/docs-csm/en-12/install/set_gigabyte_node_bmc_to_factory_defaults/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/create_ncn_metadata_csv/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/shcd_hmn_connections_rules/</loc>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/create_ncn_metadata_csv/"
+                href="/docs-csm/en-10/install/shcd_hmn_connections_rules/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/create_ncn_metadata_csv/"
+                href="/docs-csm/en-12/install/shcd_hmn_connections_rules/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/create_switch_metadata_csv/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/switch_pxe_boot_from_onboard_nic_to_pcie/</loc>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/create_switch_metadata_csv/"
+                href="/docs-csm/en-10/install/switch_pxe_boot_from_onboard_nic_to_pcie/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/create_switch_metadata_csv/"
+                href="/docs-csm/en-12/install/switch_pxe_boot_from_onboard_nic_to_pcie/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/deploy_final_ncn/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/troubleshooting_installation/</loc>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/troubleshooting_installation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/troubleshooting_installation/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/utility_storage_node_installation_troubleshooting/</loc>
+    <lastmod>2022-07-08T03:29:59+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/utility_storage_node_installation_troubleshooting/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/utility_storage_node_installation_troubleshooting/"
+                />
   </url><url>
     <loc>/docs-csm/en-12/install/deploy_management_nodes/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3886,7 +3781,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3899,7 +3794,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/install_csm_services/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3911,63 +3806,86 @@
                 href="/docs-csm/en-12/install/install_csm_services/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/csm_installation_failure/</loc>
-    <lastmod>2022-07-07T03:34:15+00:00</lastmod>
-  </url><url>
-    <loc>/docs-csm/en-12/install/clear_gigabyte_cmos/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/prepare_compute_nodes/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/clear_gigabyte_cmos/"
+                href="/docs-csm/en-10/install/prepare_compute_nodes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/clear_gigabyte_cmos/"
+                href="/docs-csm/en-12/install/prepare_compute_nodes/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/collect_mac_addresses_for_ncns/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/prepare_configuration_payload/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/collect_mac_addresses_for_ncns/"
+                href="/docs-csm/en-10/install/prepare_configuration_payload/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/collect_mac_addresses_for_ncns/"
+                href="/docs-csm/en-12/install/prepare_configuration_payload/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/collecting_ncn_mac_addresses/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/prepare_management_nodes/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/collecting_ncn_mac_addresses/"
+                href="/docs-csm/en-10/install/prepare_management_nodes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/collecting_ncn_mac_addresses/"
+                href="/docs-csm/en-12/install/prepare_management_nodes/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/install/collecting_bmc_mac_addresses/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <loc>/docs-csm/en-12/install/prepare_site_init/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
-                href="/docs-csm/en-10/install/collecting_bmc_mac_addresses/"
+                href="/docs-csm/en-10/install/prepare_site_init/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-12"
-                href="/docs-csm/en-12/install/collecting_bmc_mac_addresses/"
+                href="/docs-csm/en-12/install/prepare_site_init/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/pxe_boot_troubleshooting/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/pxe_boot_troubleshooting/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/pxe_boot_troubleshooting/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/reinstall_livecd/</loc>
+    <lastmod>2022-07-08T03:29:58+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/reinstall_livecd/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/reinstall_livecd/"
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/configure_administrative_access/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3980,7 +3898,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/configure_management_network/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -3993,7 +3911,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/connect_to_switch_over_usb_serial_cable/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4006,7 +3924,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/create_application_node_config_yaml/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4019,7 +3937,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/create_cabinets_yaml/</loc>
-    <lastmod>2022-07-07T03:34:14+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4031,8 +3949,53 @@
                 href="/docs-csm/en-12/install/create_cabinets_yaml/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/install/create_hmn_connections_json/</loc>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/create_hmn_connections_json/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/create_hmn_connections_json/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/create_ncn_metadata_csv/</loc>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/create_ncn_metadata_csv/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/create_ncn_metadata_csv/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/create_switch_metadata_csv/</loc>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/create_switch_metadata_csv/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/create_switch_metadata_csv/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/deploy_final_ncn/</loc>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
+  </url><url>
+    <loc>/docs-csm/en-12/install/csm_installation_failure/</loc>
+    <lastmod>2022-07-08T03:29:57+00:00</lastmod>
+  </url><url>
     <loc>/docs-csm/en-12/install/boot_livecd_virtual_iso/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4045,7 +4008,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/bootstrap_livecd_remote_iso/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4058,7 +4021,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/bootstrap_livecd_usb/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4071,7 +4034,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/cable_management_network_servers/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4084,7 +4047,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/install/ceph_csi_troubleshooting/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4096,8 +4059,60 @@
                 href="/docs-csm/en-12/install/ceph_csi_troubleshooting/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/install/clear_gigabyte_cmos/</loc>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/clear_gigabyte_cmos/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/clear_gigabyte_cmos/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/collect_mac_addresses_for_ncns/</loc>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/collect_mac_addresses_for_ncns/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/collect_mac_addresses_for_ncns/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/collecting_ncn_mac_addresses/</loc>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/collecting_ncn_mac_addresses/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/collecting_ncn_mac_addresses/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/install/collecting_bmc_mac_addresses/</loc>
+    <lastmod>2022-07-08T03:29:56+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/install/collecting_bmc_mac_addresses/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/install/collecting_bmc_mac_addresses/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/</loc>
-    <lastmod>2022-07-07T03:34:13+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -4115,7 +4130,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/glossary/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:54+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4127,60 +4142,8 @@
                 href="/docs-csm/en-12/glossary/"
                 />
   </url><url>
-    <loc>/docs-csm/en-12/background/ncn_boot_workflow/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/background/ncn_boot_workflow/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/background/ncn_boot_workflow/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/background/ncn_images/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/background/ncn_images/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/background/ncn_images/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/background/ncn_mounts_and_file_systems/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/background/ncn_mounts_and_file_systems/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/background/ncn_mounts_and_file_systems/"
-                />
-  </url><url>
-    <loc>/docs-csm/en-12/background/ncn_networking/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-10"
-                href="/docs-csm/en-10/background/ncn_networking/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-12"
-                href="/docs-csm/en-12/background/ncn_networking/"
-                />
-  </url><url>
     <loc>/docs-csm/en-12/background/ncn_operating_system_releases/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:54+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4193,7 +4156,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/background/ncn_packages/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:54+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4206,10 +4169,10 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/background/ncn_plan_of_record/</loc>
-    <lastmod>2022-07-07T03:34:11+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:54+00:00</lastmod>
   </url><url>
     <loc>/docs-csm/en-12/background/</loc>
-    <lastmod>2022-07-07T03:34:10+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4222,7 +4185,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/background/certificate_authority/</loc>
-    <lastmod>2022-07-07T03:34:10+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
@@ -4235,7 +4198,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/readme/</loc>
-    <lastmod>2022-07-07T03:34:10+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -4253,7 +4216,7 @@
                 />
   </url><url>
     <loc>/docs-csm/en-12/release_notes/</loc>
-    <lastmod>2022-07-07T03:34:10+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-09"
@@ -4270,8 +4233,60 @@
                 href="/docs-csm/en-12/release_notes/"
                 />
   </url><url>
+    <loc>/docs-csm/en-12/background/ncn_boot_workflow/</loc>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/background/ncn_boot_workflow/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/background/ncn_boot_workflow/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/background/ncn_images/</loc>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/background/ncn_images/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/background/ncn_images/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/background/ncn_mounts_and_file_systems/</loc>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/background/ncn_mounts_and_file_systems/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/background/ncn_mounts_and_file_systems/"
+                />
+  </url><url>
+    <loc>/docs-csm/en-12/background/ncn_networking/</loc>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-10"
+                href="/docs-csm/en-10/background/ncn_networking/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-12"
+                href="/docs-csm/en-12/background/ncn_networking/"
+                />
+  </url><url>
     <loc>/docs-csm/en-12/background/ncn_bios/</loc>
-    <lastmod>2022-07-07T03:34:10+00:00</lastmod>
+    <lastmod>2022-07-08T03:29:53+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-10"
