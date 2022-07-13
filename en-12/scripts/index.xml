@@ -6,27 +6,27 @@
     <description>Recent content in Scripts on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 12 Jul 2022 19:36:10 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jul 2022 03:30:56 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Library For SLS Network Data</title>
+      <link>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</link>
+      <pubDate>Wed, 13 Jul 2022 03:30:56 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</guid>
+      <description>Python Library for SLS Network Data This is a reusable Python library for safely interacting with SLS network data (in JSON format).
+The library has been tested against Python version 3.6 and up.</description>
+    </item>
+    
     <item>
       <title>Kernel Dump Hotfix</title>
       <link>/docs-csm/en-12/scripts/hotfixes/kdump/readme/</link>
-      <pubDate>Tue, 12 Jul 2022 19:36:10 +0000</pubDate>
+      <pubDate>Wed, 13 Jul 2022 03:30:55 +0000</pubDate>
       
       <guid>/docs-csm/en-12/scripts/hotfixes/kdump/readme/</guid>
       <description>Kernel Dump Hotfix This directory includes the script and the library necessary for applying the hotfix to all reachable NCNs.
 Usage   Run hotfix.sh.
 ncn# /usr/share/doc/csm/scripts/hotfixes/kdump/hotfix.sh Example output:
 Uploading hotfix files to ncn-m001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s004:/srv/cray/scripts/common/ .</description>
-    </item>
-    
-    <item>
-      <title>Python Library For SLS Network Data</title>
-      <link>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</link>
-      <pubDate>Tue, 12 Jul 2022 19:36:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</guid>
-      <description>Python Library for SLS Network Data This is a reusable Python library for safely interacting with SLS network data (in JSON format).
-The library has been tested against Python version 3.6 and up.</description>
     </item>
     
   </channel>
