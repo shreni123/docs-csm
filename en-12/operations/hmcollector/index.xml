@@ -6,15 +6,16 @@
     <description>Recent content in Hmcollector on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 15 Jul 2022 03:41:28 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/hmcollector/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 03:29:25 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/operations/hmcollector/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Adjust Hm Collector Resource Limits And Requests</title>
       <link>/docs-csm/en-12/operations/hmcollector/adjust_hmcollector_resource_limits_requests/</link>
-      <pubDate>Fri, 15 Jul 2022 03:40:37 +0000</pubDate>
+      <pubDate>Sat, 16 Jul 2022 03:28:29 +0000</pubDate>
       
       <guid>/docs-csm/en-12/operations/hmcollector/adjust_hmcollector_resource_limits_requests/</guid>
-      <description>Adjust HM Collector resource limits and requests  Resource Limit Tuning Guidance Customize cray-hms-hmcollector resource limits and requests in customizations.yaml Redeploy cray-hms-hmcollector with new resource limits and requests  Resource Limit Tuning Guidance Inspect current resource usage in the cray-hms-hmcollector pod View resource usage of the containers in the cray-hms-hmcollector pod:
-ncn-m001# kubectl -n services top pod -l app.kubernetes.io/name=cray-hms-hmcollector --containers POD NAME CPU(cores) MEMORY(bytes) cray-hms-hmcollector-7c5b797c5c-zxt67 istio-proxy 187m 275Mi cray-hms-hmcollector-7c5b797c5c-zxt67 cray-hms-hmcollector 4398m 296Mi The default resource limits for the cray-hms-hmcollector container are:</description>
+      <description>Adjust HM Collector resource limits and requests  Resource limit tuning guidance Customize cray-hms-hmcollector in customizations.yaml Redeploy cray-hms-hmcollector with new customizations  Resource limit tuning guidance Inspect current resource usage View resource usage of the containers in the cray-hms-hmcollector-ingress pods:
+ncn-mw# kubectl -n services top pod -l app.kubernetes.io/name=cray-hms-hmcollector-ingress --containers Example output:
+POD NAME CPU(cores) MEMORY(bytes) cray-hms-hmcollector-ingress-554bb46784-dvjzq cray-hms-hmcollector-ingress 7m 99Mi cray-hms-hmcollector-ingress-554bb46784-dvjzq istio-proxy 5m 132Mi cray-hms-hmcollector-ingress-554bb46784-hctwm cray-hms-hmcollector-ingress 4m 82Mi cray-hms-hmcollector-ingress-554bb46784-hctwm istio-proxy 4m 120Mi cray-hms-hmcollector-ingress-554bb46784-zdhwc cray-hms-hmcollector-ingress 5m 97Mi cray-hms-hmcollector-ingress-554bb46784-zdhwc istio-proxy 4m 133Mi The default resource limits for the cray-hms-hmcollector-ingress containers are:</description>
     </item>
     
   </channel>
