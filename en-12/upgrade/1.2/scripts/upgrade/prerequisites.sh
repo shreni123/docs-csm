@@ -381,6 +381,29 @@ else
     echo "====> ${state_name} has been completed"
 fi
 
+state_name="RECONFIGURE_CONTAINERD_WORKERS"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+if [[ $state_recorded == "0" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    workers=$(grep -oP 'ncn-w\d+' /etc/hosts | sort -u)
+    for worker in $workers
+    do
+      echo "Reconfiguring containerd on $worker:"
+      scp /usr/share/doc/csm/scripts/reconfigure_containerd.sh $worker:/tmp/reconfigure_containerd.sh
+      pdsh -b -S -w $worker '/tmp/reconfigure_containerd.sh'
+    done
+    echo "Restarting sonar-jobs-watcher pods"
+    kubectl -n services rollout restart daemonset.apps/sonar-jobs-watcher
+    kubectl -n services rollout status daemonset.apps/sonar-jobs-watcher
+
+    } >> ${LOG_FILE} 2>&1
+    record_state ${state_name} "$(hostname)"
+else
+    echo "====> ${state_name} has been completed"
+fi
+
 state_name="UPGRADE_BSS"
 state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
@@ -468,7 +491,10 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
 
     # shellcheck disable=SC2155
     export SQUASHFS_ROOT_PW_HASH=$(awk -F':' /^root:/'{print $2}' < /etc/shadow)
-    DEBUG=1 ${CSM_ARTI_DIR}/ncn-image-modification.sh \
+    set -o pipefail
+    NCN_IMAGE_MOD_SCRIPT="$(rpm -ql docs-csm | grep ncn-image-modification.sh)"
+    set +o pipefail
+    DEBUG=1 ${NCN_IMAGE_MOD_SCRIPT} \
         -d /root/.ssh \
         -k $artdir/kubernetes/kubernetes*.squashfs \
         -s $artdir/storage-ceph/storage-ceph*.squashfs \
