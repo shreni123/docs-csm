@@ -1,18 +1,17 @@
 # Audit Logs
 
-How to enable and disable audit logging for host and Kubernetes APIs.
+## Enable or disable audit logging for host and Kubernetes APIs
 
 Audit logs are used to monitor the system and search for suspicious behavior.
 Host and Kubernetes API audit logging can be enabled to produce extra audit logs for analysis.
-Enabling audit logging is optional and will generate some load and data on the non-compute nodes \(NCNs\).
-Host and Kubernetes API audit logging is not enabled by default.
+Enabling audit logging is optional. If enabled it generates some load and data on the non-compute nodes \(NCNs\).
+By default, host and Kubernetes API audit logging are not enabled.
 
-## Procedure
+### Procedure
 
-1. (`ncn#`) Enable or disable host and Kubernetes API audit logging.
+The method for updating the audit log settings varies depending on the state of the system.
 
-   The method for updating the audit log settings will vary depending on the state of the system.
-   Select one of the following options based on the installation status of the system:
+1. (`ncn#`) Select one of the following options based on the installation status of the system:
 
    * Install
 
@@ -20,9 +19,8 @@ Host and Kubernetes API audit logging is not enabled by default.
 
      * **Option 1**
 
-       During the install, audit logging is enabled or disabled by changing the CSI settings.
-       Use the following flags with the `csi config init` command to enable or disable audit logging.
-       Refer to `csi config init -h` for more information on using flags.
+       During the installation, audit logging is enabled or disabled by modifying the CSI settings.
+       To enable or disable audit logging, use the following flags with the `csi config init` command. For more information on using flags, see `csi config init -h`:
 
        `ncn-mgmt-node-auditing-enabled`: Set to `true` to enable host logging or to `false` to disable host logging.
 
@@ -56,7 +54,7 @@ Host and Kubernetes API audit logging is not enabled by default.
 
    * Post-install
 
-     If a system is installed, audit logging can be enabled via the Boot Script Service (BSS).
+     If a system is installed, audit logging can be enabled through the Boot Script Service (BSS).
 
      * `ncn-mgmt-node-auditing-enabled`
      * `k8s-api-auditing-enabled`
