@@ -7,12 +7,11 @@ Host and Kubernetes API audit logging can be enabled to produce extra audit logs
 Enabling audit logging is optional. If enabled it generates some load and data on the non-compute nodes \(NCNs\).
 By default, host and Kubernetes API audit logging are not enabled.
 
-## Procedure
+### Procedure
 
-1. Enable or disable host and Kubernetes API audit logging.
+The method for updating the audit log settings varies depending on the state of the system.
 
-   The method for updating the audit log settings will vary depending on the state of the system.
-   Select one of the following options based on the installation status of the system:
+1. Select one of the following options based on the installation status of the system:
 
    * Install
 
@@ -22,7 +21,6 @@ By default, host and Kubernetes API audit logging are not enabled.
 
        During the installation, audit logging is enabled or disabled by modifying the CSI settings.
        To enable or disable audit logging, use the following flags with the `csi config init` command. For more information on using flags, see `csi config init -h`:
-       Refer to `csi config init -h` for more information on using flags.
 
        `ncn-mgmt-node-auditing-enabled`: Set to `true` to enable host logging or to `false` to disable host logging.
 
@@ -85,4 +83,3 @@ The log rotation settings are enabled after editing the CSI settings and rebooti
 
 The Kubernetes API audit logs are stored in the `/var/log/audit/kl8s/apiserver` directory on each master NCN.
 Kubernetes API audit logging uses a maximum of 1GB on each master NCN when using log rotation settings.
-
