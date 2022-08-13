@@ -6,15 +6,24 @@
     <description>Recent content in 1.2.1 on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 12 Aug 2022 03:30:22 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Aug 2022 03:26:36 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upgrade And Validate Switch Configurations</title>
+      <link>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</link>
+      <pubDate>Sat, 13 Aug 2022 03:26:11 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</guid>
+      <description>Upgrade and validate Switch Configurations Prerequisites  SSH access to the switches or the running configuration file Upgrade or install latest version of CANU Install/Upgrade CANU  Run canu --version to see version CANU installed with version 1.6.13 or greater.   Use the paddle file (CCJ) if available, or validate an up-to-date SHCD Validate SHCD System Layout Service (SLS) input file. Collect Data   CAUTION: All of these steps should be done using an out-of-band connection.</description>
+    </item>
+    
     <item>
       <title>1.2.1 Patch Installation Instructions</title>
       <link>/docs-csm/en-12/upgrade/1.2.1/readme/</link>
-      <pubDate>Fri, 12 Aug 2022 03:29:56 +0000</pubDate>
+      <pubDate>Sat, 13 Aug 2022 03:26:10 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.1/readme/</guid>
       <description>CSM 1.2.1 Patch Installation Instructions Introduction This document guides an administrator through the upgrade to Cray Systems Management v1.2.1 from v1.2.0. Earlier version of CSM must first be upgraded to at least v1.2.0. For information on how to do that, see Upgrade CSM.
-Steps  Preparation Setup Nexus Upgrade services Verification Complete upgrade  Preparation   Start a typescript on ncn-m001 to capture the commands and output from this procedure.</description>
+Steps  Upgrade CSM network configuration Preparation Setup Nexus Upgrade services Verification Complete upgrade  Upgrade CSM network configuration Before proceeding with the patch installation. Upgrade the CSM management network configuration.</description>
     </item>
     
   </channel>
