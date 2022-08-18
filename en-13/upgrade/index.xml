@@ -6,11 +6,11 @@
     <description>Recent content in Upgrade on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 17 Aug 2022 03:44:42 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/upgrade/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Aug 2022 03:45:45 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/upgrade/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.2.0 Or Later To 1.3.0 Upgrade Process</title>
       <link>/docs-csm/en-13/upgrade/upgrade_ncn_nodes/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:45 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:47 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/upgrade_ncn_nodes/</guid>
       <description>CSM 1.2.0 or later to 1.3.0 Upgrade Process Introduction This document guides an administrator through the upgrade of Cray Systems Management from v1.0 to v1.2. When upgrading a system, follow this top-level file from top to bottom. The content on this top-level page is meant to be terse. For additional reference material on the upgrade processes and scripts mentioned explicitly on this page, see resource material.
@@ -20,7 +20,7 @@ Important Notes Service request adjustments are needed for small systems   For s
     <item>
       <title>Upgrade Automation</title>
       <link>/docs-csm/en-13/upgrade/scripts/upgrade/upgrade_automation/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:45 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:47 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/scripts/upgrade/upgrade_automation/</guid>
       <description>Upgrade Automation This document describes how the CSM upgrade process is automated.
@@ -33,7 +33,7 @@ The prerequisites.sh script is required to run on both ncn-m001 and ncn-m002 (at
     <item>
       <title>SLS Updater.py TechNICal Details</title>
       <link>/docs-csm/en-13/upgrade/scripts/sls/sls_updater.py_technical_details/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:44 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:46 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/scripts/sls/sls_updater.py_technical_details/</guid>
       <description>sls_updater.py Technical Details No action needed. Informational purposes only.
@@ -44,7 +44,7 @@ Actions and order This migration is performed offline for data security. The run
     <item>
       <title>SLS Updates Expert Mode</title>
       <link>/docs-csm/en-13/upgrade/scripts/sls/expert_mode/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:44 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:46 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/scripts/sls/expert_mode/</guid>
       <description>SLS Updates Expert mode The 1.2 SLS Upgrader aims to make the upgrade of SLS from pre-CMS 1.2 to CSM 1.2 as seamless as possible. However, certain system constraints and subnet sizes quickly necessitate overriding standard input.
@@ -54,7 +54,7 @@ Actions and order This migration is performed offline for data security. The run
     <item>
       <title>Upgrade SLS Offline From 1.0.x To Csm 1.2</title>
       <link>/docs-csm/en-13/upgrade/scripts/sls/readme.sls_upgrade/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:44 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:46 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/scripts/sls/readme.sls_upgrade/</guid>
       <description>Upgrade SLS Offline from CSM 1.0.x to CSM 1.2 Abstract Prior to updating SLS, at a minimum, answers to the following questions must be known:
@@ -65,7 +65,7 @@ By default when upgrading to CSM 1.2, non-administrative user traffic is migrate
     <item>
       <title>Prepare For Upgrade</title>
       <link>/docs-csm/en-13/upgrade/prepare_for_upgrade/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:43 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:45 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/prepare_for_upgrade/</guid>
       <description>Prepare for Upgrade Before beginning an upgrade to a new version of CSM, there are a few things to do on the system first.
@@ -74,31 +74,9 @@ Warning: Although it is expected that compute nodes and application nodes will c
     </item>
     
     <item>
-      <title>Stage 0 - Prerequisites And Preflight Checks</title>
-      <link>/docs-csm/en-13/upgrade/stage_0_prerequisites/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/upgrade/stage_0_prerequisites/</guid>
-      <description>Stage 0 - Prerequisites and Preflight Checks  Reminders:
- CSM 1.2.0 or higher is required in order to upgrade to CSM 1.3.0. If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.   Stage 0 has several critical procedures which prepare the environment and verify if the environment is ready for the upgrade.
- Stage 0 - Prerequisites and Preflight Checks  Stage 0.</description>
-    </item>
-    
-    <item>
-      <title>Stage 1 - Ceph Image Upgrade</title>
-      <link>/docs-csm/en-13/upgrade/stage_1/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/upgrade/stage_1/</guid>
-      <description>Stage 1 - Ceph image upgrade Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.
-Before starting Stage 1, access the Argo UI to view the progress of this stage. For more information, see Using the Argo UI.
-Procedure   (ncn-m001#) Run ncn-upgrade-worker-storage-nodes.sh for all storage nodes to be upgraded. Provide the storage nodes in a comma-separated list, such as ncn-s001,ncn-s002,ncn-s003.</description>
-    </item>
-    
-    <item>
       <title>Stage 2 - Kubernetes Upgrade</title>
       <link>/docs-csm/en-13/upgrade/stage_2/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:45 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/stage_2/</guid>
       <description>Stage 2 - Kubernetes Upgrade Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.
@@ -110,19 +88,17 @@ Follow output of the script carefully. The script will pause for manual interact
     <item>
       <title>Stage 3 - Service Upgrades</title>
       <link>/docs-csm/en-13/upgrade/stage_3/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:45 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/stage_3/</guid>
       <description>Stage 3 - CSM Service Upgrades Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.
-Move assets to ncn-m002   Set the CSM_RELEASE variable to the target CSM version of this upgrade.
-CSM_RELEASE=1.3.0 CSM_REL_NAME=csm-${CSM_RELEASE}   Move the RBD device containing the CSM tarball.
-/usr/share/doc/csm/scripts/csm_rbd_tool/csm_rbd_tool.py --rbd_action move --target_host ncn-m002   Perform upgrade During this stage there will be a brief (approximately five minutes) window where pods with Persistent Volumes (PVs) will not be able to migrate between nodes.</description>
+Perform upgrade During this stage there will be a brief (approximately five minutes) window where pods with Persistent Volumes (PVs) will not be able to migrate between nodes. This is due to a redeployment of the Ceph csi provisioners into namespaces, in order to accommodate the newer charts and a better upgrade strategy.</description>
     </item>
     
     <item>
       <title>Stage 4 - Ceph Upgrade</title>
       <link>/docs-csm/en-13/upgrade/stage_4/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:45 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/stage_4/</guid>
       <description>Stage 4 - Ceph Upgrade Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, then see Relevant troubleshooting links for upgrade-related issues.
@@ -133,7 +109,7 @@ Procedure  This upgrade is performed using the cubs_tool. The cubs_tool.py can b
     <item>
       <title>Stage 5 - Perform NCN Personalization</title>
       <link>/docs-csm/en-13/upgrade/stage_5/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:45 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/stage_5/</guid>
       <description>Stage 5 - Perform NCN Personalization Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.
@@ -141,9 +117,31 @@ Procedure   If custom configuration content was merged with content from a previ
     </item>
     
     <item>
+      <title>Stage 0 - Prerequisites And Preflight Checks</title>
+      <link>/docs-csm/en-13/upgrade/stage_0_prerequisites/</link>
+      <pubDate>Thu, 18 Aug 2022 03:45:44 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/upgrade/stage_0_prerequisites/</guid>
+      <description>Stage 0 - Prerequisites and Preflight Checks  Reminders:
+ CSM 1.2.0 or higher is required in order to upgrade to CSM 1.3.0. If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.   Stage 0 has several critical procedures which prepare the environment and verify if the environment is ready for the upgrade.
+ Stage 0 - Prerequisites and Preflight Checks  Stage 0.</description>
+    </item>
+    
+    <item>
+      <title>Stage 1 - Ceph Image Upgrade</title>
+      <link>/docs-csm/en-13/upgrade/stage_1/</link>
+      <pubDate>Thu, 18 Aug 2022 03:45:44 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/upgrade/stage_1/</guid>
+      <description>Stage 1 - Ceph image upgrade Reminder: If any problems are encountered and the procedure or command output does not provide relevant guidance, see Relevant troubleshooting links for upgrade-related issues.
+Before starting Stage 1, access the Argo UI to view the progress of this stage. For more information, see Using the Argo UI.
+Procedure   (ncn-m001#) Run ncn-upgrade-worker-storage-nodes.sh for all storage nodes to be upgraded. Provide the storage nodes in a comma-separated list, such as ncn-s001,ncn-s002,ncn-s003.</description>
+    </item>
+    
+    <item>
       <title>Upgrade</title>
       <link>/docs-csm/en-13/upgrade/readme/</link>
-      <pubDate>Wed, 17 Aug 2022 03:44:42 +0000</pubDate>
+      <pubDate>Thu, 18 Aug 2022 03:45:44 +0000</pubDate>
       
       <guid>/docs-csm/en-13/upgrade/readme/</guid>
       <description>Upgrade CSM The process for upgrading Cray Systems Management (CSM) has many steps in multiple procedures which should be done in a specific order.
