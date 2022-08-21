@@ -6,21 +6,21 @@
     <description>Recent content in 1.2.1 on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 20 Aug 2022 03:31:53 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Aug 2022 03:32:00 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.2.1 Patch Installation Instructions</title>
       <link>/docs-csm/en-12/upgrade/1.2.1/readme/</link>
-      <pubDate>Sat, 20 Aug 2022 03:31:53 +0000</pubDate>
+      <pubDate>Sun, 21 Aug 2022 03:31:59 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.1/readme/</guid>
       <description>CSM 1.2.1 Patch Installation Instructions Introduction This document guides an administrator through the upgrade to Cray Systems Management v1.2.1 from v1.2.0. Earlier version of CSM must first be upgraded to at least v1.2.0. For information on how to do that, see Upgrade CSM.
-Known Issues  kdump (kernel dump) may hang and fail on NCNs in CSM 1.2 (HPE Cray EX System Software 22.07 release). During the upgrade, a workaround is applied to fix this.</description>
+Bug Fixes  Fixes two issues in CFS, restoring the additional inventory field functionality. Fixes an issue restoring console services functionality on &amp;ldquo;Hill&amp;rdquo; cabinets. Fixes a few issues in PowerDNS where various records were missing in the AXFR transfer.</description>
     </item>
     
     <item>
       <title>Upgrade And Validate Switch Configurations</title>
       <link>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</link>
-      <pubDate>Sat, 20 Aug 2022 03:31:53 +0000</pubDate>
+      <pubDate>Sun, 21 Aug 2022 03:31:59 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</guid>
       <description>Upgrade and validate Switch Configurations Prerequisites  SSH access to the switches or the running configuration file Upgrade or install latest version of CANU Install/Upgrade CANU  Run canu --version to see version CANU installed with version 1.6.13 or greater.   Use the paddle file (CCJ) if available, or validate an up-to-date SHCD Validate SHCD System Layout Service (SLS) input file. Collect Data   CAUTION: All of these steps should be done using an out-of-band connection.</description>
