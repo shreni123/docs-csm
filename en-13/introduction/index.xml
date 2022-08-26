@@ -6,11 +6,30 @@
     <description>Recent content in Introduction To Installation on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 25 Aug 2022 03:46:49 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/introduction/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Aug 2022 03:51:19 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/introduction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scenarios For Shasta V1.5</title>
+      <link>/docs-csm/en-13/introduction/scenarios/</link>
+      <pubDate>Fri, 26 Aug 2022 03:51:20 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/introduction/scenarios/</guid>
+      <description>Scenarios for Shasta v1.5 There are multiple scenarios for installing CSM software which are described in this documentation with many supporting procedures.
+Topics  Installation Upgrade Migration  Installation There are two ways to install the CSM software. There are some differences between a first time install which must create the initial configuration payload and configure the management network switches, whereas a reinstall can reuse a previous configuration payload and skip the configuration of management network switches.</description>
+    </item>
+    
+    <item>
+      <title>CAPMC Deprecation Notice Many Capmc V1 Features Are Being Partially Deprecated</title>
+      <link>/docs-csm/en-13/introduction/capmc_deprecation/</link>
+      <pubDate>Fri, 26 Aug 2022 03:51:19 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/introduction/capmc_deprecation/</guid>
+      <description>CAPMC Deprecation Notice: many CAPMC v1 features are being partially deprecated Deprecated Features in CSM 1.0 Many CAPMC v1 REST API and CLI features are being deprecated as part of CSM version 1.0; Full removal of the following deprecated CAPMC features will happen in CSM version 1.3. Further development of CAPMC service or CLI has stopped. CAPMC has entered end-of-life but will still be generally available. CAPMC is going to be replaced with the Power Control Service (PCS) in a future release.</description>
+    </item>
+    
     <item>
       <title>Differences From Previous Release</title>
       <link>/docs-csm/en-13/introduction/differences/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:49 +0000</pubDate>
+      <pubDate>Fri, 26 Aug 2022 03:51:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/introduction/differences/</guid>
       <description>Differences from Previous Release The most noteworthy changes since the previous release are described here.
@@ -21,17 +40,17 @@ Topics  New Features Deprecated Features Removed Features  New Features The foll
     <item>
       <title>Documentation Conventions</title>
       <link>/docs-csm/en-13/introduction/documentation_conventions/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:49 +0000</pubDate>
+      <pubDate>Fri, 26 Aug 2022 03:51:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/introduction/documentation_conventions/</guid>
-      <description>Documentation Conventions Several conventions have been used in the preparation of this documentation.
- Markdown Format File Formats Typographic Conventions Command Prompt Conventions  Host Name and Account in Command Prompts Node Abbreviations Using Prompts Context Badges Step Examples    Markdown Format This documentation is in Markdown format. Although much of it can be viewed with any text editor, a richer experience will come from using a tool which can render the Markdown to show different font sizes, the use of bold and italics formatting, inclusion of diagrams and screen shots as image files, and to follow navigational links within a topic file and to other files.</description>
+      <description>Documentation Conventions This outlines conventions and standards that are used in this documentation.
+ Markdown format File formats Typographic conventions Command prompt conventions  Host and user name in command prompts Node abbreviations Command prompt reference Command prompt location Command prompts inside new shells  chroot example kubectl exec example Combined ssh and chroot example   Directory path in command prompt   Ability to pause and resume procedures  Bad example Good example    Markdown format This documentation is in Markdown format.</description>
     </item>
     
     <item>
       <title>Introduction To Installation</title>
       <link>/docs-csm/en-13/introduction/readme/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:49 +0000</pubDate>
+      <pubDate>Fri, 26 Aug 2022 03:51:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/introduction/readme/</guid>
       <description>Introduction to CSM Installation This document provides an introduction to the Cray System Management (CSM) installation documentation for an HPE Cray EX system.
@@ -41,30 +60,11 @@ Topics  CSM overview Scenarios for Shasta v1.5 CSM product stream updates CSM op
     <item>
       <title>Overview</title>
       <link>/docs-csm/en-13/introduction/csm_overview/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:49 +0000</pubDate>
+      <pubDate>Fri, 26 Aug 2022 03:51:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/introduction/csm_overview/</guid>
       <description>CSM Overview This CSM Overview describes the Cray System Management ecosystem with its hardware, software, and network. It describes how to access these services and components.
 The CSM installation prepares and deploys a distributed system across a group of management nodes organized into a Kubernetes cluster which uses Ceph for utility storage. These nodes perform their function as Kubernetes master nodes, Kubernetes worker nodes, or utility storage nodes with the Ceph storage.</description>
-    </item>
-    
-    <item>
-      <title>Scenarios For Shasta V1.5</title>
-      <link>/docs-csm/en-13/introduction/scenarios/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:49 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/introduction/scenarios/</guid>
-      <description>Scenarios for Shasta v1.5 There are multiple scenarios for installing CSM software which are described in this documentation with many supporting procedures.
-Topics  Installation Upgrade Migration  Installation There are two ways to install the CSM software. There are some differences between a first time install which must create the initial configuration payload and configure the management network switches, whereas a reinstall can reuse a previous configuration payload and skip the configuration of management network switches.</description>
-    </item>
-    
-    <item>
-      <title>CAPMC Deprecation Notice Many Capmc V1 Features Are Being Partially Deprecated</title>
-      <link>/docs-csm/en-13/introduction/capmc_deprecation/</link>
-      <pubDate>Thu, 25 Aug 2022 03:46:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/introduction/capmc_deprecation/</guid>
-      <description>CAPMC Deprecation Notice: many CAPMC v1 features are being partially deprecated Deprecated Features in CSM 1.0 Many CAPMC v1 REST API and CLI features are being deprecated as part of CSM version 1.0; Full removal of the following deprecated CAPMC features will happen in CSM version 1.3. Further development of CAPMC service or CLI has stopped. CAPMC has entered end-of-life but will still be generally available. CAPMC is going to be replaced with the Power Control Service (PCS) in a future release.</description>
     </item>
     
   </channel>
