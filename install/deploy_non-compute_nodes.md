@@ -21,15 +21,15 @@ the number of storage and worker nodes.
 ## Topics
 
 1. [Prepare for management node deployment](#1-prepare-for-management-node-deployment)
-    1. [Tokens and IPMI password](#1-1-tokens-and-ipmi-password)
-    2. [BIOS baseline](#1-2-bios-baseline)
-2. [Deploy management nodes](#2-deploy-management-nodes)
-    1. [Deploy storage NCNs](#2-1-deploy-storage-ncns)
-    2. [Deploy Kubernetes NCNs](#2-2-deploy-kubernetes-ncns)
-    3. [Check LVM on Kubernetes NCNs](#2-3-check-lvm-on-kubernetes-ncns)
-3. [Cleanup](#3-cleanup)
-4. [Validate deployment](#4-validate-deployment)
-5. [Next topic](#next-topic)
+    1. [Tokens and IPMI password](#11-tokens-and-ipmi-password)
+    1. [BIOS baseline](#12-bios-baseline)
+1. [Deploy management nodes](#2-deploy-management-nodes)
+    1. [Deploy storage NCNs](#21-deploy-storage-ncns)
+    1. [Deploy Kubernetes NCNs](#22-deploy-kubernetes-ncns)
+    1. [Check LVM on Kubernetes NCNs](#23-check-lvm-on-kubernetes-ncns)
+1. [Cleanup](#3-cleanup)
+1. [Validate deployment](#4-validate-deployment)
+1. [Next topic](#next-topic)
 
 ## 1. Prepare for management node deployment
 
@@ -39,12 +39,13 @@ Preparation of the environment must be done before attempting to deploy the mana
 
 1. (`pit#`) Define shell environment variables that will simplify later commands to deploy management nodes.
 
-   1. Set `IPMI_PASSWORD` to the root password for the NCN BMCs.
+   1. Set `USERNAME` and `IPMI_PASSWORD` to the credentials for the NCN BMCs.
 
       > `read -s` is used to prevent the password from being written to the screen or the shell history.
 
       ```bash
-      read -s IPMI_PASSWORD
+      USERNAME=root
+      read -r -s -p "NCN BMC ${USERNAME} password: " IPMI_PASSWORD
       ```
 
    1. Set the remaining helper variables.
@@ -52,7 +53,7 @@ Preparation of the environment must be done before attempting to deploy the mana
       > These values do not need to be altered from what is shown.
 
       ```bash
-      export IPMI_PASSWORD ; mtoken='ncn-m(?!001)\w+-mgmt' ; stoken='ncn-s\w+-mgmt' ; wtoken='ncn-w\w+-mgmt' ; export USERNAME=$(whoami)
+      export IPMI_PASSWORD ; mtoken='ncn-m(?!001)\w+-mgmt' ; stoken='ncn-s\w+-mgmt' ; wtoken='ncn-w\w+-mgmt'
       ```
 
 ### 1.2. BIOS baseline
@@ -68,15 +69,15 @@ Preparation of the environment must be done before attempting to deploy the mana
 1. (`pit#`) Check power status of all NCNs.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power status
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power status
     ```
 
 1. (`pit#`) Power off all NCNs.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power off
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power off
     ```
 
 1. (`pit#`) Clear CMOS; ensure default settings are applied to all NCNs.
@@ -89,17 +90,17 @@ Preparation of the environment must be done before attempting to deploy the mana
    - Disable VT-x, AMD-V, SVM, VT-d, and AMD IOMMU for Virtualization, on both AMD and Intel CPUs; there is no way to enable at this time.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev none options=clear-cmos
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} chassis bootdev none options=clear-cmos
     ```
 
 1. (`pit#`) Boot NCNs to BIOS to allow the CMOS to reinitialize.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev bios options=efiboot
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power on
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} chassis bootdev bios options=efiboot
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power on
     ```
 
 1. (`pit#`) Run `bios-baseline.sh`.
@@ -113,8 +114,8 @@ Preparation of the environment must be done before attempting to deploy the mana
 1. (`pit#`) Power off the nodes.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u |
-          xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power off
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u |
+          xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power off
     ```
 
 ## 2. Deploy management nodes
@@ -124,28 +125,7 @@ After the operating system boots on each node, there are some configuration acti
 console or the console log for certain nodes can help to understand what happens and when. When the process is complete
 for all nodes, the Ceph storage will have been initialized and the Kubernetes cluster will be created ready for a workload.
 
-1. (`pit#`) Set the default `root` password and SSH keys and optionally change the timezone.
-
-   > **NOTE:** The management nodes images do not contain a default `root` password or SSH keys.
-   > If this step is skipped and the nodes are booted, then they will be inaccessible via console or SSH.
-   > In that case, the nodes would have to be rebooted with the secure images built from this step, have their disks wiped,
-   > and then redeployed.
-
-   It is **required** to set the default `root` password and SSH keys in the images used to boot the management nodes.
-   Follow the NCN image customization steps in [Change NCN Image Root Password and SSH Keys on PIT Node](../operations/security_and_authentication/Change_NCN_Image_Root_Password_and_SSH_Keys_on_PIT_Node.md)
-
-1. (`pit#`) Create boot directories for any NCN in DNS.
-
-    > **NOTE:** This script also sets the BMCs to DHCP. This script only sets up boot directories
-    > for nodes that appear in `/var/lib/misc/dnsmasq.leases`. Since nodes may take a few seconds
-    > to DHCP after switching from their old, static IP addresses, it is advised to run this twice when
-    > reinstalling a system.
-
-    ```bash
-    /root/bin/set-sqfs-links.sh
-    ```
-
-1. (`pit#`) Customize boot scripts for any out-of-baseline NCNs.
+1. (`pit#`) Customize boot scripts for any out-of-baseline NCNs if needed (see below).
 
     - See the [Plan of Record](../background/ncn_plan_of_record.md) and compare against the server's hardware.
     - If modifications are needed for the PCIe hardware, then see [Customize PCIe Hardware](../operations/node_management/Customize_PCIe_Hardware.md).
@@ -155,8 +135,9 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
 1. (`pit#`) Set each node to always UEFI network boot, and ensure that they are powered off.
 
     ```bash
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev pxe options=efiboot,persistent
-    grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power off
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} chassis bootdev pxe options=persistent
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} chassis bootdev pxe options=efiboot
+    grep -oP "(${mtoken}|${stoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power off
     ```
 
     > **NOTE:** The NCN boot order is further explained in [NCN Boot Workflow](../background/ncn_boot_workflow.md).
@@ -166,7 +147,7 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
 1. (`pit#`) Boot the **storage NCNs**.
 
     ```bash
-    grep -oP $stoken /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power on 
+    grep -oP "${stoken}" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power on 
     ```
 
 1. (`pit#`) Observe the installation through the console of `ncn-s001-mgmt`.
@@ -193,7 +174,7 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
 1. (`pit#`) Boot the **Kubernetes NCNs**.
 
     ```bash
-    grep -oP "($mtoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power on
+    grep -oP "(${mtoken}|${wtoken})" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U "${USERNAME}" -E -H {} power on
     ```
 
 1. (`pit#`) Start watching the the first Kubernetes master's console.
@@ -205,19 +186,19 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
     1. Determine the first Kubernetes master.
 
         ```bash
-        FM=$(cat /var/www/ephemeral/configs/data.json | jq -r '."Global"."meta-data"."first-master-hostname"')
-        echo $FM
+        FM=$(cat "${PITDATA}"/configs/data.json | jq -r '."Global"."meta-data"."first-master-hostname"')
+        echo ${FM}
         ```
 
     1. Open its console.
 
         ```bash
-        conman -j ${FM}-mgmt
+        conman -j "${FM}-mgmt"
         ```
 
     > **NOTES:**
     >
-    > - If the nodes have PXE boot issues (e.g. getting PXE errors, not pulling the ipxe.efi binary) then see [PXE boot troubleshooting](troubleshooting_pxe_boot.md).
+    > - If the nodes have PXE boot issues (e.g. getting PXE errors, not pulling the `ipxe.efi` binary), then see [Troubleshooting PXE Boot](troubleshooting_pxe_boot.md).
     > - If one of the master nodes seems hung waiting for the storage nodes to create a secret, then check the storage node consoles for error messages.
     >   If any are found, then consult [CEPH CSI Troubleshooting](troubleshooting_ceph_csi.md).
 
@@ -241,7 +222,7 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
         > Enter the `root` password for the first Kubernetes master node, if prompted.
 
         ```bash
-        ssh ${FM} kubectl get nodes -o wide
+        ssh "${FM}" kubectl get nodes -o wide
         ```
 
         Expected output looks similar to the following:
@@ -267,7 +248,7 @@ for all nodes, the Ceph storage will have been initialized and the Kubernetes cl
 
    ```bash
    mkdir -v ~/.kube
-   scp ${FM}.nmn:/etc/kubernetes/admin.conf ~/.kube/config
+   scp "${FM}.nmn:/etc/kubernetes/admin.conf" ~/.kube/config
    ```
 
 1. (`pit#`) Ensure that the working directory is the `prep` directory.
@@ -317,12 +298,10 @@ SUCCESS: LVM checks passed on all master and worker NCNs
 
 If the check fails, stop and:
 
-1. (`pit#`) Wipe the nodes in question. See [Wipe disks on booted nodes](re-installation.md#wipe-disks-on-booted-nodes).
-
 1. (`pit#`) Power cycle the node
 
     ```bash
-    ipmitool -I lanplus -U $USERNAME -E -H <node-in-question> power reset    
+    ipmitool -I lanplus -U "${USERNAME}" -E -H <node-in-question> power reset    
     ```
 
 If the check fails after doing the rebuild, contact support.
@@ -332,7 +311,7 @@ If the check fails after doing the rebuild, contact support.
 1. (`pit#`) Install tests and test server on NCNs.
 
     ```bash
-    pushd /var/www/ephemeral && ${CSM_RELEASE}/lib/install-goss-tests.sh && popd
+    "${CSM_PATH}"/lib/install-goss-tests.sh
     ```
 
 1. (`pit#`) Remove the default NTP pool.
@@ -355,78 +334,20 @@ If the check fails after doing the rebuild, contact support.
 1. (`pit#`) Check the storage nodes.
 
    ```bash
-   csi pit validate --ceph | tee csi-pit-validate-ceph.log
+   csi pit validate --ceph
    ```
 
-   Once that command has finished, the following will extract the test totals reported for each node:
-
-   ```bash
-   grep "Total Test" csi-pit-validate-ceph.log
-   ```
-
-   Example output for a system with three storage nodes:
-
-   ```text
-   Total Tests: 8, Total Passed: 8, Total Failed: 0, Total Execution Time: 74.3782 seconds
-   Total Tests: 3, Total Passed: 3, Total Failed: 0, Total Execution Time: 0.6091 seconds
-   Total Tests: 3, Total Passed: 3, Total Failed: 0, Total Execution Time: 0.6260 seconds
-   ```
-
-   If these total lines report any failed tests, then look through the full output of the test in `csi-pit-validate-ceph.log` to see which node had the failed test and what the details are for that test.
-
-   > **NOTE:** See [Utility Storage](../operations/utility_storage/Utility_Storage.md) and [Ceph CSI Troubleshooting](troubleshooting_ceph_csi.md) in order to help resolve any
-   failed tests.
+   > **NOTE:** See [Utility Storage](../operations/utility_storage/Utility_Storage.md) and [Ceph CSI Troubleshooting](troubleshooting_ceph_csi.md) in
+   order to help resolve any failed tests.
 
 1. (`pit#`) Check the master and worker nodes.
 
-   > **NOTE:** Throughout the output of the `csi pit validate` command are test totals for each node where the tests run. **Be sure to check
-   all of them and not just the final one.** A `grep` command is provided to help with this.
-
    ```bash
-   csi pit validate --k8s | tee csi-pit-validate-k8s.log
+   csi pit validate --k8s
    ```
-
-   Once that command has finished, the following will extract the test totals reported for each node:
-
-   ```bash
-   grep "Total Test" csi-pit-validate-k8s.log
-   ```
-
-   Example output for a system with five master and worker nodes (excluding the PIT node):
-
-   ```text
-   Total Tests: 16, Total Passed: 16, Total Failed: 0, Total Execution Time: 0.3072 seconds
-   Total Tests: 16, Total Passed: 16, Total Failed: 0, Total Execution Time: 0.2727 seconds
-   Total Tests: 12, Total Passed: 12, Total Failed: 0, Total Execution Time: 0.2841 seconds
-   Total Tests: 12, Total Passed: 12, Total Failed: 0, Total Execution Time: 0.3622 seconds
-   Total Tests: 12, Total Passed: 12, Total Failed: 0, Total Execution Time: 0.2353 seconds
-   ```
-
-   If these total lines report any failed tests, then look through the full output of the test in `csi-pit-validate-k8s.log` to see which node had the failed test and what the details are for that test.
-
-1. (`pit#`) Ensure that `weave` has not become split-brained.
-
-   To ensure that `weave` is operating as a single cluster, run the following command to check each member of the Kubernetes cluster:
-
-   ```bash
-   pdsh -b -S -w "$(grep -oP 'ncn-[mw][0-9]{3}' /etc/dnsmasq.d/statics.conf | grep -v '^ncn-m001$' | sort -u |  tr -t '\n' ',')" \
-           'weave --local status connections | grep -i failed || true'
-   ```
-
-1. (`pit#`) Verify that all the pods in the `kube-system` namespace are `Running` or `Completed`. (Optional)
-
-   ```bash
-   kubectl get pods -o wide -n kube-system | grep -Ev '(Running|Completed)'
-   ```
-
-   If any pods are listed by this command, it means they are not in the `Running` or `Completed` state. That needs to be investigated before proceeding.
-
-1. Verify that the `ceph-csi` requirements are in place. (Optional)
-
-   See [Ceph CSI Troubleshooting](troubleshooting_ceph_csi.md) for details.
 
 ## Next topic
 
 After completing the deployment of the management nodes, the next step is to install the CSM services.
 
-See [Install CSM Services](README.md#2-install-csm-services)
+See [Install CSM Services](README.md#2-install-csm-services).

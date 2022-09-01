@@ -4,22 +4,22 @@ The page walks a user through setting up the Cray LiveCD with the intention of i
 
 1. [Boot installation environment](#1-boot-installation-environment)
     1. [Prepare installation environment server](#11-prepare-installation-environment-server)
-    2. [Boot the LiveCD](#12-boot-the-livecd)
-    3. [First login](#13-first-login)
-    4. [Prepare the data partition](#14-prepare-the-data-partition)
-    5. [Set reusable environment variables](#15-set-reusable-environment-variables)
-    6. [Exit the console and login with SSH](#16-exit-the-console-and-login-with-ssh)
-2. [Import CSM tarball](#2-import-csm-tarball)
+    1. [Boot the LiveCD](#12-boot-the-livecd)
+    1. [First log in](#13-first-log-in)
+    1. [Prepare the data partition](#14-prepare-the-data-partition)
+    1. [Set reusable environment variables](#15-set-reusable-environment-variables)
+    1. [Exit the console and log in with SSH](#16-exit-the-console-and-log-in-with-ssh)
+1. [Import CSM tarball](#2-import-csm-tarball)
     1. [Download CSM tarball](#21-download-csm-tarball)
-    2. [Import tarball assets](#22-import-tarball-assets)
-3. [Create system configuration](#3-create-system-configuration)
+    1. [Import tarball assets](#22-import-tarball-assets)
+1. [Create system configuration](#3-create-system-configuration)
     1. [Validate SHCD](#31-validate-shcd)
-    2. [Generate topology files](#32-generate-topology-files)
-    3. [Customize `system_config.yaml`](#33-customize-system_configyaml)
-    4. [Run CSI](#34-run-csi)
-    5. [Prepare Site Init](#35-prepare-site-init)
-    6. [Initialize the LiveCD](#36-initialize-the-livecd)
-4. [Next topic](#next-topic)
+    1. [Generate topology files](#32-generate-topology-files)
+    1. [Customize `system_config.yaml`](#33-customize-system_configyaml)
+    1. [Run CSI](#34-run-csi)
+    1. [Prepare Site Init](#35-prepare-site-init)
+    1. [Initialize the LiveCD](#36-initialize-the-livecd)
+1. [Next topic](#next-topic)
 
 ## 1. Boot installation environment
 
@@ -27,7 +27,7 @@ This section walks the user through booting and connecting to the LiveCD.
 
 Before proceeding, the user must obtain the CSM tarball containing the LiveCD.
 
-> **NOTE:** Each step denotes where its commands must run; `external#` refers to a server that is **not** the CRAY, whereas `pit#` refers to the LiveCD itself.
+> **NOTE:** Each step denotes where its commands must run; `external#` refers to a server that is **not** the Cray, whereas `pit#` refers to the LiveCD itself.
 
 Any steps run on an `external` server require that server to have the following tools:
 
@@ -39,28 +39,31 @@ Any steps run on an `external` server require that server to have the following 
 
 ### 1.1 Prepare installation environment server
 
-**`TODO: Manually validate the m001 firmware, UEFI settings, and cabling`**
-
 1. (`external#`) Download the CSM software release from the public Artifactory instance.
 
    > **NOTES:**
    >
    > - `-C -` is used to allow partial downloads. These tarballs are large; in the event of a connection disruption, the same `curl` command can be used to continue the disrupted download.
    > - **If air-gapped or behind a strict firewall**, then the tarball must be obtained from the medium delivered by Cray-HPE. For these cases, copy or download the tarball to the working
-   >   directory and then proceed to the next step. The tarball will need to be fetched with `scp` during the [Download CSM tarball](#2-1-download-csm-tarball) step.
+   >   directory and then proceed to the next step. The tarball will need to be fetched with `scp` during the [Download CSM tarball](#21-download-csm-tarball) step.
 
    ```bash
    # e.g. an alpha : CSM_RELEASE=1.3.0-alpha.99
    # e.g. an RC    : CSM_RELEASE=1.3.0-rc.1
    # e.g. a stable : CSM_RELEASE=1.3.0  
    CSM_RELEASE=1.3.0-alpha.9
+   ```
+
+   ```bash
    curl -C - -O "https://artifactory.algol60.net/artifactory/csm-releases/csm/$(awk -F. '{print $1"."$2}' <<< ${CSM_RELEASE})/csm-${CSM_RELEASE}.tar.gz"
    ```
 
 1. (`external#`) Extract the LiveCD from the tarball.
 
    ```bash
-   tar --wildcards --no-anchored -xzvf "csm-${CSM_RELEASE}.tar.gz" 'cray-pre-install-toolkit-*.iso'
+   OUT_DIR="$(pwd)/csm-temp"
+   mkdir -pv "${OUT_DIR}"
+   tar -C "${OUT_DIR}" --wildcards --no-anchored --transform='s/.*\///' -xzvf "csm-${CSM_RELEASE}.tar.gz" 'cray-pre-install-toolkit-*.iso'
    ```
 
 ### 1.2 Boot the LiveCD
@@ -88,7 +91,9 @@ Any steps run on an `external` server require that server to have the following 
       1. (`external#`) Get `cray-site-init` from the tarball.
 
          ```bash
-         tar --wildcards --no-anchored -xzvf "csm-${CSM_RELEASE}.tar.gz" 'cray-site-init-*.rpm'
+         OUT_DIR="$(pwd)/csm-temp"
+         mkdir -pv "${OUT_DIR}"
+         tar -C "${OUT_DIR}" --wildcards --no-anchored --transform='s/.*\///' -xzvf "csm-${CSM_RELEASE}.tar.gz" 'cray-site-init-*.rpm'
          ```
 
       1. (`external#`) Install the `write-livecd.sh` script:
@@ -96,28 +101,28 @@ Any steps run on an `external` server require that server to have the following 
          - RPM-based systems:
 
             ```bash
-            rpm -Uvh --force cray-site-init*.rpm
+            rpm -Uvh --force ${OUT_DIR}/cray-site-init*.rpm
             ```
 
          - Non-RPM-based systems (requires `bsdtar`):
 
             ```bash
-            bsdtar xvf cray-site-init-*.rpm --include *write-livecd.sh -C ./
-            mv -v ./usr/local/bin/write-livecd.sh ./
-            rmdir -pv ./usr/local/bin/
+            bsdtar xvf "${OUT_DIR}"/cray-site-init-*.rpm --include *write-livecd.sh -C "${OUT_DIR}"
+            mv -v "${OUT_DIR}"/usr/local/bin/write-livecd.sh "./${OUT_DIR}"
+            rmdir -pv "${OUT_DIR}/usr/local/bin/"
             ```
 
          - Non-RPM Based Distros (requires `rpm2cpio`):
 
             ```bash
             rpm2cpio cray-site-init-*.rpm | cpio -idmv
-            mv -v ./usr/local/bin/write-livecd.sh ./
+            mv -v ./usr/local/bin/write-livecd.sh "./${OUT_DIR}"
             rm -vrf ./usr
             ```
 
       1. Follow [Bootstrap a LiveCD USB](livecd/Boot_LiveCD_USB.md) and then return here.
 
-### 1.3 First login
+### 1.3 First log in
 
 On first login, the LiveCD will prompt the administrator to change the password.
 
@@ -173,15 +178,10 @@ On first login, the LiveCD will prompt the administrator to change the password.
       > **NOTES:**
       >
       > - All of the `/root/bin/csi-*` scripts can be run without parameters to display usage statements.
-      > - The hostname is auto-resolved based on reverse DNS, if it is unresolvable then the user can set the hostname with:
-      >
-      >    ```bash
-      >    hostname=eniac-ncn-m001
-      >    hostamectl set-hostname "${hostname}-pit" 
-      >    ```
+      > - The hostname is auto-resolved based on reverse DNS.
 
       ```bash
-      /root/bin/csi-setup-lan0.sh "$site_ip" "$site_gw" "$site_dns" "$site_nics"
+      /root/bin/csi-setup-lan0.sh "${site_ip}" "${site_gw}" "${site_dns}" "${site_nics}"
       ```
 
 1. (`pit#`) Verify that the assigned IP address was successfully applied to `lan0` .
@@ -206,9 +206,10 @@ On first login, the LiveCD will prompt the administrator to change the password.
       Use a local disk for `PITDATA`:
 
       ```bash
-      disk="$(lsblk -l -o SIZE,NAME,TYPE,TRAN | grep -E '(sata|nvme|sas)' | sort -h | awk '{print $2}' | head -n 1 | tr -d '\n')"
-      echo $disk
-      parted --wipesignatures -m --align=opt --ignore-busy -s /dev/$disk -- mklabel gpt mkpart primary ext4 2048s 100%
+      disk="$(lsblk -l -o SIZE,NAME,TYPE,TRAN -e7 -e11 -d -n | grep -v usb | sort -h | awk '{print $2}' | xargs -I {} bash -c "if ! grep -Fq {} /proc/mdstat; then echo {}; fi" | head -n 1)"
+      echo "Using ${disk}"
+      parted --wipesignatures -m --align=opt --ignore-busy -s "/dev/${disk}" -- mklabel gpt mkpart primary ext4 2048s 100%
+      partprobe "/dev/${disk}"
       mkfs.ext4 -L PITDATA "/dev/${disk}1"
       mount -vL PITDATA
       ```
@@ -269,25 +270,26 @@ These variables will need to be set for many procedures within the CSM installat
    ```bash
    cat << EOF >/etc/environment
    CSM_RELEASE=${CSM_RELEASE}
-   CSM_PATH=${PITDATA}/csm-${CSM_RELEASE} 
+   CSM_PATH=${PITDATA}/csm-${CSM_RELEASE}
    GOSS_BASE=${GOSS_BASE}
    PITDATA=${PITDATA}
    SYSTEM_NAME=${SYSTEM_NAME}
    EOF
    ```
 
-### 1.6 Exit the console and login with SSH
+### 1.6 Exit the console and log in with SSH
 
-1. (`pit#`) Create the `admin` directory and logout.
+1. (`pit#`) Create the `admin` directory for the typescripts and administrative scratch work.
 
    ```bash
-   mkdir -pv "$(lsblk -o MOUNTPOINT -nr /dev/disk/by-label/PITDATA)/admin"
-   logout
+   mkdir -pv "$(lsblk -o MOUNTPOINT -nr /dev/disk/by-label/PITDATA)/prep/admin"
+   ls -l "$(lsblk -o MOUNTPOINT -nr /dev/disk/by-label/PITDATA)/prep/admin"
    ```
 
-1. (`pit#`) Exit the typescript
+1. (`pit#`) Exit the typescript and log out.
 
    ```bash
+   exit
    exit
    ```
 
@@ -308,15 +310,14 @@ These variables will need to be set for many procedures within the CSM installat
 
    ```bash
    livecd=eniac-ncn-m001.example.company.com
-   ssh root@$livecd
+   ssh root@"${livecd}"
    ```
 
 1. (`pit#`) Copy the previous typescript and start a new one.
 
    ```bash
-   cd "${PITDATA}/admin"
-   cp -pv /tmp/boot.livecd.*.txt ./
-   script -af ~/csm-install.$(date +%Y-%m-%d).txt
+   cp -pv /tmp/boot.livecd.*.txt "${PITDATA}/prep/admin"
+   script -af "${PITDATA}/prep/admin/csm-install.$(date +%Y-%m-%d).txt"
    export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
 
@@ -362,7 +363,8 @@ These variables will need to be set for many procedures within the CSM installat
       > - `-C -` is used to allow partial downloads. These tarballs are large; in the event of a connection disruption, the same `curl` command can be used to continue the disrupted download.
 
       ```bash
-      curl -C - -o /var/www/ephemeral/csm-${CSM_RELEASE}.tar.gz "https://artifactory.algol60.net/artifactory/csm-releases/csm/$(awk -F. '{print $1"."$2}' <<< ${CSM_RELEASE})/csm-${CSM_RELEASE}.tar.gz"
+      curl -C - -o "/var/www/ephemeral/csm-${CSM_RELEASE}.tar.gz" \
+        "https://artifactory.algol60.net/artifactory/csm-releases/csm/$(awk -F. '{print $1"."$2}' <<< ${CSM_RELEASE})/csm-${CSM_RELEASE}.tar.gz"
       ```
 
    - `scp` from the external server used in [Prepare installation environment server](#11-prepare-installation-environment-server):
@@ -378,33 +380,99 @@ in `/etc/environment` from the [Download CSM tarball](#21-download-csm-tarball) 
 
 1. (`pit#`) Extract the tarball.
 
-   ```text
+   ```bash
    tar -C "${PITDATA}" -zxvf "csm-${CSM_RELEASE}.tar.gz"
+   ```
+
+1. (`pit#`) Install/update the RPMs necessary for the CSM installation.
+
+   > ***NOTE*** `--no-gpg-checks` is used because the repository contained within the tarball does not provide a GPG key.
+
+   1. Install `docs-csm`.
+
+      > ***NOTE*** This installs necessary scripts for deployment checks, as well as the offline manual.
+
+       ```bash
+       zypper \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp2/" \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp3/" \
+           --no-gpg-checks \
+           install -y docs-csm
+       ```
+
+   1. Update `cray-site-init`.
+
+       > ***NOTE*** This provides `csi`, a tool for creating and managing configurations, as well as
+       > orchestrating the [handoff and deploy of the final non-compute node](deploy_final_non-compute_node.md).
+
+       ```bash
+       zypper \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp2/" \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp3/" \
+           --no-gpg-checks \
+           update -y cray-site-init
+       ```
+
+   1. Install `csm-testing` RPM.
+
+       > ***NOTE*** This package provides the necessary tests and their dependencies for validating the pre-installation, installation, and more.
+
+       ```bash
+       zypper \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp2/" \
+           --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp3/" \
+           --no-gpg-checks \
+           install -y csm-testing
+      ```
+
+1. (`pit#`) Get the artifact versions.
+
+   ```bash
+   KUBERNETES_VERSION="$(find ${CSM_PATH}/images/kubernetes -name '*.squashfs' -exec basename {} .squashfs \; | awk -F '-' '{print $NF}')"
+   CEPH_VERSION="$(find ${CSM_PATH}/images/storage-ceph -name '*.squashfs' -exec basename {} .squashfs \; | awk -F '-' '{print $NF}')"
    ```
 
 1. (`pit#`) Copy the NCN images from the expanded tarball.
 
-   ```bash
-   rsync -a -P --delete "${CSM_PATH}/images/kubernetes/" "${PITDATA}/data/k8s/"
-   rsync -a -P --delete "${CSM_PATH}/images/storage-ceph/" "${PITDATA}/data/ceph/"
-   ```
-
-1. (`pit#`) Install or update `cray-site-init`, `csm-testing`, and `goss-servers` RPMs.
-
-   > **NOTE:** `--no-gpg-checks` is used because the repository contained within the tarball does not provide a GPG key.
+   > ***NOTE*** This hard-links the files to do this copy as fast as possible, as well as to mitigate space waste on the USB stick.
 
    ```bash
-   zypper \
-      --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp2/" \
-      --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp3/" \
-      --no-gpg-checks \
-      update -y cray-site-init
-   zypper \
-      --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp2/" \
-      --plus-repo "${CSM_PATH}/rpm/cray/csm/sle-15sp3/" \
-      --no-gpg-checks \
-      update -y csm-testing goss-servers
+   mkdir -pv "${PITDATA}/data/k8s/" "${PITDATA}/data/ceph/"
+   rsync -rltDP --delete "${CSM_PATH}/images/kubernetes/" --link-dest="${CSM_PATH}/images/kubernetes/" "${PITDATA}/data/k8s/${KUBERNETES_VERSION}"
+   rsync -rltDP --delete "${CSM_PATH}/images/storage-ceph/" --link-dest="${CSM_PATH}/images/storage-ceph/" "${PITDATA}/data/ceph/${CEPH_VERSION}"
    ```
+
+1. (`pit#`) Modify the NCN images with SSH keys and `root` passwords.
+
+   The following substeps provide the most commonly used defaults for this process. For more advanced options, see
+   [Set NCN Image Root Password, SSH Keys, and Timezone on PIT Node](../operations/security_and_authentication/Change_NCN_Image_Root_Password_and_SSH_Keys_on_PIT_Node.md).
+
+   1. Generate SSH keys.
+
+       > ***NOTE*** The code block below assumes there is an RSA key without a passphrase. This step can be customized to use a passphrase if desired.
+
+       ```bash
+       ssh-keygen -N "" -t rsa
+       ```
+
+   1. Export the password hash for `root` that is needed for the `ncn-image-modification.sh` script.
+
+       This will set the NCN `root` user password to be the same as the `root` user password on the PIT.
+
+       ```bash
+       export SQUASHFS_ROOT_PW_HASH="$(awk -F':' /^root:/'{print $2}' < /etc/shadow)"
+       ```
+
+   1. Inject these into the NCN images by running `ncn-image-modification.sh` from the CSM documentation RPM.
+
+       ```bash
+       NCN_MOD_SCRIPT=$(rpm -ql docs-csm | grep ncn-image-modification.sh)
+       echo "${NCN_MOD_SCRIPT}"
+       "${NCN_MOD_SCRIPT}" -p \
+          -d /root/.ssh \
+          -k "/var/www/ephemeral/data/k8s/${KUBERNETES_VERSION}/kubernetes-${KUBERNETES_VERSION}.squashfs" \
+          -s "/var/www/ephemeral/data/ceph/${CEPH_VERSION}/storage-ceph-${CEPH_VERSION}.squashfs"
+       ```
 
 1. (`pit#`) Log the currently installed PIT packages.
 
@@ -460,38 +528,56 @@ Run the following steps before starting any of the system configuration procedur
 
 1. (`pit#`) Download the SHCD to the `prep` directory.
 
-   This will need to be retrieved from the administrators Cray deliverable.
+    This will need to be retrieved from the administrator's Cray deliverable.
 
 1. Validate the SHCD.
 
-   See [Validate SHCD](../operations/network/management_network/validate_shcd.md) and then return to this page.
+    See [Validate SHCD](../operations/network/management_network/validate_shcd.md) and then return to this page.
 
 ### 3.2 Generate topology files
 
-1. (`pit#`) Generate `hmn_connections.json`.
+The following steps use the new, automated method for generating files. The previous step for
+[validate SHCD](#31-validate-shcd) generated "paddle" files; these are necessary for generating
+the rest of the seed files.
+
+> ***NOTE*** The paddle files are temporarily not used due to bugs in the seed file generation software.
+> Until these bugs are resolved, the seed files must be manually generated.
+
+If seed files from a prior installation of the same major-minor version of CSM exist, then these can be used and
+this step may be skipped.
+
+1. (`pit#`) Create each seed file, unless they already exist from a previous installation.
+
+   - For new installations of CSM that have no prior seed files, each one must be created:
+
+      - [Create `application_node_config.yaml`](create_application_node_config_yaml.md)
+      - [Create `cabinets.yaml`](create_cabinets_yaml.md)
+      - [Create `hmn_connections.json`](create_hmn_connections_json.md)
+      - [Create `ncn_metadata.csv`](create_ncn_metadata_csv.md)
+      - [Create `switch_metadata.csv`](create_switch_metadata_csv.md)
+
+   - For re-installations of CSM 1.3, the previous seed files may be used and this step can be skipped.
+   - For new installations of CSM 1.3 that have prior seed files from CSM 1.2 or older, the previous seed files
+   may be used **except that the following files must be recreated** because of content or formatting changes:
+
+      - [Create `cabinets.yaml`](create_cabinets_yaml.md)
+      - [Create `hmn_connections.json`](create_hmn_connections_json.md)
+
+1. (`pit#`) Confirm that the following files exist.
 
    ```bash
-   csi config shcd "$SYSTEM_NAME-hmn-paddle.json" -H
+   ls -l "${PITDATA}"/prep/{application_node_config.yaml,cabinets.yaml,hmn_connections.json,ncn_metadata.csv,switch_metadata.csv}
    ```
 
-1. (`pit#`) Create `application_node_config.yaml`, `ncn_metadata.csv`, and `switch_metadata.csv`.
+   Expected output may look like:
 
-    ```bash
-    csi config shcd "${SYSTEM_NAME}-full-paddle.json" -ANS
-    ```
-
-1. Create the `cabinents.yaml` file.
-
-   > If using this file, then do not forget to set the `cabinets-yaml` field in the
-   > [Customize `system_config.yaml`](#33-customize-system_configyaml) step.
-
-   See [Create `cabinets.yaml`](./create_cabinets_yaml.md).
-
-1. Fill in the `ncn_metadata.csv` placeholder values with the actual values.
-
-   > **NOTE:** If a previous `ncn_metadata.csv` file is available, simply copy it into place by overriding the generated one.
-
-   See [Collect MAC Addresses for NCNs](./collect_mac_addresses_for_ncns.md).
+   ```text
+   -rw-r--r-- 1 root root  146 Jun  6 00:12 /var/www/ephemeral/prep/application_node_config.yaml
+   -rw-r--r-- 1 root root  392 Jun  6 00:12 /var/www/ephemeral/prep/cabinets.yaml
+   -rwxr-xr-x 1 root root 3768 Jun  6 00:12 /var/www/ephemeral/prep/hmn_connections.json
+   -rw-r--r-- 1 root root 1216 Jun  6 00:12 /var/www/ephemeral/prep/ncn_metadata.csv
+   -rw-r--r-- 1 root root  150 Jun  6 00:12 /var/www/ephemeral/prep/switch_metadata.csv
+   ```
 
 ### 3.3 Customize `system_config.yaml`
 
@@ -548,7 +634,7 @@ Follow the [Prepare Site Init](prepare_site_init.md) procedure.
 1. (`pit#`) Set the `IPMI_PASSWORD` variable.
 
    ```bash
-   read -s IPMI_PASSWORD
+   read -r -s -p "NCN BMC root password: " IPMI_PASSWORD
    ```
 
 1. (`pit#`) Export the `IPMI_PASSWORD` variable.
@@ -559,7 +645,7 @@ Follow the [Prepare Site Init](prepare_site_init.md) procedure.
 
 1. (`pit#`) Setup boot links to the artifacts extracted from the CSM tarball.
 
-   > **NOTES:**
+   > ***NOTES***
    >
    > - This will also set all the BMCs to DHCP.
    > - Changing into the `$HOME` directory ensures the proper operation of the script.
@@ -583,14 +669,8 @@ Follow the [Prepare Site Init](prepare_site_init.md) procedure.
    This needs to be copied off the system and either stored in a secure location or in a secured Git repository.
    There are secrets in this directory that should not be accidentally exposed.
 
-1. (`pit#`) Exit the typescript.
-
-   ```bash
-   exit
-   ```
-
 ## Next topic
 
 After completing this procedure, proceed to configure the management network switches.
 
-See [Configure Management Network Switches](README.md#4-configure-management-network-switches).
+See [Configure management network switches](README.md#5-configure-management-network-switches).

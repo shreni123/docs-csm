@@ -35,6 +35,7 @@ This procedure will add a liquid-cooled blade to an HPE Cray EX system.
    `--dst-mapping` argument should be a mappings file of the MAC addresses, IP addresses, and component xnames from the new blade. If the new
    blade was removed from another system, the mappings file was saved while performing the
    [Removing a Liquid-cooled Blade from a System Using SAT](Removing_a_Liquid-cooled_blade_from_a_System_Using_SAT.md) procedure on the other system.
+   If the blade is a new blade, (that is, not from another running system), do not use either `--src-mapping` or `--dst-mapping`.
 
    ```bash
    sat swap blade --src-mapping <SRC_MAPPING> --dst-mapping <DST_MAPPING> --action enable <SLOT_XNAME>
@@ -45,6 +46,37 @@ This procedure will add a liquid-cooled blade to an HPE Cray EX system.
    ```bash
    sat swap blade --action enable <SLOT_XNAME>
    ```
+
+1. (`ncn#`) Clear out the existing Redfish event subscriptions from the BMCs on the blade.
+
+    1. Set the environment variable `SLOT` to the blade's location.
+
+        ```bash
+        SLOT=<SLOT_XNAME>
+        ```
+
+    1. Clear the Redfish event subscriptions.
+
+        ```bash
+        export TOKEN=$(curl -s -S -d grant_type=client_credentials \
+                -d client_id=admin-client \
+                -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
+                https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+
+        for BMC in $(cray hsm inventory  redfishEndpoints list --type NodeBMC --format json | jq .RedfishEndpoints[].ID -r | grep ${SLOT}); do
+            /usr/share/doc/csm/scripts/operations/node_management/delete_bmc_subscriptions.py $BMC
+        done
+        ```
+
+        Each BMC on the blade will have output like the following:
+
+        ```text
+        Clearing subscriptions from NodeBMC x3000c0s9b0
+        Retrieving BMC credentials from SCSD
+        Retrieving Redfish Event subscriptions from the BMC: https://x3000c0s9b0/redfish/v1/EventService/Subscriptions
+        Deleting event subscription: https://x3000c0s9b0/redfish/v1/EventService/Subscriptions/1
+        Successfully deleted https://x3000c0s9b0/redfish/v1/EventService/Subscriptions/1
+        ```
 
 ## Power on and boot the nodes
 
@@ -259,7 +291,11 @@ There should be a `cray-cps` pod (the broker), three `cray-cps-etcd` pods and th
           "ID": "0040a68350a4",
           "Description": "Node Maintenance Network",
           "MACAddress": "00:40:a6:83:50:a4",
-          "IPAddress": "10.100.0.105",
+          "IPAddresses": [
+            {
+              "IPAddress": "10.100.0.105"
+            }
+          ],
           "LastUpdate": "2021-08-24T20:24:23.214023Z",
           "ComponentID": "x9000c3s0b0n1",
           "Type": "Node"
@@ -268,7 +304,11 @@ There should be a `cray-cps` pod (the broker), three `cray-cps-etcd` pods and th
           "ID": "0040a683639a",
           "Description": "Node Maintenance Network",
           "MACAddress": "00:40:a6:83:63:9a",
-          "IPAddress": "10.100.0.105",
+          "IPAddresses": [
+            {
+              "IPAddress": "10.100.0.105"
+            }
+          ],
           "LastUpdate": "2021-08-27T19:15:53.697459Z",
           "ComponentID": "x9000c3s0b0n1",
           "Type": "Node"

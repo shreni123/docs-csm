@@ -9,10 +9,6 @@ will obtain an API token from Keycloak and then use that token to attempt to acc
 more networks, as defined in the gateway test definition file (`gateway-test-defn.yaml`). The test will check the
 return code to make sure it gets the expected response.
 
-When the `nmnlb` network is tested, the test will use `api-gw-service-nmn.local` as an override for
-`nmnlb.<system-domain>` in CSM v1.2. Optionally, setting `use-api-gw-override: false` in `gateway-test-defn.yaml`
-disables that override, and the test will use `nmnlb.<system-domain>`.
-
 ## Topics
 
 - [Running Gateway Tests on an NCN Management Node](#running-gateway-tests-on-an-ncn-management-node)
@@ -189,7 +185,7 @@ PASS - [cray-powerdns-manager]: https://api-gw-service-nmn.local/apis/powerdns-m
 PASS - [cray-reds]: https://api-gw-service-nmn.local/apis/reds/v1/liveness - 204
 PASS - [cray-scsd]: https://api-gw-service-nmn.local/apis/scsd/v1/health - 200
 PASS - [cray-sls]: https://api-gw-service-nmn.local/apis/sls/v1/health - 200
-PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v1/service/ready - 200
+PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v2/service/ready - 200
 PASS - [cray-sts]: https://api-gw-service-nmn.local/apis/sts/healthz - 200
 PASS - [cray-uas-mgr]: https://api-gw-service-nmn.local/apis/uas-mgr/v1/images - 200
 SKIP - [nmdv2-service]: https://api-gw-service-nmn.local/apis/v2/nmd/dumps - virtual service not found
@@ -214,7 +210,7 @@ PASS - [cray-powerdns-manager]: https://api.cmn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.cmn.eniac.dev.cray.com/apis/reds/v1/liveness - 204
 PASS - [cray-scsd]: https://api.cmn.eniac.dev.cray.com/apis/scsd/v1/health - 200
 PASS - [cray-sls]: https://api.cmn.eniac.dev.cray.com/apis/sls/v1/health - 200
-PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 200
+PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 200
 PASS - [cray-sts]: https://api.cmn.eniac.dev.cray.com/apis/sts/healthz - 200
 PASS - [cray-uas-mgr]: https://api.cmn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 200
 SKIP - [nmdv2-service]: https://api.cmn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -244,7 +240,7 @@ PASS - [cray-powerdns-manager]: https://api.chn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.chn.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.chn.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.chn.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.chn.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.chn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.chn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -273,7 +269,7 @@ PASS - [cray-powerdns-manager]: https://api-gw-service-nmn.local/apis/powerdns-m
 PASS - [cray-reds]: https://api-gw-service-nmn.local/apis/reds/v1/liveness - 204
 PASS - [cray-scsd]: https://api-gw-service-nmn.local/apis/scsd/v1/health - 200
 PASS - [cray-sls]: https://api-gw-service-nmn.local/apis/sls/v1/health - 200
-PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v1/service/ready - 200
+PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v2/service/ready - 200
 PASS - [cray-sts]: https://api-gw-service-nmn.local/apis/sts/healthz - 200
 PASS - [cray-uas-mgr]: https://api-gw-service-nmn.local/apis/uas-mgr/v1/images - 200
 SKIP - [nmdv2-service]: https://api-gw-service-nmn.local/apis/v2/nmd/dumps - virtual service not found
@@ -298,7 +294,7 @@ PASS - [cray-powerdns-manager]: https://api.cmn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.cmn.eniac.dev.cray.com/apis/reds/v1/liveness - 204
 PASS - [cray-scsd]: https://api.cmn.eniac.dev.cray.com/apis/scsd/v1/health - 200
 PASS - [cray-sls]: https://api.cmn.eniac.dev.cray.com/apis/sls/v1/health - 200
-PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 200
+PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 200
 PASS - [cray-sts]: https://api.cmn.eniac.dev.cray.com/apis/sts/healthz - 200
 PASS - [cray-uas-mgr]: https://api.cmn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 200
 SKIP - [nmdv2-service]: https://api.cmn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -328,7 +324,7 @@ PASS - [cray-powerdns-manager]: https://api.chn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.chn.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.chn.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.chn.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.chn.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.chn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.chn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -361,7 +357,7 @@ PASS - [cray-powerdns-manager]: https://api-gw-service-nmn.local/apis/powerdns-m
 PASS - [cray-reds]: https://api-gw-service-nmn.local/apis/reds/v1/liveness - 403
 PASS - [cray-scsd]: https://api-gw-service-nmn.local/apis/scsd/v1/health - 403
 PASS - [cray-sls]: https://api-gw-service-nmn.local/apis/sls/v1/health - 403
-PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v1/service/ready - 403
+PASS - [cray-smd]: https://api-gw-service-nmn.local/apis/smd/hsm/v2/service/ready - 403
 PASS - [cray-sts]: https://api-gw-service-nmn.local/apis/sts/healthz - 403
 PASS - [cray-uas-mgr]: https://api-gw-service-nmn.local/apis/uas-mgr/v1/images - 403
 SKIP - [nmdv2-service]: https://api-gw-service-nmn.local/apis/v2/nmd/dumps - virtual service not found
@@ -386,7 +382,7 @@ PASS - [cray-powerdns-manager]: https://api.cmn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.cmn.eniac.dev.cray.com/apis/reds/v1/liveness - 403
 PASS - [cray-scsd]: https://api.cmn.eniac.dev.cray.com/apis/scsd/v1/health - 403
 PASS - [cray-sls]: https://api.cmn.eniac.dev.cray.com/apis/sls/v1/health - 403
-PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 403
+PASS - [cray-smd]: https://api.cmn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 403
 PASS - [cray-sts]: https://api.cmn.eniac.dev.cray.com/apis/sts/healthz - 403
 PASS - [cray-uas-mgr]: https://api.cmn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 403
 SKIP - [nmdv2-service]: https://api.cmn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -416,7 +412,7 @@ PASS - [cray-powerdns-manager]: https://api.chn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.chn.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.chn.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.chn.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.chn.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.chn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.chn.eniac.dev.cray.com/apis/v2/nmd/dumps - virtual service not found
@@ -475,7 +471,7 @@ PASS - [cray-powerdns-manager]: https://api.can.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.can.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.can.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.can.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.can.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.can.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.can.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.can.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.can.eniac.dev.cray.com/apis/v2/nmd/dumps
@@ -500,7 +496,7 @@ PASS - [cray-powerdns-manager]: https://api.chn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.chn.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.chn.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.chn.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.chn.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.chn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.chn.eniac.dev.cray.com/apis/v2/nmd/dumps
@@ -537,7 +533,7 @@ PASS - [cray-powerdns-manager]: https://api.can.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.can.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.can.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.can.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.can.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.can.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.can.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.can.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.can.eniac.dev.cray.com/apis/v2/nmd/dumps
@@ -562,7 +558,7 @@ PASS - [cray-powerdns-manager]: https://api.chn.eniac.dev.cray.com/apis/powerdns
 PASS - [cray-reds]: https://api.chn.eniac.dev.cray.com/apis/reds/v1/liveness - 404
 PASS - [cray-scsd]: https://api.chn.eniac.dev.cray.com/apis/scsd/v1/health - 404
 PASS - [cray-sls]: https://api.chn.eniac.dev.cray.com/apis/sls/v1/health - 404
-PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v1/service/ready - 404
+PASS - [cray-smd]: https://api.chn.eniac.dev.cray.com/apis/smd/hsm/v2/service/ready - 404
 PASS - [cray-sts]: https://api.chn.eniac.dev.cray.com/apis/sts/healthz - 404
 PASS - [cray-uas-mgr]: https://api.chn.eniac.dev.cray.com/apis/uas-mgr/v1/images - 404
 SKIP - [nmdv2-service]: https://api.chn.eniac.dev.cray.com/apis/v2/nmd/dumps

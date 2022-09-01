@@ -15,9 +15,10 @@ which device will be used for it.
 1. (`external`) Set up the initial typescript.
 
    ```bash
-   SCRIPT_FILE=$(pwd)/csm-install-usb.$(date +%Y-%m-%d).txt
-   script -af ${SCRIPT_FILE}
+   SCRIPT_FILE="$(pwd)/csm-install-usb.$(date +%Y-%m-%d).txt"
+   script -af "${SCRIPT_FILE}"
    export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
+   export OUT_DIR=$(pwd)/csm-temp
    ```
 
 1. (`external#`) Identify the USB device.
@@ -30,17 +31,17 @@ which device will be used for it.
 
    Expected output looks similar to the following:
 
-      ```text
-      [6:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sda
-      [7:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdb
-      [8:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdc
-      [14:0:0:0]   disk    SanDisk  Extreme SSD      1012  /dev/sdd
-      [14:0:0:1]   enclosu SanDisk  SES Device       1012  -
-      ```
+   ```text
+   [6:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sda
+   [7:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdb
+   [8:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdc
+   [14:0:0:0]   disk    SanDisk  Extreme SSD      1012  /dev/sdd
+   [14:0:0:1]   enclosu SanDisk  SES Device       1012  -
+   ```
 
-   In the above example, internal disks are the `ATA` devices and USB drives are final two devices.
+   In the above example, internal disks are the `ATA` devices and USB drives are the final two devices.
 
-   Set a variable with your disk to avoid mistakes:
+   Set a variable with the USB device and for the `CSM_PATH`:
 
    ```bash
    USB=/dev/sd<disk_letter>
@@ -48,36 +49,36 @@ which device will be used for it.
 
 1. Format the USB device.
 
-    * Use the CSI application to do this:
+    - Use the CSI application to do this:
 
-      ```bash
-      csi pit format ${USB} ${CSM_PATH}/cray-pre-install-toolkit-*.iso 50000
-      ```
+        ```bash
+        csi pit format "${USB}" "${OUT_DIR}/"cray-pre-install-toolkit-*.iso 50000
+        ```
 
-   * If CSI is unavailable, then fetch and use the `write-livecd.sh` script:
+    - If CSI is unavailable, then fetch and use the `write-livecd.sh` script:
 
-      > **`NOTE`** This assumes the `write-livecd.sh` script was extracted from the tarball's 
-      > cray-site-init RPM. If that was skipped in 
-      > [the USB section of Boot the LiveCD](../pre-installation.md#boot-the-livecd), the script
-      > is also available on GitHub:
-      > 
-      >    ```bash
-      >    curl -O https://raw.githubusercontent.com/Cray-HPE/cray-site-init/main/scripts/write-livecd.sh && chmod +x write-livecd.sh
-      >    ```          
-      > 
-      > Alternatively if the RPM is available but the LiveCD is being created on a non-RPM based distro, 
-      > then the script can be extracted from the RPM file:
-      > 
-      >    ```bash
-      >    bsdtar xvf cray-site-init-*.rpm --include *write-livecd.sh -C ./
-      >    mv ./usr/local/bin/write-livecd.sh ./
-      >    rmdir -p ./usr/local/bin/
-      >    ```
-      >     
+        > **`NOTE`** This assumes the `write-livecd.sh` script was extracted from the tarball's
+        > `cray-site-init` RPM. If that was skipped in
+        > [the USB section of Boot the LiveCD](../pre-installation.md#12-boot-the-livecd), the script
+        > is also available on GitHub:
+        >
+        >    ```curl
+        >    curl -f -o "${OUT_DIR}/write-livecd.sh" https://raw.githubusercontent.com/Cray-HPE/cray-site-init/main/scripts/write-livecd.sh && chmod +x "${OUT_DIR}/write-livecd.sh"
+        >    ```
+        >
+        > Alternatively if the RPM is available but the LiveCD is being created on a non-RPM based distro,
+        > then the script can be extracted from the RPM file:
+        >
+        >    ```bash
+        >    bsdtar xvf cray-site-init-*.rpm --include *write-livecd.sh -C "./${OUT_DIR}"
+        >    mv -v "${OUT_DIR}/usr/local/bin/write-livecd.sh" ./
+        >    rmdir -pv "${OUT_DIR}/usr/local/bin/"
+        >    ```
+        >
 
-      ```bash
-      write-livecd.sh ${USB} ${CSM_PATH}/cray-pre-install-toolkit-*.iso 50000
-      ```
+        ```bash
+        write-livecd.sh "${USB}" "${OUT_DIR}/"cray-pre-install-toolkit-*.iso 50000
+        ```
 
 ## Boot the LiveCD
 
@@ -98,20 +99,24 @@ boot order to have the USB device first.
    > `read -s` is used in order to prevent the credentials from being displayed on the screen or recorded in the shell history.
 
    ```bash
-   username=root
+   USERNAME=root
    BMC=eniac-ncn-m001-mgmt
-   read -s IPMI_PASSWORD
-   export IPMI_PASSWORD ; ipmitool -I lanplus -U ${username} -E -H ${BMC} chassis power status
+   read -r -s -p "${BMC} ${USERNAME} password: " IPMI_PASSWORD
+   export IPMI_PASSWORD
+   ipmitool -I lanplus -U "${USERNAME}" -E -H "${BMC}" chassis power status
    ```
 
 1. (`external#`) Power the NCN on and connect to the IPMI console.
 
-   > **`NOTE`** The bootdevice can be set via IPMI, below we use the `floppy` option. At a glance this seems incorrect,
+   > **`NOTE`** The boot device can be set via IPMI; the example below uses the `floppy` option. At a glance this seems incorrect,
    > however it selects the primary removable media. This step instructs the user to power off the node to ensure
-   > the BIOS has the best chance at finding the USB via a cold-boot.
+   > the BIOS has the best chance at finding the USB via a cold boot.
    >
    > ```bash
    > ipmitool chassis bootdev
+   > ```
+   >
+   > ```text
    >    Received a response with unexpected ID 0 vs. 1
    >    bootdev <device> [clear-cmos=yes|no]
    >    bootdev <device> [options=help,...]
@@ -126,17 +131,17 @@ boot order to have the USB device first.
    > ```
 
    ```bash
-   ipmitool -I lanplus -U ${username} -E -H ${BMC} chassis bootdev floppy options=efiboot
-   ipmitool -I lanplus -U ${username} -E -H ${BMC} chassis power off
+   ipmitool -I lanplus -U "${username}" -E -H "${BMC}" chassis bootdev floppy options=efiboot
+   ipmitool -I lanplus -U "${username}" -E -H "${BMC}" chassis power off
    ```
 
-1. Insert the USB stick into a USB 3 port (USB2 is compatible, USB3 offers the best performance).
+1. Insert the USB stick into a USB3 port (USB2 is compatible, USB3 offers the best performance).
 
-1. (`external#`) Power the server on
+1. (`external#`) Power the server on.
 
    ```bash
-   ipmitool -I lanplus -U ${username} -E -H ${BMC} chassis power on
-   ipmitool -I lanplus -U ${username} -E -H ${BMC} sol activate
+   ipmitool -I lanplus -U "${username}" -E -H "${BMC}" chassis power on
+   ipmitool -I lanplus -U "${username}" -E -H "${BMC}" sol activate
    ```
 
-1. Do not exit the typescript. After completing this procedure, proceed to [First Login](../pre-installation.md#first-login).
+1. Do not exit the typescript. After completing this procedure, proceed to [First log in](../pre-installation.md#13-first-log-in).

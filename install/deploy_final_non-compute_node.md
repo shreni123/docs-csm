@@ -10,9 +10,10 @@ procedure entails deactivating the LiveCD, meaning the LiveCD and all of its res
 1. [Required services](#1-required-services)
 1. [Notice of danger](#2-notice-of-danger)
 1. [Hand-off](#3-handoff)
-   1. [Handoff Data](#31-handoff-data)
-   1. [Backup](#32-backup)
-   1. [Prepare for Rebooting](#33-prepare-for-rebooting)
+   1. [Handoff data](#31-handoff-data)
+   1. [Prepare for rebooting](#32-prepare-for-rebooting)
+   1. [Backup](#33-backup)
+1. [Reboot](#4-reboot)
 1. [Enable NCN disk wiping safeguard](#5-enable-ncn-disk-wiping-safeguard)
 1. [Remove the default NTP pool](#6-remove-the-default-ntp-pool)
 1. [Configure DNS and NTP on each BMC](#7-configure-dns-and-ntp-on-each-bmc)
@@ -49,7 +50,7 @@ and ready for reboot of the LiveCD:
 
 The steps in this section load hand-off data before a later procedure reboots the LiveCD node.
 
-### 3.1 Handoff Data
+### 3.1 Handoff data
 
 1. (`pit#`) Start a new typescript.
 
@@ -62,9 +63,9 @@ The steps in this section load hand-off data before a later procedure reboots th
     1. Start a new typescript on the PIT node.
 
         ```bash
-        mkdir -pv /var/www/ephemeral/prep/admin &&
-             pushd /var/www/ephemeral/prep/admin &&
-             script -af csm-livecd-reboot.$(date +%Y-%m-%d).txt
+        mkdir -pv "${PITDATA}"/prep/admin &&
+             pushd "${PITDATA}"/prep/admin &&
+             script -af "csm-livecd-reboot.$(date +%Y-%m-%d).txt"
         export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
         ```
 
@@ -73,7 +74,7 @@ The steps in this section load hand-off data before a later procedure reboots th
     > **`NOTE`** The environment variable `SYSTEM_NAME` must be set.
 
     ```bash
-    csi upload-sls-file --sls-file /var/www/ephemeral/prep/${SYSTEM_NAME}/sls_input_file.json
+    csi upload-sls-file --sls-file "${PITDATA}/prep/${SYSTEM_NAME}/sls_input_file.json"
     ```
 
     Expected output looks similar to the following:
@@ -84,37 +85,49 @@ The steps in this section load hand-off data before a later procedure reboots th
     2021/02/02 14:05:15 Successfully uploaded SLS Input File.
     ```
 
+1. (`pit#`) Upload NCN boot artifacts into S3.
+
+    ```bash
+    set -o pipefail
+    kubernetes_rootfs="$(readlink -f /var/www/ncn-m002/rootfs)" &&
+    kubernetes_initrd="$(readlink -f /var/www/ncn-m002/initrd.img.xz)"  &&
+    kubernetes_kernel="$(readlink -f /var/www/ncn-m002/kernel)"  &&
+    kubernetes_version="$(basename ${kubernetes_rootfs} .squashfs | awk -F '-' '{print $NF}')" &&
+    ceph_rootfs="$(readlink -f /var/www/ncn-s001/rootfs)" &&
+    ceph_initrd="$(readlink -f /var/www/ncn-s001/initrd.img.xz)" &&
+    ceph_kernel="$(readlink -f /var/www/ncn-s001/kernel)" &&
+    ceph_version="$(basename ${ceph_rootfs} .squashfs | awk -F '-' '{print $NF}')" &&
+    cray artifacts create boot-images "k8s/${kubernetes_version}/rootfs" "${kubernetes_rootfs}" &&
+    cray artifacts create boot-images "k8s/${kubernetes_version}/initrd" "${kubernetes_initrd}" &&
+    cray artifacts create boot-images "k8s/${kubernetes_version}/kernel" "${kubernetes_kernel}" &&
+    cray artifacts create boot-images "ceph/${ceph_version}/rootfs" "${ceph_rootfs}" &&
+    cray artifacts create boot-images "ceph/${ceph_version}/initrd" "${ceph_initrd}" &&
+    cray artifacts create boot-images "ceph/${ceph_version}/kernel" "${ceph_kernel}" && echo SUCCESS
+    ```
+
+    Ensure that the output from the above command chain ends with `SUCCESS`.
+
 1. (`pit#`) Get a token to use for authenticated communication with the gateway.
 
     > **`NOTE`** `api-gw-service-nmn.local` is legacy, and will be replaced with `api-gw-service.nmn`.
 
     ```bash
-    export TOKEN=$(curl -k -s -S -d grant_type=client_credentials \
-            -d client_id=admin-client \
-            -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
-            https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+    export TOKEN=$(curl -k -s -S -d grant_type=client_credentials -d client_id=admin-client \
+                    -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
+                    https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
     ```
 
-1. (`pit#`) Upload NCN boot artifacts into S3.
-
-    ```bash
-    k8sdir="$(dirname $(readlink -f /var/www/ncn-m002/filesystem.squashfs))" &&
-    cephdir="$(dirname $(readlink -f /var/www/ncn-s001/filesystem.squashfs))" &&
-    csi handoff ncn-images \
-        --k8s-kernel-path $k8sdir/*.kernel \
-        --k8s-initrd-path $k8sdir/initrd.img*.xz \
-        --k8s-squashfs-path $k8sdir/secure-*.squashfs \
-        --ceph-kernel-path $cephdir/*.kernel \
-        --ceph-initrd-path $cephdir/initrd.img*.xz \
-        --ceph-squashfs-path $cephdir/secure-*.squashfs
-    ```
-
-1. (`pit#`) Upload the `data.json` file to BSS, our `cloud-init` data source.
+1. (`pit#`) Upload the `data.json` file to BSS, the `cloud-init` data source.
 
     > **`NOTE`** This step will prompt for the root password of the NCNs.
 
     ```bash
-    csi handoff bss-metadata --data-file "$PITDATA/configs/data.json" || echo "ERROR: csi handoff bss-metadata failed"
+    kubernetes_rootfs="$(readlink -f /var/www/ncn-m002/rootfs)" &&
+    ceph_rootfs="$(readlink -f /var/www/ncn-s001/rootfs)" &&
+    csi handoff bss-metadata \
+        --data-file "${PITDATA}/configs/data.json" \
+        --kubernetes-file "${kubernetes_rootfs}" \
+        --storage-ceph-file "${ceph_rootfs}" && echo SUCCESS
     ```
 
 1. (`pit#`) Patch the metadata for the Ceph nodes to have the correct run commands.
@@ -129,77 +142,7 @@ The steps in this section load hand-off data before a later procedure reboots th
     csi handoff bss-update-cloud-init --set meta-data.dns-server="10.92.100.225 10.94.100.225" --limit Global
     ```
 
-### 3.2 Backup
-
-1. (`pit#`) Preserve logs and configuration files if desired.
-
-    The PIT RemoteISO is running in memory, thus all files contained are ephemeral. It is recommended to retain some of the log files and
-    configuration files, because they may be useful if issues are encountered during the remainder of the install.
-
-    The following commands create a `tar` archive of these files, storing it in a directory that will be backed up in the next step.
-
-    ```bash
-    mkdir -pv /var/www/ephemeral/prep/logs &&
-         ls -d \
-                    /etc/dnsmasq.d \
-                    /etc/os-release \
-                    /etc/sysconfig/network \
-                    /opt/cray/tests/cmsdev.log \
-                    /opt/cray/tests/install/logs \
-                    /opt/cray/tests/logs \
-                    /root/.canu \
-                    /root/.config/cray/logs \
-                    /root/csm*.{log,txt} \
-                    /tmp/*.log \
-                    /usr/share/doc/csm/install/scripts/csm_services/yapl.log \
-                    /var/log/conman \
-                    /var/log/zypper.log 2>/dev/null |
-         sed 's_^/__' |
-         xargs tar -C / -czvf /var/www/ephemeral/prep/logs/pit-backup-$(date +%Y-%m-%d_%H-%M-%S).tgz
-    ```
-
-1. (`pit#`) Backup the bootstrap information from `ncn-m001`.
-
-    > **`NOTE`** This preserves information that should always be kept together in order to fresh-install the system again.
-
-    1. Log in and set up passwordless SSH **to** the PIT node.
-
-        Copying **only** the public keys from `ncn-m002` and `ncn-m003` to the PIT node. **Do not** set up
-        passwordless SSH **from** the PIT node or the key will have to be securely tracked or expunged if using a USB installation).
-
-        > The `ssh` commands below may prompt for the NCN root password.
-
-        ```bash
-        ssh ncn-m002 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys &&
-             ssh ncn-m003 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys &&
-             chmod 600 /root/.ssh/authorized_keys
-        ```
-
-    1. Back up files from the PIT to `ncn-m002`.
-
-        ```bash
-        ssh ncn-m002 \
-            "mkdir -pv /metal/bootstrap
-            rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:/var/www/ephemeral/prep /metal/bootstrap/
-            rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:${CSM_PATH}/cray-pre-install-toolkit*.iso /metal/bootstrap/"
-        ```
-
-    1. Back up files from the PIT to `ncn-m003`.
-
-        ```bash
-        ssh ncn-m003 \
-            "mkdir -pv /metal/bootstrap
-            rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:/var/www/ephemeral/prep /metal/bootstrap/
-            rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:${CSM_PATH}/cray-pre-install-toolkit*.iso /metal/bootstrap/"
-        ```
-
-### 3.3 Prepare for Rebooting
-
-1. (`pit#`) Set the PIT node to PXE boot.
-
-    ```bash
-    efibootmgr | grep -Ei "ip(v4|4)"
-    ```
+### 3.2 Prepare for rebooting
 
 1. (`pit#`) Set and trim the boot order on the PIT node.
 
@@ -218,7 +161,7 @@ The steps in this section load hand-off data before a later procedure reboots th
     1. (`pit#`) Get the IP address.
 
         ```bash
-        ssh ncn-m002 ip -4 a show bond0.can0 | grep inet | awk '{print $2}' | cut -d / -f1
+        ssh ncn-m002 ip -4 a show bond0.cmn0 | grep inet | awk '{print $2}' | cut -d / -f1
         ```
 
         Expected output will look similar to the following (exact values may differ):
@@ -227,98 +170,114 @@ The steps in this section load hand-off data before a later procedure reboots th
         10.102.11.13
         ```
 
-    1. (`external#`) Log in from another external machine to verify SSH is up and running for this session.
+    1. (`external#`) Log in from an external machine to verify that SSH is up and running for this session.
 
         ```bash
         ssh root@10.102.11.13
-        ncn-m002#
         ```
 
         > Keep this terminal active as it will enable `kubectl` commands during the bring-up of the new NCN.
         > If the reboot successfully deploys the LiveCD, then this terminal can be exited.
-        >
-        > **POINT OF NO RETURN** The next step will wipe the underlying nodes disks clean. It will ignore USB devices.
-        > RemoteISOs are at risk here; even though a backup has been performed of the PIT node, it is not possible to
-        > boot back to the same state. This is the last step before rebooting the node.
 
-1. (`pit#`) Wipe the disks on the PIT node.
+### 3.3 Backup
 
-    > **WARNING:** Risk of **USER ERROR**! Do not assume to wipe the first three disks (for example, `sda`, `sdb`, and `sdc`);
-    > they are not pinned to any physical disk layout. **Choosing the wrong ones may result in wiping the USB device**. USB devices can
-    > only be wiped by operators at this point in the install. USB devices are never wiped by the CSM installer.
+It is important to backup some files from `ncn-m001` before it is rebooted.
 
-    1. Select disks to wipe (SATA/NVME/SAS).
+1. (`pit#`) Set up passwordless SSH **to** the PIT node from `ncn-m002`.
 
-        ```bash
-        . /usr/lib/dracut/modules.d/90metalmdsquash/metal-lib.sh
-        md_disks="$(lsblk -l -o SIZE,NAME,TYPE,TRAN | grep -E $metal_transports | sort -h | awk '{print "/dev/" $2}')"
-        ```
-
-    1. Run a sanity check by printing disks into typescript or console.
-
-        ```bash
-        echo $md_disks
-        ```
-
-        Expected output looks similar to the following:
-
-        ```text
-        /dev/sda /dev/sdb /dev/sdc
-        ```
-
-    1. Wipe. **This is irreversible.**
-
-        ```bash
-        wipefs --all --force $md_disks
-        ```
-
-        If any disks had labels present, output looks similar to the following:
-
-        ```text
-        /dev/sda: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
-        /dev/sda: 8 bytes were erased at offset 0x6fc86d5e00 (gpt): 45 46 49 20 50 41 52 54
-        /dev/sda: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
-        /dev/sdb: 6 bytes were erased at offset 0x00000000 (crypto_LUKS): 4c 55 4b 53 ba be
-        /dev/sdb: 6 bytes were erased at offset 0x00004000 (crypto_LUKS): 53 4b 55 4c ba be
-        /dev/sdc: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
-        /dev/sdc: 8 bytes were erased at offset 0x6fc86d5e00 (gpt): 45 46 49 20 50 41 52 54
-        /dev/sdc: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
-        ```
-
-        If there was any wiping done, output should appear similar to the output above. If this is re-run, there may be no output or an ignorable error.
-
-1. (`pit#`) Quit the typescript session and copy the typescript file off of `ncn-m001`.
-
-    1. Stop the typescript session:
-
-        ```bash
-        exit
-        ```
-
-    1. Back up the completed typescript file by re-running the `rsync` commands in the [Backup Bootstrap Information](#32-backup) section.
-
-1. (`external#`) Setup ConMan or serial console, if not already on, from any laptop or other system with network connectivity to the cluster.
+    > The `ssh` command below may prompt for the NCN root password.
 
     ```bash
-    script -a boot.livecd.$(date +%Y-%m-%d).txt
-    export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
-    SYSTEM_NAME=eniac
+    ssh ncn-m002 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys &&
+        chmod 600 /root/.ssh/authorized_keys
     ```
-   
+
+1. (`pit#`) Stop the typescript session.
+
     ```bash
-    USERNAME=$(whoami)
-    read -S IPMI_PASSWORD
+    exit
     ```
-   
-    ```bash 
-    export IPMI_PASSWORD=changeme
-    ipmitool -I lanplus -U $USERNAME -E -H ${SYSTEM_NAME}-ncn-m001-mgmt chassis power status
-    ipmitool -I lanplus -U $USERNAME -E -H ${SYSTEM_NAME}-ncn-m001-mgmt sol activate
+
+1. (`pit#`) Preserve logs and configuration files if desired.
+
+    The following commands create a `tar` archive of select files on the PIT node. This archive is located
+    in a directory that will be backed up in the next steps.
+
+    ```bash
+    mkdir -pv "${PITDATA}"/prep/logs &&
+         ls -d \
+            /etc/dnsmasq.d \
+            /etc/os-release \
+            /etc/sysconfig/network \
+            /opt/cray/tests/cmsdev.log \
+            /opt/cray/tests/install/logs \
+            /opt/cray/tests/logs \
+            /root/.canu \
+            /root/.config/cray/logs \
+            /root/csm*.{log,txt} \
+            /tmp/*.log \
+            /usr/share/doc/csm/install/scripts/csm_services/yapl.log \
+            /var/log/conman \
+            /var/log/zypper.log 2>/dev/null |
+         sed 's_^/__' |
+         xargs tar -C / -czvf "${PITDATA}/prep/logs/pit-backup-$(date +%Y-%m-%d_%H-%M-%S).tgz"
     ```
+
+1. (`pit#`) Copy some of the installation files to `ncn-m002`.
+
+    These files will be copied back to `ncn-m001` after the PIT node is rebooted.
+
+    ```bash
+    ssh ncn-m002 \
+        "mkdir -pv /metal/bootstrap
+         rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:'${PITDATA}'/prep /metal/bootstrap/
+         rsync -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' -rltD -P --delete pit.nmn:'${CSM_PATH}'/cray-pre-install-toolkit*.iso /metal/bootstrap/"
+    ```
+
+1. (`pit#`) Upload install files to S3 in the cluster.
+
+    ```bash
+    PITBackupDateTime=$(date +%Y-%m-%d_%H-%M-%S)
+    tar -czf "${PITDATA}/PitPrepIsoConfigsBackup-${PITBackupDateTime}.tgz" "${PITDATA}/prep" "${PITDATA}/configs" "${CSM_PATH}/cray-pre-install-toolkit"*.iso &&
+    cray artifacts create config-data \
+        "PitPrepIsoConfigsBackup-${PITBackupDateTime}.tgz" \
+        "${PITDATA}/PitPrepIsoConfigsBackup-${PITBackupDateTime}.tgz" &&
+    rm -v "${PITDATA}/PitPrepIsoConfigsBackup-${PITBackupDateTime}.tgz" && echo COMPLETED
+    ```
+
+    Ensure that the previous command chain output ends with `COMPLETED`, indicating that the procedure was successful.
 
 ## 4. Reboot
 
+1. (`external#`) Open a serial console to the PIT node, if one is not already open.
+
+    Open it from a system external to the cluster. It can be a laptop or any other system with network connectivity to the cluster.
+
+    > This example uses `ipmitool`, but any method for accessing the console of `ncn-m001` is acceptable.
+
+    1. Start a typescript, set helper variables, and enter the BMC password for `ncn-m001`.
+
+        ```bash
+        script -a boot.livecd.$(date +%Y-%m-%d).txt
+        export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
+        SYSTEM_NAME=eniac
+        USERNAME=root
+        read -r -s -p "ncn-m001 BMC ${USERNAME} password: " IPMI_PASSWORD
+        ```
+
+    1. Open the console connection.
+
+        ```bash
+        export IPMI_PASSWORD
+        ipmitool -I lanplus -U "${USERNAME}" -E -H "${SYSTEM_NAME}-ncn-m001-mgmt" chassis power status
+        ipmitool -I lanplus -U "${USERNAME}" -E -H "${SYSTEM_NAME}-ncn-m001-mgmt" sol activate
+        ```
+
 1. (`pit#`) Reboot the LiveCD.
+
+    > **POINT OF NO RETURN** When the PIT node boots as `ncn-m001`, it will wipe its disks clean. It will ignore USB devices.
+    > Remote ISOs are also at risk here; even though a backup has been performed of the PIT node, it is not possible to
+    > boot back to the same state.
 
     ```bash
     reboot
@@ -334,7 +293,7 @@ The steps in this section load hand-off data before a later procedure reboots th
     ssh root@10.102.11.13
 
     pushd /metal/bootstrap/prep/admin
-    script -af csm-verify.$(date +%Y-%m-%d).txt
+    script -af "csm-verify.$(date +%Y-%m-%d).txt"
     export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
     ssh ncn-m001
     ```
@@ -364,9 +323,9 @@ The steps in this section load hand-off data before a later procedure reboots th
 
     ```bash
     SYSTEM_NAME=eniac
-    rsync ncn-m002:/metal/bootstrap/prep/${SYSTEM_NAME}/pit-files/ifcfg-lan0 /etc/sysconfig/network/ && \
-              wicked ifreload lan0 && \
-              wicked ifstatus lan0
+    rsync "ncn-m002:/metal/bootstrap/prep/${SYSTEM_NAME}/pit-files/ifcfg-lan0" /etc/sysconfig/network/ && \
+        wicked ifreload lan0 && \
+        wicked ifstatus lan0
     ```
 
     Expected output looks similar to:
@@ -380,22 +339,6 @@ The steps in this section load hand-off data before a later procedure reboots th
        addr:     ipv4 172.30.53.88/20 [static]
     ```
 
-1. (`ncn-m001#`) Verify that the site link (`lan0`) and the VLANs have IP addresses.
-
-    > Examine the output to ensure that each interface has been assigned an IPv4 address.
-
-    ```bash
-    for INT in lan0 bond0.nmn0 bond0.hmn0 bond0.can0 bond0.cmn0 ; do
-                ip a show $INT || echo "ERROR: Command failed: ip a show $INT"
-              done
-    ```
-
-1. (`ncn-m001#`) Verify that the default route is via the CMN.
-
-    ```bash
-    ip r show default
-    ```
-
 1. (`ncn-m001#`) Verify that there **is not** a metal bootstrap IP address.
 
     ```bash
@@ -407,33 +350,51 @@ The steps in this section load hand-off data before a later procedure reboots th
     If this machine does not have direct internet access, then this RPM will need to be
     externally downloaded and then copied to this machine.
 
-    See [Check for Latest Documentation](../update_product_stream/README.md#check-for-latest-documentation)
+    See [Check for Latest Documentation](../update_product_stream/README.md#check-for-latest-documentation).
 
-1. (`ncn-m001#`) Exit the typescript and move the backup to `ncn-m001`.
+1. Move the backup to `ncn-m001`.
 
     This is required to facilitate reinstallations, because it pulls the preparation data back over to the documented area (`ncn-m001`).
 
-    ```console
-    exit
-    exit
-    # typescript exited
-    rsync -rltDv -P /metal/bootstrap ncn-m001:/metal/ && rm -rfv /metal/bootstrap
-    exit
-    ```
+    1. (`ncn-m001#`) Exit out of `ncn-m001`, back to `ncn-m002`.
+
+        ```bash
+        exit
+        ```
+
+    1. (`ncn-m002#`) Exit the typescript.
+
+        ```bash
+        exit
+        ```
+
+    1. (`ncn-m002#`) Copy install files back to `ncn-m001`.
+
+        ```bash
+        rsync -rltDv -P /metal/bootstrap ncn-m001:/metal/ && rm -rfv /metal/bootstrap
+        ```
+
+    1. (`ncn-m002#`) Log out of `ncn-m002`.
+
+        ```bash
+        exit
+        ```
+
+    1. Log in to `ncn-m001`.
+
+        SSH back into `ncn-m001` or log in at the console.
+
+    1. (`ncn-m001#`) Resume the typescript.
+
+        ```bash
+        script -af "/metal/bootstrap/prep/admin/csm-verify.$(date +%Y-%m-%d).txt"
+        export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
+        ```
 
 ## 5. Enable NCN disk wiping safeguard
 
 The next steps require `csi` from the installation media. `csi` will not be provided on an NCN otherwise because
 it is used for Cray installation and bootstrap.
-
-1. (`pit#`) SSH back into `ncn-m001` or restart a local console.
-
-1. (`ncn-m001#`) Resume the typescript.
-
-    ```bash
-    script -af /metal/bootstrap/prep/admin/csm-verify.$(date +%Y-%m-%d).txt
-    export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
-    ```
 
 1. (`ncn-m001#`) Obtain access to CSI.
 
@@ -453,10 +414,9 @@ it is used for Cray installation and bootstrap.
 1. (`ncn-m001#`) Authenticate with the cluster.
 
     ```bash
-    export TOKEN=$(curl -k -s -S -d grant_type=client_credentials \
-        -d client_id=admin-client \
-        -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
-        https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+    export TOKEN=$(curl -k -s -S -d grant_type=client_credentials -d client_id=admin-client \
+                    -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
+                    https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
     ```
 
 1. (`ncn-m001#`) Set the wipe safeguard to allow safe reboots on all NCNs.
@@ -467,7 +427,7 @@ it is used for Cray installation and bootstrap.
 
 ## 6. Remove the default NTP pool
 
-Run the following command on `ncn-m001` to remove the default pool, which can cause contention issues with NTP.
+(`ncn-m001#`) Run the following command to remove the default pool, in order to prevent contention issues with NTP.
 
 ```bash
 sed -i "s/^! pool pool\.ntp\.org.*//" /etc/chrony.conf
@@ -476,7 +436,7 @@ sed -i "s/^! pool pool\.ntp\.org.*//" /etc/chrony.conf
 ## 7. Configure DNS and NTP on each BMC
 
  > **`NOTE`** Only follow this section if the NCNs are HPE hardware. If the system uses
- > Gigabyte or Intel hardware, skip this section.
+ > Gigabyte or Intel hardware, then skip this section.
 
 Configure DNS and NTP on the BMC for each management node **except `ncn-m001`**.
 However, the commands in this section are all run **on** `ncn-m001`.
@@ -494,10 +454,10 @@ However, the commands in this section are all run **on** `ncn-m001`.
     > **`NOTE`** Using `read -s` for this prevents the credentials from being echoed to the screen or saved in the shell history.
 
     ```bash
-    export USERNAME=$(whoami)
-    read -s IPMI_PASSWORD
+    USERNAME=root
+    read -r -s -p "NCN BMC ${USERNAME} password: " IPMI_PASSWORD
     ```
-   
+
     ```bash
     export IPMI_PASSWORD USERNAME
     ```
@@ -506,8 +466,8 @@ However, the commands in this section are all run **on** `ncn-m001`.
    except `ncn-m001-mgmt`:
 
     ```bash
-    readarray BMCS < <(grep mgmt /etc/hosts | awk '{print $NF}' | grep -v m001 | sort -u)
-    for BMC in ${BMCS[@]}; do echo $BMC; done
+    readarray BMCS < <(grep mgmt /etc/hosts | awk '{print $NF}' | grep -v m001 | sort -u | tr '\n' ' ')
+    for BMC in ${BMCS[@]}; do echo ${BMC}; done
     ```
 
     Expected output looks similar to the following:
@@ -519,7 +479,7 @@ However, the commands in this section are all run **on** `ncn-m001`.
 1. (`ncn-m001#`) Get the DNS server IP address for the NMN.
 
     ```bash
-    NMN_DNS=$(kubectl get services -n services -o wide | grep cray-dns-unbound-udp-nmn | awk '{ print $4 }'); echo $NMN_DNS
+    NMN_DNS=$(kubectl get services -n services -o wide | grep cray-dns-unbound-udp-nmn | awk '{ print $4 }'); echo ${NMN_DNS}
     ```
 
     Example output:
@@ -531,7 +491,7 @@ However, the commands in this section are all run **on** `ncn-m001`.
 1. (`ncn-m001#`) Get the DNS server IP address for the HMN.
 
     ```bash
-    HMN_DNS=$(kubectl get services -n services -o wide | grep cray-dns-unbound-udp-hmn | awk '{ print $4 }'); echo $HMN_DNS
+    HMN_DNS=$(kubectl get services -n services -o wide | grep cray-dns-unbound-udp-hmn | awk '{ print $4 }'); echo ${HMN_DNS}
     ```
 
     Example output:
@@ -544,14 +504,14 @@ However, the commands in this section are all run **on** `ncn-m001`.
 
     ```bash
     for BMC in ${BMCS[@]}; do
-        echo "$BMC: Disabling DHCP and configure NTP on the BMC using data from unbound service"
-        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H $BMC -S -n
+        echo "${BMC}: Disabling DHCP and configure NTP on the BMC using data from unbound service"
+        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H "${BMC}" -S -n
         echo
-        echo "$BMC: Configuring DNS on the BMC using data from unbound"
-        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H $BMC -D $NMN_DNS,$HMN_DNS -d
+        echo "${BMC}: Configuring DNS on the BMC using data from unbound"
+        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H "${BMC}" -D "${NMN_DNS},${HMN_DNS}" -d
         echo
-        echo "$BMC: Showing settings"
-        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H $BMC -s
+        echo "${BMC}: Showing settings"
+        /opt/cray/csm/scripts/node_management/set-bmc-ntp-dns.sh ilo -H "${BMC}" -s
         echo
     done ; echo "Configuration completed on all NCN BMCs"
     ```

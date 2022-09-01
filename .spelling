@@ -1,4 +1,5 @@
 1.0.x
+1.6.x
 100GBASE-CR2
 100GBASE-CR4
 100GBASE-SR2
@@ -58,13 +59,13 @@ Ansible
 AOS-CX
 API
 APIs
+Argo
 Arista
 artifact
 artifact's
-artifacts
 Artifactory
+artifacts
 ArubaOS-CX
-ASes
 ASICs
 backdoor
 backend
@@ -113,6 +114,7 @@ checkmark
 CHN
 cleanup
 CLI
+CloudWatch
 ClusterStor
 CMC
 CMCs
@@ -162,8 +164,10 @@ DHCP
 dialog
 diskless
 DNS
+dnsmasq
 Docker
 Dockerfile
+dracut
 dropdown
 dryrun
 DSAv2
@@ -268,6 +272,7 @@ Jinja2
 JViewer
 Kafka
 Kea
+Keepalived
 keychain
 Keycloak
 Keycloak's
@@ -275,6 +280,7 @@ KeyStore
 Kiali
 Kibana
 Kubernetes
+Kyverno
 labeled
 labeler
 labeling
@@ -285,7 +291,7 @@ laborers
 laboring
 labors
 license
-licences
+licenses
 lifecycle
 LiveCD
 LiveCD's
@@ -298,7 +304,11 @@ loopback
 loopbacks
 lowercase
 lowercased
+LAN
+LANs
 Luks
+LVM
+LVMs
 macOS
 maneuver
 maneuvers
@@ -323,6 +333,7 @@ Motivair
 MPOs
 mTLS
 multimode
+Multus
 MyMellanox
 MZ32-AR0-00
 MZ62-HD0-00
@@ -373,6 +384,7 @@ organizers
 organizes
 organizing
 OSDs
+OverlayFS
 oversubscription
 PaaS
 PAM-4
@@ -482,6 +494,7 @@ SSHing
 SSHKey
 standalone
 startup
+Strimzi
 Submodule
 subnetting
 subrole
@@ -543,6 +556,7 @@ V1.20.13
 v1.3
 v1.3.x
 v1.30.16
+v1.3.0
 V1.3.0
 v1.4
 v1.4.
@@ -586,7 +600,14 @@ zeroization
 zeroize
 Zypper
 
-# Per-file spelling exceptions
+# Per-file spelling exceptions. Please keep this section sorted in order by filepath, to help make it easier to
+# see if a file already is listed.
+
+- background/README.md
+initramFS
+initrd
+overlayFS
+squashFS
 
 - glossary.md
 # To allow 802.3cd/bs
@@ -598,17 +619,58 @@ Init
 # To allow Site Init
 Init
 
+- install/configure_management_network.md
+# To allow Site Init
+Init
+
+- install/create_cabinets_yaml.md
+# To allow Site Init
+Init
+
 - install/pre-installation.md
 # To allow Site Init
 Init
+
+- install/README.md
+Alerta
+
+- install/livecd/Boot_LiveCD_USB.md
+Init
+
+- introduction/documentation_conventions.md
+ipsum
+Lorem
 
 - introduction/site_survey.md
 # To allow Site Init
 Init
 
+- operations/network/external_dns/Update_the_cmn-external-dns_Value_Post-Installation.md
+LoadBalancer
+
+- operations/network/management_network/1.2_to_1.3_upgrade.md
+VRFs
+
+- operations/network/management_network/aruba/bgp_basic.md
+ASes
+
+- operations/network/management_network/mellanox/bgp_basic.md
+ASes
+
+- operations/network/management_network/upgrade.md
+Preconfig
+preconfig
+
+- operations/power_management/Power_Off_Compute_and_IO_Cabinets.md
+lockout-tagout
+
 - operations/security_and_authentication/Change_Air-Cooled_Node_BMC_Credentials.md
 # To allow System Admin Toolkit
 Admin
+
+- operations/security_and_authentication/Manage_Sealed_Secrets.md
+# To allow Site Init
+Init
 
 - operations/security_and_authentication/Updating_the_Liquid-Cooled_EX_Cabinet_Default_Credentials_after_a_CEC_Password_Change.md
 # To allow Site Init
@@ -618,11 +680,13 @@ Init
 # To allow System Admin Toolkit
 Admin
 
-- operations/network/management_network/upgrade.md
-Preconfig
-preconfig
+- operations/system_management_health/Configure_Prometheus_Alerta_Alert_Notifications.md
+Alerta
 
-- upgrade/1.2/plan_and_coordinate_network_upgrade.md
-# To differentiate between old CAN and new CAN
-pre-1
+- operations/network/dns/DNS.md
+ExternalDNS
 
+- RELEASE_NOTES.md
+5.x
+Antero
+Expat-15
