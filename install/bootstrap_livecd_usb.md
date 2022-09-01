@@ -49,9 +49,9 @@ Fetch the base installation CSM tarball, extract it, and install the contained C
    > and exported.
 
    ```bash
-   pit# export CSM_RELEASE=csm-x.y.z
-   pit# export SYSTEM_NAME=eniac
-   pit# export PITDATA=/mnt/pitdata
+   linux# export CSM_RELEASE=csm-x.y.z
+   linux# export SYSTEM_NAME=eniac
+   linux# export PITDATA=/mnt/pitdata
    ```
 
 1. Download and expand the CSM software release.
@@ -100,7 +100,7 @@ Fetch the base installation CSM tarball, extract it, and install the contained C
    Git Version    : b3ed3046a460d804eb545d21a362b3a5c7d517a3
    Platform       : linux/amd64
    App. Version   : 1.5.18
-    ```
+   ```
 
 1. Configure `zypper` with the `embedded` repository from the CSM release.
 
@@ -150,16 +150,25 @@ Fetch the base installation CSM tarball, extract it, and install the contained C
 
     If reinstalling the system and **using `ncn-m001` to prepare the USB image**, then remove the prior CNI configuration.
 
-    ```bash
-    ncn-m001# rm -rf /etc/cni/net.d/00-multus.conf /etc/cni/net.d/10-*.conflist /etc/cni/net.d/multus.d
-    ```
+    1. Remove the configuration files.
 
-    This should leave the following two files in `/etc/cni/net.d`.
+        ```bash
+        ncn-m001# rm -rf /etc/cni/net.d/00-multus.conf /etc/cni/net.d/10-*.conflist /etc/cni/net.d/multus.d
+        ```
 
-    ```bash
-    ncn-m001# ls /etc/cni/net.d
-    87-podman-bridge.conflist  99-loopback.conf.sample
-    ```
+    1. List the remaining contents of the `/etc/cni/net.d` directory.
+
+        ```bash
+        ncn-m001# ls /etc/cni/net.d
+        ```
+
+        Example output:
+
+        ```text
+        87-podman-bridge.conflist  99-loopback.conf.sample
+        ```
+
+        The exact directory contents may vary depending on the CSM version previously installed on `ncn-m001`.
 
 <a name="create-the-bootable-media"></a>
 
@@ -322,7 +331,7 @@ information for this system has not yet been prepared.
       system_config.yaml
       ```
 
-   1. Generate the system configuration.
+   2. Generate the system configuration.
 
       > **Note:** Ensure that you specify a reachable NTP pool or server using the `ntp-pools` or `ntp-servers` fields, respectively. Adding an unreachable server can
       > cause clock skew as `chrony` tries to continually reach out to a server it can never reach.
@@ -357,7 +366,7 @@ information for this system has not yet been prepared.
       >    {"Source":"x3000door-Motiv","SourceRack":"x3000","SourceLocation":" ","DestinationRack":"x3000","DestinationLocation":"u36","DestinationPort":"j27"}}
       >    ```
 
-   1. Skip the next step and continue to [verify and backup `system_config.yaml`](#verify-csi-versions-match).
+   3. Skip the next step and continue to [verify and backup `system_config.yaml`](#verify-csi-versions-match).
 
 <a name="first-timeinitial-installs-bare-metal"></a>
 
@@ -447,7 +456,7 @@ information for this system has not yet been prepared.
       > **`NOTE`** This step is needed only for fresh installs where `system_config.yaml` is missing from the `prep/` directory.
 
       ```bash
-      pit# cd ${PITDATA}/prep && ln ${SYSTEM_NAME}/system_config.yaml
+      linux# cd ${PITDATA}/prep && ln ${SYSTEM_NAME}/system_config.yaml
       ```
 
    1. Continue to the next step to [verify and backup `system_config.yaml`](#verify-csi-versions-match).
@@ -483,11 +492,7 @@ information for this system has not yet been prepared.
 > **Note:**: It is assumed at this point that `$PITDATA` (that is, `/mnt/pitdata`) is still mounted on the Linux system. This is important because the following procedure
 > depends on that mount existing.
 
-1. Install Git if not already installed (recommended).
-
-   Although not strictly required, the procedures for setting up the
-   `site-init` directory recommend persisting `site-init` files in a Git
-   repository.
+1. Install Git if not already installed.
 
 1. Prepare the `site-init` directory.
 
@@ -721,11 +726,13 @@ On first log in (over SSH or at local console), the LiveCD will prompt the admin
    pit# mount -vL PITDATA
    ```
 
-1. Set new environment variables and save them to `/etc/environment`.
+1. Set and export new environment variables.
+
+   The commands below save them to `/etc/environment` as well, which makes them available in all new shell sessions on the PIT node.
 
    ```bash
-   pit# PITDATA=$(lsblk -o MOUNTPOINT -nr /dev/disk/by-label/PITDATA)
-   pit# CSM_PATH=${PITDATA}/${CSM_RELEASE}
+   pit# export PITDATA=$(lsblk -o MOUNTPOINT -nr /dev/disk/by-label/PITDATA)
+   pit# export CSM_PATH=${PITDATA}/${CSM_RELEASE}
    pit# echo "
    PITDATA=${PITDATA}
    CSM_PATH=${CSM_PATH}" | tee -a /etc/environment
@@ -734,7 +741,7 @@ On first log in (over SSH or at local console), the LiveCD will prompt the admin
 1. Start a typescript to record this section of activities done on `ncn-m001` while booted from the LiveCD.
 
    ```bash
-   pit# script -af /var/www/ephemeral/prep/admin/booted-csm-livecd.$(date +%Y-%m-%d).txt
+   pit# script -af "${PITDATA}/prep/admin/booted-csm-livecd.$(date +%Y-%m-%d).txt"
    pit# export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
 
@@ -822,19 +829,12 @@ On first log in (over SSH or at local console), the LiveCD will prompt the admin
    pit# /root/bin/pit-init.sh
    ```
 
-1. Start and configure NTP on the LiveCD for a fallback/recovery server.
-
-   ```bash
-   pit# /root/bin/configure-ntp.sh
-   ```
-
-1. Install Goss Tests and Server
+1. Install Goss tests.
 
    The following assumes the `CSM_PATH` environment variable is set to the absolute path of the unpacked CSM release.
 
    ```bash
-   pit# rpm -Uvh --force $(find ${CSM_PATH}/rpm/ -name "goss-servers*.rpm" | sort -V | tail -1) \
-                         $(find ${CSM_PATH}/rpm/ -name "csm-testing*.rpm" | sort -V | tail -1)
+   pit# rpm -Uvh --force $(find ${CSM_PATH}/rpm/ -name "csm-testing*.rpm" | sort -V | tail -1)
    ```
 
 <a name="next-topic"></a>

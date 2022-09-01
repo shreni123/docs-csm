@@ -26,10 +26,8 @@
 set -e
 locOfScript=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 . ${locOfScript}/../common/upgrade-state.sh
-. ${locOfScript}/../common/ncn-common.sh $(hostname)
+. ${locOfScript}/../common/ncn-common.sh "$(hostname)"
 trap 'err_report' ERR INT TERM HUP EXIT
-# array for paths to unmount after chrooting images
-declare -a UNMOUNTS=()
 
 while [[ $# -gt 0 ]]
 do
@@ -64,13 +62,60 @@ if [[ -z ${CSM_ARTI_DIR} ]]; then
     exit 1
 fi
 
+state_name="CHECK_WEAVE"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+# shellcheck disable=SC2046
+TOKEN=$(curl -s -S -d grant_type=client_credentials \
+                   -d client_id=admin-client \
+                   -d client_secret=$(kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d) \
+                   https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+export TOKEN
+
+if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    SLEEVE_MODE="yes"
+    weave --local status connections | grep -q sleeve || SLEEVE_MODE="no"
+    if [ "${SLEEVE_MODE}" == "yes" ]; then
+        echo "Detected that weave is in sleeve mode with at least one peer.   Please consult FN6636 before proceeding with the upgrade."
+        exit 1
+    fi
+
+    # get bss global cloud-init data
+    curl -k -H "Authorization: Bearer $TOKEN" https://api-gw-service-nmn.local/apis/bss/boot/v1/bootparameters?name=Global|jq .[] > cloud-init-global.json
+
+    CURRENT_MTU=$(jq '."cloud-init"."meta-data"."kubernetes-weave-mtu"' cloud-init-global.json)
+    echo "Current kubernetes-weave-mtu is $CURRENT_MTU"
+
+    # make sure kubernetes-weave-mtu is set to 1376
+    jq '."cloud-init"."meta-data"."kubernetes-weave-mtu" = "1376"' cloud-init-global.json > cloud-init-global-update.json
+
+    echo "Setting kubernetes-weave-mtu to 1376"
+    # post the update json to bss
+    curl -s -k -H "Authorization: Bearer ${TOKEN}" --header "Content-Type: application/json" \
+        --request PUT \
+        --data @cloud-init-global-update.json \
+        https://api-gw-service-nmn.local/apis/bss/boot/v1/bootparameters
+
+    } >> ${LOG_FILE} 2>&1
+    record_state ${state_name} "$(hostname)"
+    echo
+else
+    echo "====> ${state_name} has been completed"
+fi
+
 state_name="UPDATE_SSH_KEYS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" ]]; then
     echo "====> ${state_name} ..."
     {
 
-    test -f /root/.ssh/config && mv /root/.ssh/config /root/.ssh/config.bak
+    if [ -f /root/.ssh/config ]; then
+        # shellcheck disable=SC2034 # it is referenced in upgrade-state.sh, which is sourced at the
+        # top of this file.
+        RESTORE_SSH_CONFIG=1
+        mv /root/.ssh/config /root/.ssh/config.bak
+    fi
     cat <<EOF> /root/.ssh/config
 Host *
     StrictHostKeyChecking no
@@ -81,13 +126,71 @@ EOF
     grep -oP "(ncn-\w+)" /etc/hosts | sort -u | xargs -t -i ssh {} 'grep -oP "(ncn-s\w+|ncn-m\w+|ncn-w\w+)" /etc/hosts | sort -u | xargs -t -i ssh-keyscan -H \{\} >> /root/.ssh/known_hosts'
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
+else
+    echo "====> ${state_name} has been completed"
+fi
+
+state_name="REPAIR_AND_VERIFY_CHRONY_CONFIG"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+# shellcheck disable=SC2046
+TOKEN=$(curl -s -S -d grant_type=client_credentials \
+                   -d client_id=admin-client \
+                   -d client_secret=$(kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d) \
+                   https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+export TOKEN
+if [[ $state_recorded == "0" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    if [[ "$(hostname)" == "ncn-m002" ]]; then
+        # we already did this from ncn-m001
+        echo "====> ${state_name} has been completed"
+    else
+      # shellcheck disable=SC2013
+      for target_ncn in $(grep -oP 'ncn-\w\d+' /etc/hosts | sort -u); do
+
+        # ensure host is accessible, skip it if not
+        if ! ssh "$target_ncn" hostname > /dev/null; then
+            continue
+        fi
+
+        # ensure the directory exists
+        ssh "$target_ncn" mkdir -p /srv/cray/scripts/common/
+
+        # copy the NTP script and template to the target ncn
+        rsync -aq "${CSM_ARTI_DIR}"/chrony "$target_ncn":/srv/cray/scripts/common/
+
+        # shellcheck disable=SC2029 # it's ok that $TOKEN expands on the client side
+        # run the script
+        if ! ssh "$target_ncn" "TOKEN=$TOKEN /srv/cray/scripts/common/chrony/csm_ntp.py"; then
+            echo "${target_ncn} csm_ntp failed"
+            exit 1
+        fi
+
+        ssh "$target_ncn" chronyc makestep
+        loop_idx=0
+        in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+        # wait up to 90s for the node to be in sync
+        while [[ $loop_idx -lt 18 && "$in_sync" == "no" ]]; do
+            sleep 5
+            in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+            loop_idx=$(( loop_idx+1 ))
+        done
+
+        if [[ "$in_sync" == "no" ]]; then
+            echo "The clock for ${target_ncn} is not in sync.  Wait a bit more or try again."
+            exit 1
+        fi
+      done
+      record_state "${state_name}" "$(hostname)"
+    fi
+    } >> ${LOG_FILE} 2>&1
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="CHECK_CLOUD_INIT_PREREQ"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -101,7 +204,7 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
         ssh_keygen_keyscan $host
         until ssh $host test -f /run/cloud-init/instance-data.json
         do
-            ssh $host cloud-init init 2>&1 >/dev/null
+            ssh $host cloud-init init >/dev/null 2>&1
             counter=$((counter+1))
             sleep 10
             if [[ $counter -gt 5 ]]
@@ -120,10 +223,10 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
         ssh_keygen_keyscan $host
         until ssh $host test -f /run/cloud-init/instance-data.json
         do
-            ssh $host cloud-init init 2>&1 >/dev/null
+            ssh $host cloud-init init >/dev/null 2>&1
             counter=$((counter+1))
             sleep 10
-            if [[ $counter > 5 ]]
+            if [[ $counter -gt 5 ]]
             then
                 echo "Cloud init data is missing and cannot be recreated. Existing upgrade.."
             fi
@@ -132,13 +235,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
 
     set -e
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPDATE_DOC_RPM"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -148,13 +251,13 @@ if [[ $state_recorded == "0" ]]; then
     fi
     cp /root/docs-csm-latest.noarch.rpm ${CSM_ARTI_DIR}/rpm/cray/csm/sle-15sp2/
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPDATE_CUSTOMIZATIONS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -183,26 +286,36 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     kubectl create secret -n loftsman generic site-init --from-file=./customizations.yaml
     popd
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="SETUP_NEXUS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
+    set +e
+    nexus-cred-check () {
+        pod=$(kubectl get pods -n nexus --selector app=nexus -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep -v nexus-init);
+        kubectl -n nexus exec -it $pod -c nexus -- curl -i -sfk -u "admin:${NEXUS_PASSWORD:=admin123}" -H "accept: application/json" -X GET http://nexus/service/rest/beta/security/user-sources >/dev/null 2>&1; 
+    } 
+    if ! nexus-cred-check; then
+        echo "Nexus password is incorrect. Please set NEXUS_PASSWORD and try again."
+        exit 1
+    fi
+    set -e
     ${CSM_ARTI_DIR}/lib/setup-nexus.sh
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="DISABLE_SERVICE_REPOS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -212,13 +325,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     pdsh -w "$NCNS" 'zypper ms -d SUSE_Linux_Enterprise_Server_15_SP2_x86_64'
     pdsh -w "$NCNS" 'zypper ms -d Server_Applications_Module_15_SP2_x86_64'
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="REMOVE_DUPLICATE_BMC_DNS_RECORDS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -228,6 +341,7 @@ if [[ $state_recorded == "0" ]]; then
         # turn until one of them has the IPMI credentials.
         USERNAME=""
         IPMI_PASSWORD=""
+        # shellcheck disable=SC1083
         VAULT_TOKEN=$(kubectl get secrets cray-vault-unseal-keys -n vault -o jsonpath={.data.vault-root} | base64 -d)
         for VAULT_POD in $(kubectl get pods -n vault --field-selector status.phase=Running --no-headers \
                             -o custom-columns=:.metadata.name | grep -E "^cray-vault-(0|[1-9][0-9]*)$") ; do
@@ -237,6 +351,7 @@ if [[ $state_recorded == "0" ]]; then
                 jq -r '.data.Username')
             # If we are not able to get the username, no need to try and get the password.
             [[ -n ${USERNAME} ]] || continue
+            # shellcheck disable=SC2155
             export IPMI_PASSWORD=$(kubectl exec -it -n vault -c vault ${VAULT_POD} -- sh -c \
                 "export VAULT_ADDR=http://localhost:8200; export VAULT_TOKEN=`echo $VAULT_TOKEN`; \
                 vault kv get -format=json secret/hms-creds/$TARGET_MGMT_XNAME" |
@@ -256,11 +371,13 @@ if [[ $state_recorded == "0" ]]; then
         # Check for and remove any duplicate DNS entries for BMCs
         bmc_duplicate_error=0
         for ncn in $(grep -oP 'ncn-\w\d+' /etc/hosts | sort -u); do
-            if [[ "$(dig +short ${ncn}-mgmt | wc -l)" > "1" ]]; then
+            if [[ "$(dig +short ${ncn}-mgmt | wc -l)" -gt "1" ]]; then
                 bmc_duplicate_error=1
             fi
         done
+        # shellcheck disable=SC2155
         if [ $bmc_duplicate_error = 1 ]; then
+           # shellcheck disable=SC2046
             export TOKEN=$(curl -s -S -d grant_type=client_credentials \
                               -d client_id=admin-client \
                               -d client_secret=`kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d` \
@@ -269,43 +386,67 @@ if [[ $state_recorded == "0" ]]; then
         fi
         set -e
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
+else
+    echo "====> ${state_name} has been completed"
+fi
+
+state_name="RECONFIGURE_CONTAINERD_WORKERS"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+if [[ $state_recorded == "0" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    workers=$(grep -oP 'ncn-w\d+' /etc/hosts | sort -u)
+    for worker in $workers
+    do
+      echo "Reconfiguring containerd on $worker:"
+      scp /usr/share/doc/csm/scripts/reconfigure_containerd.sh $worker:/tmp/reconfigure_containerd.sh
+      pdsh -b -S -w $worker '/tmp/reconfigure_containerd.sh'
+    done
+    echo "Restarting sonar-jobs-watcher pods"
+    kubectl -n services rollout restart daemonset.apps/sonar-jobs-watcher
+    kubectl -n services rollout status daemonset.apps/sonar-jobs-watcher
+
+    } >> ${LOG_FILE} 2>&1
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPGRADE_BSS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     helm -n services upgrade cray-hms-bss ${CSM_ARTI_DIR}/helm/cray-hms-bss-*.tgz
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPGRADE_KEA"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     helm -n services upgrade cray-dhcp-kea ${CSM_ARTI_DIR}/helm/cray-dhcp-kea-*.tgz
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPGRADE_UNBOUND"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     manifest_folder='/tmp'
     dns_forwarder=$(kubectl -n loftsman get secret site-init -o jsonpath='{.data.customizations\.yaml}' | base64 -d|yq r - spec.network.netstaticips.system_to_site_lookups)
     system_name=$(kubectl -n loftsman get secret site-init -o jsonpath='{.data.customizations\.yaml}' | base64 -d|yq r - spec.network.dns.external)
+    # shellcheck disable=SC2010
     unbound_version=$(ls ${CSM_ARTI_DIR}/helm |grep cray-dns-unbound|sed -e 's/\.[^./]*$//'|cut -d '-' -f4)
 
 
@@ -345,21 +486,25 @@ EOF
     loftsman ship --charts-path ${CSM_ARTI_DIR}/helm/ --manifest-path $manifest_folder/unbound.yaml
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPLOAD_NEW_NCN_IMAGE"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     temp_file=$(mktemp)
     artdir=${CSM_ARTI_DIR}/images
 
+    # shellcheck disable=SC2155
     export SQUASHFS_ROOT_PW_HASH=$(awk -F':' /^root:/'{print $2}' < /etc/shadow)
-    DEBUG=1 ${CSM_ARTI_DIR}/ncn-image-modification.sh \
+    set -o pipefail
+    NCN_IMAGE_MOD_SCRIPT="$(rpm -ql docs-csm | grep ncn-image-modification.sh)"
+    set +o pipefail
+    DEBUG=1 ${NCN_IMAGE_MOD_SCRIPT} \
         -d /root/.ssh \
         -k $artdir/kubernetes/kubernetes*.squashfs \
         -s $artdir/storage-ceph/storage-ceph*.squashfs \
@@ -383,13 +528,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "export KUBERNETES_VERSION=${KUBERNETES_VERSION}" >> /etc/cray/upgrade/csm/myenv
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPDATE_CLOUD_INIT_RECORDS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -406,7 +551,7 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     # check for record already exists and create the script to be idempotent
     for ((i=0;i<$entry_number; i++)); do
         record=$(jq '."cloud-init"."meta-data".host_records['$i']' cloud-init-global.json)
-        if [[ $record =~ "packages.local" ]] || [[ $record =~ "registry.local" ]]; then
+        if [[ $record =~ packages.local ]] || [[ $record =~ registry.local ]]; then
                 echo "packages.local and registry.local already in BSS cloud-init host_records"
         fi
     done
@@ -425,19 +570,19 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
         --storage-version ${CEPH_VERSION}
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
     echo
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="PREFLIGHT_CHECK"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" ]]; then
     echo "====> ${state_name} ..."
     {
     export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-    rpm --force -Uvh $(find $CSM_ARTI_DIR/rpm/cray/csm/ -name \*csm-testing\*.rpm | sort -V | tail -1)
+    rpm --force -Uvh "$(find $CSM_ARTI_DIR/rpm/cray/csm/ -name \*csm-testing\*.rpm | sort -V | tail -1)"
     /opt/cray/tests/install/ncn/scripts/validate-bootraid-artifacts.sh
 
     # get all installed csm version into a file
@@ -454,13 +599,13 @@ if [[ $state_recorded == "0" ]]; then
     GOSS_BASE=/opt/cray/tests/install/ncn goss -g /opt/cray/tests/install/ncn/suites/ncn-upgrade-preflight-tests.yaml --vars=/opt/cray/tests/install/ncn/vars/variables-ncn.yaml validate
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="UPGRADE_PRECACHE_CHART"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -477,6 +622,7 @@ spec:
 EOF
 
     yq r "${CSM_ARTI_DIR}/manifests/platform.yaml" 'spec.charts.(name==cray-precache-images)' | sed 's/^/    /' >> $tmp_manifest
+    yq w -i $tmp_manifest 'spec.charts[*].timeout' 20m0s
     loftsman ship --charts-path "${CSM_ARTI_DIR}/helm" --manifest-path $tmp_manifest
 
     #
@@ -484,45 +630,211 @@ EOF
     # needs so it can move around on an upgraded NCN (before we deploy
     # the new nexus chart)
     #
-    kubectl get configmap -n nexus cray-precache-images -o yaml | sed '/kind: ConfigMap/i\    docker.io/sonatype/nexus3:3.25.0\n    dtr.dev.cray.com/baseos/busybox:1\n    dtr.dev.cray.com/cray/istio/proxyv2:1.7.8-cray2-distroless' | kubectl apply -f -
+    kubectl get configmap -n nexus cray-precache-images -o yaml | sed '/kind: ConfigMap/i\    docker.io/sonatype/nexus3:3.25.0\n    dtr.dev.cray.com/baseos/busybox:1\n    dtr.dev.cray.com/cray/istio/proxyv2:1.7.8-cray2-distroless\n    docker.io/openpolicyagent/opa:0.24.0-envoy-1' | kubectl apply -f -
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="POD_ANTI_AFFINITY"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
 
-    kubectl patch deployment -n spire spire-jwks -p '{
-        "spec": {
-        "strategy": {"rollingUpdate": {"maxSurge": 0}},
-        "template": {
+    if kubectl get deployment -n istio-system istio-ingressgateway >/dev/null 2>&1; then
+        kubectl patch deployment -n istio-system istio-ingressgateway -p '{
             "spec": {
-                "affinity": {
-                    "podAntiAffinity": {
-                        "requiredDuringSchedulingIgnoredDuringExecution": [
-                            {
-                            "labelSelector": {
-                                "matchLabels": {
-                                    "app.kubernetes.io/name":"spire-jwks"
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"istio-ingressgateway"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
                                 }
-                            },
-                            "topologyKey": "kubernetes.io/hostname"
-                            }
-                        ]
+                            ]
+                        }
                     }
                 }
             }
-        }
-    }}'
+        }}'
+    fi
+
+    if kubectl get deployment -n istio-system istio-ingressgateway-customer-admin >/dev/null 2>&1; then
+        kubectl patch deployment -n istio-system istio-ingressgateway-customer-admin -p '{
+            "spec": {
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"istio-ingressgateway-customer-admin"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }}'
+    fi
+
+    if kubectl get deployment -n istio-system istio-ingressgateway-customer-user >/dev/null 2>&1; then
+        kubectl patch deployment -n istio-system istio-ingressgateway-customer-user -p '{
+            "spec": {
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"istio-ingressgateway-customer-user"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }}'
+    fi
+
+    if kubectl get deployment -n istio-system istio-ingressgateway-hmn >/dev/null 2>&1; then
+        kubectl patch deployment -n istio-system istio-ingressgateway-hmn -p '{
+            "spec": {
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"istio-ingressgateway-hmn"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }}'
+    fi
+
+    for deploy in cray-opa cray-opa-ingressgateway cray-opa-ingressgateway-customer-admin cray-opa-ingressgateway-user; do
+        namespace="opa"
+        if kubectl get deployment -n "${namespace}" "${deploy}" >/dev/null 2>&1; then
+            kubectl patch deployment -n "${namespace}" "${deploy}" -p '{
+                "spec": {
+                "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+                "template": {
+                    "spec": {
+                        "affinity": {
+                            "podAntiAffinity": {
+                                "preferredDuringSchedulingIgnoredDuringExecution": null,
+                                "requiredDuringSchedulingIgnoredDuringExecution": [
+                                    {
+                                    "labelSelector": {
+                                        "matchLabels": {
+                                            "app":"'"${deploy}"'"
+                                        }
+                                    },
+                                    "topologyKey": "kubernetes.io/hostname"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }}'
+        fi
+    done
+
+    namespace="spire"
+
+    deploy=spire-jwks
+    if kubectl get deployment -n "${namespace}" "${deploy}" >/dev/null 2>&1; then
+        kubectl patch deployment -n "${namespace}" "${deploy}" -p '{
+            "spec": {
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"'"${deploy}"'"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }}'
+    fi
+
+    deploy=spire-server
+    if kubectl get statefulset -n "${namespace}" "${deploy}" >/dev/null 2>&1; then
+        kubectl patch statefulset -n "${namespace}" "${deploy}" -p '{
+            "spec": {
+            "strategy": {"rollingUpdate": {"maxSurge": 0, "maxUnavailable": 1 }},
+            "template": {
+                "spec": {
+                    "affinity": {
+                        "podAntiAffinity": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": null,
+                            "requiredDuringSchedulingIgnoredDuringExecution": [
+                                {
+                                "labelSelector": {
+                                    "matchLabels": {
+                                        "app":"'"${deploy}"'"
+                                    }
+                                },
+                                "topologyKey": "kubernetes.io/hostname"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }}'
+    fi
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
@@ -530,7 +842,7 @@ fi
 ${locOfScript}/../cps/snapshot-cps-deployment.sh
 
 state_name="ADD_MTL_ROUTES"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -562,13 +874,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     fi
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="CREATE_CEPH_RO_KEY"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -576,18 +888,19 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     ceph auth import -i /etc/ceph/ceph.client.ro.keyring
     for node in $(ceph orch host ls --format=json|jq -r '.[].hostname'); do scp /etc/ceph/ceph.client.ro.keyring $node:/etc/ceph/ceph.client.ro.keyring; done
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="BACKUP_BSS_DATA"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
-    
-    cray bss bootparameters list --format=json > bss-backup-$(date +%Y-%m-%d).json
+
+    #shellcheck disable=SC2046
+    cray bss bootparameters list --format json > bss-backup-$(date +%Y-%m-%d).json
 
     backupBucket="config-data"
     set +e
@@ -597,16 +910,16 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     fi
     set -e
 
-    cray artifacts create ${backupBucket} bss-backup-$(date +%Y-%m-%d).json bss-backup-$(date +%Y-%m-%d).json
+    cray artifacts create ${backupBucket} bss-backup-"$(date +%Y-%m-%d)".json bss-backup-"$(date +%Y-%m-%d)".json
     
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="BACKUP_VCS_DATA"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -647,13 +960,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     cray artifacts create ${backupBucket} vcs.tar vcs.tar
     
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="TDS_LOWER_CPU_REQUEST"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -667,13 +980,13 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     fi
     
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="RECONFIGURE_HAPROXY_MASTERS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -686,38 +999,41 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
       pdsh -b -S -w $master '/tmp/reconfigure_haproxy.sh'
     done
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="SUSPEND_NCN_CONFIGURATION"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     
     export CRAY_FORMAT=json
-    for xname in $(cray hsm state components list --role Management --type node | jq -r .Components[].ID)
+    # Even though we export the CRAY_FORMAT environment variable, it still is safest to also specify the --format command line argument
+    for xname in $(cray hsm state components list --role Management --type node --format json | jq -r .Components[].ID)
     do
         cray cfs components update --enabled false --desired-config "" $xname
     done
     
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi
 
 state_name="CHECK_BMC_NCN_LOCKS"
-state_recorded=$(is_state_recorded "${state_name}" $(hostname))
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
     # install the hpe-csm-scripts rpm early to get lock_management_nodes.py
+    # shellcheck disable=SC2046
     rpm --force -Uvh $(find $CSM_ARTI_DIR/rpm/cray/csm/ -name \*hpe-csm-scripts\*.rpm | sort -V | tail -1)
 
     # mark the NCN BMCs with the Management role in HSM
+    # shellcheck disable=SC2046
     cray hsm state components bulkRole update --role Management --component-ids \
                             $(cray hsm state components list --role management --type node --format json | \
                                 jq -r .Components[].ID | sed 's/n[0-9]*//' | tr '\n' ',' | sed 's/.$//')
@@ -726,7 +1042,7 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     python3 /opt/cray/csm/scripts/admin_access/lock_management_nodes.py
 
     } >> ${LOG_FILE} 2>&1
-    record_state ${state_name} $(hostname)
+    record_state ${state_name} "$(hostname)"
 else
     echo "====> ${state_name} has been completed"
 fi

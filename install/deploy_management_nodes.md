@@ -11,8 +11,6 @@ initialized and the Kubernetes cluster is created and ready for a workload. The 
 will join Kubernetes after it is rebooted later in
 [Deploy Final NCN](index.md#deploy_final_ncn).
 
-<a name="timing-of-deployments"></a>
-
 ## Timing of deployments
 
 The timing of each set of boots varies based on hardware. Nodes from some manufacturers will
@@ -22,22 +20,24 @@ the number of storage and worker nodes.
 
 ## Topics
 
-   1. [Prepare for management node deployment](#prepare_for_management_node_deployment)
-      1. [Tokens and IPMI password](#tokens-and-ipmi-password)
-      1. [Ensure time is accurate before Deploying NCNs](#ensure-time-is-accurate-before-deploying-ncns)
-   1. [Update management node firmware](#update_management_node_firmware)
-   1. [Deploy management nodes](#deploy_management_nodes)
-      1. [Deploy workflow](#deploy-workflow)
-      1. [Deploy](#deploy)
-      1. [Check LVM on Kubernetes NCNs](#check-lvm-on-masters-and-workers)
-      1. [Check for unused drives on utility storage nodes](#check-for-unused-drives-on-utility-storage-nodes)
-   1. [Configure after management node deployment](#configure_after_management_node_deployment)
-      1. [LiveCD cluster authentication](#livecd-cluster-authentication)
-      1. [Install tests and test server on NCNs](#install-tests)
-      1. [Remove the default NTP pool](#remove-the-default-ntp-pool)
-   1. [Validate management node deployment](#validate_management_node_deployment)
-   1. [Important checkpoint](#important-checkpoint)
-   1. [Next topic](#next-topic)
+1. [Prepare for management node deployment](#1-prepare-for-management-node-deployment)
+   1. [Tokens and IPMI password](#11-tokens-and-ipmi-password)
+   1. [Ensure time is accurate before Deploying NCNs](#12-ensure-time-is-accurate-before-deploying-ncns)
+1. [Update management node firmware](#2-update-management-node-firmware)
+1. [Deploy management nodes](#3-deploy-management-nodes)
+   1. [Deploy workflow](#31-deploy-workflow)
+   1. [Deploy](#32-deploy)
+   1. [Check for unused drives on utility storage nodes](#33-check-for-unused-drives-on-utility-storage-nodes)
+1. [Configure after management node deployment](#4-configure-after-management-node-deployment)
+   1. [LiveCD cluster authentication](#41-livecd-cluster-authentication)
+   1. [Install tests and test server on NCNs](#42-install-tests-and-test-server-on-ncns)
+   1. [Clean up `chrony` configurations](#43-clean-up-chrony-configurations)
+1. [Validate management node deployment](#5-validate-management-node-deployment)
+1. [Important checkpoint](#important-checkpoint)
+1. [Next topic](#next-topic)
+1. [LVM check troubleshooting](#lvm-check-troubleshooting)
+   * [Manual LVM check procedure](#manual-lvm-check-procedure)
+   * [LVM check failure recovery](#lvm-check-failure-recovery)
 
 <a name="prepare_for_management_node_deployment"></a>
 
@@ -53,8 +53,7 @@ Preparation of the environment must be done before attempting to deploy the mana
 
    1. Set `IPMI_PASSWORD` to the root password for the NCN BMCs.
 
-      >  `read -s` is used to prevent the password
-      > from being written to the screen or the shell history.
+      > `read -s` is used to prevent the password from being written to the screen or the shell history.
 
       ```bash
       pit# read -s IPMI_PASSWORD
@@ -66,7 +65,7 @@ Preparation of the environment must be done before attempting to deploy the mana
       > These values do not need to be altered from what is shown.
 
       ```bash
-      pit# export mtoken='ncn-m(?!001)\w+-mgmt' ; export stoken='ncn-s\w+-mgmt' ; export wtoken='ncn-w\w+-mgmt' ; export USERNAME=root
+      pit# mtoken='ncn-m(?!001)\w+-mgmt' ; stoken='ncn-s\w+-mgmt' ; wtoken='ncn-w\w+-mgmt' ; export USERNAME=root
       ```
 
    Throughout the guide, simple one-liners can be used to query status of expected nodes. If the shell or environment is terminated, these
@@ -194,6 +193,10 @@ proceed to step 2.
 
    1. After the correct time has been verified, power off the NCN.
 
+      ```bash
+      pit# ipmitool -I lanplus -U $USERNAME -E -H $bmc chassis power off
+      ```
+
    Repeat the above process for each NCN.
 
 <a name="update_management_node_firmware"></a>
@@ -214,9 +217,8 @@ firmware requirement before starting.
    both been installed and configured. However, at that point a rolling reboot procedure for the management nodes will be needed,
    after the firmware has been updated.
 
-   See the `Shasta 1.5 HPE Cray EX System Software Getting Started Guide S-8000`
-   on the [`HPE Customer Support Center`](https://www.hpe.com/support/ex-gsg) for information about the _HPE Cray EX HPC Firmware Pack_ (HFP) product.
-
+   See the [`HPE Cray EX System Software Getting Started Guide (S-8000) 22.07`](http://www.hpe.com/support/ex-gsg-042120221040)
+   on the HPE Customer Support Center for information about the _HPE Cray EX HPC Firmware Pack_ (HFP) product.
    In the HFP documentation there is information about the recommended firmware packages to be installed.
    See "Product Details" in the HPE Cray EX HPC Firmware Pack Installation Guide.
 
@@ -315,13 +317,27 @@ be performed are in the [Deploy](#deploy) section.
 1. Create boot directories for any NCN in DNS.
 
     This will create folders for each host in `/var/www`, allowing each host to have its own unique set of artifacts:
-    kernel, initrd, SquashFS, and `script.ipxe` bootscript.
+    kernel, `initrd`, SquashFS, and `script.ipxe` bootscript.
 
-    ```bash
-    pit# /root/bin/set-sqfs-links.sh
-    ```
+    1. Patch the `set-sqfs-links.sh` script to include the blacklisting of an undesired kernel module.
+
+        ```bash
+        pit# sed -i -E 's:rd.luks=0 /:rd.luks=0 module_blacklist=rpcrdma \/:g' /root/bin/set-sqfs-links.sh
+        ```
+
+    1. Invoke the script.
+
+        ```bash
+        pit# /root/bin/set-sqfs-links.sh
+        ```
+
+        > Every NCN except for `ncn-m001` should be included in the output from this script. If that is not the case,
+        > then verify that all NCN BMCs are set to use DHCP. See
+        > [Set node BMCs to DHCP](prepare_management_nodes.md#set_node_bmcs_to_dhcp). After that is done,
+        > re-run the `set-sqfs-links.sh` script.
 
 1. Customize boot scripts for any out-of-baseline NCNs
+
     * **Worker nodes** with more than two small disks need to make adjustments to [prevent bare-metal `etcd` creation](../background/ncn_mounts_and_file_systems.md#worker-nodes-with-etcd).
     * For a brief overview of what is expected, see [disk plan of record / baseline](../background/ncn_mounts_and_file_systems.md#plan-of-record--baseline).
 
@@ -339,7 +355,8 @@ be performed are in the [Deploy](#deploy) section.
 1. <a name="set-uefi-and-power-off"></a>Set each node to always UEFI Network Boot, and ensure they are powered off
 
     ```bash
-    pit# grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev pxe options=efiboot,persistent
+    pit# grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev pxe options=persistent
+    pit# grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} chassis bootdev pxe options=efiboot
     pit# grep -oP "($mtoken|$stoken|$wtoken)" /etc/dnsmasq.d/statics.conf | sort -u | xargs -t -i ipmitool -I lanplus -U $USERNAME -E -H {} power off
     ```
 
@@ -347,21 +364,24 @@ be performed are in the [Deploy](#deploy) section.
 
 1. Validate that the LiveCD is ready for installing NCNs.
 
-   > Observe the output of the checks and note any failures, then remediate them.
+   Observe the output of the checks and note any failures, then remediate them.
 
-    Specify the admin user password for the management switches in the system.
+   1. Specify the `admin` user password for the management switches in the system.
 
-    ```bash
-    pit# export SW_ADMIN_PASSWORD='changeme'
-    ```
+      > `read -s` is used to prevent the password from being written to the screen or the shell history.
 
-    Run the LiveCD preflight checks.
+      ```bash
+      pit# read -s SW_ADMIN_PASSWORD
+      pit# export SW_ADMIN_PASSWORD
+      ```
 
-    ```bash
-    pit# csi pit validate --livecd-preflight
-    ```
+   1. Run the LiveCD preflight checks.
 
-    > Note: Ignore any errors about not being able resolve `arti.dev.cray.com`.
+      ```bash
+      pit# csi pit validate --livecd-preflight
+      ```
+
+      > Note: Ignore any errors about not being able resolve `arti.dev.cray.com`.
 
 1. Print the available consoles.
 
@@ -471,6 +491,15 @@ be performed are in the [Deploy](#deploy) section.
     ncn-w003   Ready    <none>                 2h    v1.20.13   10.252.1.9    <none>        SUSE Linux Enterprise High Performance Computing 15 SP3   5.3.18-59.19-default   containerd://1.5.7
     ```
 
+1. Stop watching the console of `ncn-m002`.
+
+    Type the ampersand character and then the period character to exit from the conman session on `ncn-m002`.
+
+    ```text
+    &.
+    pit#
+    ```
+
 1. Enable passwordless SSH for the PIT node.
 
     1. Copy SSH files from `ncn-m002` to the PIT node.
@@ -540,109 +569,85 @@ be performed are in the [Deploy](#deploy) section.
         SUCCESS
         ```
 
-1. Stop watching the console of `ncn-m002`.
+1. <a name="check-lvm-on-masters-and-workers"></a>Validate that the expected LVM labels are present on disks on the master and worker nodes.
 
-    Type the ampersand character and then the period character to exit from the conman session on `ncn-m002`.
+    ```bash
+    pit# /usr/share/doc/csm/install/scripts/check_lvm.sh
+    ```
+
+    Expected output looks similar to the following:
 
     ```text
-    &.
-    pit#
+    When prompted, please enter the NCN password for ncn-m002
+    Warning: Permanently added 'ncn-m002,10.252.1.11' (ECDSA) to the list of known hosts.
+    Password:
+    Checking ncn-m002...
+    ncn-m002: OK
+    Checking ncn-m003...
+    Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
+    Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
+    ncn-m003: OK
+    Checking ncn-w001...
+    Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
+    Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
+    ncn-w001: OK
+    Checking ncn-w002...
+    Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
+    Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
+    ncn-w002: OK
+    Checking ncn-w003...
+    Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
+    Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
+    ncn-w003: OK
+    SUCCESS: LVM checks passed on all master and worker NCNs
     ```
 
-<a name="check-lvm-on-masters-and-workers"></a>
+    **If the check fails for any nodes, then the problem must be resolved before continuing.**
+    See [LVM Check Failure Recovery](#lvm-check-failure-recovery).
 
-### 3.3 Check LVM on Kubernetes NCNs
+1. Apply the `kdump` workaround.
 
-#### 3.3.1 Run the check
-
-Run the following command on the PIT node to validate that the expected LVM labels are present on disks on the master and worker nodes.
-
-```bash
-pit# /usr/share/doc/csm/install/scripts/check_lvm.sh
-```
-
-#### 3.3.2 Expected check output
-
-Expected output looks similar to the following:
-
-```text
-When prompted, please enter the NCN password for ncn-m002
-Warning: Permanently added 'ncn-m002,10.252.1.11' (ECDSA) to the list of known hosts.
-Password:
-Checking ncn-m002...
-ncn-m002: OK
-Checking ncn-m003...
-Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-m003,10.252.1.10' (ECDSA) to the list of known hosts.
-ncn-m003: OK
-Checking ncn-w001...
-Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w001,10.252.1.9' (ECDSA) to the list of known hosts.
-ncn-w001: OK
-Checking ncn-w002...
-Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w002,10.252.1.8' (ECDSA) to the list of known hosts.
-ncn-w002: OK
-Checking ncn-w003...
-Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
-Warning: Permanently added 'ncn-w003,10.252.1.7' (ECDSA) to the list of known hosts.
-ncn-w003: OK
-SUCCESS: LVM checks passed on all master and worker NCNs
-```
-
-If the check succeeds, skip the manual check procedure and recovery steps.
-
-**If the check fails for any nodes, the problem must be resolved before continuing.** See [LVM Check Failure Recovery](#lvm-check-failure-recovery).
-
-<a name="manual-lvm-check-procedure"></a>
-
-#### 3.3.3 Manual LVM check procedure
-
-If needed, the LVM checks can be performed manually on the master and worker nodes.
-
-* Manual check on master nodes:
+    `kdump` assists in taking a dump of the NCN if it encounters a kernel panic.
+    `kdump` does not work properly in CSM 1.2. Until this workaround is applied, `kdump` may not produce a proper dump.
+    Running this script applies the workaround on all of the NCNs that were just deployed.
 
     ```bash
-    ncn-m# blkid -L ETCDLVM
-    /dev/sdc
+    pit# /usr/share/doc/csm/scripts/workarounds/kdump/run.sh
     ```
 
-* Manual check on worker nodes:
+    Example output:
 
-    ```bash
-    ncn-w# blkid -L CONLIB
-    /dev/sdb2
-    ncn-w# blkid -L CONRUN
-    /dev/sdb1
-    ncn-w# blkid -L K8SLET
-    /dev/sdb3
+    ```text
+    Uploading hotfix files to ncn-m001:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-m002:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-m003:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-s001:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-s002:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-s003:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-s004:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-w001:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-w002:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-w003:/srv/cray/scripts/common/ ... Done
+    Uploading hotfix files to ncn-w004:/srv/cray/scripts/common/ ... Done
+    Running updated create-kdump-artifacts.sh script on [11] NCNs ... Done
+    The following NCNs contain the kdump patch:
+    ncn-m001
+    ncn-m002
+    ncn-m003
+    ncn-s001
+    ncn-s002
+    ncn-s003
+    ncn-s004
+    ncn-w001
+    ncn-w002
+    ncn-w003
+    ncn-w004
+    This workaround has completed.
     ```
-
-The manual checks are considered successful if all of the `blkid` commands report a disk device (such as `/dev/sdc` -- the particular device is unimportant).
-If any of the `lsblk` commands return no output, then the check is a failure. **Any failures must be resolved before continuing.** See the following section
-for details on how to do so.
-
-<a name="lvm-check-failure-recovery"></a>
-
-#### 3.3.4 LVM check failure recovery
-
-If there are LVM check failures, then the problem must be resolved before continuing with the install.
-
-* If **any master node** has the problem, then wipe and redeploy **all** of the NCNs before continuing the installation:
-    1. Wipe each worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Wipe each master node (**except** `ncn-m001` because it is the PIT node) using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Wipe each storage node using the 'Full Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#full-wipe).
-    1. Return to the [Set each node to always UEFI Network Boot, and ensure they are powered off](#set-uefi-and-power-off) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
-
-* If **only worker nodes** have the problem, then wipe and redeploy the affected worker nodes before continuing the installation:
-    1. Wipe each affected worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
-    1. Power off each affected worker node.
-    1. Return to the [Boot the Master and Worker Nodes](#boot-master-and-worker-nodes) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
-        * Note: The `ipmitool` command will give errors trying to power on the unaffected nodes, because they are already powered on -- this is expected and not a problem.
 
 <a name="check-for-unused-drives-on-utility-storage-nodes"></a>
 
-### 3.4 Check for unused drives on utility storage nodes
+### 3.3 Check for unused drives on utility storage nodes
 
 > **IMPORTANT:** Do the following if NCNs are Gigabyte hardware. It is suggested (but optional) for HPE NCNs.
 >
@@ -707,8 +712,13 @@ If there are LVM check failures, then the problem must be resolved before contin
 
 1. Check to see if the number of devices is less than the number of listed drives in the output from step 1.
 
-   ```bash
+    ```bash
     ncn-s# ceph orch device ls|grep dev|wc -l
+    ```
+
+    Example output:
+
+    ```text
     24
     ```
 
@@ -724,6 +734,11 @@ If there are LVM check failures, then the problem must be resolved before contin
 
     ```bash
     ncn-s# lsblk
+    ```
+
+    Example output:
+
+    ```text
     NAME                                                                                                 MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
     loop0                                                                                                   7:0    0   4.2G  1 loop  / run/    rootfsbase
     loop1                                                                                                  7:1    0    30G  0 loop
@@ -841,27 +856,32 @@ The LiveCD needs to authenticate with the cluster to facilitate the rest of the 
 Run the following commands on the PIT node.
 
 ```bash
-pit# export CSM_RELEASE=csm-x.y.z
-pit# pushd /var/www/ephemeral
-pit# ${CSM_RELEASE}/lib/install-goss-tests.sh
-pit# popd
+pit# pushd /var/www/ephemeral && ${CSM_RELEASE}/lib/install-goss-tests.sh && popd
 ```
 
-<a name="remove-default-ntp-pool"></a>
+<a name="clean-up-chrony-configurations"></a>
 
-### 4.3 Remove the default NTP pool
+### 4.3 Clean up `chrony` configurations
 
-Run the following command on the PIT node to remove the default pool, which can cause contention issues with NTP.
+Run the following command without editing the value of the `TOKEN` variable.
 
 ```ShellSession
-pit# pdsh -b -S -w "$(grep -oP 'ncn-\w\d+' /etc/dnsmasq.d/statics.conf | grep -v m001 | sort -u |  tr -t '\n' ',')" \
-        'sed -i "s/^! pool pool\.ntp\.org.*//" /etc/chrony.conf' && echo SUCCESS
+pit# for i in $(grep -oP 'ncn-\w\d+' /etc/dnsmasq.d/statics.conf | sort -u | grep -v ncn-m001); do 
+       ssh $i "TOKEN=token /srv/cray/scripts/common/chrony/csm_ntp.py"; done
 ```
 
-Successful output is:
+Successful output can appear as:
+
+If BSS is unreachable, local cache is checked and the configuration is still deployed:
 
 ```text
-SUCCESS
+...
+BSS query failed. Checking local cache...
+Chrony configuration created
+Problematic config found: /etc/chrony.d/cray.conf.dist
+Problematic config found: /etc/chrony.d/pool.conf
+Restarted chronyd
+...
 ```
 
 <a name="validate_management_node_deployment"></a>
@@ -878,15 +898,21 @@ Observe the output of the checks. If there are any failures, remediate them.
    pit# csi pit validate --ceph | tee csi-pit-validate-ceph.log
    ```
 
-   Once that command has finished, check the last line of output to see the results of the tests.
+   Once that command has finished, the following will extract the test totals reported for each node:
 
-   Example last line of output:
-
-   ```text
-   Total Tests: 7, Total Passed: 7, Total Failed: 0, Total Execution Time: 1.4226 seconds
+   ```bash
+   pit# grep "Total Test" csi-pit-validate-ceph.log
    ```
 
-   If the test total line reports any failed tests, look through the full output of the test in `csi-pit-validate-ceph.log` to see which node had the failed test and what the details are for that test.
+   Example output for a system with three storage nodes:
+
+   ```text
+   Total Tests: 8, Total Passed: 8, Total Failed: 0, Total Execution Time: 74.3782 seconds
+   Total Tests: 3, Total Passed: 3, Total Failed: 0, Total Execution Time: 0.6091 seconds
+   Total Tests: 3, Total Passed: 3, Total Failed: 0, Total Execution Time: 0.6260 seconds
+   ```
+
+   If these total lines report any failed tests, then look through the full output of the test in `csi-pit-validate-ceph.log` to see which node had the failed test and what the details are for that test.
 
    **Note:** See [Utility Storage](../operations/utility_storage/Utility_Storage.md) and [Ceph CSI Troubleshooting](ceph_csi_troubleshooting.md) in order to help resolve any
    failed tests.
@@ -916,7 +942,7 @@ Observe the output of the checks. If there are any failures, remediate them.
    Total Tests: 12, Total Passed: 12, Total Failed: 0, Total Execution Time: 0.2353 seconds
    ```
 
-   If these total lines report any failed tests, look through the full output of the test to see which node had the failed test and what the details are for that test.
+   If these total lines report any failed tests, then look through the full output of the test in `csi-pit-validate-k8s.log` to see which node had the failed test and what the details are for that test.
 
    > **WARNING:** Notes on specific failures:
    >
@@ -943,7 +969,7 @@ Observe the output of the checks. If there are any failures, remediate them.
 
 ## Important checkpoint
 
-Before proceeding, be aware that this is the last point where the other NCN nodes can be rebuilt without also having to rebuild the PIT node. Therefore, take time to double check both the cluster and the validation test results
+Before proceeding, be aware that this is the last point where the other NCNs can be rebuilt without also having to rebuild the PIT node. Therefore, take time to double check both the cluster and the validation test results
 
 <a name="next-topic"></a>
 
@@ -951,4 +977,56 @@ Before proceeding, be aware that this is the last point where the other NCN node
 
 After completing the deployment of the management nodes, the next step is to install the CSM services.
 
-See [Install CSM Services](index.md#install_csm_services)
+See [Install CSM Services](index.md#install_csm_services).
+
+## LVM check troubleshooting
+
+This section gives information on troubleshooting and remediating issues with the LVM check performed during
+the Deploy Management Nodes procedure. If that check passed, this section can be ignored.
+
+### Manual LVM check procedure
+
+If needed, the LVM checks can be performed manually on the master and worker nodes.
+
+* Manual check on master nodes:
+
+    ```bash
+    ncn-m# blkid -L ETCDLVM
+    ```
+
+    Example output:
+
+    ```text
+    /dev/sdc
+    ```
+
+* Manual check on worker nodes:
+
+    ```bash
+    ncn-w# blkid -L CONLIB
+    /dev/sdb2
+    ncn-w# blkid -L CONRUN
+    /dev/sdb1
+    ncn-w# blkid -L K8SLET
+    /dev/sdb3
+    ```
+
+The manual checks are considered successful if all of the `blkid` commands report a disk device (such as `/dev/sdc` -- the particular device is unimportant).
+If any of the `lsblk` commands return no output, then the check is a failure. **Any failures must be resolved before continuing.** See the following section
+for details on how to do so.
+
+### LVM check failure recovery
+
+If there are LVM check failures, then the problem must be resolved before continuing with the install.
+
+* If **any master node** has the problem, then wipe and redeploy **all** of the NCNs before continuing the installation:
+    1. Wipe each worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Wipe each master node (**except** `ncn-m001` because it is the PIT node) using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Wipe each storage node using the 'Full Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#full-wipe).
+    1. Return to the [Set each node to always UEFI Network Boot, and ensure they are powered off](#set-uefi-and-power-off) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
+
+* If **only worker nodes** have the problem, then wipe and redeploy the affected worker nodes before continuing the installation:
+    1. Wipe each affected worker node using the 'Basic Wipe' section of [Wipe NCN Disks for Reinstallation](wipe_ncn_disks_for_reinstallation.md#basic-wipe).
+    1. Power off each affected worker node.
+    1. Return to the [Boot the Master and Worker Nodes](#boot-master-and-worker-nodes) step of the [Deploy Management Nodes](#deploy_management_nodes) section above.
+        * Note: The `ipmitool` command will give errors trying to power on the unaffected nodes, because they are already powered on -- this is expected and not a problem.

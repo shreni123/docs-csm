@@ -46,6 +46,8 @@ To check the current state of the switches, see the [upgrade](upgrade.md) page.
 
 ## Starting Points
 
+* Upgrade CANU to the latest version:
+  * [Install/Upgrade CANU](canu_install_update.md)
 * Current switch configurations are not generated and need to upgrade to generated configurations.
   * This can either be 1.0 generated or 1.2 generated.
   * [upgrade](upgrade.md)
@@ -89,7 +91,7 @@ See [CSM Automatic Network Utility (CANU)](canu/index.md)
   * Shows how the HMN tab on the SHCD should be formatted.
 * [SHCD Connection Rules](../../../install/shcd_hmn_connections_rules.md)
   * Shows how the all tabs on the SHCD should be formatted EXCEPT the HMN tab.
-* [Backup Custom Configuration](backup_custom_config.md)
+* [Backup Custom Configuration](backup_custom_configurations.md)
   * Shows users how to backup configuration that is custom to their system; this includes site connections and credentials.
 * [Configuration Management](config_management.md)
   * Shows users how to save a running configuration to the switch for backup purposes or to switch between different switch configurations.
@@ -177,9 +179,9 @@ The following are known open issues with this branch of the software.
 
 The Symptom statement describes what a user might experience if this is seen on the network. The Scenario statement provides additional environment details and trigger summaries. When available, the Workaround statement provides a workaround to the issue.
 
-> No currently known issues.
+> Known and fixed issue can be found from CANU release notes.
 
-<a name="bulletin"></a>
+[CANU releases](https://github.com/Cray-HPE/canu/releases)
 
 ### Security Bulletin Subscription Service
 

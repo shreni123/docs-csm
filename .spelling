@@ -1,19 +1,14 @@
 1.0.x
+1.6.x
 100GBASE-CR2
 100GBASE-CR4
 100GBASE-SR2
 100GBASE-SR4
-100Gbps
-100Gbs
-100m
-100Mb
 10GBASE-T
 10GbE
 10Gi
 10Hz
-10s
 12-core
-1Gb
 1GiB
 1TiB
 2-chassis
@@ -21,8 +16,6 @@
 200GBASE-CR4
 200GBASE-DR4
 200GBASE-SR4
-200Gbs
-25Gb
 3-phase
 3.1.a
 3.1.b
@@ -40,27 +33,28 @@
 4.1.a
 4.1.b
 4096-bit
-40Gb
 48-port
 5.15.itb
-500GiB
-500m
-6.6G
 64-port
-6TiB
 7060CX2-32S
 802.1p
 802.1Q
 802.1s
 802.1x
 802.3cd
+802.3cd/bs
 8325-23C
 8325-48Y8C
 ACLs
 airgapped
+Alertmanager
 analog
 analyze
+analyzed
 analyzer
+analyzers
+analyzes
+analyzing
 Ansible
 AOS-CX
 API
@@ -68,18 +62,16 @@ APIs
 Arista
 artifact
 artifact's
+Artifactory
 artifacts
 ArubaOS-CX
-ASes
 ASICs
 backdoor
 backend
 BardPeak
-Barebones
+barebones
 base-64
 base-64-encoded
-base64
-base64-encoded
 Basecamp
 Basecamp's
 behavior
@@ -93,11 +85,9 @@ BMCs
 bootscript
 BOA
 BOS
-BOSv2
 BSS
 Burstable
-busses
-cadvisor
+buses
 CAN
 CAN-to-CMN
 CANU
@@ -105,9 +95,11 @@ CANU-generated
 CAPMC
 CAs
 Cassini
+catalog
 cataloged
 CDUs
 CECs
+center
 centers
 Ceph
 Cephadm
@@ -119,9 +111,9 @@ CFS-Operator
 channeled
 checkmark
 CHN
-chrony
 cleanup
 CLI
+CloudWatch
 ClusterStor
 CMC
 CMCs
@@ -132,6 +124,8 @@ CN
 CNs
 color
 colored
+colorful
+coloring
 colors
 ConfigMap
 ConfigMap's
@@ -141,7 +135,7 @@ ConMan
 ConnectX-4
 ConnectX-5
 ConnectX-5s
-conntrack
+CoreDNS
 Cray
 Cray-HPE
 CrayPort
@@ -159,18 +153,22 @@ Cutoff
 CVEs
 CX-5
 CX-series
-daemonset
 datastore
 DB-9
+defense
+defenses
+defensive
 DellOS
 DHCP
+dialog
 diskless
 DNS
+dnsmasq
 Docker
 Dockerfile
+dracut
 dropdown
 dryrun
-dsa2
 DSAv2
 DUTs
 DVS-specific
@@ -180,22 +178,34 @@ Elasticsearch
 etcd
 EX
 exascale
+favor
+favored
+favoring
+favors
 failback
 FAS
 FastLinQ
-favor
 fiber
 fibers
+flavor
+flavored
+flavoring
 flavors
 FPGAs
 Frontend
 fulfills
+Gbs
+GBs
 GbE
 Gen10
 Giga-Byte
 Git
 Gitea
+Gbs
+GBs
+GitOps
 Goss
+GPFS
 Grafana
 Grafana's
 Grafterm
@@ -216,19 +226,21 @@ highspeed
 HM
 HMN
 HMNLB
-HMN_MTN 
+HMN_MTN
 HMN_RVR
 honored
 hostname
 hostnames
 hotfix
-Hotfix
 hotfixes
-Hotfixes
 HPC
 HPCaaS
 HPE
 HSM
+humor
+humored
+humoring
+humors
 hypervisors
 IaaS
 iBGP
@@ -241,12 +253,7 @@ iLOM
 IMS
 IMS-hosted
 inband
-Infiniband
-initramFS
-initrd
-inode
-ioctl
-ion
+InfiniBand
 IP
 iPDU
 iPDUs
@@ -262,19 +269,28 @@ Jetstack
 Jinja
 Jinja2
 JViewer
-kafka
+Kafka
 Kea
+Keepalived
 keychain
 Keycloak
 Keycloak's
 KeyStore
 Kiali
 Kibana
-kubelet
 Kubernetes
+Kyverno
 labeled
+labeler
 labeling
-lasthop
+labor
+labored
+laborer
+laborers
+laboring
+labors
+license
+licenses
 lifecycle
 LiveCD
 LiveCD's
@@ -288,8 +304,11 @@ loopbacks
 lowercase
 lowercased
 Luks
-lvm2
 macOS
+maneuver
+maneuvers
+Mbs
+MBs
 MC-LAG
 MCDU-4U
 MCLAGs
@@ -302,15 +321,14 @@ MetalLB's
 Mi100
 microservice
 milli-CPUs
-minicom
-mis-categorized
+miscategorized
 MLAG-LACP
 MLAG-VIP
 Motivair
 MPOs
 mTLS
 multimode
-multus
+Multus
 MyMellanox
 MZ32-AR0-00
 MZ62-HD0-00
@@ -320,6 +338,8 @@ nC's
 NCN
 NCNs
 neighbor
+neighborhood
+neighborhoods
 neighboring
 neighbors
 Netcat
@@ -348,13 +368,18 @@ nonzero
 NVidia
 OAuth
 OAuth2
-onsite
 OpenAPI
 OpenID
 OpROM
 OpROMs
+organize
+organized
+organizer
+organizers
+organizes
+organizing
 OSDs
-overlayfs
+OverlayFS
 oversubscription
 PaaS
 PAM-4
@@ -375,7 +400,7 @@ playbook
 playbooks
 plugin
 plugins
-podman
+Podman
 PoR
 post-Ceph
 post-Ceph-install
@@ -402,45 +427,40 @@ QSFP-DD
 quiescing
 Rados
 Rados-Gateway
-ramdisk
-rbd
 re-architecting
 reauthentication
 Redbook
 Redfish
-redis
 Redstone
 reestablished
+remediate
 remediated
+remediates
+remediating
 RemoteISO
-renewncnjoin
-Repomd
 respawns
 REST
 Restic
 Resync
-reweight
+RFC-1305
 RFC5171-compliant
-rgw
-rgws
 Rivest-Shamir-Adleman
 RJ-45
 Rollout
-rootfs
 routable
 RPMs
 RPs
 RSAv1
 RSAv2
-rsync
-rsyslog
+Rsyslog
 Runbook
+S-8000
+S-8024
 sC
 SCSD
 sC-ToR
 SealedSecret
 SemVer
-serial-over-lan
 ServerTech
 SHA-512
 SharePoint
@@ -461,7 +481,7 @@ SMS
 Sonatype
 Sonexion
 specialty
-spilo
+SpectrumScale
 Spire
 SquashFS
 SR-IOV
@@ -469,9 +489,10 @@ SSHing
 SSHKey
 standalone
 startup
-strace
+Strimzi
 Submodule
 subnetting
+subrole
 subroles
 subslots
 substep
@@ -486,6 +507,10 @@ timeframes
 timestamp
 timezone
 traceroute
+traveled
+traveler
+travelers
+traveling
 Trento
 TrustedCerts
 tunables
@@ -501,8 +526,10 @@ Un-suspend
 unconfigured
 unixODBC
 unmap
-Unregister
+unregister
 unregisters
+unset
+unsets
 unsquashed
 Unsuspend
 untainting
@@ -511,6 +538,7 @@ untarred
 upgrader
 Upgrader
 upgrader's
+uppercase
 uptimes
 URIs
 v1
@@ -523,6 +551,8 @@ V1.20.13
 v1.3
 v1.3.x
 v1.30.16
+v1.3.0
+V1.3.0
 v1.4
 v1.4.
 v1.4.0
@@ -556,10 +586,71 @@ wireshark
 workarea
 writable
 X.509
-XL645D
+XL645d
+XL675d
 xname
 xnames
 Yum
 zeroization
 zeroize
-zypper
+Zypper
+
+# Per-file spelling exceptions. Please keep this section sorted in order by filepath, to help make it easier to
+# see if a file already is listed.
+
+- background/ncn_mounts_and_file_systems.md
+Inode
+
+- glossary.md
+# To allow 802.3cd/bs
+bs
+# To allow Site Init
+Init
+
+- install/collecting_ncn_mac_addresses.md
+# To allow Site Init
+Init
+
+- install/configure_management_network.md
+# To allow Site Init
+Init
+
+- install/create_cabinets_yaml.md
+# To allow Site Init
+Init
+
+- install/prepare_configuration_payload.md
+# To allow Site Init
+Init
+
+- introduction/site_survey.md
+# To allow Site Init
+Init
+
+- operations/network/external_dns/Update_the_cmn-external-dns_Value_Post-Installation.md
+LoadBalancer
+
+- operations/network/management_network/aruba/bgp_basic.md
+ASes
+
+- operations/network/management_network/mellanox/bgp_basic.md
+ASes
+
+- operations/network/management_network/upgrade.md
+Preconfig
+preconfig
+
+- operations/power_management/Power_Off_Compute_and_IO_Cabinets.md
+lockout-tagout
+
+- operations/security_and_authentication/Manage_Sealed_Secrets.md
+# To allow Site Init
+Init
+
+- operations/security_and_authentication/Updating_the_Liquid-Cooled_EX_Cabinet_Default_Credentials_after_a_CEC_Password_Change.md
+# To allow Site Init
+Init
+
+- upgrade/1.2/plan_and_coordinate_network_upgrade.md
+# To differentiate between old CAN and new CAN
+pre-1

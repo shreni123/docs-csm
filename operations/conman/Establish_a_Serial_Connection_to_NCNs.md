@@ -1,116 +1,192 @@
 # Establish a Serial Connection to NCNs
 
 The ConMan pod can be used to establish a serial console connection with each non-compute node (NCN) in the system.
-In the scenario of a power down or reboot of an NCN worker, one must first determine if any `cray-console-node` pods
-are running on that NCN. It is important to move `cray-console-node` pods to other worker nodes before rebooting or
-powering off a worker node.
+
+In the scenario of a power down or reboot of an NCN worker, one must first determine if any `cray-console` pods
+are running on that NCN. It is important to move `cray-console` pods to other worker nodes before rebooting or
+powering off a worker node to minimize disruption in console logging. If a brief interruption in console logging
+and interactive access is acceptable while the NCN worker is being drained, then the evacuation may be skipped.
 
 If a `cray-console-node` pod is running on a worker node when it is powered off or rebooted, then access to its
 associated consoles will be unavailable until one of the following things happens:
+
 * the worker node comes back up and the `cray-console-node` pod begins running on it.
 * the `cray-console-node` pod is terminated and comes up on another worker node.
 * the `cray-console-operator` pod assigns the associated consoles to a different `cray-console-node` pod.
 
 ## Prerequisites
 
-The user performing this procedure needs to have access permission to the `cray-console-operator` and `cray-console-node` pods.
+The user performing these procedures needs to have access permission to the `cray-console-operator` and `cray-console-node` pods.
 
-## Procedure
-
-**Note:** this procedure has changed since the CSM 0.9 release.
+## Connection procedure
 
 1. Find the `cray-console-operator` pod.
 
     ```bash
-    ncn# OP_POD=$(kubectl get pods -n services \
+    ncn-mw# OP_POD=$(kubectl get pods -n services \
             -o wide|grep cray-console-operator|awk '{print $1}')
-    ncn# echo $OP_POD
+    ncn-mw# echo $OP_POD
     ```
 
     Example output:
+
     ```text
     cray-console-operator-6cf89ff566-kfnjr
-    ```
-
-1. Set the `XNAME` variable to the component name (xname) of the NCN whose console is of interest.
-
-    NCN component names (xnames) can be gathered from the `/opt/cray/platform-utils/ncnGetXnames.sh` script.
-
-    ```bash
-    ncn# XNAME=<xname>
     ```
 
 1. Find the `cray-console-node` pod that is connecting with the console.
 
     ```bash
-    ncn# NODE_POD=$(kubectl -n services exec $OP_POD -c cray-console-operator -- sh -c \
+    ncn-mw# NODE_POD=$(kubectl -n services exec $OP_POD -c cray-console-operator -- sh -c \
         "/app/get-node $XNAME" | jq .podname | sed 's/"//g')
-    ncn# echo $NODE_POD
+    ncn-mw# echo $NODE_POD
     ```
 
     Example output:
+
     ```text
-    cray-console-node-2
+    cray-console-node-1
     ```
 
-1. Find the worker node on which this pod is running.
+1. Check which NCN worker node the `cray-console-node` pod is running on.
 
     ```bash
-    ncn# WNODE=$(kubectl get pods -o custom-columns=:.spec.nodeName -n services --no-headers $NODE_POD)
-    ncn# echo $WNODE
+    ncn-mw# kubectl -n services get pods -o wide | grep $NODE_POD
     ```
 
     Example output:
+
     ```text
-    ncn-w003
+    cray-console-node-1   3/3  Running  0  3h55m   10.42.0.12  ncn-w010   <none>   <none>
     ```
 
-1. **Optional:** Move the `cray-console-node` pod.
+    If the pod is running on the node that is going to be rebooted, then the interactive session
+    and logging will be interrupted while the NCN worker is drained and the pods are all
+    migrated to different NCN workers. To maintain an interactive console session, the
+    `cray-console-node` pod must be moved:
 
-    The pod can be proactively moved to a different worker if a power or reboot operation is going to be performed on the node where the pod is running.
-
-    1. Prevent new pods from being scheduled on the NCN worker node currently running ConMan.
+    1. Cordon the NCN worker node to suspend scheduling, then delete the pod.
 
         ```bash
-        ncn# kubectl cordon $WNODE
+        ncn-mw# WNODE=ncn-wxxx
+        ncn-mw# kubectl cordon $WNODE
+        ncn-mw# kubectl -n services delete pod $NODE_POD
         ```
 
-    1. Delete the pod.
+    1. Wait for the pod to restart on another NCN worker.
 
-        When the pod comes back up, it will be on a different NCN worker node.
+    1. Repeat the previous step to find if this node is now being monitored by a different `cray-console-node` pod.
+
+    **NOTE:** If desiring to minimize the disruption to console logging and interaction,
+    then follow the [Evacuation procedure](#evacuation-procedure) to remove all console
+    logging services prior to draining this node.
+
+1. Establish a serial console session with the desired NCN.
+
+    ```bash
+    ncn-mw# kubectl -n services exec -it $NODE_POD -- conman -j $XNAME
+    ```
+
+    The console session log files for each NCN are located in a shared volume in the `cray-console-node` pods.
+    In those pods, the log files are in the `/var/log/conman/` directory and are named `console.<xname>`.
+
+1. Exit the connection to the console by entering `&.`.
+
+## Evacuation procedure
+
+In order to avoid losing data while monitoring a reboot or power down of a worker node,
+first follow this procedure to evacuate the target worker node of its pods.
+
+**NOTE:** If multiple `cray-console-node` pods are present on the worker being evacuated, the
+deployment may be edited to add anti-affinity to the Kubernetes scheduling. Follow the directions
+in [Multiple Console Node Pods on the Same Worker](../../troubleshooting/known_issues/Multiple_Console_Node_Pods_on_the_Same_Worker.md).
+
+1. Set the `WNODE` variable to the name of the worker node being evacuated.
+
+    Modify the following example to reflect the actual worker node number.
+
+    ```bash
+    ncn-mw# WNODE=ncn-wxxx
+    ```
+
+1. Cordon the node so that rescheduled pods do not end up back on the same node.
+
+    ```bash
+    ncn-mw# kubectl cordon $WNODE
+    ```
+
+1. Find all `cray-console` pods that need to be migrated.
+
+    This includes `cray-console-node`, `cray-console-data` (but not its Postgres pods), and `cray-console-operator`.
+
+    ```bash
+    ncn-mw# kubectl get pods -n services -l 'app.kubernetes.io/name in (cray-console-node, cray-console-data, cray-console-operator)' \
+        --field-selector spec.nodeName=$WNODE | awk '{print $1}'
+    ```
+
+    Example output:
+
+    ```text
+    cray-console-operator-6cf89ff566-kfnjr
+    ```
+
+1. Delete the `cray-console-operator` and `cray-console-data` pods listed in the previous step.
+
+    If none were listed, then skip this step.
+
+    1. Delete the pods.
 
         ```bash
-        ncn# kubectl -n services delete $NODE_POD
+        ncn-mw# for POD in $(kubectl get pods -n services -l 'app.kubernetes.io/name in (cray-console-data, cray-console-operator)' \
+            --field-selector spec.nodeName=$WNODE | awk '{print $1}'); do
+                    kubectl -n services delete pod $POD
+            done
         ```
 
-    1. Wait for pod to terminate and come back up again.
+    1. (`ncn-mw#`) Wait for the `console-operator` and `console-data` pods to be re-scheduled on other nodes.
 
-        It may take several minutes even after the pod is running for the console connections to be re-established.
-
-    1. Find the `cray-console-node` pod that is connecting with the console.
-
-        While the pod was being terminated and restarted, there is a small chance that the console connection was
-        moved to a different `cray-console-node` pod.
+        Run the following command until both deployments show `2/2` pods are ready.
 
         ```bash
-        ncn# NODE_POD=$(kubectl -n services exec $OP_POD -c cray-console-operator -- sh -c \
-            "/app/get-node $XNAME" | jq .podname | sed 's/"//g')
-        ncn# echo $NODE_POD
+        ncn-mw# kubectl -n services get deployment | grep cray-console
         ```
 
         Example output:
+
         ```text
-        cray-console-node-1
+        cray-console-data           2/2     1          1     1m
+        cray-console-operator       2/2     1          1     1m
         ```
 
-1. Establish a serial console session (from `ncn-m001`) with the desired NCN.
+1. Delete any `cray-console-node` pods listed in the earlier step.
+
+    If none were listed, then skip this step.
+
+    1. Delete the pods.
+
+        ```bash
+        ncn-mw# for POD in $(kubectl get pods -n services -l 'app.kubernetes.io/name=cray-console-node' --field-selector spec.nodeName=$WNODE | awk '{print $1}'); do
+                kubectl -n services delete pod $POD
+            done
+        ```
+
+    1. Wait for the `console-node` pods to be re-scheduled on other nodes.
+
+        Run the following command until all pods show ready.
+
+        ```bash
+        ncn-mw# kubectl -n services get statefulset cray-console-node
+        ```
+
+        Example output:
+
+        ```text
+        NAME                READY   AGE
+        cray-console-node   3/3     1m
+        ```
+
+1. After the node has been rebooted and can accept `cray-console` pods again, remove the node cordon.
 
     ```bash
-    ncn-m001# kubectl -n services exec -it $NOD_EPOD -- conman -j $XNAME
+    ncn-mw# kubectl uncordon $WNODE
     ```
-
-    The console session log files for each NCN is located in the `cray-console-operator` and `cray-console-node` pods in a shared volume at the `/var/log/conman/` directory in a file named `console.<xname>`.
-
-    **IMPORTANT:** If the `cray-console-node` pod the user is connected through is running on the NCN that the console session is connected to, and a reboot is initiated, expect the connection to terminate and there to be a gap in the console log file. The gap will last until the console connection is reestablished through a different cray-console-node pod or until the existing pod is restarted on a different NCN. If the `cray-console-node` pod was running on a different NCN or was moved prior to the reboot, the console log and session should persist through the operation.
-
-1.  Exit the connection to the console with the `&.` command.

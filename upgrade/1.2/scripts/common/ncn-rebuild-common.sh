@@ -48,6 +48,38 @@ else
     echo "====> ${state_name} has been completed"
 fi
 
+
+state_name="ELIMINATE_NTP_CLOCK_SKEW"
+state_recorded=$(is_state_recorded "${state_name}" "$target_ncn")
+if [[ $state_recorded == "0" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    loop_idx=0
+    in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+    if [[ "$in_sync" == "no" ]]; then
+        ssh "$target_ncn" chronyc makestep
+        sleep 5
+        in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+        # wait up to 90s for the node to be in sync
+        while [[ $loop_idx -lt 18 && "$in_sync" == "no" ]]; do
+            sleep 5
+            in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+            loop_idx=$(( loop_idx+1 ))
+        done
+        if [[ "$in_sync" == "no" ]]; then
+            exit 1
+        else
+            record_state "${state_name}" "${target_ncn}"
+        fi
+    else
+        record_state "${state_name}" "${target_ncn}"
+    fi
+    } >> ${LOG_FILE} 2>&1
+else
+    echo "====> ${state_name} has been completed"
+fi
+
+
 state_name="WIPE_NODE_DISK"
 state_recorded=$(is_state_recorded "${state_name}" ${target_ncn})
 if [[ $state_recorded == "0" ]]; then
@@ -136,7 +168,7 @@ fi
     echo "mgmt IP/Host: ${target_ncn_mgmt_host}"
 
     # retrieve IPMI username/password from vault
-    VAULT_TOKEN=$(kubectl get secrets cray-vault-unseal-keys -n vault -o jsonpath={.data.vault-root} | base64 -d)
+    VAULT_TOKEN=$(kubectl get secrets cray-vault-unseal-keys -n vault -o jsonpath='{.data.vault-root}' | base64 -d)
     # Make sure we got a vault token
     [[ -n ${VAULT_TOKEN} ]]
 
@@ -153,10 +185,11 @@ fi
             jq -r '.data.Username')
         # If we are not able to get the username, no need to try and get the password.
         [[ -n ${IPMI_USERNAME} ]] || continue
-        export IPMI_PASSWORD=$(kubectl exec -it -n vault -c vault ${VAULT_POD} -- sh -c \
+        IPMI_PASSWORD=$(kubectl exec -it -n vault -c vault ${VAULT_POD} -- sh -c \
             "export VAULT_ADDR=http://localhost:8200; export VAULT_TOKEN=`echo $VAULT_TOKEN`; \
             vault kv get -format=json secret/hms-creds/$TARGET_MGMT_XNAME" | 
             jq -r '.data.Password')
+        export IPMI_PASSWORD
         break
     done
     # Make sure we found a pod that worked
@@ -275,11 +308,51 @@ if [[ $target_ncn != ncn-s* ]]; then
     {
         wait_for_kubernetes $target_ncn
     } >> ${LOG_FILE} 2>&1
-fi 
+fi
+
+state_name="FORCE_TIME_SYNC"
+state_recorded=$(is_state_recorded "${state_name}" ${target_ncn})
+TOKEN=$(curl -s -S -d grant_type=client_credentials \
+                   -d client_id=admin-client \
+                   -d client_secret=$(kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d) \
+                   https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
+export TOKEN
+if [[ $state_recorded == "0" ]]; then
+    echo "====> ${state_name} ..."
+    {
+    ssh "$target_ncn" "TOKEN=$TOKEN /srv/cray/scripts/common/chrony/csm_ntp.py"
+    loop_idx=0
+    in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+    if [[ "$in_sync" == "no" ]]; then
+        ssh "$target_ncn" chronyc makestep
+        sleep 5
+        in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+        # wait up to 90s for the node to be in sync
+        while [[ $loop_idx -lt 18 && "$in_sync" == "no" ]]; do
+            sleep 5
+            in_sync=$(ssh "${target_ncn}" timedatectl | awk /synchronized:/'{print $NF}')
+            loop_idx=$(( loop_idx+1 ))
+        done
+        if [[ "$in_sync" == "yes" ]]; then
+            record_state "${state_name}" "${target_ncn}"
+        fi
+        # else wait until the end of the script to fail
+    else
+        record_state "${state_name}" "${target_ncn}"
+    fi
+    } >> ${LOG_FILE} 2>&1
+else
+    echo "====> ${state_name} has been completed"
+fi
+
 
 {
+    # Validate SLS health before calling csi handoff bss-update-*, since
+    # it relies on SLS
+    check_sls_health
+
     set +e
-    while true ; do    
+    while true ; do
         csi handoff bss-update-param --set metal.no-wipe=1 --limit $TARGET_XNAME
         if [[ $? -eq 0 ]]; then
             break
@@ -325,4 +398,10 @@ if [[ ${target_ncn} != ncn-s* ]]; then
     else
         echo "====> ${state_name} has been completed"
     fi
+fi
+
+if [[ "$in_sync" == "no" ]]; then
+    echo "The clock for ${target_ncn} is not in sync. Please verify $target_ncn:/etc/chrony.d/cray.conf"
+    echo "contains a server that is reachable. See also: chronyc sources -v"
+    exit 1
 fi
