@@ -353,7 +353,7 @@
 
    `configurationStatus` should change from `pending` to `configured` once NCN personalization completes successfully.
 
-For more information on managing NCN personalization, see [Perform NCN Personalization](../../CSM_product_management/Perform_NCN_Personalization.md).
+For more information on managing NCN personalization, see [Perform NCN Personalization](../../operations/CSM_product_management/Perform_NCN_Personalization.md).
 
 ## Update `MetalLB`
 
@@ -387,7 +387,7 @@ TODO
 
 - Many of the procedures use the Cray Command Line Interface. These can be identified by their use of the `cray` command. For these procedures, the
   Cray CLI must be configured on the node where the procedure is being followed. See
-  [Configure the Cray CLI](../../configure_cray_cli.md).
+  [Configure the Cray CLI](../../operations/configure_cray_cli.md).
 - Some of the procedures require the CSM documentation RPM to be installed on the node where the procedure is being done.
   This is called out in the procedures where it is a requirement. For information on installing the RPM, see
   [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
@@ -434,7 +434,7 @@ Setting SystemDefaultRoute to CHN
 
 If the system is moving from the CAN to CHN, then the management network will need configuration changes to allow connectivity.
 
-Refer to [BICAN switch configuration](bican_switch_configuration.md) to configure management network switches and customer edge switches.
+Refer to [BICAN switch configuration](network_upgrade_1.2_to_1.3.md) to configure management network switches and customer edge switches.
 
 ### Configure UAN
 
@@ -452,9 +452,9 @@ While access to currently running UANs continues during the upgrade, UAN rebuild
 The time frame over which the transition can be scheduled is quite large and the transition requires only that UAN users log out of the UAN (over the old IPv4 address) and log back in (over a new IPv4 address).
 The following diagram illustrates the UAN timeline before, during, and after the CSM 1.2 upgrade.
 
-![UAN Upgrade Transitions](../../../img/UAN_transition_CSM_1.2.png)
+![UAN Upgrade Transitions](../../img/UAN_transition_CSM_1.2.png)
 
-Concretely, users on a running UAN may be transitioned from the CMN to the new CAN before [UANs are booted with new images](../../boot_orchestration/Boot_UANs.md).
+Concretely, users on a running UAN may be transitioned from the CMN to the new CAN before [UANs are booted with new images](../../operations/boot_orchestration/Boot_UANs.md).
 
 ### Configure UAI
 
@@ -834,7 +834,7 @@ Configured SystemDefaultRoute: CHN
    Overall Gateway Test Status:  PASS
    ```
 
-See [Gateway Testing](../Gateway_Testing.md) for more information.
+See [Gateway Testing](../../operations/network/Gateway_Testing.md) for more information.
 
 ### Validate compute nodes
 

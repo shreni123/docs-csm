@@ -34,7 +34,7 @@ Additionally, UAN can be operated normally and any reboot or rebuild operations 
 
 ## Prerequisites
 
-- **IMPORTANT** If conversion from `CAN` to `CHN` is required, the [SLS update procedure](bican_enable_on_upgrade.md) must have been run at the beginning of the upgrade process.
+- **IMPORTANT** If conversion from `CAN` to `CHN` is required, the [SLS update procedure](bican_enable.md) must have been run at the beginning of the upgrade process.
 - An up-to-date and validated copy of the system [CCJ/Paddle JSON topology file](https://github.com/Cray-HPE/canu/tree/main#validate-paddle) (preferred), or an up-to-date and validated [SHCD spreadsheet](https://github.com/Cray-HPE/canu/tree/main#validate-shcd).  The SHCD should be used as starting data over the CCJ/Paddle file only when node, network or cabling changes have taken place on the system.  A correct cabling and network topology must be reflected to ensure working switch configurations.
 - An [up-to-date custom configurations](https://github.com/Cray-HPE/canu/tree/main#generate-switch-configs-including-custom-configurations) `YAML` file to be used in `CANU` switch configuration generation with the `--custom-config` flag.  These custom configurations are critical to preserve site uplinks and any configurations which extend beyond plan-of-record.  This file should have been created during the CSM 1.2 system install or upgrade process and is required to ensure working switch configurations.
 
