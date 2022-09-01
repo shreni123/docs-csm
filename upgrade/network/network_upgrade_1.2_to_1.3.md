@@ -17,7 +17,7 @@
 
 CSM 1.3 includes full support for the Bifurcated CAN feature, specifically deployment of user traffic on the high speed network (CHN). Other switch related changes for the release are minimal.
 
-- Removal of CMN VLAN from UAN to complete BICAN cutover
+- Removal of CMN VLAN from UAN to complete BICAN cut-over
 - Addition of ACLS to prevent CAN traffic on the CMN
 - Addition of ACLs to prevent cross-network load balancer access: NMN to HMNLB and HMN to NMNLB
 
@@ -35,8 +35,12 @@ Additionally, UAN can be operated normally and any reboot or rebuild operations 
 ## Prerequisites
 
 - **IMPORTANT** If conversion from `CAN` to `CHN` is required, the [SLS update procedure](bican_enable.md) must have been run at the beginning of the upgrade process.
-- An up-to-date and validated copy of the system [CCJ/Paddle JSON topology file](https://github.com/Cray-HPE/canu/tree/main#validate-paddle) (preferred), or an up-to-date and validated [SHCD spreadsheet](https://github.com/Cray-HPE/canu/tree/main#validate-shcd).  The SHCD should be used as starting data over the CCJ/Paddle file only when node, network or cabling changes have taken place on the system.  A correct cabling and network topology must be reflected to ensure working switch configurations.
-- An [up-to-date custom configurations](https://github.com/Cray-HPE/canu/tree/main#generate-switch-configs-including-custom-configurations) `YAML` file to be used in `CANU` switch configuration generation with the `--custom-config` flag.  These custom configurations are critical to preserve site uplinks and any configurations which extend beyond plan-of-record.  This file should have been created during the CSM 1.2 system install or upgrade process and is required to ensure working switch configurations.
+- An up-to-date and validated copy of the system [CCJ/Paddle JSON topology file](https://github.com/Cray-HPE/canu/tree/main#validate-paddle) (preferred), or an up-to-date and validated [SHCD spreadsheet](https://github.com/Cray-HPE/canu/tree/main#validate-shcd).
+  - The SHCD should be used as starting data over the CCJ/Paddle file only when node, network or cabling changes have taken place on the system.
+  - A correct cabling and network topology must be reflected to ensure working switch configurations.
+- An [up-to-date custom configurations](https://github.com/Cray-HPE/canu/tree/main#generate-switch-configs-including-custom-configurations) `YAML` file to be used in `CANU` switch configuration generation with the `--custom-config` flag.
+  - These custom configurations are critical to preserve site uplinks and any configurations which extend beyond plan-of-record.
+  - This file should have been created during the CSM 1.2 system install or upgrade process and is required to ensure working switch configurations.
 
 ## Upgrade CANU to the latest version
 
@@ -72,9 +76,9 @@ Additionally, UAN can be operated normally and any reboot or rebuild operations 
    canu generate network config --csm 1.3 --architecture <full|tds|v1> --ccj <system-ccj.json> --custom-config <system-custom-config.yaml> --folder 1.3 --sls-file sls_input_file.json
    ```
 
-  - full architecture is defined as Aruba switches with leaf switches connected to spines - no NCNs on spines.
-  - tds architecture is defined as Aruba switches with NCNs connected directly to the spine switches.
-  - v1 architecturre is defined as any system with Mellanox and Dell switches.
+  - `full` architecture is defined as Aruba switches with leaf switches connected to spines - no NCNs on spines.
+  - `tds` architecture is defined as Aruba switches with NCNs connected directly to the spine switches.
+  - `v1` architecturre is defined as any system with Mellanox and Dell switches.
 
 ## Discover CSM 1.2 to CSM 1.3 configuration changes
 
