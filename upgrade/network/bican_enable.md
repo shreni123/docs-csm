@@ -390,7 +390,7 @@ TODO
   [Configure the Cray CLI](../../operations/configure_cray_cli.md).
 - Some of the procedures require the CSM documentation RPM to be installed on the node where the procedure is being done.
   This is called out in the procedures where it is a requirement. For information on installing the RPM, see
-  [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+  [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
 ## Configuration tasks
 
@@ -399,7 +399,7 @@ TODO
 Configuration for the default route of a BICAN enabled system is contained in the System Layout Service (SLS) BICAN data structure in the `SystemDefaultRoute` attribute value.
 
 > The commands in this section can be run on any master or worker NCN with the CSM documentation RPM installed. See
-> [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+> [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
 For CSM 1.3, the recommended value for the BICAN `SystemDefaultRoute` is `CHN`.  For transition from `CAN` to `CHN` a post-install cleanup process is required.
 
@@ -496,7 +496,7 @@ Prerequisites for this task:
 #### Add compute IP addresses to CHN SLS data
 
 > The CSM documentation RPM must be installed on the node where this command is run. See
-> [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+> [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
 (`ncn-mw#`) Process the SLS file:
 
@@ -732,7 +732,7 @@ If CHN is selected during CSM installation or upgrade, then the `customer-high-s
 (`ncn-mw#`) To display current setting of the `SystemDefaultRoute` SLS BICAN network, run the following command.
 
 > The CSM documentation RPM must be installed on the node where this command is run. See
-> [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+> [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
 ```bash
 /usr/share/doc/csm/scripts/operations/bifurcated_can/bican_route.py --check
@@ -821,7 +821,7 @@ Configured SystemDefaultRoute: CHN
 1. (`ncn-mw#`) Run the UAI gateway tests.
 
    > The CSM documentation RPM must be installed on the node where this command is run. See
-   > [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+   > [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
    ```bash
    /usr/share/doc/csm/scripts/operations/gateway-test/uai-gateway-test.sh
@@ -972,7 +972,7 @@ See [Gateway Testing](../../operations/network/Gateway_Testing.md) for more info
 1. (`ncn-mw#`) Run the NCN gateway health checks.
 
    > The CSM documentation RPM must be installed on the node where this command is run. See
-   > [Check for Latest Documentation](../../../update_product_stream/README.md#check-for-latest-documentation).
+   > [Check for Latest Documentation](../../update_product_stream/README.md#check-for-latest-documentation).
 
    ```bash
    /usr/share/doc/csm/scripts/operations/gateway-test/ncn-gateway-test.sh
@@ -984,4 +984,4 @@ See [Gateway Testing](../../operations/network/Gateway_Testing.md) for more info
    Overall Gateway Test Status:  PASS
    ```
 
-See [Gateway Testing](../Gateway_Testing.md) for more information.
+See [Gateway Testing](../../operations/network/Gateway_Testing.md) for more information.
