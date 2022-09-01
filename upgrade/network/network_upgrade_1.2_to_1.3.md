@@ -78,7 +78,7 @@ Additionally, UAN can be operated normally and any reboot or rebuild operations 
 
   - `full` architecture is defined as Aruba switches with leaf switches connected to spines - no NCNs on spines.
   - `tds` architecture is defined as Aruba switches with NCNs connected directly to the spine switches.
-  - `v1` architecturre is defined as any system with Mellanox and Dell switches.
+  - `v1` architecture is defined as any system with Mellanox and Dell switches.
 
 ## Discover CSM 1.2 to CSM 1.3 configuration changes
 
