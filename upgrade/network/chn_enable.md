@@ -1,6 +1,9 @@
 # Enabling Customer High Speed Network Routing
 
+## Overview
+
 - [Enabling Customer High Speed Network Routing](#enabling-customer-high-speed-network-routing)
+  - [Overview](#overview)
   - [Process overview and warnings](#process-overview-and-warnings)
   - [Prerequisites](#prerequisites)
   - [Backup Phase](#backup-phase)
@@ -26,7 +29,7 @@
 
 ## Process overview and warnings
 
-**IMPORTANT** This procedure is quite involved and the complexities should be completely understood before beginning.  The procedure may be run as part of a system upgrade, or at any time after the CSM 1.3 system upgrade - out-of-band with the upgrade itself.
+**IMPORTANT** This procedure is quite involved and the complexities should be completely understood before beginning.  The procedure is designed to be run after a CSM 1.3 upgrade.  With careful preparation this could be run as part of the CSM 1.3 upgrade.
 
 The primary objective of this procedure is to move user traffic (users running jobs) from a `CAN` network running over the CSM management network, to a `CHN` network over the Slingshot high speed network, while *minimizing* downtime and outages.
 
@@ -42,37 +45,38 @@ The overall process can be summarized as:
 3. Migrate phase - perform a controlled configuration and migration of components from the `CAN` to the `CHN`
       1. NCN workers
       2. CSM services
-      3. UAN NCN
+      3. UAN
       4. UAI
       5. Compute (optional)
 4. Cleanup phase
    1. Remove the `CAN` from operations and all data sets
-5. Upgrade the management network
+5. Upgrade the management network switch configurations
 
 The procedure, to be safe and flexible, is intensive from both the number of steps involved and the amount of system data which needs to be managed.
 However, during the migration phase, ample time and flexibility exists to contact system users as well as reverse the migration.
 
-**Note** that updates to the CSM management network are at the very end of this procedure.  CSM 1.3 network updates consist only of critical bugfixes as well as interface and `ACL` changes to complete Bifurcated `CAN` transitions begun in CSM 1.2.
+**Note** that updates to the CSM management network are at the very end of this procedure.  CSM 1.3 network updates consist only of critical bugfixes as well as interface and `ACL` changes. This completes Bifurcated `CAN` transitions begun in CSM 1.2.
 
 ## Prerequisites
 
-1. The system as a whole must be healthy and running.
-2. A site-routable IPv4 subnet for the `CHN`.  Minimally this must be sized to accommodate:
+1. The system must have successfully completed a CSM 1.3 upgrade or be ready for CSM 1.3 upgrade.
+2. [Install the latest CSM 1.3 documentation](../../update_product_stream/README.md#check-for-latest-documentation)
+3. A site-routable IPv4 subnet for the `CHN`.  Minimally this must be sized to accommodate:
    1. Three IPs for switching, plus
    2. The number of `NCN` workers on the system, plus
    3. One IP for the API ingress gateway, plus
    4. The number of `NCN` `UANs` on the system, plus
    5. The maximum number of `UAIs` required, plus
    6. IPs for any other services to be brought up dynamically on the `CHN`
-   7. **NOTE** A `/24` subnet is usually more than sufficient for small-to-medium sized systems with minimal `UAI` requirements.
-3. The Slingshot high speed network is configured and up, including the fabric manager service.  This network is required to transit CHN traffic.
-4. The Slingshot Host Software is installed and configured on NCN Worker nodes.  This is required to expose CHN services.  For the purpose of CHN, the host software creates the (required) primary IPv4 address on `hsn0`, often a `10.253` address.
+   7. **Note** A `/24` subnet is usually more than sufficient for small-to-medium sized systems with minimal `UAI` requirements.
+4. The Slingshot high speed network is configured and up, including the fabric manager service.  This network is required to transit CHN traffic.
+5. The Slingshot Host Software is installed and configured on NCN Worker nodes.  This is required to expose CHN services.  For the purpose of CHN, the host software creates the (required) primary IPv4 address on `hsn0`, often a `10.253` address.
 
 ## Backup Phase
 
 ### Preparation
 
-1. (`ncn-m001#`) Create the a directory for the procedure and set environment variables.
+1. (`ncn-m001#`) Make working directories for the procedure.
 
    ```bash
    mkdir migrate_can_to_chn
@@ -84,7 +88,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    export CLEANUPDIR=${BASEDIR}/cleanup
    ```
 
-2. (`ncn-m001#`) Obtain a token.
+2. (`ncn-m001#`) Obtain an API token.
 
    ```bash
    export TOKEN=$(curl -s -k -S -d grant_type=client_credentials -d client_id=admin-client \
@@ -94,43 +98,45 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 ### Create system backups
 
-1. (`ncn-m001#`) Create a backup directory.
+**Recommend** copying and storing all data backups off-system in a version control repository.
+
+1. (`ncn-m001#`) Change to the backup directory.
 
    ```bash
    cd ${BACKUPDIR}
    ```
 
-2. (`ncn-m001#`) Backup original `SLS` data.
+2. (`ncn-m001#`) Backup running system `SLS` data.
 
    ```bash
    curl -k -H "Authorization: Bearer ${TOKEN}" https://api-gw-service-nmn.local/apis/sls/v1/dumpstate | jq -S . > sls_input_file.json
    ```
 
-3. (`ncn-m001#`) Backup original customizations data.
+3. (`ncn-m001#`) Backup running system customizations data.
 
    ```bash
    kubectl -n loftsman get secret site-init -o json | jq -r '.data."customizations.yaml"' | base64 -d > customizations.yaml
    ```
 
-4. (`ncn-m001#`) Backup original MetalLB `configmap` data.
+4. (`ncn-m001#`) Backup runniung system MetalLB `configmap` data.
 
    ```bash
    kubectl get cm -n metallb-system metallb -o yaml > metallb.yaml
    ```
 
-5. (`ncn-m001#`) Backup original manifest data.
+5. (`ncn-m001#`) Backup running system manifest data.
 
    ```bash
    kubectl get cm -n loftsman loftsman-platform -o jsonpath='{.data.manifest\.yaml}' > manifest.yaml
    ```
 
-6. (`ncn-m001#`) Backup original NCN Personalization data.
+6. (`ncn-m001#`) Backup running system NCN Personalization data.
 
    ```bash
    cray cfs configurations describe ncn-personalization --format json | jq 'del(.lastUpdated) | del(.name)' > ncn-personalization.json
    ```
 
-7. (`ncn-m001#`) Backup original BSS data.
+7. (`ncn-m001#`) Backup running system BSS data.
 
    ```bash
    curl -s -X GET -H "Authorization: Bearer ${TOKEN}" https://api-gw-service-nmn.local/apis/bss/boot/v1/bootparameters | jq . > bss-bootparameters.json
@@ -155,11 +161,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 2. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script
 
    ```bash
-   [[ -f /usr/share/doc/csm/upgrade/scripts/sls/sls_can_to_chn.py ]] &&
-      export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls || 
-      echo "STOP:  Manual intervention is required.
-      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
-      2. export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls"
+   export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls
    ```
 
 3. (`ncn-m001#`) Add `CHN` to `SLS` data.
@@ -174,8 +176,8 @@ However, during the migration phase, ample time and flexibility exists to contac
    where:
 
       - `<CHN VLAN>` is the "stub" `VLAN` for the `CHN`.  This is currently used only on the edge switches in access mode, not a trunk through the high speed network.
-      - `<CHN IPv4 Subnet>` is the pre-requisite site-routable IPv4 subnet for the `CHN`
-      - `<number of edge switches>` is typically 2 Arista or Aruba switches, but some pre-production systems have 1
+      - `<CHN IPv4 Subnet>` is the pre-requisite site-routable IPv4 subnet for the `CHN`.
+      - `<number of edge switches>` is typically 2 Arista or Aruba switches, but some pre-production systems have 1.
 
 4. (`ncn-m001#`) Upload data to `SLS`.
 
@@ -194,20 +196,13 @@ However, during the migration phase, ample time and flexibility exists to contac
 2. (`ncn-m001#`) Set the directory location for the customizations script to add `CHN`.
 
    ```bash
-   [[ -f /usr/share/doc/csm/upgrade/scripts/upgrade/util/update-customizations.sh ]] &&
-      export CUSTOMIZATIONS_SCRIPT_DIR=/usr/share/doc/csm/upgrade/scripts/upgrade/util || 
-      echo "STOP:  Requires manual steps"
-   grep NETWORKSJSON ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh >/dev/null 2>&1 ||
-      echo "STOP:  This does not to update networking.  Manual steps required.
-      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
-      2. export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls"
+   export CUSTOMIZATIONS_SCRIPT_DIR=/usr/share/doc/csm/upgrade/scripts/upgrade/util
    ```
 
 3. (`ncn-m001#`) Create updated `customizations.yaml` against updated `SLS`.
 
    ```bash
-   cd ${UPDATEDIR}
-   ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh ${BACKUPDIR}/customizations.yaml > customizations.yaml
+   ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh ${BACKUPDIR}/customizations.yaml > ${UPDATEDIR}/customizations.yaml
    yq validate customizations.yaml
    ```
 
@@ -217,7 +212,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
    ```bash
    kubectl delete secret -n loftsman site-init
-   kubectl create secret -n loftsman generic site-init --from-file=customizations.yaml
+   kubectl create secret -n loftsman generic site-init --from-file=${UPDATEDIR}/customizations.yaml
    ```
 
 ## Migrate Phase
@@ -233,10 +228,10 @@ However, during the migration phase, ample time and flexibility exists to contac
 2. (`ncn-m001#`) Ensure SHS is active by testing if there is an `HSN` IP address (typically `10.253`) on the `hsn0` interfaces.  If there is not primary address on the `hsn0` interface this must be fixed before proceeding;
 
    ```bash
-   pdsh -w ncn-w00[1-$(egrep 'ncn-w...\.nmn' /etc/hosts | wc -l)] ip address list dev hsn0
+   pdsh -w ncn-w[$(printf "%03d-%03d" 1 $(egrep 'ncn-w...\.nmn' /etc/hosts | wc -l))] ip address list dev hsn0
    ```
 
-   **NOTE** If some interfaces have a `HSN` address and others do not, this is typically indicative that the CFS plays are failing at some point.
+   **NOTE** If some interfaces have an `HSN` address and others do not, this is typically indicative that  CFS plays are failing at some point.
    The following `CFS` steps may help, but checking if the Slingshot high speed network and host software is operating correctly prior to moving forward in this procedure is required.
 
 3. Determine the CFS configuration in use on the worker nodes.
@@ -272,7 +267,7 @@ However, during the migration phase, ample time and flexibility exists to contac
       id = "x3000c0s4b0n0"
       ```
 
-      **NOTE** Errors or failed CFS personalization runs may be fixed via the following process as CFS will be re-run. Likely, though, it's better to take a few minutes to troubleshoot the current issue.
+      **Note** Errors or failed CFS personalization runs may be fixed via the following process as CFS will be re-run. Likely though, it's better to take a few minutes to troubleshoot the current issue.
 
 4. (`ncn#`) Extract the CFS configuration.
 
@@ -280,7 +275,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    cray cfs configurations describe ncn-personalization --format json | jq 'del(.lastUpdated) | del(.name)' > ncn-personalization.json
    ```
 
-   The resulting output file should look similar to this. Installed products, versions, and commit hashes will vary.
+   The resulting output file should look similar to this. Installed products, versions, and commit hashes will vary. **Note** This is an example and should not be pasted directly into your working configuration.
 
    ```json
    {
@@ -320,6 +315,8 @@ However, during the migration phase, ample time and flexibility exists to contac
    ```
 
 5. Edit the extracted file. Copy the existing CSM layer and create an new layer to run the `enable_chn.yml` playbook.  The original CSM layer should still exist after this operation as well as the new layer.
+
+   **Note** this is a an example and should not be copied into the running configuration.
 
    ```json
    {
@@ -382,7 +379,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 7. (`ncn#`) Check that NCN personalization runs and completes successfully on all worker nodes.
 
-   Updating the CFS configuration will cause CFS to schedule the nodes for configuration. Run the following command to verify this has occurred.
+   Updating the CFS configuration will cause CFS to schedule the nodes for configuration. Run the following command for all worker xnames to verify this has occurred.
 
    ```bash
    cray cfs components describe --format toml x3000c0s4b0n0
@@ -439,13 +436,35 @@ TODO
 
 ### Remove CAN from SLS
 
-```text
-TODO
-```
+1. (`ncn-m001#`) Move to the update directory.
+
+   ```bash
+   cd ${CLEANUPDIR}
+   ```
+
+2. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script
+
+   ```bash
+   export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls
+   ```
+
+3. (`ncn-m001#`) Add `CHN` to `SLS` data.
+
+   ```bash
+   ${SLS_CHN_DIR}/sls_del_can.py
+      --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json
+      --sls-output-file ${CLEANUPDIR}/sls_file_without_can.json
+   ```
+
+4. (`ncn-m001#`) Upload data to `SLS`.
+
+   ```bash
+   curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${CLEANUPDIR}/sls_file_without_can.json"
+   ```
 
 ### Remove CAN from BSS
 
-1. (`ncn-m001#`) Move to the update directory.
+1. (`ncn-m001#`) Move to the cleanup directory.
 
    ```bash
    cd ${CLEANUPDIR}
@@ -493,9 +512,7 @@ TODO
 
 ## Update the management network
 
-```text
-TODO
-```
+Follow the process outlined in [update the management network from CSM 1.2 to CSM 1.3](network_upgrade_1.2_to_1.3.md).
 
 ## Testing
 
