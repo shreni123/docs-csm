@@ -9,7 +9,6 @@
   - [Update Phase](#update-phase)
     - [Update SLS](#update-sls)
     - [Update customizations](#update-customizations)
-    - [Update BSS](#update-bss)
   - [Migrate Phase](#migrate-phase)
     - [Migrate NCN workers](#migrate-ncn-workers)
     - [Migrate CSM Services (MetalLB)](#migrate-csm-services-metallb)
@@ -17,6 +16,12 @@
     - [Migrate UAI](#migrate-uai)
     - [Migrate Computes (optional)](#migrate-computes-optional)
   - [Cleanup Phase](#cleanup-phase)
+    - [Remove CAN from SLS](#remove-can-from-sls)
+    - [Remove CAN from BSS](#remove-can-from-bss)
+    - [Remove CAN interfaces from NCN workers](#remove-can-interfaces-from-ncn-workers)
+    - [Remove CAN names from hosts file](#remove-can-names-from-hosts-file)
+    - [Remove CAN service endpoints](#remove-can-service-endpoints)
+  - [Update the management network](#update-the-management-network)
   - [Testing](#testing)
 
 ## Process overview and warnings
@@ -84,16 +89,6 @@ However, during the migration phase, ample time and flexibility exists to contac
                  https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
    ```
 
-3. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script
-
-   ```bash
-   [[ -f /usr/share/doc/csm/upgrade/scripts/sls/sls_can_to_chn.py ]] &&
-      export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls || 
-      echo "STOP:  Manual intervention is required.
-      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
-      2. export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls"
-   ```
-
 ### Create system backups
 
 1. (`ncn-m001#`) Create a backup directory.
@@ -154,7 +149,17 @@ However, during the migration phase, ample time and flexibility exists to contac
    cd ${UPDATEDIR}
    ```
 
-2. (`ncn-m001#`) Add `CHN` to `SLS` data.
+2. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script
+
+   ```bash
+   [[ -f /usr/share/doc/csm/upgrade/scripts/sls/sls_can_to_chn.py ]] &&
+      export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls || 
+      echo "STOP:  Manual intervention is required.
+      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
+      2. export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls"
+   ```
+
+3. (`ncn-m001#`) Add `CHN` to `SLS` data.
 
    ```bash
    ${SLS_CHN_DIR}/sls_can_to_chn.py --sls-input-file ${BACKUPDIR}/sls_input_file.json
@@ -169,7 +174,7 @@ However, during the migration phase, ample time and flexibility exists to contac
       - `<CHN IPv4 Subnet>` is the pre-requisite site-routable IPv4 subnet for the `CHN`
       - `<number of edge switches>` is typically 2 Arista or Aruba switches, but some pre-production systems have 1
 
-3. (`ncn-m001#`) Upload data to `SLS`.
+4. (`ncn-m001#`) Upload data to `SLS`.
 
    ```bash
    curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${UPDATEDIR}/sls_file_with_chn.json"
@@ -211,12 +216,6 @@ However, during the migration phase, ample time and flexibility exists to contac
    kubectl delete secret -n loftsman site-init
    kubectl create secret -n loftsman generic site-init --from-file=customizations.yaml
    ```
-
-### Update BSS
-
-```text
-TODO
-```
 
 ## Migrate Phase
 
@@ -434,6 +433,62 @@ TODO
 ```
 
 ## Cleanup Phase
+
+### Remove CAN from SLS
+
+```text
+TODO
+```
+
+### Remove CAN from BSS
+
+1. (`ncn-m001#`) Move to the update directory.
+
+   ```bash
+   cd ${CLEANUPDIR}
+   ```
+
+2. (`ncn-m001#`) Set the directory location for the `BSS` `CHN` script.
+
+   ```bash
+   [[ -f /usr/share/doc/csm/upgrade/scripts/bss/bss_remove_can.py ]] &&
+      export BSS_CAN_DIR=/usr/share/doc/csm/upgrade/scripts/bss || 
+      echo "STOP:  Manual intervention is required.
+      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
+      2. export BSS_CAN_DIR=/usr/share/doc/csm/upgrade/scripts/bss"
+   ```
+
+3. (`ncn-m001#`) Remove `CAN` from `BSS` data.
+
+   ```bash
+   ${BSS_CAN_DIR}/bss_remove_can.py --bss-input-file ${BACKUPDIR}/bss-bootparameters.json --bss-output-file ${CLEANUPDIR}/bss-ouput-chn.json
+   ```
+
+4. (`ncn-m001#`) Upload data to `BSS`.
+
+   ```bash
+   ${BSS_CAN_DIR}/post-bootparameters.sh -u https://api-gw-service-nmn.local/apis/bss/boot/v1/bootparameters -f ${CLEANUPDIR}/bss-ouput-chn.json
+   ```
+
+### Remove CAN interfaces from NCN workers
+
+```text
+TODO
+```
+
+### Remove CAN names from hosts file
+
+```text
+TODO
+```
+
+### Remove CAN service endpoints
+
+```text
+TODO
+```
+
+## Update the management network
 
 ```text
 TODO
