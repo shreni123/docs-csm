@@ -47,9 +47,12 @@ The overall process can be summarized as:
       5. Compute (optional)
 4. Cleanup phase
    1. Remove the `CAN` from operations and all data sets
+5. Upgrade the management network
 
 The procedure, to be safe and flexible, is intensive from both the number of steps involved and the amount of system data which needs to be managed.
 However, during the migration phase, ample time and flexibility exists to contact system users as well as reverse the migration.
+
+**Note** that updates to the CSM management network are at the very end of this procedure.  CSM 1.3 network updates consist only of critical bugfixes as well as interface and `ACL` changes to complete Bifurcated `CAN` transitions begun in CSM 1.2.
 
 ## Prerequisites
 
