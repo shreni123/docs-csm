@@ -100,7 +100,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 ### Create system backups
 
-**Recommend** copying and storing all data backups off-system in a version control repository.
+**Recommend** copying and storing all data in ${BACKUPDIR} off-system in a version control repository is hightly recommended.
 
 1. (`ncn-m001#`) Change to the backup directory.
 
@@ -120,7 +120,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    kubectl -n loftsman get secret site-init -o json | jq -r '.data."customizations.yaml"' | base64 -d > customizations.yaml
    ```
 
-4. (`ncn-m001#`) Backup runniung system MetalLB `configmap` data.
+4. (`ncn-m001#`) Backup running system MetalLB `configmap` data.
 
    ```bash
    kubectl get cm -n metallb-system metallb -o yaml > metallb.yaml
@@ -151,6 +151,8 @@ However, during the migration phase, ample time and flexibility exists to contac
    ```
 
 ## Update Phase
+
+**Recommend** copying and storing all data in ${UPDATEDIR} off-system in a version control repository is hightly recommended.
 
 ### Update SLS
 
@@ -435,6 +437,8 @@ TODO
 ```
 
 ## Cleanup Phase
+
+**Recommend** copying and storing all data in the ${CLEANUPDIR} off-system in a version control repository is hightly recommended.
 
 ### Remove CAN from SLS
 
