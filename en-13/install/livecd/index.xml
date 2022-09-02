@@ -6,11 +6,11 @@
     <description>Recent content in Livecd on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 01 Sep 2022 03:47:00 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/install/livecd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 03:51:02 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/install/livecd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reinstall Livecd</title>
       <link>/docs-csm/en-13/install/livecd/reinstall_livecd_usb/</link>
-      <pubDate>Thu, 01 Sep 2022 03:45:18 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:49:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/reinstall_livecd_usb/</guid>
       <description>Reinstall LiveCD Setup a re-install of LiveCD on a node using the previous configuration.
@@ -22,7 +22,7 @@ The USB device should now contain all the information already loaded, as well as
     <item>
       <title>Reset Root Password On A Livecd Usb</title>
       <link>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</link>
-      <pubDate>Thu, 01 Sep 2022 03:45:18 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:49:19 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</guid>
       <description>Reset root Password on a LiveCD USB It may become desirable to clear the password on the LiveCD.
@@ -33,7 +33,7 @@ If a site/user needs to reset/clear the password for root, they can mount their 
     <item>
       <title>Accessing Livecd Usb Device After Reboot</title>
       <link>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</link>
-      <pubDate>Thu, 01 Sep 2022 03:45:17 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:49:18 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</guid>
       <description>Accessing LiveCD USB Device After Reboot This is a procedure that only applies to the LiveCD USB device after the PIT node has been rebooted.
@@ -46,7 +46,7 @@ mkdir -pv /mnt/{cow,pitdata} mount -vL cow /mnt/cow mount -vL PITDATA /mnt/pitda
     <item>
       <title>Boot Livecd Remoteiso</title>
       <link>/docs-csm/en-13/install/livecd/boot_livecd_remoteiso/</link>
-      <pubDate>Thu, 01 Sep 2022 03:45:17 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:49:18 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/boot_livecd_remoteiso/</guid>
       <description>Boot LiveCD RemoteISO This page will guide a user on booting the LiveCD .iso file directly onto a BMC.
@@ -57,7 +57,7 @@ Topics  Prerequisites BMCs&#39; virtual mounts  HPE iLO BMCs Gigabyte BMCs   Con
     <item>
       <title>Boot Livecd Usb</title>
       <link>/docs-csm/en-13/install/livecd/boot_livecd_usb/</link>
-      <pubDate>Thu, 01 Sep 2022 03:45:17 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:49:18 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/boot_livecd_usb/</guid>
       <description>Boot LiveCD USB These steps provide a bootable USB capable of installing this CSM release.

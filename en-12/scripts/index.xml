@@ -6,23 +6,11 @@
     <description>Recent content in Scripts on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 01 Sep 2022 03:46:48 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Kernel Dump Workaround</title>
-      <link>/docs-csm/en-12/scripts/workarounds/kdump/readme/</link>
-      <pubDate>Thu, 01 Sep 2022 03:46:48 +0000</pubDate>
-      
-      <guid>/docs-csm/en-12/scripts/workarounds/kdump/readme/</guid>
-      <description>Kernel Dump Workaround This directory includes the script and the library necessary for applying the workaround to all reachable NCNs.
-Usage   Run run.sh.
-ncn# /usr/share/doc/csm/scripts/workarounds/kdump/run.sh Example output:
-Uploading hotfix files to ncn-m001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s004:/srv/cray/scripts/common/ .</description>
-    </item>
-    
+    <lastBuildDate>Fri, 02 Sep 2022 03:50:51 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/scripts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Boot Order Workaround</title>
       <link>/docs-csm/en-12/scripts/workarounds/boot-order/readme/</link>
-      <pubDate>Thu, 01 Sep 2022 03:46:47 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:50:51 +0000</pubDate>
       
       <guid>/docs-csm/en-12/scripts/workarounds/boot-order/readme/</guid>
       <description>Boot Order Workaround This directory includes the script and the library necessary for applying the workaround to all reachable NCNs.
@@ -32,9 +20,21 @@ Failed to ping [ncn-w004]; skipping hotfix for [ncn-w004] Uploading new metal-li
     </item>
     
     <item>
+      <title>Kernel Dump Workaround</title>
+      <link>/docs-csm/en-12/scripts/workarounds/kdump/readme/</link>
+      <pubDate>Fri, 02 Sep 2022 03:50:51 +0000</pubDate>
+      
+      <guid>/docs-csm/en-12/scripts/workarounds/kdump/readme/</guid>
+      <description>Kernel Dump Workaround This directory includes the script and the library necessary for applying the workaround to all reachable NCNs.
+Usage   Run run.sh.
+ncn# /usr/share/doc/csm/scripts/workarounds/kdump/run.sh Example output:
+Uploading hotfix files to ncn-m001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-m003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s001:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s002:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s003:/srv/cray/scripts/common/ ... Done Uploading hotfix files to ncn-s004:/srv/cray/scripts/common/ .</description>
+    </item>
+    
+    <item>
       <title>Python Library For SLS Network Data</title>
       <link>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</link>
-      <pubDate>Thu, 01 Sep 2022 03:46:47 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:50:50 +0000</pubDate>
       
       <guid>/docs-csm/en-12/scripts/operations/node_management/add_remove_replace_ncns/sls_utils/readme/</guid>
       <description>Python Library for SLS Network Data This is a reusable Python library for safely interacting with SLS network data (in JSON format).

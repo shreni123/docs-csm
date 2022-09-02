@@ -6,11 +6,11 @@
     <description>Recent content in 1.2.1 on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 01 Sep 2022 03:46:54 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 03:50:58 +0000</lastBuildDate><atom:link href="/docs-csm/en-12/upgrade/1.2.1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.2.1 Patch Installation Instructions</title>
       <link>/docs-csm/en-12/upgrade/1.2.1/readme/</link>
-      <pubDate>Thu, 01 Sep 2022 03:46:53 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:50:57 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.1/readme/</guid>
       <description>CSM 1.2.1 Patch Installation Instructions Introduction This document guides an administrator through the upgrade to Cray Systems Management v1.2.1 from v1.2.0. Earlier version of CSM must first be upgraded to at least v1.2.0. For information on how to do that, see Upgrade CSM.
@@ -20,7 +20,7 @@ Bug Fixes  Fixes two issues in CFS, restoring the additional inventory field fun
     <item>
       <title>Upgrade And Validate Switch Configurations</title>
       <link>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</link>
-      <pubDate>Thu, 01 Sep 2022 03:46:53 +0000</pubDate>
+      <pubDate>Fri, 02 Sep 2022 03:50:57 +0000</pubDate>
       
       <guid>/docs-csm/en-12/upgrade/1.2.1/upgrade_network/</guid>
       <description>Upgrade and validate Switch Configurations Prerequisites  SSH access to the switches or the running configuration file Upgrade or install latest version of CANU Install/Upgrade CANU  Run canu --version to see version CANU installed with version 1.6.13 or greater.   Use the paddle file (CCJ) if available, or validate an up-to-date SHCD Validate SHCD System Layout Service (SLS) input file. Collect Data   CAUTION: All of these steps should be done using an out-of-band connection.</description>
