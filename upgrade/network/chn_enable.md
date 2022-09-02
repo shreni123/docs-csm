@@ -20,7 +20,9 @@
     - [Migrate Computes (optional)](#migrate-computes-optional)
   - [Cleanup Phase](#cleanup-phase)
     - [Remove CAN from SLS](#remove-can-from-sls)
+    - [Remove CAN from customizations](#remove-can-from-customizations)
     - [Remove CAN from BSS](#remove-can-from-bss)
+    - [Remove CAN from CSM services](#remove-can-from-csm-services)
     - [Remove CAN interfaces from NCN workers](#remove-can-interfaces-from-ncn-workers)
     - [Remove CAN names from hosts file](#remove-can-names-from-hosts-file)
     - [Remove CAN service endpoints](#remove-can-service-endpoints)
@@ -203,7 +205,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
    ```bash
    ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh ${BACKUPDIR}/customizations.yaml > ${UPDATEDIR}/customizations.yaml
-   yq validate customizations.yaml
+   yq validate ${UPDATEDIR}/customizations.yaml
    ```
 
    **Important** If the updated `customizations.yaml` file is empty or not valid `YAML`, do not proceed.  Debug in place.
@@ -462,6 +464,36 @@ TODO
    curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${CLEANUPDIR}/sls_file_without_can.json"
    ```
 
+### Remove CAN from customizations
+
+1. (`ncn-m001#`) Move to the update directory.
+
+   ```bash
+   cd ${CLEANUPDIR}
+   ```
+
+2. (`ncn-m001#`) Set the directory location for the customizations script to add `CHN`.
+
+   ```bash
+   export CUSTOMIZATIONS_SCRIPT_DIR=/usr/share/doc/csm/upgrade/scripts/upgrade/util
+   ```
+
+3. (`ncn-m001#`) Create updated `customizations.yaml` against updated `SLS`.
+
+   ```bash
+   ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh ${UPDATEDIR}/customizations.yaml > ${CLEANUPDIR}/customizations.yaml
+   yq validate ${CLEANUPDIR}/customizations.yaml
+   ```
+
+   **Important** If the updated `customizations.yaml` file is empty or not valid `YAML`, do not proceed.  Debug in place.
+
+4. (`ncn-m001#`) Upload new `customizations.yaml` to ensure changes persist across updates
+
+   ```bash
+   kubectl delete secret -n loftsman site-init
+   kubectl create secret -n loftsman generic site-init --from-file=${CLEANUPDIR}/customizations.yaml
+   ```
+
 ### Remove CAN from BSS
 
 1. (`ncn-m001#`) Move to the cleanup directory.
@@ -491,6 +523,18 @@ TODO
    ```bash
    ${BSS_CAN_DIR}/post-bootparameters.sh -u https://api-gw-service-nmn.local/apis/bss/boot/v1/bootparameters -f ${CLEANUPDIR}/bss-ouput-chn.json
    ```
+
+### Remove CAN from CSM services
+
+```text
+TODO
+extract metallb configmap
+yq just the metallb stuff from new customizations
+merge into configmap
+load into metallb
+
+kick pod? (luke did not have to) kubectl rollout restart
+```
 
 ### Remove CAN interfaces from NCN workers
 
