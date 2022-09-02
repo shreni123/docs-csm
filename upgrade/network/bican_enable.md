@@ -195,7 +195,7 @@ However, during the migration phase, ample time and flexibility exists to contac
       2. export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls"
    ```
 
-3. (`ncn-m001#`) Create updated customizations.yaml against updated `SLS`.
+3. (`ncn-m001#`) Create updated `customizations.yaml` against updated `SLS`.
 
    ```bash
    cd ${UPDATEDIR}
@@ -203,7 +203,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    yq validate customizations.yaml
    ```
 
-   **Important** If the updated `customizations.yaml` file is empty or not valid yaml, do not proceed.  Debug in place.
+   **Important** If the updated `customizations.yaml` file is empty or not valid `YAML`, do not proceed.  Debug in place.
 
 4. (`ncn-m001#`) Upload new `customizations.yaml` to ensure changes persist across updates
 
