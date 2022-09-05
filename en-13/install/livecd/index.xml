@@ -6,11 +6,35 @@
     <description>Recent content in Livecd on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 04 Sep 2022 03:48:13 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/install/livecd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Sep 2022 03:53:34 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/install/livecd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reset Root Password On A Livecd Usb</title>
+      <link>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</link>
+      <pubDate>Mon, 05 Sep 2022 03:51:42 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</guid>
+      <description>Reset root Password on a LiveCD USB It may become desirable to clear the password on the LiveCD.
+The root password is preserved within the COW partition at cow:rw/etc/shadow. This is the modified copy of the /etc/shadow file used by the operating system.
+If a site/user needs to reset/clear the password for root, they can mount their USB on another machine and remove this file from the COW partition. When next booting from the USB it will reinitialize to an empty password for root, and again at next login it will require the password to be changed.</description>
+    </item>
+    
+    <item>
+      <title>Accessing Livecd Usb Device After Reboot</title>
+      <link>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</link>
+      <pubDate>Mon, 05 Sep 2022 03:51:41 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</guid>
+      <description>Accessing LiveCD USB Device After Reboot This is a procedure that only applies to the LiveCD USB device after the PIT node has been rebooted.
+ USB ONLY If the installation above was done from a Remote ISO.
+ After deploying the LiveCD&amp;rsquo;s NCN, the LiveCD USB itself is unharmed and available to an administrator.
+Procedure   Mount and view the USB device.
+mkdir -pv /mnt/{cow,pitdata} mount -vL cow /mnt/cow mount -vL PITDATA /mnt/pitdata ls -ld /mnt/cow/rw/* Example output:</description>
+    </item>
+    
     <item>
       <title>Boot Livecd Remoteiso</title>
       <link>/docs-csm/en-13/install/livecd/boot_livecd_remoteiso/</link>
-      <pubDate>Sun, 04 Sep 2022 03:46:24 +0000</pubDate>
+      <pubDate>Mon, 05 Sep 2022 03:51:41 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/boot_livecd_remoteiso/</guid>
       <description>Boot LiveCD RemoteISO This page will guide a user on booting the LiveCD .iso file directly onto a BMC.
@@ -21,7 +45,7 @@ Topics  Prerequisites BMCs&#39; virtual mounts  HPE iLO BMCs Gigabyte BMCs   Con
     <item>
       <title>Boot Livecd Usb</title>
       <link>/docs-csm/en-13/install/livecd/boot_livecd_usb/</link>
-      <pubDate>Sun, 04 Sep 2022 03:46:24 +0000</pubDate>
+      <pubDate>Mon, 05 Sep 2022 03:51:41 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/boot_livecd_usb/</guid>
       <description>Boot LiveCD USB These steps provide a bootable USB capable of installing this CSM release.
@@ -33,37 +57,13 @@ SCRIPT_FILE=&amp;#34;$(pwd)/csm-install-usb.$(date +%Y-%m-%d).txt&amp;#34; scrip
     <item>
       <title>Reinstall Livecd</title>
       <link>/docs-csm/en-13/install/livecd/reinstall_livecd_usb/</link>
-      <pubDate>Sun, 04 Sep 2022 03:46:24 +0000</pubDate>
+      <pubDate>Mon, 05 Sep 2022 03:51:41 +0000</pubDate>
       
       <guid>/docs-csm/en-13/install/livecd/reinstall_livecd_usb/</guid>
       <description>Reinstall LiveCD Setup a re-install of LiveCD on a node using the previous configuration.
   (pit#) Backup to the data partition:
 mkdir -pv /var/www/ephemeral/backup pushd /var/www/ephemeral/backup tar -czvf &amp;#34;dnsmasq-data-$(date &amp;#39;+%Y-%m-%d_%H-%M-%S&amp;#39;).tar.gz&amp;#34; /etc/dnsmasq.* tar -czvf &amp;#34;network-data-$(date &amp;#39;+%Y-%m-%d_%H-%M-%S&amp;#39;).tar.gz&amp;#34; /etc/sysconfig/network/* cp -pv /etc/hosts ./ popd umount -v /var/www/ephemeral   Unplug the USB device.
 The USB device should now contain all the information already loaded, as well as the backups of the initialized files.</description>
-    </item>
-    
-    <item>
-      <title>Reset Root Password On A Livecd Usb</title>
-      <link>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</link>
-      <pubDate>Sun, 04 Sep 2022 03:46:24 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/install/livecd/reset_root_password_on_a_livecd_usb/</guid>
-      <description>Reset root Password on a LiveCD USB It may become desirable to clear the password on the LiveCD.
-The root password is preserved within the COW partition at cow:rw/etc/shadow. This is the modified copy of the /etc/shadow file used by the operating system.
-If a site/user needs to reset/clear the password for root, they can mount their USB on another machine and remove this file from the COW partition. When next booting from the USB it will reinitialize to an empty password for root, and again at next login it will require the password to be changed.</description>
-    </item>
-    
-    <item>
-      <title>Accessing Livecd Usb Device After Reboot</title>
-      <link>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</link>
-      <pubDate>Sun, 04 Sep 2022 03:46:23 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/install/livecd/access_livecd_usb_device_after_reboot/</guid>
-      <description>Accessing LiveCD USB Device After Reboot This is a procedure that only applies to the LiveCD USB device after the PIT node has been rebooted.
- USB ONLY If the installation above was done from a Remote ISO.
- After deploying the LiveCD&amp;rsquo;s NCN, the LiveCD USB itself is unharmed and available to an administrator.
-Procedure   Mount and view the USB device.
-mkdir -pv /mnt/{cow,pitdata} mount -vL cow /mnt/cow mount -vL PITDATA /mnt/pitdata ls -ld /mnt/cow/rw/* Example output:</description>
     </item>
     
   </channel>
