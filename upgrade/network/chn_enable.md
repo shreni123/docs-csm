@@ -12,12 +12,17 @@
   - [Update Phase](#update-phase)
     - [Update SLS](#update-sls)
     - [Update customizations](#update-customizations)
+    - [Update MetalLB data](#update-metallb-data)
+    - [Update CSM Service endpoint data (MetalLB)](#update-csm-service-endpoint-data-metallb)
   - [Migrate Phase](#migrate-phase)
     - [Migrate NCN workers](#migrate-ncn-workers)
     - [Migrate CSM Services (MetalLB)](#migrate-csm-services-metallb)
     - [Migrate UAN](#migrate-uan)
     - [Migrate UAI](#migrate-uai)
     - [Migrate Computes (optional)](#migrate-computes-optional)
+      - [Add compute IP addresses to CHN SLS data](#add-compute-ip-addresses-to-chn-sls-data)
+      - [Upload migrated SLS file to SLS service](#upload-migrated-sls-file-to-sls-service)
+      - [Enable CFS layer](#enable-cfs-layer)
   - [Cleanup Phase](#cleanup-phase)
     - [Remove CAN from SLS](#remove-can-from-sls)
     - [Remove CAN from customizations](#remove-can-from-customizations)
@@ -123,7 +128,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 4. (`ncn-m001#`) Backup running system MetalLB `configmap` data.
 
    ```bash
-   kubectl get cm -n metallb-system metallb -o yaml > metallb.yaml
+   kubectl get cm -n metallb-system metallb -o yaml | egrep -v 'creationTimestamp:|resourceVersion:|uid:' > metallb.yaml
    ```
 
 5. (`ncn-m001#`) Backup running system manifest data.
@@ -217,6 +222,19 @@ However, during the migration phase, ample time and flexibility exists to contac
    ```bash
    kubectl delete secret -n loftsman site-init
    kubectl create secret -n loftsman generic site-init --from-file=${UPDATEDIR}/customizations.yaml
+   ```
+
+### Update MetalLB data
+
+### Update CSM Service endpoint data (MetalLB)
+
+1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.
+
+   ```bash
+    yq r ${UPDATEDIR}/customizations.yaml 'spec.network.metallb' |
+    yq p - 'data.config.' |
+    sed 's/config\:/config\:\ \|/' |
+    yq m - ${BACKUPDIR}/metallb.yaml > ${UPDATEDIR}/metallb.yaml
    ```
 
 ## Migrate Phase
@@ -408,15 +426,25 @@ For more information on managing NCN personalization, see [Perform NCN Personali
 
 ### Migrate CSM Services (MetalLB)
 
-```text
-TODO
-extract metallb configmap
-yq just the metallb stuff from new customizations
-merge into configmap
-load into metallb
+**Note** this will activate `CHN` service endpoints.
 
-kick pod? (luke did not have to) kubectl rollout restart
-```
+1. (`ncn-m001#`) Change to updates directory.
+
+   ```bash
+   cd ${UPDATESDIR}
+   ```
+
+1. (`ncn-m001#`) Apply MetalLB configuration map with `CHN` data to the system.
+
+   ```bash
+    kubectl apply -f ${UPDATEDIR}/metallb.yaml 
+   ```
+
+2. (`ncn-m001#`) Reload MetalLB with `CHN` data to active new services.
+
+   ```bash
+   kubectl rollout restart deployments -n metallb-system metallb-controller
+   ```
 
 ### Migrate UAN
 
@@ -432,9 +460,229 @@ TODO
 
 ### Migrate Computes (optional)
 
-```text
-TODO
-```
+**Important** This part of the procedure is needed only if all compute nodes will have a `CHN` IPv4 address.  This implies that the `CHN` subnet is large enough to hold *all* compute nodes in the system.
+
+#### Add compute IP addresses to CHN SLS data
+
+1. (`ncn-m001#`) Change to updates directory
+
+   ```bash
+   cd ${UPDATESDIR}
+   ```
+
+(`ncn-mw#`) Process the SLS file:
+
+   ```bash
+   DOCDIR=/usr/share/doc/csm/upgrade/scripts/sls
+   ${DOCDIR}/add_computes_to_chn.py --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json
+   ```
+
+The default output file name will be `chn_with_computes_added_sls_file.json`, but can be changed by using the flag `--sls-output-file` with the script.
+
+#### Upload migrated SLS file to SLS service
+
+(`ncn-mw#`) If the following command does not complete successfully, check if the `TOKEN` environment variable is set correctly.
+
+   ```bash
+   curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${UPDATEDIR}/sls_file_with_chn.json"
+   ```
+
+#### Enable CFS layer
+
+`CHN` network configuration of compute nodes is performed by the UAN CFS configuration layer. This procedure describes how to identify the UAN layer and add it to the compute node configuration.
+
+1. Determine the CFS configuration in use on the compute nodes.
+
+   1. (`ncn#`) Identify the compute nodes.
+
+      ```bash
+      cray hsm state components list --role Compute --format json | jq -r '.Components[] | .ID'
+      ```
+
+      Example output:
+
+      ```text
+      x1000c5s1b0n1
+      x1000c5s1b0n0
+      x1000c5s0b0n0
+      x1000c5s0b0n1
+      ```
+
+   2. (`ncn#`) Identify CFS configuration in use on the compute nodes.
+
+      ```bash
+      cray cfs components describe --format toml x1000c5s1b0n1
+      ```
+
+      Example output:
+
+      ```toml
+      configurationStatus = "configured"
+      desiredConfig = "cos-config-full-2.3-integration"
+      enabled = true
+      errorCount = 0
+      id = "x1000c5s1b0n1"
+      ```
+
+   3. (`ncn#`) Extract the CFS configuration.
+
+      ```bash
+      cray cfs configurations describe cos-config-full-2.3-integration --format json | jq 'del(.lastUpdated) | del(.name)' > cos-config-full-2.3-integration.json
+      ```
+
+2. Identify the UAN CFS configuration.
+
+   1. (`ncn#`) Identify the UAN nodes.
+
+      ```bash
+      cray hsm state components list --role Application --subrole UAN --format    json | jq -r '.Components[] | .ID'
+      ```
+
+      Example output:
+
+      ```text
+      x3000c0s25b0n0
+      x3000c0s16b0n0
+      x3000c0s15b0n0
+      ```
+
+   2. (`ncn#`) Identify the UAN CFS configuration in use.
+
+      ```bash
+      cray cfs components describe --format toml x3000c0s25b0n0
+      ```
+
+      Example output:
+
+      ```toml
+      configurationStatus = "configured"
+      desiredConfig = "chn-uan-cn"
+      enabled = true
+      errorCount = 0
+      id = "x3000c0s25b0n0"
+      ```
+
+   3. (`ncn#`) Identify the UAN CFS configuration layer.
+
+      ```bash
+      cray cfs configurations describe chn-uan-cn --format json
+      ```
+
+      The resulting output should look similar to this. Installed products, versions, and commit hashes will vary.
+
+      ```json
+      {
+        "lastUpdated": "2022-05-27T20:15:10Z",
+        "layers": [
+          {
+            "cloneUrl": "https://api-gw-service-nmn.local/vcs/cray/uan-config-management.git",
+            "commit": "359611be2f6893ddd0020841b73a3d4924120bb1",
+            "name": "chn-uan-cn",
+            "playbook": "site.yml"
+          }
+        ],
+        "name": "chn-uan-cn"
+      }
+      ```
+
+3. Edit the extracted compute node configuration and add the UAN layer to it.
+
+4. (`ncn#`) Update the compute node CFS configuration.
+
+   ```bash
+   cray cfs configurations update cos-config-full-2.3-integration --file cos-config-full-2.3-integration.json --format toml
+   ```
+
+   Example output:
+
+   ```toml
+   lastUpdated = "2022-05-27T20:47:18Z"
+   name = "cos-config-full-2.3-integration"
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/   slingshot-host-software-config-management.git"
+   commit = "dd428854a04a652f825a3abbbf5ae2ff9842dd55"
+   name = "shs-integration"
+   playbook = "shs_mellanox_install.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/csm-config-management.git"
+   commit = "92ce2c9988fa092ad05b40057c3ec81af7b0af97"
+   name = "csm-1.9.21"
+   playbook = "site.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/cos-config-management.git"
+   commit = "dd2bcbb97e3adbfd604f9aa297fb34baa0dd90f7"
+   name = "cos-compute-integration-2.3.75"
+   playbook = "cos-compute.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/sma-config-management.git"
+   commit = "2219ca094c0a2721f3bf52f5bd542d8c4794bfed"
+   name = "sma-base-config"
+   playbook = "sma-base-config.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/sma-config-management.git"
+   commit = "2219ca094c0a2721f3bf52f5bd542d8c4794bfed"
+   name = "sma-ldms-ncn"
+   playbook = "sma-ldms-ncn.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/slurm-config-management.git"
+   commit = "0982661002a857d743ee5b772520e47c97f63acc"
+   name = "slurm master"
+   playbook = "site.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/pbs-config-management.git"
+   commit = "874050c9820cc0752c6424ef35295289487acccc"
+   name = "pbs master"
+   playbook = "site.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/analytics-config-management.git"
+   commit = "d4b26b74d08e668e61a1e5ee199e1a235e9efa3b"
+   name = "analytics integration"
+   playbook = "site.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/cos-config-management.git"
+   commit = "dd2bcbb97e3adbfd604f9aa297fb34baa0dd90f7"
+   name = "cos-compute-last-integration-2.3.75"
+   playbook = "cos-compute-last.yml"
+
+   [[layers]]
+   cloneUrl = "https://api-gw-service-nmn.local/vcs/cray/uan-config-management.git"
+   commit = "359611be2f6893ddd0020841b73a3d4924120bb1"
+   name = "chn-uan-cn"
+   playbook = "site.yml"
+   ```
+
+5. (`ncn#`) Check that CFS configuration of the compute node completes successfully.
+
+   Updating the CFS configuration will cause CFS to schedule the nodes for configuration. Run the following command to verify this has occurred.
+
+   ```bash
+   cray cfs components describe --format toml x1000c5s1b0n1
+   ```
+
+   Example output:
+
+   ```toml
+   configurationStatus = "pending"
+   desiredConfig = "cos-config-full-2.3-integration"
+   enabled = true
+   errorCount = 0
+   id = "x1000c5s1b0n1"
+   state = []
+
+   [tags]
+   ```
+
+   `configurationStatus` should change from `pending` to `configured` once CFS configuration of the node is complete.
+
+For more information on managing node with CFS, see the [Configuration Management](../../README.md#configuration-management) documentation.
 
 ## Cleanup Phase
 
@@ -530,15 +778,28 @@ TODO
 
 ### Remove CAN from CSM services
 
-```text
-TODO
-extract metallb configmap
-yq just the metallb stuff from new customizations
-merge into configmap
-load into metallb
+**Note** this will remove `CAN` service endpoints.
 
-kick pod? (luke did not have to) kubectl rollout restart
-```
+1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.
+
+   ```bash
+    yq r ${CLEANUPDIR}/customizations.yaml 'spec.network.metallb' |
+    yq p - 'data.config.' |
+    sed 's/config\:/config\:\ \|/' |
+    yq m - ${UPDATEDIR}/metallb.yaml > ${CLEANUPDIR}/metallb.yaml
+   ```
+
+2. (`ncn-m001#`) Apply MetalLB configuration map with `CHN` data to the system.
+
+   ```bash
+    kubectl apply -f ${CLEANUPDIR}/metallb.yaml 
+   ```
+
+3. (`ncn-m001#`) Reload MetalLB without `CAN` data to remove `CAN` services.
+
+   ```bash
+   kubectl rollout restart deployments -n metallb-system metallb-controller
+   ```
 
 ### Remove CAN interfaces from NCN workers
 
