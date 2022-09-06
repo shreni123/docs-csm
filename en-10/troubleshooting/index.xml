@@ -6,11 +6,11 @@
     <description>Recent content in Troubleshooting Information on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 05 Sep 2022 03:52:51 +0000</lastBuildDate><atom:link href="/docs-csm/en-10/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Sep 2022 03:55:40 +0000</lastBuildDate><atom:link href="/docs-csm/en-10/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PXE Booting Runbook</title>
       <link>/docs-csm/en-10/troubleshooting/pxe_runbook/</link>
-      <pubDate>Mon, 05 Sep 2022 03:52:54 +0000</pubDate>
+      <pubDate>Tue, 06 Sep 2022 03:55:43 +0000</pubDate>
       
       <guid>/docs-csm/en-10/troubleshooting/pxe_runbook/</guid>
       <description>PXE Booting Runbook PXE booting is a key component of a working Shasta system. There are a lot of different components involved, which increases the complexity. This guide runs through the most common issues and shows what is needed in order to have a successful PXE boot.
@@ -20,7 +20,7 @@
     <item>
       <title>Interpreting Hms Health Check Results</title>
       <link>/docs-csm/en-10/troubleshooting/interpreting_hms_health_check_results/</link>
-      <pubDate>Mon, 05 Sep 2022 03:52:52 +0000</pubDate>
+      <pubDate>Tue, 06 Sep 2022 03:55:41 +0000</pubDate>
       
       <guid>/docs-csm/en-10/troubleshooting/interpreting_hms_health_check_results/</guid>
       <description>Interpreting HMS Health Check Results Table of contents  Introduction HMS smoke tests HMS functional tests Additional troubleshooting  smd_discovery_status_test_ncn-smoke.sh  HTTPsGetFailed ChildVerificationFailed DiscoveryStarted     Install blocking vs. Non-blocking failures Known issues  Warning flags incorrectly set in HSM for Mountain BMCs BMCs set to On state in HSM ComponentEndpoints of Redfish subtype AuxiliaryController in HSM Custom Roles and SubRoles for Components in HSM    Introduction This document describes how to interpret the results of the HMS health check scripts and techniques for troubleshooting when failures occur.</description>
