@@ -105,7 +105,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 ### Create system backups
 
-**Recommend** copying and storing all data in ${BACKUPDIR} off-system in a version control repository is hightly recommended.
+**Recommend** copying and storing all data in ${BACKUPDIR} off-system in a version control repository is highly recommended.
 
 1. (`ncn-m001#`) Change to the backup directory.
 
@@ -157,7 +157,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 ## Update Phase
 
-**Recommend** copying and storing all data in ${UPDATEDIR} off-system in a version control repository is hightly recommended.
+**Recommend** copying and storing all data in ${UPDATEDIR} off-system in a version control repository is highly recommended.
 
 ### Update SLS
 
@@ -434,13 +434,13 @@ For more information on managing NCN personalization, see [Perform NCN Personali
    cd ${UPDATESDIR}
    ```
 
-1. (`ncn-m001#`) Apply MetalLB configuration map with `CHN` data to the system.
+2. (`ncn-m001#`) Apply MetalLB configuration map with `CHN` data to the system.
 
    ```bash
     kubectl apply -f ${UPDATEDIR}/metallb.yaml 
    ```
 
-2. (`ncn-m001#`) Reload MetalLB with `CHN` data to active new services.
+3. (`ncn-m001#`) Reload MetalLB with `CHN` data to active new services.
 
    ```bash
    kubectl rollout restart deployments -n metallb-system metallb-controller
@@ -686,7 +686,7 @@ For more information on managing node with CFS, see the [Configuration Managemen
 
 ## Cleanup Phase
 
-**Recommend** copying and storing all data in the ${CLEANUPDIR} off-system in a version control repository is hightly recommended.
+**Recommend** copying and storing all data in the ${CLEANUPDIR} off-system in a version control repository is highly recommended.
 
 ### Remove CAN from SLS
 
