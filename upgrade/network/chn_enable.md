@@ -731,11 +731,11 @@ For more information on managing node with CFS, see the [Configuration Managemen
    export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls
    ```
 
-3. (`ncn-m001#`) Add `CHN` to `SLS` data.
+3. (`ncn-m001#`) Remove `CAN` to `SLS` data.
 
    ```bash
-   ${SLS_CHN_DIR}/sls_del_can.py
-      --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json
+   ${SLS_CHN_DIR}/sls_del_can.py \
+      --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json \
       --sls-output-file ${CLEANUPDIR}/sls_file_without_can.json
    ```
 
@@ -747,19 +747,19 @@ For more information on managing node with CFS, see the [Configuration Managemen
 
 ### Remove CAN from customizations
 
-1. (`ncn-m001#`) Move to the update directory.
+1. (`ncn-m001#`) Move to the cleanup directory.
 
    ```bash
    cd ${CLEANUPDIR}
    ```
 
-2. (`ncn-m001#`) Set the directory location for the customizations script to add `CHN`.
+2. (`ncn-m001#`) Set the directory location for the customizations script to remoe `CAN`.
 
    ```bash
    export CUSTOMIZATIONS_SCRIPT_DIR=/usr/share/doc/csm/upgrade/scripts/upgrade/util
    ```
 
-3. (`ncn-m001#`) Create updated `customizations.yaml` against updated `SLS`.
+3. (`ncn-m001#`) Remove `CAN` from `customizations.yaml`.
 
    ```bash
    ${CUSTOMIZATIONS_SCRIPT_DIR}/update-customizations.sh ${UPDATEDIR}/customizations.yaml > ${CLEANUPDIR}/customizations.yaml
@@ -786,11 +786,7 @@ For more information on managing node with CFS, see the [Configuration Managemen
 2. (`ncn-m001#`) Set the directory location for the `BSS` `CHN` script.
 
    ```bash
-   [[ -f /usr/share/doc/csm/upgrade/scripts/bss/bss_remove_can.py ]] &&
-      export BSS_CAN_DIR=/usr/share/doc/csm/upgrade/scripts/bss || 
-      echo "STOP:  Manual intervention is required.
-      1. Ensure the [CSM 1.3 Documentation](../../update_product_stream/README.md#check-for-latest-documentation) is installed.
-      2. export BSS_CAN_DIR=/usr/share/doc/csm/upgrade/scripts/bss"
+      export BSS_CAN_DIR=/usr/share/doc/csm/upgrade/scripts/bss
    ```
 
 3. (`ncn-m001#`) Remove `CAN` from `BSS` data.
@@ -807,7 +803,7 @@ For more information on managing node with CFS, see the [Configuration Managemen
 
 ### Remove CAN from CSM services
 
-**Note** this will remove `CAN` service endpoints.
+**Note** this will remove `CAN` service endpoints in Kubernetes.
 
 1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.
 
