@@ -252,7 +252,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 1. (`ncn-m001#`) Change to updates directory
 
    ```bash
-   cd ${UPDATESDIR}
+   cd ${UPDATEDIR}
    ```
 
 2. (`ncn-m001#`) Ensure SHS is active by testing if there is an `HSN` IP address (typically `10.253`) on the `hsn0` interfaces.  If there is not primary address on the `hsn0` interface this must be fixed before proceeding;
@@ -439,7 +439,7 @@ For more information on managing NCN personalization, see [Perform NCN Personali
 1. (`ncn-m001#`) Change to updates directory.
 
    ```bash
-   cd ${UPDATESDIR}
+   cd ${UPDATEDIR}
    ```
 
 2. (`ncn-m001#`) Apply MetalLB configuration map with `CHN` data to the system.
@@ -497,7 +497,7 @@ Existing UAIs will continue to use the network that was set when it was created.
 1. (`ncn-m001#`) Change to updates directory
 
    ```bash
-   cd ${UPDATESDIR}
+   cd ${UPDATEDIR}
    ```
 
 2. (`ncn-m001#`) Process the SLS file:
