@@ -10,14 +10,17 @@
     - [Preparation](#preparation)
     - [Create system backups](#create-system-backups)
   - [Update Phase](#update-phase)
+    - [Disable CFS for UAN](#disable-cfs-for-uan)
     - [Update SLS](#update-sls)
     - [Update customizations](#update-customizations)
-    - [Update MetalLB data](#update-metallb-data)
     - [Update CSM Service endpoint data (MetalLB)](#update-csm-service-endpoint-data-metallb)
   - [Migrate Phase](#migrate-phase)
     - [Migrate NCN workers](#migrate-ncn-workers)
     - [Migrate CSM Services (MetalLB)](#migrate-csm-services-metallb)
     - [Migrate UAN](#migrate-uan)
+    - [Minimizing UAN downtime](#minimizing-uan-downtime)
+      - [Enable CFS for UAN](#enable-cfs-for-uan)
+      - [Notify UAN users](#notify-uan-users)
     - [Migrate UAI](#migrate-uai)
     - [Migrate Computes (optional)](#migrate-computes-optional)
       - [Add compute IP addresses to CHN SLS data](#add-compute-ip-addresses-to-chn-sls-data)
@@ -28,9 +31,8 @@
     - [Remove CAN from customizations](#remove-can-from-customizations)
     - [Remove CAN from BSS](#remove-can-from-bss)
     - [Remove CAN from CSM services](#remove-can-from-csm-services)
-    - [Remove CAN interfaces from NCN workers](#remove-can-interfaces-from-ncn-workers)
-    - [Remove CAN names from hosts file](#remove-can-names-from-hosts-file)
-    - [Remove CAN service endpoints](#remove-can-service-endpoints)
+    - [Remove CAN interfaces from NCNs](#remove-can-interfaces-from-ncns)
+    - [Remove CAN names from NCN hosts file](#remove-can-names-from-ncn-hosts-file)
   - [Update the management network](#update-the-management-network)
   - [Testing](#testing)
 
@@ -159,6 +161,14 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 **Recommend** copying and storing all data in ${UPDATEDIR} off-system in a version control repository is highly recommended.
 
+### Disable CFS for UAN
+
+1. (`ncn-m001#`) Disable CFS changes on UAN to prevent migration to the `CHN`.
+
+   ```bash
+   for xname in $(cray hsm state components list --role Application --subrole UAN --type Node --format json | jq -r .Components[].ID) ; do cray cfs components update --enabled false --format json $xname; done
+   ```
+
 ### Update SLS
 
 1. (`ncn-m001#`) Move to the update directory.
@@ -224,11 +234,9 @@ However, during the migration phase, ample time and flexibility exists to contac
    kubectl create secret -n loftsman generic site-init --from-file=${UPDATEDIR}/customizations.yaml
    ```
 
-### Update MetalLB data
-
 ### Update CSM Service endpoint data (MetalLB)
 
-1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.
+1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.  The new configmap will not be applied in the update phase as this would change service endpoints earlier than desired.
 
    ```bash
     yq r ${UPDATEDIR}/customizations.yaml 'spec.network.metallb' |
@@ -448,19 +456,41 @@ For more information on managing NCN personalization, see [Perform NCN Personali
 
 ### Migrate UAN
 
-```text
-TODO
-```
+### Minimizing UAN downtime
+
+UANs running before and during an upgrade to CSM 1.2 will continue running with no connectivity or local data impacts until an administrator-scheduled transition takes place. UAN rebuilds and reboots durig this time are not supported.
+
+The time frame over which the transition can be scheduled is quite large and the transition requires only that UAN users log out of the UAN (over the old IPv4 address) and log back in (over a new IPv4 address).
+
+Administrators should enable CFS for UAN, ensure plays run successfully and then notify users to migrate by logging out of the UAN over the `CAN` and back in over the `CHN`.
+
+#### Enable CFS for UAN
+
+1. (`ncn-m001#`) Enable CFS changes on UAN.
+
+   ```bash
+   for xname in $(cray hsm state components list --role Application --subrole UAN --type Node --format json | jq -r .Components[].ID) ; do cray cfs components update --enabled true --format json $xname; done
+   ```
+
+2. (`ncn-m001#`) Ensure that CFS has run successfully on all UAN.  This may take several minutes.
+
+   ```bash
+   for xname in $(cray hsm state components list --role Application --subrole UAN --type Node --format json | jq -r .Components[].ID) ; do cray cfs components describe --format json $xname; done
+   ```
+
+#### Notify UAN users
+
+Notify users to log out of the UAN over the `CAN` and back in over the `CHN`.  The old `CAN` interface is removed during UAN rebuild, but access over the `CAN` will be removed during the [management network upgrade](#update-the-management-network).
 
 ### Migrate UAI
 
-```text
-TODO
-```
+Newly created User Access Instances (UAI) will use the network configured as the `SystemDefaultRoute` in the SLS BICAN network structure.
+
+Existing UAIs will continue to use the network that was set when it was created.  Users with existing UAI will need to recreate their instances before the `CAN` network is removed from workers and the management in the cleanup phase below.
 
 ### Migrate Computes (optional)
 
-**Important** This part of the procedure is needed only if all compute nodes will have a `CHN` IPv4 address.  This implies that the `CHN` subnet is large enough to hold *all* compute nodes in the system.
+**Important** This part of the procedure is needed only if all compute nodes will have a `CHN` IPv4 address.  The `CHN` subnet must be large enough to hold *all* compute nodes in the system. The same UAN CFS configuration is used for computes.
 
 #### Add compute IP addresses to CHN SLS data
 
@@ -470,21 +500,20 @@ TODO
    cd ${UPDATESDIR}
    ```
 
-(`ncn-mw#`) Process the SLS file:
+2. (`ncn-m001#`) Process the SLS file:
 
    ```bash
    DOCDIR=/usr/share/doc/csm/upgrade/scripts/sls
-   ${DOCDIR}/add_computes_to_chn.py --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json
+   ${DOCDIR}/add_computes_to_chn.py --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json 
+      --sls-output-file ${UPDATEDIR}/sls_file_with_chn_and_computes.json
    ```
-
-The default output file name will be `chn_with_computes_added_sls_file.json`, but can be changed by using the flag `--sls-output-file` with the script.
 
 #### Upload migrated SLS file to SLS service
 
-(`ncn-mw#`) If the following command does not complete successfully, check if the `TOKEN` environment variable is set correctly.
+(`ncn-m001#`) If the following command does not complete successfully, check if the `TOKEN` environment variable is set correctly.
 
    ```bash
-   curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${UPDATEDIR}/sls_file_with_chn.json"
+   curl --fail -H "Authorization: Bearer ${TOKEN}" -k -L -X POST 'https://api-gw-service-nmn.local/apis/sls/v1/loadstate' -F "sls_dump=@${UPDATEDIR}/sls_file_with_chn_and_computes.json"
    ```
 
 #### Enable CFS layer
@@ -493,7 +522,7 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
 
 1. Determine the CFS configuration in use on the compute nodes.
 
-   1. (`ncn#`) Identify the compute nodes.
+   1. (`ncn-m001#`) Identify the compute nodes.
 
       ```bash
       cray hsm state components list --role Compute --format json | jq -r '.Components[] | .ID'
@@ -508,7 +537,7 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
       x1000c5s0b0n1
       ```
 
-   2. (`ncn#`) Identify CFS configuration in use on the compute nodes.
+   2. (`ncn-m001#`) Identify CFS configuration in use on the compute nodes.
 
       ```bash
       cray cfs components describe --format toml x1000c5s1b0n1
@@ -524,15 +553,15 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
       id = "x1000c5s1b0n1"
       ```
 
-   3. (`ncn#`) Extract the CFS configuration.
+   3. (`ncn-m001#`) Extract the CFS configuration.
 
       ```bash
-      cray cfs configurations describe cos-config-full-2.3-integration --format json | jq 'del(.lastUpdated) | del(.name)' > cos-config-full-2.3-integration.json
+      cray cfs configurations describe cos-config-full-2.3-integration --format json | jq 'del(.lastUpdated) | del(.name)' > ${UPDATEDIR}/cos-config-full-2.3-integration.json
       ```
 
 2. Identify the UAN CFS configuration.
 
-   1. (`ncn#`) Identify the UAN nodes.
+   1. (`ncn-m001#`) Identify the UAN nodes.
 
       ```bash
       cray hsm state components list --role Application --subrole UAN --format    json | jq -r '.Components[] | .ID'
@@ -546,7 +575,7 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
       x3000c0s15b0n0
       ```
 
-   2. (`ncn#`) Identify the UAN CFS configuration in use.
+   2. (`ncn-m001#`) Identify the UAN CFS configuration in use.
 
       ```bash
       cray cfs components describe --format toml x3000c0s25b0n0
@@ -562,7 +591,7 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
       id = "x3000c0s25b0n0"
       ```
 
-   3. (`ncn#`) Identify the UAN CFS configuration layer.
+   3. (`ncn-m001#`) Identify the UAN CFS configuration layer.
 
       ```bash
       cray cfs configurations describe chn-uan-cn --format json
@@ -587,10 +616,10 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
 
 3. Edit the extracted compute node configuration and add the UAN layer to it.
 
-4. (`ncn#`) Update the compute node CFS configuration.
+4. (`ncn-m001#`) Update the compute node CFS configuration.
 
    ```bash
-   cray cfs configurations update cos-config-full-2.3-integration --file cos-config-full-2.3-integration.json --format toml
+   cray cfs configurations update cos-config-full-2.3-integration --file ${UPDATEDIR}/cos-config-full-2.3-integration.json --format toml
    ```
 
    Example output:
@@ -659,7 +688,7 @@ The default output file name will be `chn_with_computes_added_sls_file.json`, bu
    playbook = "site.yml"
    ```
 
-5. (`ncn#`) Check that CFS configuration of the compute node completes successfully.
+5. (`ncn-m001#`) Check that CFS configuration of the compute node completes successfully.
 
    Updating the CFS configuration will cause CFS to schedule the nodes for configuration. Run the following command to verify this has occurred.
 
@@ -801,23 +830,24 @@ For more information on managing node with CFS, see the [Configuration Managemen
    kubectl rollout restart deployments -n metallb-system metallb-controller
    ```
 
-### Remove CAN interfaces from NCN workers
+### Remove CAN interfaces from NCNs
 
-```text
-TODO
-```
+1. (`ncn-m001#`) Remove `CAN` interfaces from NCN master, worker and storage nodes.
 
-### Remove CAN names from hosts file
+   ```bash
+   pdsh -w $(grep -oP 'ncn-[mws]\d+' /etc/hosts | sort -u |  tr -t '\n' ',') \
+                     'rm /etc/sysconfig/network/ifcfg-bond0.can0; \
+                      wicked ifdown bond0.can0'
+   ```
 
-```text
-TODO
-```
+### Remove CAN names from NCN hosts file
 
-### Remove CAN service endpoints
+1. (`ncn-m001#`) Remove `CAN` names from host files.
 
-```text
-TODO
-```
+   ```bash
+   pdsh -w $(grep -oP 'ncn-[mws]\d+' /etc/hosts | sort -u |  tr -t '\n' ',') \
+                    sed -i '/\.can/d' /etc/hosts
+   ```
 
 ## Update the management network
 
