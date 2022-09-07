@@ -186,9 +186,9 @@ However, during the migration phase, ample time and flexibility exists to contac
 3. (`ncn-m001#`) Add `CHN` to `SLS` data.
 
    ```bash
-   ${SLS_CHN_DIR}/sls_can_to_chn.py --sls-input-file ${BACKUPDIR}/sls_input_file.json
-      --customer-highspeed-network <CHN VLAN> <CHN IPv4 Subnet>
-      --number-of-chn-edge-switches <number of edge switches>
+   ${SLS_CHN_DIR}/sls_can_to_chn.py --sls-input-file ${BACKUPDIR}/sls_input_file.json \
+      --customer-highspeed-network <CHN VLAN> <CHN IPv4 Subnet> \
+      --number-of-chn-edge-switches <number of edge switches> \
       --sls-output-file ${UPDATEDIR}/sls_file_with_chn.json
    ```
 
