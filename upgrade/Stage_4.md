@@ -1,7 +1,7 @@
 # Stage 4 - Ceph Upgrade
 
 **Reminder:** If any problems are encountered and the procedure or command output does not provide relevant guidance, then see
-[Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+[Relevant troubleshooting links for upgrade-related issues](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 - [Ceph upgrade contents](#ceph-upgrade-contents)
 - [Start typescript](#start-typescript)
@@ -224,10 +224,10 @@ See [Ceph Orchestrator Usage](../operations/utility_storage/Ceph_Orchestrator_Us
 
 ## Stop typescript
 
-Stop any typescripts that were started during this stage.
+For any typescripts that were started during this stage, stop them with the `exit` command.
 
 ## Stage completed
 
 **DO NOT** proceed past this point if the upgrade has not completed and been verified. Contact support for in-depth troubleshooting.
 
-This stage is completed. Continue to [Stage 5](Stage_5.md).
+This stage is completed. Proceed to [Validate CSM health](README.md#4-validate-csm-health) on the main upgrade page.

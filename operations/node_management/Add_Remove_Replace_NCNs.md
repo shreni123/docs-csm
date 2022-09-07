@@ -11,13 +11,13 @@ Add, remove, replace, or move non-compute nodes (NCNs). This applies to worker, 
 The following workflows are available:
 
 * [Prerequisites](#prerequisites)
-* [Add worker, storage, or master NCNs](#add-worker-storage-master-ncns)
+* [Add worker, storage, or master NCNs](#add-worker-storage-or-master-ncns)
   * [Add NCN prerequisites](#add-ncn-prerequisites)
   * [Add NCN procedure](#add-ncn-procedure)
-* [Remove worker, storage, or master NCNs](#remove-worker-storage-master-ncns)
+* [Remove worker, storage, or master NCNs](#remove-worker-storage-or-master-ncns)
   * [Remove NCN prerequisites](#remove-ncn-prerequisites)
   * [Remove NCN procedure](#remove-ncn-procedure)
-* [Replace or move worker, storage, or master NCNs](#replace-worker-storage-master-ncns)
+* [Replace or move worker, storage, or master NCNs](#replace-or-move-worker-storage-or-master-ncns)
   * [Replace NCN procedure](#replace-ncn-procedure)
 
 ## Prerequisites
@@ -185,7 +185,7 @@ XNAME=<xname>
 **IMPORTANT:** Ensure that the node being added to the system has been properly configured. If the node being added to the system has not been previously in the system, several settings need to be verified.
 
 * Ensure that the NCN device to be added has been racked and cabled per the SHCD.
-* Ensure that the NCN BMC is configured with the expected root user credentials.
+* Ensure that the NCN BMC is configured with the expected root user credentials. If the BMC does not have the root user credentials set or if its is unknown, then they will be configured later in this procedure.
 
    (`ncn-m#`) The NCN BMC credentials need to match the current global air-cooled BMC default credentials. These can be viewed with the following commands:
 
@@ -206,86 +206,10 @@ XNAME=<xname>
    Cray    map[password:foobar username:root] 
    ```
 
-* If adding an NCN that was not previously in the system, then follow the
-  [Access and Update the Settings for Replacement NCNs](Access_and_Update_the_Settings_for_Replacement_NCNs.md) procedure.
 * Ensure that the NCN BMC is configured to use DHCP.
   * This does not apply to the BMC for `ncn-m001`, because it is statically configured for the site.
 * Ensure that the NCN is configured to boot over the PCIe NICs instead of the Onboard 1 Gig NICs.
   * See the [Switch PXE Boot from Onboard NIC to PCIe](Switch_PXE_Boot_From_Onboard_NICs_to_PCIe.md) procedure.
-
-* If adding an HPE NCN, then ensure that IPMI is enabled.
-
-   1. (`ncn-m#`) Check to see if IPMI is enabled:
-
-      > `read -s` is used to read the password in order to prevent it from being echoed to the screen or saved in the shell history.
-      > Note that the subsequent `curl` commands **will** do both of these things. If this is not desired, then the call should be made in
-      > another way.
-
-      ```bash
-      NCN_BMC=ncn_bmc_hostname_or_ip_address
-      read -r -s -p "${NCN_BMC} root password: " IPMI_PASSWORD
-      export IPMI_PASSWORD
-      curl -k -u root:"${IPMI_PASSWORD}" "https://${NCN_BMC}/redfish/v1/Managers/1/NetworkProtocol" | jq .IPMI
-      ```
-
-      Expected output:
-
-      ```json
-      {
-         "Port": 623,
-         "ProtocolEnabled": true
-      }
-      ```
-
-   1. (`ncn-m#`) If IPMI is disabled, then enable IPMI and restart the BMC.
-
-      1. Enable IPMI.
-
-         ```bash
-         curl -k -u root:"${IPMI_PASSWORD}" -X PATCH -H 'Content-Type: application/json' \
-            -d '{"IPMI": {"Port": 623, "ProtocolEnabled": true}}' \
-            "https://${NCN_BMC}/redfish/v1/Managers/1/NetworkProtocol" | jq
-         ```
-
-         Expected output:
-
-         ```json
-         {
-            "error": {
-               "code": "iLO.0.10.ExtendedInfo",
-               "message": "See @Message.ExtendedInfo for more information.",
-               "@Message.ExtendedInfo": [
-                  {
-                  "MessageId": "iLO.2.14.ResetRequired"
-                  }
-               ]
-            }
-         }
-         ```
-
-      1. Restart the BMC.
-
-         ```bash
-         curl -k -u root:"${IPMI_PASSWORD}" -X POST -H 'Content-Type: application/json' \
-            -d '{"ResetType": "GracefulRestart"}' \
-            "https://${NCN_BMC}/redfish/v1/Managers/1/Actions/Manager.Reset" | jq
-         ```
-
-         Expected output:
-
-         ```json
-         {
-            "error": {
-               "code": "iLO.0.10.ExtendedInfo",
-               "message": "See @Message.ExtendedInfo for more information.",
-               "@Message.ExtendedInfo": [
-                  {
-                  "MessageId": "iLO.2.14.ResetInProgress"
-                  }
-               ]
-            }
-         }
-         ```
 
 ### Add NCN procedure
 
@@ -342,5 +266,5 @@ In general, scaling master nodes is not recommended because it can cause Etcd la
 
 The following is a high-level overview of the replace NCN workflow:
 
-1. [Remove Worker, Storage, or Master NCNs](#remove-worker-storage-master-ncns)
-1. [Add Worker, Storage, or Master NCNs](#add-worker-storage-master-ncns)
+1. [Remove Worker, Storage, or Master NCNs](#remove-worker-storage-or-master-ncns)
+1. [Add Worker, Storage, or Master NCNs](#add-worker-storage-or-master-ncns)

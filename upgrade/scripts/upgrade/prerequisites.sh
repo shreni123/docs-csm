@@ -30,7 +30,7 @@ locOfScript=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 . ${locOfScript}/../common/ncn-common.sh $(hostname)
 trap 'err_report' ERR INT TERM HUP EXIT
 # array for paths to unmount after chrooting images
-#shellcheck disable=SC2034
+# shellcheck disable=SC2034
 declare -a UNMOUNTS=()
 
 while [[ $# -gt 0 ]]
@@ -65,16 +65,86 @@ if [[ -z ${CSM_ARTI_DIR} ]]; then
     echo "CSM_ARTI_DIR environment variable has not been set"
     echo "make sure you have run: prepare-assets.sh"
     exit 1
+elif [[ ! -e ${CSM_ARTI_DIR} ]]; then
+    echo "CSM_ARTI_DIR does not exist: ${CSM_ARTI_DIR}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+elif [[ ! -d ${CSM_ARTI_DIR} ]]; then
+    echo "CSM_ARTI_DIR exists but is not a directory"
+    ls -ald "${CSM_ARTI_DIR}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
 fi
 
-state_name="CHECK_WEAVE"
-state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+CSM_MANIFESTS_DIR=${CSM_ARTI_DIR}/manifests
+if [[ ! -e ${CSM_MANIFESTS_DIR} ]]; then
+    echo "CSM manifests directory does not exist: ${CSM_MANIFESTS_DIR}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+elif [[ ! -d ${CSM_MANIFESTS_DIR} ]]; then
+    echo "Location of CSM manifests directory exists but is not a directory"
+    ls -ald "${CSM_MANIFESTS_DIR}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+fi
+
+EXTRACT_CHART_MANIFEST="${locOfScript}/util/extract_chart_manifest.py"
+if [[ ! -e ${EXTRACT_CHART_MANIFEST} ]]; then
+    echo "Tool does not exist: ${EXTRACT_CHART_MANIFEST}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+elif [[ ! -f ${EXTRACT_CHART_MANIFEST} ]]; then
+    echo "Tool exists but is not a regular file: ${EXTRACT_CHART_MANIFEST}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+elif [[ ! -x ${EXTRACT_CHART_MANIFEST} ]]; then
+    echo "Tool exists but is not executable: ${EXTRACT_CHART_MANIFEST}"
+    echo "make sure you have run: prepare-assets.sh"
+    exit 1
+fi
+
 TOKEN=$(curl -s -S -d grant_type=client_credentials \
                    -d client_id=admin-client \
                    -d client_secret="$(kubectl get secrets admin-client-auth -o jsonpath='{.data.client-secret}' | base64 -d)" \
                    https://api-gw-service-nmn.local/keycloak/realms/shasta/protocol/openid-connect/token | jq -r '.access_token')
 export TOKEN
 
+# Make a backup copy of select pre-upgrade information, just in case it is needed for later reference.
+# This is only run on ncn-m001 (not when it is run from ncn-m002 during the upgrade)
+state_name="BACKUP_SNAPSHOT"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
+if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
+    echo "====> ${state_name} ..."
+    {
+
+    DATESTRING=$(date +%Y-%m-%d_%H-%M-%S)
+    SNAPSHOT_DIR=$(mktemp -d --tmpdir=/root csm_upgrade.pre_upgrade_snapshot.${DATESTRING}.XXXXXX)
+    echo "Pre-upgrade snapshot directory: ${SNAPSHOT_DIR}"
+
+    # Record CFS components and configurations, since these are modified during the upgrade process
+    CFS_CONFIG_SNAPSHOT="${SNAPSHOT_DIR}/cfs_configurations.json"
+    echo "Backing up CFS configurations to ${CFS_CONFIG_SNAPSHOT}"
+    curl -k -H "Authorization: Bearer $TOKEN" https://api-gw-service-nmn.local/apis/cfs/v2/configurations > "${CFS_CONFIG_SNAPSHOT}"
+
+    CFS_COMP_SNAPSHOT="${SNAPSHOT_DIR}/cfs_components.json"
+    echo "Backing up CFS components to ${CFS_COMP_SNAPSHOT}"
+    curl -k -H "Authorization: Bearer $TOKEN" https://api-gw-service-nmn.local/apis/cfs/v2/components > "${CFS_COMP_SNAPSHOT}"
+
+    # Record state of Kubernetes pods. If a pod is later seen in an unexpected state, this can provide a reference to
+    # determine whether or not the issue existed prior to the upgrade.
+    K8S_PODS_SNAPSHOT="${SNAPSHOT_DIR}/k8s_pods.txt"
+    echo "Taking snapshot of current Kubernetes pod states to ${K8S_PODS_SNAPSHOT}"
+    kubectl get pods -A -o wide --show-labels > "${K8S_PODS_SNAPSHOT}"
+
+    } >> ${LOG_FILE} 2>&1
+    record_state ${state_name} "$(hostname)"
+    echo
+else
+    echo "====> ${state_name} has been completed"
+fi
+
+state_name="CHECK_WEAVE"
+state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
@@ -160,9 +230,9 @@ if [[ $state_recorded == "0" ]]; then
         # copy the NTP script and template to the target ncn
         rsync -aq "${CSM_ARTI_DIR}"/chrony "$target_ncn":/srv/cray/scripts/common/
 
-        # shellcheck disable=SC2029 # it's ok that $TOKEN expands on the client side
+        # shellcheck disable=SC2029 # it is intentional that ${TOKEN} expands on the client side
         # run the script
-        if ! ssh "$target_ncn" "TOKEN=$TOKEN /srv/cray/scripts/common/chrony/csm_ntp.py"; then
+        if ! ssh "${target_ncn}" "TOKEN=${TOKEN} /srv/cray/scripts/common/chrony/csm_ntp.py"; then
             echo "${target_ncn} csm_ntp failed"
             exit 1
         fi
@@ -357,27 +427,29 @@ state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
+
     manifest_folder='/tmp'
-    csm_config_version=$(ls ${CSM_ARTI_DIR}/helm |grep csm-config|sed -e 's/\.[^./]*$//'|sed -e 's/^csm-config-//')
-    if [ -z "$csm_config_version" ]; then
-      echo "ERROR: null value found.  See the variable"
-      echo "csm_config_version is $csm_config_version."
-      exit 1
-    fi
-    cat > $manifest_folder/csm_config.yaml <<EOF
-apiVersion: manifests/v1beta1
-metadata:
-  name: cray-csm-config
-spec:
-  charts:
-  - name: csm-config
-    namespace: services
-    source: csm
-    version: $csm_config_version
-EOF
-    echo "$manifest_folder/csm_config.yaml"
-    cat $manifest_folder/csm_config.yaml
-    loftsman ship --charts-path ${CSM_ARTI_DIR}/helm/ --manifest-path $manifest_folder/csm_config.yaml
+    
+    # Get customizations.yaml
+    TMP_CUST_YAML=$(mktemp --tmpdir="${manifest_folder}" customizations.XXXXXX.yaml)
+    set -o pipefail
+    kubectl get secrets -n loftsman site-init -o jsonpath='{.data.customizations\.yaml}' | base64 -d > "${TMP_CUST_YAML}"
+    set +o pipefail
+
+    # Create the base of the new manifest
+    TMP_MANIFEST=$(mktemp --tmpdir="${manifest_folder}" csm-config.XXXXXX.yaml)
+    echo "${TMP_MANIFEST}"
+    "${EXTRACT_CHART_MANIFEST}" csm-config "${CSM_MANIFESTS_DIR}/sysmgmt.yaml" > "${TMP_MANIFEST}"
+    cat "${TMP_MANIFEST}"
+
+    # Customize it
+    TMP_MANIFEST_CUSTOMIZED=$(mktemp --tmpdir="${manifest_folder}" csm-config.customized.XXXXXX.yaml)
+    echo "${TMP_MANIFEST_CUSTOMIZED}"
+    manifestgen -i "${TMP_MANIFEST}" -c "${TMP_CUST_YAML}" -o "${TMP_MANIFEST_CUSTOMIZED}"
+    cat "${TMP_MANIFEST_CUSTOMIZED}"
+
+    loftsman ship --manifest-path "${TMP_MANIFEST_CUSTOMIZED}"
+
     } >> ${LOG_FILE} 2>&1
     record_state ${state_name} "$(hostname)"
 else
@@ -389,27 +461,29 @@ state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
+
     manifest_folder='/tmp'
-    kyverno_version=$(ls ${CSM_ARTI_DIR}/helm |grep cray-kyverno|sed -e 's/\.[^./]*$//'|cut -d '-' -f3)
-    if [ -z "$kyverno_version" ]; then
-      echo "ERROR: null value found.  See the variable"
-      echo "kyverno_version is $kyverno_version."
-      exit 1
-    fi
-    cat > $manifest_folder/kyverno.yaml <<EOF
-apiVersion: manifests/v1beta1
-metadata:
-  name: cray-kyverno
-spec:
-  charts:
-  - name: cray-kyverno
-    namespace: kyverno
-    source: csm
-    version: $kyverno_version
-EOF
-    echo "$manifest_folder/kyverno.yaml"
-    cat $manifest_folder/kyverno.yaml
-    loftsman ship --charts-path ${CSM_ARTI_DIR}/helm/ --manifest-path $manifest_folder/kyverno.yaml
+    
+    # Get customizations.yaml
+    TMP_CUST_YAML=$(mktemp --tmpdir="${manifest_folder}" customizations.XXXXXX.yaml)
+    set -o pipefail
+    kubectl get secrets -n loftsman site-init -o jsonpath='{.data.customizations\.yaml}' | base64 -d > "${TMP_CUST_YAML}"
+    set +o pipefail
+
+    # Create the base of the new manifest
+    TMP_MANIFEST=$(mktemp --tmpdir="${manifest_folder}" cray-kyverno.XXXXXX.yaml)
+    echo "${TMP_MANIFEST}"
+    "${EXTRACT_CHART_MANIFEST}" cray-kyverno "${CSM_MANIFESTS_DIR}/platform.yaml" > "${TMP_MANIFEST}"
+    cat "${TMP_MANIFEST}"
+
+    # Customize it
+    TMP_MANIFEST_CUSTOMIZED=$(mktemp --tmpdir="${manifest_folder}" cray-kyverno.customized.XXXXXX.yaml)
+    echo "${TMP_MANIFEST_CUSTOMIZED}"
+    manifestgen -i "${TMP_MANIFEST}" -c "${TMP_CUST_YAML}" -o "${TMP_MANIFEST_CUSTOMIZED}"
+    cat "${TMP_MANIFEST_CUSTOMIZED}"
+
+    loftsman ship --manifest-path "${TMP_MANIFEST_CUSTOMIZED}"
+
     } >> ${LOG_FILE} 2>&1
     record_state ${state_name} "$(hostname)"
 else
@@ -421,27 +495,29 @@ state_recorded=$(is_state_recorded "${state_name}" "$(hostname)")
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
+
     manifest_folder='/tmp'
-    kyverno_policy_version=$(ls ${CSM_ARTI_DIR}/helm |grep kyverno-policy|sed -e 's/\.[^./]*$//'|cut -d '-' -f3)
-    if [ -z "$kyverno_policy_version" ]; then
-      echo "ERROR: null value found.  See the variable"
-      echo "kyverno_policy_version is $kyverno_policy_version."
-      exit 1
-    fi
-    cat > $manifest_folder/kyverno-policy.yaml <<EOF
-apiVersion: manifests/v1beta1
-metadata:
-  name: kyverno-policy
-spec:
-  charts:
-  - name: kyverno-policy
-    namespace: kyverno
-    source: csm
-    version: $kyverno_policy_version
-EOF
-    echo "$manifest_folder/kyverno-policy.yaml"
-    cat $manifest_folder/kyverno-policy.yaml
-    loftsman ship --charts-path ${CSM_ARTI_DIR}/helm/ --manifest-path $manifest_folder/kyverno-policy.yaml
+    
+    # Get customizations.yaml
+    TMP_CUST_YAML=$(mktemp --tmpdir="${manifest_folder}" customizations.XXXXXX.yaml)
+    set -o pipefail
+    kubectl get secrets -n loftsman site-init -o jsonpath='{.data.customizations\.yaml}' | base64 -d > "${TMP_CUST_YAML}"
+    set +o pipefail
+
+    # Create the base of the new manifest
+    TMP_MANIFEST=$(mktemp --tmpdir="${manifest_folder}" kyverno-policy.XXXXXX.yaml)
+    echo "${TMP_MANIFEST}"
+    "${EXTRACT_CHART_MANIFEST}" kyverno-policy "${CSM_MANIFESTS_DIR}/platform.yaml" > "${TMP_MANIFEST}"
+    cat "${TMP_MANIFEST}"
+
+    # Customize it
+    TMP_MANIFEST_CUSTOMIZED=$(mktemp --tmpdir="${manifest_folder}" kyverno-policy.customized.XXXXXX.yaml)
+    echo "${TMP_MANIFEST_CUSTOMIZED}"
+    manifestgen -i "${TMP_MANIFEST}" -c "${TMP_CUST_YAML}" -o "${TMP_MANIFEST_CUSTOMIZED}"
+    cat "${TMP_MANIFEST_CUSTOMIZED}"
+
+    loftsman ship --manifest-path "${TMP_MANIFEST_CUSTOMIZED}"
+
     } >> ${LOG_FILE} 2>&1
     record_state ${state_name} "$(hostname)"
 else
@@ -466,7 +542,6 @@ state_recorded=$(is_state_recorded "${state_name}" $(hostname))
 if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     echo "====> ${state_name} ..."
     {
-    temp_file=$(mktemp)
     artdir=${CSM_ARTI_DIR}/images
     #shellcheck disable=SC2155
     export SQUASHFS_ROOT_PW_HASH=$(awk -F':' /^root:/'{print $2}' < /etc/shadow)
@@ -493,7 +568,7 @@ if [[ $state_recorded == "0" && $(hostname) == "ncn-m001" ]]; then
     if [ ${k8s_done} = 1 ] && [ ${ceph_done} = 1 ]; then
         echo "Already ran $NCN_IMAGE_MOD_SCRIPT, skipping re-run."
     else
-        rm -f "$artidir/storage-ceph/secure-storage-ceph-${CEPH_VERSION}.squashfs" "$artdir/kubernetes/secure-kubernetes-${KUBERNETES_VERSION}.squashfs"
+        rm -f "$artdir/storage-ceph/secure-storage-ceph-${CEPH_VERSION}.squashfs" "$artdir/kubernetes/secure-kubernetes-${KUBERNETES_VERSION}.squashfs"
         DEBUG=1 $NCN_IMAGE_MOD_SCRIPT \
             -d /root/.ssh \
             -k "$artdir/kubernetes/kubernetes-${KUBERNETES_VERSION}.squashfs" \
@@ -648,7 +723,7 @@ spec:
   -
 EOF
 
-    yq r "${CSM_ARTI_DIR}/manifests/platform.yaml" 'spec.charts.(name==cray-precache-images)' | sed 's/^/    /' >> $tmp_manifest
+    yq r "${CSM_MANIFESTS_DIR}/platform.yaml" 'spec.charts.(name==cray-precache-images)' | sed 's/^/    /' >> $tmp_manifest
     loftsman ship --charts-path "${CSM_ARTI_DIR}/helm" --manifest-path $tmp_manifest
 
     #

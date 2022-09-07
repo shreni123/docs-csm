@@ -4,7 +4,7 @@
 >
 > - CSM 1.2.0 or higher is required in order to upgrade to CSM 1.3.0.
 > - If any problems are encountered and the procedure or command output does not provide relevant guidance, see
->   [Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+>   [Relevant troubleshooting links for upgrade-related issues](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 Stage 0 has several critical procedures which prepare the environment and verify if the environment is ready for the upgrade.
 
@@ -12,8 +12,11 @@ Stage 0 has several critical procedures which prepare the environment and verify
 - [Stage 0.1 - Prepare assets](#stage-01---prepare-assets)
   - [Direct download](#direct-download)
   - [Manual copy](#manual-copy)
-- [Stage 0.2 - Prerequisites check](#stage-03---prerequisites-check)
-- [Stage 0.3 - Backup workload manager data](#stage-04---backup-workload-manager-data)
+- [Stage 0.2 - Prerequisites](#stage-02---prerequisites)
+- [Stage 0.3 - Customize the new NCN image and update NCN personalization configurations](#stage-03---customize-the-new-ncn-image-and-update-ncn-personalization-configurations)
+  - [Standard upgrade](#standard-upgrade)
+  - [CSM-only system upgrade](#csm-only-system-upgrade)
+- [Stage 0.4 - Backup workload manager data](#stage-04---backup-workload-manager-data)
 - [Stop typescript](#stop-typescript)
 - [Stage completed](#stage-completed)
 
@@ -117,7 +120,7 @@ after a break, always be sure that a typescript is running before proceeding.
    /usr/share/doc/csm/upgrade/scripts/upgrade/prepare-assets.sh --csm-version ${CSM_RELEASE} --endpoint "${ENDPOINT}"
    ```
 
-1. Skip the `Manual copy` subsection and proceed to [Stage 0.2 - Update SLS](#stage-02---update-sls)
+1. Skip the `Manual copy` subsection and proceed to [Stage 0.2 - Prerequisites](#stage-02---prerequisites)
 
 ### Manual copy
 
@@ -141,7 +144,7 @@ after a break, always be sure that a typescript is running before proceeding.
    /usr/share/doc/csm/upgrade/scripts/upgrade/prepare-assets.sh --csm-version ${CSM_RELEASE} --tarball-file "${CSM_TAR_PATH}"
    ```
 
-## Stage 0.2 - Prerequisites check
+## Stage 0.2 - Prerequisites
 
 1. (`ncn-m001#`) Set the `SW_ADMIN_PASSWORD` environment variable.
 
@@ -186,13 +189,8 @@ after a break, always be sure that a typescript is running before proceeding.
    ```
 
    If the script does not end with this output, then try rerunning it. If it still fails, see
-   [Upgrade Troubleshooting](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+   [Upgrade Troubleshooting](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
    If the failure persists, then open a support ticket for guidance before proceeding.
-
-1. (`ncn-m001#`) Assign a new CFS configuration to the worker nodes.
-
-   The content of the new CFS configuration is described in *HPE Cray EX System Software Getting Started Guide S-8000*, section
-   "HPE Cray EX Software Upgrade Workflow" subsection "Cray System Management (CSM)".
 
 1. (`ncn-m001#`) Unset the `NEXUS_PASSWORD` variable, if it was set in the earlier step.
 
@@ -217,7 +215,39 @@ after a break, always be sure that a typescript is running before proceeding.
    git push
    ```
 
-## Stage 0.3 - Backup workload manager data
+## Stage 0.3 - Customize the new NCN image and update NCN personalization configurations
+
+There are two possible scenarios. Follow the procedure for the scenario that is applicable to the upgrade being performed.
+
+- [Standard upgrade](#standard-upgrade) - Upgrading CSM on a system that has products installed other than CSM.
+- [CSM-only system upgrade](#csm-only-system-upgrade) - Upgrading CSM only on a CSM-only system **no other products installed or being upgraded**.
+
+**NOTE:** For the standard upgrade, it will not be possible to rebuild NCNs on the current, pre-upgraded CSM version after performing these steps. Rebuilding NCNs will become the same thing as upgrading them.
+
+### Standard upgrade
+
+The procedures for customizing the NCN image and updating NCN personalization configurations are found in the *HPE Cray EX System Software Getting Started Guide S-8000*, section
+"HPE Cray EX Software Upgrade Workflow", subsection "Cray System Management (CSM)".
+
+### CSM-only system upgrade
+
+This upgrade scenario is extremely uncommon in production environments.
+
+1. (`ncn-m001#`) Generate new CFS configuration for the NCNs.
+
+    This script will also leave CFS disabled for the NCNs. CFS will automatically be re-enabled on them as they are rebooted during the upgrade.
+
+    ```bash
+    /usr/share/doc/csm/scripts/operations/configuration/apply_csm_configuration.sh --no-enable
+    ```
+
+    Successful output should end with the following line:
+
+    ```text
+    All components updated successfully.
+    ```
+
+## Stage 0.4 - Backup workload manager data
 
 To prevent any possibility of losing workload manager configuration data or files, a backup is required. Execute all backup procedures (for the workload manager in use) located in
 the `Troubleshooting and Administrative Tasks` sub-section of the `Install a Workload Manager` section of the
@@ -225,7 +255,7 @@ the `Troubleshooting and Administrative Tasks` sub-section of the `Install a Wor
 
 ## Stop typescript
 
-Stop any typescripts that were started during this stage.
+For any typescripts that were started during this stage, stop them with the `exit` command.
 
 ## Stage completed
 

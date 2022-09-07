@@ -1,11 +1,11 @@
 # Stage 2 - Kubernetes Upgrade
 
 **Reminder:** If any problems are encountered and the procedure or command output does not provide relevant guidance, see
-[Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+[Relevant troubleshooting links for upgrade-related issues](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 - [Start typescript on `ncn-m001`](#start-typescript-on-ncn-m001)
 - [Stage 2.1 - Master node image upgrade](#stage-21---master-node-image-upgrade)
-- [Argo web UI](#argo-web-ui)
+- [Argo workflows](#argo-workflows)
 - [Stage 2.2 - Worker node image upgrade](#stage-22---worker-node-image-upgrade)
   - [Option 1 - Serial upgrade](#option-1---serial-upgrade)
   - [Option 2 - Parallel upgrade (Tech preview)](#option-2---parallel-upgrade-tech-preview)
@@ -14,6 +14,7 @@
 - [Stage 2.3 - `ncn-m001` upgrade](#stage-23---ncn-m001-upgrade)
   - [Remap `rbd` device from `ncn-m001` to `ncn-m002`](#remap-rbd-device-from-ncn-m001-to-ncn-m002)
   - [Stop typescript on `ncn-m001`](#stop-typescript-on-ncn-m001)
+  - [Backup artifacts on `ncn-m001`](#backup-artifacts-on-ncn-m001)
   - [Move to `ncn-m002`](#move-to-ncn-m002)
   - [Start typescript on `ncn-m002`](#start-typescript-on-ncn-m002)
   - [Prepare `ncn-m002`](#prepare-ncn-m002)
@@ -52,12 +53,12 @@ after a break, always be sure that a typescript is running before proceeding.
 
 1. Repeat the previous step for each other master node **excluding `ncn-m001`**, one at a time.
 
-## Argo web UI
+## Argo workflows
 
 Before starting [Stage 2.2 - Worker node image upgrade](#stage-22---worker-node-image-upgrade), access the Argo UI to view the progress of this stage.
 Note that the progress for the current stage will not show up in Argo before the worker node image upgrade script has been started.
 
-For more information, see [Using the Argo UI](../operations/argo/Using_the_Argo_UI.md).
+For more information, see [Using the Argo UI](../operations/argo/Using_the_Argo_UI.md) and [Using Argo Workflows](../operations/argo/Using_Argo_Workflows.md).
 
 ## Stage 2.2 - Worker node image upgrade
 
@@ -122,7 +123,27 @@ upgrade procedure pivots to use `ncn-m002` as the new "stable node", in order to
 
 ### Stop typescript on `ncn-m001`
 
-Stop any typescripts that were started earlier on `ncn-m001`.
+For any typescripts that were started earlier on `ncn-m001`, stop them with the `exit` command.
+
+### Backup artifacts on `ncn-m001`
+
+1. (`ncn-m001#`) Create an archive of the artifacts.
+
+    ```bash
+    BACKUP_TARFILE="csm_upgrade.pre_m001_reboot_artifacts.$(date +%Y%m%d_%H%M%S).tgz"
+    ls -d \
+        /root/apply_csm_configuration.* \
+        /root/csm_upgrade.* \
+        /root/output.log 2>/dev/null |
+    sed 's_^/__' |
+    xargs tar -C / -czvf "/root/${BACKUP_TARFILE}"
+    ```
+
+1. (`ncn-m001#`) Upload the archive to S3 in the cluster.
+
+    ```bash
+    cray artifacts create config-data "${BACKUP_TARFILE}" "/root/${BACKUP_TARFILE}"
+    ```
 
 ### Move to `ncn-m002`
 
@@ -166,9 +187,7 @@ Stop any typescripts that were started earlier on `ncn-m001`.
    A later stage of the upgrade expects the `docs-csm` RPM to be located at `/root/docs-csm-latest.noarch.rpm` on `ncn-m002`; that is why this command copies it there.
 
    ```bash
-   scp ncn-m001:/root/csm_upgrade.*.txt /root &&
-       scp ncn-m001:/root/output.log /root/pre-m001-reboot-upgrade.log &&
-       cray artifacts create config-data pre-m001-reboot-upgrade.log /root/pre-m001-reboot-upgrade.log
+   scp ncn-m001:/root/csm_upgrade.pre_m001_reboot_artifacts.*.tgz /root
    csi_rpm=$(find "/etc/cray/upgrade/csm/${CSM_REL_NAME}/tarball/${CSM_REL_NAME}/rpm/cray/csm/" -name 'cray-site-init*.rpm') &&
        scp ncn-m001:/root/docs-csm-*.noarch.rpm /root/docs-csm-latest.noarch.rpm &&
        rpm -Uvh --force "${csi_rpm}" /root/docs-csm-latest.noarch.rpm
@@ -210,7 +229,7 @@ Complete the Kubernetes upgrade. This script will restart several pods on each m
 
 ### Stop typescript on `ncn-m002`
 
-Stop any typescripts that were started during this stage on `ncn-m002`.
+For any typescripts that were started during this stage on `ncn-m002`, stop them with the `exit` command.
 
 ## Stage completed
 

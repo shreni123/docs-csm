@@ -1,7 +1,7 @@
 # Stage 3 - CSM Service Upgrades
 
 **Reminder:** If any problems are encountered and the procedure or command output does not provide relevant guidance, see
-[Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+[Relevant troubleshooting links for upgrade-related issues](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 - [Start typescript](#start-typescript)
 - [Perform upgrade](#perform-upgrade)
@@ -59,7 +59,7 @@ This is due to a redeployment of the Ceph `csi` provisioners into namespaces, in
 
 ## Stop typescript
 
-Stop any typescripts that were started during this stage.
+For any typescripts that were started during this stage, stop them with the `exit` command.
 
 ## Stage completed
 

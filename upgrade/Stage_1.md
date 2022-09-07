@@ -1,11 +1,11 @@
 # Stage 1 - Ceph image upgrade
 
 **Reminder:** If any problems are encountered and the procedure or command output does not provide relevant guidance, see
-[Relevant troubleshooting links for upgrade-related issues](README.md#relevant-troubleshooting-links-for-upgrade-related-issues).
+[Relevant troubleshooting links for upgrade-related issues](Upgrade_Management_Nodes_and_CSM_Services.md#relevant-troubleshooting-links-for-upgrade-related-issues).
 
 - [Start typescript](#start-typescript)
 - [Apply boot order workaround](#apply-boot-order-workaround)
-- [Argo web UI](#argo-web-ui)
+- [Argo workflows](#argo-workflows)
 - [Storage node image upgrade](#storage-node-image-upgrade)
 - [Ensure that `rbd` stats monitoring is enabled](#ensure-that-rbd-stats-monitoring-is-enabled)
 - [Stop typescript](#stop-typescript)
@@ -33,12 +33,12 @@ after a break, always be sure that a typescript is running before proceeding.
 /usr/share/doc/csm/scripts/workarounds/boot-order/run.sh
 ```
 
-## Argo web UI
+## Argo workflows
 
 Before starting [Storage node image upgrade](#storage-node-image-upgrade), access the Argo UI to view the progress of this stage.
 Note that the progress for the current stage will not show up in Argo before the storage node image upgrade script has been started.
 
-For more information, see [Using the Argo UI](../operations/argo/Using_the_Argo_UI.md).
+For more information, see [Using the Argo UI](../operations/argo/Using_the_Argo_UI.md) and [Using Argo Workflows](../operations/argo/Using_Argo_Workflows.md).
 
 ## Storage node image upgrade
 
@@ -66,7 +66,7 @@ ceph config set mgr mgr/prometheus/rbd_stats_pools_refresh_interval 600
 
 ## Stop typescript
 
-Stop any typescripts that were started during this stage.
+For any typescripts that were started during this stage, stop them with the `exit` command.
 
 ## Stage completed
 

@@ -83,9 +83,9 @@ BOS, CFS, CRUS, FAS, and NMD sessions should not be started or underway during t
 
 ## Stop typescript
 
-Stop any typescripts that were started during this stage.
+For any typescripts that were started during this preparation stage, stop them with the `exit` command.
 
 ## Preparation completed
 
 After completing the above steps, proceed to
-[Upgrade Management Nodes and CSM Services](README.md#2-upgrade-management-nodes-and-csm-services).
+[Upgrade Management Nodes and CSM Services](README.md#3-upgrade-management-nodes-and-csm-services).
