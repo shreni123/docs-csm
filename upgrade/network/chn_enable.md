@@ -48,9 +48,9 @@ The overall process can be summarized as:
 
 1. Backup phase
    1. Save critical runtime data
-   2. Prevent components from migrating to the `CHN`
 2. Update phase
-   1. Add the `CHN` data and configurations while the `CAN` remains as-is
+   1. Prevent UAN from migrating to the `CHN`
+   2. Add the `CHN` data and configurations while the `CAN` remains as-is
 3. Migrate phase - perform a controlled configuration and migration of components from the `CAN` to the `CHN`
       1. NCN workers
       2. CSM services
@@ -74,10 +74,11 @@ However, during the migration phase, ample time and flexibility exists to contac
    1. Three IPs for switching, plus
    2. The number of `NCN` workers on the system, plus
    3. One IP for the API ingress gateway, plus
-   4. The number of `NCN` `UANs` on the system, plus
-   5. The maximum number of `UAIs` required, plus
-   6. IPs for any other services to be brought up dynamically on the `CHN`
-   7. **Note** A `/24` subnet is usually more than sufficient for small-to-medium sized systems with minimal `UAI` requirements.
+   4. One IP for the `oath2-proxy` service, plus
+   5. The number of `NCN` `UANs` on the system, plus
+   6. The maximum number of `UAIs` required, plus
+   7. IPs for any other services to be brought up dynamically on the `CHN`
+   8. **Note** A `/24` subnet is usually more than sufficient for small-to-medium sized systems with minimal `UAI` requirements.
 4. The Slingshot high speed network is configured and up, including the fabric manager service.  This network is required to transit CHN traffic.
 5. The Slingshot Host Software is installed and configured on NCN Worker nodes.  This is required to expose CHN services.  For the purpose of CHN, the host software creates the (required) primary IPv4 address on `hsn0`, often a `10.253` address.
 
@@ -127,7 +128,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    kubectl -n loftsman get secret site-init -o json | jq -r '.data."customizations.yaml"' | base64 -d > customizations.yaml
    ```
 
-4. (`ncn-m001#`) Backup running system MetalLB `configmap` data.
+4. (`ncn-m001#`) Backup running system MetalLB `ConfigMap` data.
 
    ```bash
    kubectl get cm -n metallb-system metallb -o yaml | egrep -v 'creationTimestamp:|resourceVersion:|uid:' > metallb.yaml
@@ -236,7 +237,7 @@ However, during the migration phase, ample time and flexibility exists to contac
 
 ### Update CSM Service endpoint data (MetalLB)
 
-1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.  The new configmap will not be applied in the update phase as this would change service endpoints earlier than desired.
+1. (`ncn-m001#`) Create new MetalLB configuration map from updated customizations data.  The new ConfigMap will not be applied in the update phase as this would change service endpoints earlier than desired.
 
    ```bash
     yq r ${UPDATEDIR}/customizations.yaml 'spec.network.metallb' |
@@ -261,8 +262,7 @@ However, during the migration phase, ample time and flexibility exists to contac
    pdsh -w ncn-w[$(printf "%03d-%03d" 1 $(egrep 'ncn-w...\.nmn' /etc/hosts | wc -l))] ip address list dev hsn0
    ```
 
-   **NOTE** If some interfaces have an `HSN` address and others do not, this is typically indicative that  CFS plays are failing at some point.
-   The following `CFS` steps may help, but checking if the Slingshot high speed network and host software is operating correctly prior to moving forward in this procedure is required.
+   **NOTE** If some interfaces have an `HSN` address and others do not, this is typically indicative that SHS installed on the image is failing.  This must be resolved before proceeding.
 
 3. Determine the CFS configuration in use on the worker nodes.
 
@@ -448,7 +448,7 @@ For more information on managing NCN personalization, see [Perform NCN Personali
     kubectl apply -f ${UPDATEDIR}/metallb.yaml 
    ```
 
-3. (`ncn-m001#`) Reload MetalLB with `CHN` data to active new services.
+3. (`ncn-m001#`) Reload MetalLB with `CHN` data to activate new services.
 
    ```bash
    kubectl rollout restart deployments -n metallb-system metallb-controller
@@ -458,7 +458,7 @@ For more information on managing NCN personalization, see [Perform NCN Personali
 
 ### Minimizing UAN downtime
 
-UANs running before and during an upgrade to CSM 1.2 will continue running with no connectivity or local data impacts until an administrator-scheduled transition takes place. UAN rebuilds and reboots durig this time are not supported.
+UANs running before and during an upgrade to CSM 1.2 will continue running with no connectivity or local data impacts until an administrator-scheduled transition takes place. UAN rebuilds and reboots during this time are not supported.
 
 The time frame over which the transition can be scheduled is quite large and the transition requires only that UAN users log out of the UAN (over the old IPv4 address) and log back in (over a new IPv4 address).
 
@@ -469,7 +469,7 @@ Administrators should enable CFS for UAN, ensure plays run successfully and then
 1. (`ncn-m001#`) Enable CFS changes on UAN.
 
    ```bash
-   for xname in $(cray hsm state components list --role Application --subrole UAN --type Node --format json | jq -r .Components[].ID) ; do cray cfs components update --enabled true --format json $xname; done
+   for xname in $(cray hsm state components list --role Application --subrole UAN --type Node --format json | jq -r .Components[].ID) ; do cray cfs components update --enabled true --state "[]" --format json $xname; done
    ```
 
 2. (`ncn-m001#`) Ensure that CFS has run successfully on all UAN.  This may take several minutes.
@@ -486,7 +486,7 @@ Notify users to log out of the UAN over the `CAN` and back in over the `CHN`.  T
 
 Newly created User Access Instances (UAI) will use the network configured as the `SystemDefaultRoute` in the SLS BICAN network structure.
 
-Existing UAIs will continue to use the network that was set when it was created.  Users with existing UAI will need to recreate their instances before the `CAN` network is removed from workers and the management in the cleanup phase below.
+Existing UAIs will continue to use the network that was set when it was created.  Users with existing UAI will need to recreate their instances before the `CAN` network is removed from workers and the management network switches in the cleanup phase below.
 
 ### Migrate Computes (optional)
 
@@ -725,17 +725,20 @@ For more information on managing node with CFS, see the [Configuration Managemen
    cd ${CLEANUPDIR}
    ```
 
-2. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script
+2. (`ncn-m001#`) Set the directory location for the `SLS` `CHN` script and `SLS` file.
 
    ```bash
    export SLS_CHN_DIR=/usr/share/doc/csm/upgrade/scripts/sls
+   [[ -f ${UPDATEDIR}/sls_file_with_chn_and_computes.json ]] &&
+      export SLS_CHN_FILE=${UPDATEDIR}/sls_file_with_chn_and_computes.json ||
+      export SLS_CHN_FILE=${UPDATEDIR}/sls_file_with_chn.json
    ```
 
-3. (`ncn-m001#`) Remove `CAN` to `SLS` data.
+3. (`ncn-m001#`) Remove `CAN` from `SLS` data.
 
    ```bash
    ${SLS_CHN_DIR}/sls_del_can.py \
-      --sls-input-file ${UPDATEDIR}/sls_file_with_chn.json \
+      --sls-input-file ${SLS_CHN_FILE} \
       --sls-output-file ${CLEANUPDIR}/sls_file_without_can.json
    ```
 
@@ -753,7 +756,7 @@ For more information on managing node with CFS, see the [Configuration Managemen
    cd ${CLEANUPDIR}
    ```
 
-2. (`ncn-m001#`) Set the directory location for the customizations script to remoe `CAN`.
+2. (`ncn-m001#`) Set the directory location for the customizations script to remove `CAN`.
 
    ```bash
    export CUSTOMIZATIONS_SCRIPT_DIR=/usr/share/doc/csm/upgrade/scripts/upgrade/util
@@ -851,6 +854,8 @@ Follow the process outlined in [update the management network from CSM 1.2 to CS
 
 ## Testing
 
-```text
-TODO
-```
+The following tests should be run to confirm that the system is operating correctly on the `CHN`.
+
+1. [Gateway tests from outside the system](../../operations/validate_csm_health.md#413-gateway-health-tests-from-outside-the-system)
+2. [UAI creation tests](../../operations/validate_csm_health.md#62-validate-uai-creation)
+3. [Confirm BGP peering of MetalLB with Edge Routers](../../operations/network/metallb_bgp/Check_BGP_Status_and_Reset_Sessions.md#check-bgp-status-and-reset-sessions)
