@@ -69,6 +69,9 @@ However, during the migration phase, ample time and flexibility exists to contac
 ## Prerequisites
 
 1. The system must have successfully completed a CSM 1.3 upgrade or be ready for CSM 1.3 upgrade.
+   1. [Gateway tests from outside the system](../../operations/validate_csm_health.md#413-gateway-health-tests-from-outside-the-system)
+   2. [UAI creation tests](../../operations/validate_csm_health.md#62-validate-uai-creation)
+   3. [Confirm BGP peering of MetalLB with Edge Routers](../../operations/network/metallb_bgp/Check_BGP_Status_and_Reset_Sessions.md#check-bgp-status-and-reset-sessions)
 2. [Install the latest CSM 1.3 documentation](../../update_product_stream/README.md#check-for-latest-documentation)
 3. A site-routable IPv4 subnet for the `CHN`.  Minimally this must be sized to accommodate:
    1. Three IPs for switching, plus
