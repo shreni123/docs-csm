@@ -6,11 +6,71 @@
     <description>Recent content in Rebuild NCNs on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 07 Sep 2022 03:57:15 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/node_management/rebuild_ncns/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Sep 2022 03:48:36 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/node_management/rebuild_ncns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prepare Storage Nodes</title>
+      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/prepare_storage_nodes/</link>
+      <pubDate>Thu, 08 Sep 2022 03:47:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/prepare_storage_nodes/</guid>
+      <description>Prepare Storage Nodes Prepare a storage node before rebuilding it.
+IMPORTANT: All of the output examples may not reflect the cluster status where this operation is being performed. For example, if this is a rebuild in place, then Ceph components will not be reporting down, in contrast to a failed node rebuild.
+Prerequisites If rebuilding ncn-s001, it is critical that the storage-ceph-cloudinit.sh has been removed from the runcmd in BSS.</description>
+    </item>
+    
+    <item>
+      <title>Re-add A Storage Node To Ceph</title>
+      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/re-add_storage_node_to_ceph/</link>
+      <pubDate>Thu, 08 Sep 2022 03:47:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/re-add_storage_node_to_ceph/</guid>
+      <description>Re-Add a Storage Node to Ceph Use the following procedure to re-add a Ceph node to the Ceph cluster.
+NOTE This operation can be done to add more than one node at the same time.
+Add Join Script   Copy and paste the below script into /srv/cray/scripts/common/join_ceph_cluster.sh.
+NOTE This script may also available in the /usr/share/doc/csm/scripts directory where the latest docs-csm RPM is installed. If so, it can be copied from that node to the new storage node being rebuilt and skip to step 2.</description>
+    </item>
+    
+    <item>
+      <title>Rebuild NCNs</title>
+      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/rebuild_ncns/</link>
+      <pubDate>Thu, 08 Sep 2022 03:47:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/rebuild_ncns/</guid>
+      <description>Rebuild NCNs Rebuild a master, worker, or storage non-compute node (NCN). Use this procedure in the event that a node has a hardware failure, or some other issue with the node has occurred that warrants rebuilding the node.
+Prerequisites The system is fully installed and has transitioned off of the LiveCD.
+Variables set with the name of the node being rebuilt and its component name (xname) are required.
+ Set NODE to the hostname of the node being rebuilt (e.</description>
+    </item>
+    
+    <item>
+      <title>Validate Bootraid Artifacts</title>
+      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/validate_boot_raid/</link>
+      <pubDate>Thu, 08 Sep 2022 03:47:31 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/validate_boot_raid/</guid>
+      <description>Validate BOOTRAID Artifacts Perform the following steps on ncn-m001.
+  Initialize the cray command and follow the prompts (required for the next step).
+cray init   Run the script to ensure the local BOOTRAID has a valid kernel and initrd.
+/opt/cray/tests/install/ncn/scripts/validate-bootraid-artifacts.sh   Workaround: CASMINST-2015 As a result of rebuilding any NCN(s), remove any dynamically assigned interface IP addresses that did not get released automatically by running the CASMINST-2015 script:</description>
+    </item>
+    
+    <item>
+      <title>Final Validation Steps</title>
+      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/final_validation_steps/</link>
+      <pubDate>Thu, 08 Sep 2022 03:47:30 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/final_validation_steps/</guid>
+      <description>Final Validation Steps Use this procedure to finish validating the success of a rebuilt NCN(s).
+Procedure   Confirm what the Configuration Framework Service (CFS) configurationStatus is for the desiredConfig after rebooting the node.
+NOTE The following command will indicate if a CFS job is currently in progress for this node.
+IMPORTANT: The following command assumes that the variables from the prerequisites section have been set.
+cray cfs components describe $XNAME --format json Example output:</description>
+    </item>
+    
     <item>
       <title>Identify Nodes And Update Metadata</title>
       <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/identify_nodes_and_update_metadata/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
+      <pubDate>Thu, 08 Sep 2022 03:47:30 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/identify_nodes_and_update_metadata/</guid>
       <description>Identify Nodes and Update Metadata Use the following procedure to inspect and modify the Boot Script Service (BSS) boot parameters JSON file.
@@ -23,7 +83,7 @@ cray bss bootparameters list --name $XNAME --format=json | jq .</description>
     <item>
       <title>Post Rebuild Storage Node Validation</title>
       <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/post_rebuild_storage_node_validation/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
+      <pubDate>Thu, 08 Sep 2022 03:47:30 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/post_rebuild_storage_node_validation/</guid>
       <description>Post Rebuild Storage Node Validation Validate the storage node rebuilt successfully.
@@ -36,73 +96,13 @@ ceph -s Example output:
     <item>
       <title>Power Cycle And Rebuild Nodes</title>
       <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/power_cycle_and_rebuild_nodes/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
+      <pubDate>Thu, 08 Sep 2022 03:47:30 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/power_cycle_and_rebuild_nodes/</guid>
       <description>Power Cycle and Rebuild Nodes This section applies to all node types. The commands in this section assume the variables from the prerequisites section have been set.
 Procedure   Open and watch the console for the node being rebuilt.
   Log in to a second session to use it to watch the console using the instructions at the link below:
 Open this link in a new tab or page Log in to a Node Using ConMan</description>
-    </item>
-    
-    <item>
-      <title>Prepare Storage Nodes</title>
-      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/prepare_storage_nodes/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/prepare_storage_nodes/</guid>
-      <description>Prepare Storage Nodes Prepare a storage node before rebuilding it.
-IMPORTANT: All of the output examples may not reflect the cluster status where this operation is being performed. For example, if this is a rebuild in place, then Ceph components will not be reporting down, in contrast to a failed node rebuild.
-Prerequisites If rebuilding ncn-s001, it is critical that the storage-ceph-cloudinit.sh has been removed from the runcmd in BSS.</description>
-    </item>
-    
-    <item>
-      <title>Re-add A Storage Node To Ceph</title>
-      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/re-add_storage_node_to_ceph/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/re-add_storage_node_to_ceph/</guid>
-      <description>Re-Add a Storage Node to Ceph Use the following procedure to re-add a Ceph node to the Ceph cluster.
-NOTE This operation can be done to add more than one node at the same time.
-Add Join Script   Copy and paste the below script into /srv/cray/scripts/common/join_ceph_cluster.sh.
-NOTE This script may also available in the /usr/share/doc/csm/scripts directory where the latest docs-csm RPM is installed. If so, it can be copied from that node to the new storage node being rebuilt and skip to step 2.</description>
-    </item>
-    
-    <item>
-      <title>Rebuild NCNs</title>
-      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/rebuild_ncns/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/rebuild_ncns/</guid>
-      <description>Rebuild NCNs Rebuild a master, worker, or storage non-compute node (NCN). Use this procedure in the event that a node has a hardware failure, or some other issue with the node has occurred that warrants rebuilding the node.
-Prerequisites The system is fully installed and has transitioned off of the LiveCD.
-Variables set with the name of the node being rebuilt and its component name (xname) are required.
- Set NODE to the hostname of the node being rebuilt (e.</description>
-    </item>
-    
-    <item>
-      <title>Validate Bootraid Artifacts</title>
-      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/validate_boot_raid/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:10 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/validate_boot_raid/</guid>
-      <description>Validate BOOTRAID Artifacts Perform the following steps on ncn-m001.
-  Initialize the cray command and follow the prompts (required for the next step).
-cray init   Run the script to ensure the local BOOTRAID has a valid kernel and initrd.
-/opt/cray/tests/install/ncn/scripts/validate-bootraid-artifacts.sh   Workaround: CASMINST-2015 As a result of rebuilding any NCN(s), remove any dynamically assigned interface IP addresses that did not get released automatically by running the CASMINST-2015 script:</description>
-    </item>
-    
-    <item>
-      <title>Final Validation Steps</title>
-      <link>/docs-csm/en-13/operations/node_management/rebuild_ncns/final_validation_steps/</link>
-      <pubDate>Wed, 07 Sep 2022 03:56:09 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/node_management/rebuild_ncns/final_validation_steps/</guid>
-      <description>Final Validation Steps Use this procedure to finish validating the success of a rebuilt NCN(s).
-Procedure   Confirm what the Configuration Framework Service (CFS) configurationStatus is for the desiredConfig after rebooting the node.
-NOTE The following command will indicate if a CFS job is currently in progress for this node.
-IMPORTANT: The following command assumes that the variables from the prerequisites section have been set.
-cray cfs components describe $XNAME --format json Example output:</description>
     </item>
     
   </channel>
