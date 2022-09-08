@@ -94,7 +94,7 @@ For *each* switch in the system, determine the configuration differences.
 
 ## Test the network prior to update
 
-- (`ncn-m001#`) Test the network **only** durring 1.2 to 1.3 upgrades. Otherwise,
+- (`ncn-m001#`) Test the network **only** during 1.2 to 1.3 upgrades. Otherwise,
 
    ```bash
    canu test network --csm 1.2
@@ -115,7 +115,7 @@ For *each* switch in the system, apply the configuration changes, in two stages:
 1. Apply just the `prefix-list` and `route-maps`.
 2. Apply the remaining configuration.
 
-**Important** In addition to complete spine, leaf and leaf-bmc configurations, CANU now generates Arista edge router configurations required for CSM. These configurations must be applied as well if `CHN` is used.
+**Important** In addition to complete `spine`, `leaf` and `leaf-bmc` configurations, CANU now generates Arista edge router configurations required for CSM. These configurations must be applied as well if `CHN` is used.
 
 - (`ncn-m001#`) Set the switch configuration version string to be placed in `<CONFIG VERSION STRING>`.
 
