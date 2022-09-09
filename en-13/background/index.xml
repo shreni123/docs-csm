@@ -6,11 +6,21 @@
     <description>Recent content in Non-compute Nodes on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 08 Sep 2022 03:45:46 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/background/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Sep 2022 03:44:24 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/background/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NCN Boot Workflow</title>
+      <link>/docs-csm/en-13/background/ncn_boot_workflow/</link>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/background/ncn_boot_workflow/</guid>
+      <description>NCN Boot Workflow Non-compute nodes can boot from two sources:
+ Network/PXE Disk  Topics  Determine the current boot order Reasons to change the boot order after CSM install Determine if NCNs booted via disk or PXE Set BMCs to DHCP Boot order overview Setting boot order Trimming boot order Example boot orders Reverting changes Locating USB device  Determine the current boot order Under normal operations, the NCNs use the following boot order:</description>
+    </item>
+    
     <item>
       <title>NCN Images</title>
       <link>/docs-csm/en-13/background/ncn_images/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:47 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/ncn_images/</guid>
       <description>NCN Images The management nodes boot from NCN images which are created from layers on top of a common base image. The common image is customized with a kubernetes layer for the master nodes and worker nodes. The common image is customized with a storage-ceph layer for the utility storage nodes.
@@ -20,7 +30,7 @@ Topics  Overview of NCN Images LiveCD Server  Details Overview of NCN Images The
     <item>
       <title>NCN Mounts And Filesystems</title>
       <link>/docs-csm/en-13/background/ncn_mounts_and_filesystems/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:47 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/ncn_mounts_and_filesystems/</guid>
       <description>NCN Mounts and Filesystems The management nodes use drive storage for persistence and block storage. This page outlines reference information for these disks, their partition tables, and their management.
@@ -30,7 +40,7 @@ Topics  Overview of NCN Images LiveCD Server  Details Overview of NCN Images The
     <item>
       <title>NCN Networking</title>
       <link>/docs-csm/en-13/background/ncn_networking/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:47 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/ncn_networking/</guid>
       <description>NCN Networking Non-compute nodes and compute nodes have different network interfaces used for booting, this topic focuses on the network interfaces for management nodes.
@@ -41,7 +51,7 @@ Topics  NCN Network Interfaces Device Naming Vendor and Bus ID Identification  D
     <item>
       <title>NCN Operating System Releases</title>
       <link>/docs-csm/en-13/background/ncn_operating_system_releases/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:47 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/ncn_operating_system_releases/</guid>
       <description>NCN Operating System Releases The NCNs define their products per image layer:
@@ -50,9 +60,20 @@ The ses-release RPM is installed on top of the sle_HPC-release RPM in the Ceph i
     </item>
     
     <item>
+      <title>Non-compute Node Bios</title>
+      <link>/docs-csm/en-13/background/ncn_bios/</link>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/background/ncn_bios/</guid>
+      <description>Non-Compute Node BIOS This page specifies the BIOS settings that are desirable for non-compute nodes.
+ NOTES
+ Any tunables on this page are in the interest of performance and stability. If either of those facets seem to be infringed by any of the content on this page, then contact HPE Cray for support. The table below declares desired settings; unlisted settings should remain at vendor-default. This table may be expanded as new settings are adjusted.</description>
+    </item>
+    
+    <item>
       <title>Plan Of Record</title>
       <link>/docs-csm/en-13/background/ncn_plan_of_record/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:47 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:25 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/ncn_plan_of_record/</guid>
       <description>Plan of Record This document outlines the hardware necessary to meet CSM&amp;rsquo;s Plan of Record (PoR). This serves as the minimum, necessary pieces required per each server in the management plane.
@@ -62,7 +83,7 @@ The ses-release RPM is installed on top of the sle_HPC-release RPM in the Ceph i
     <item>
       <title>Certificate Authority</title>
       <link>/docs-csm/en-13/background/certificate_authority/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:46 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:24 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/certificate_authority/</guid>
       <description>Certificate Authority While a system is being installed for the first time, a certificate authority (CA) is needed. This can be generated for a system, or one can be supplied from a customer intermediate CA. Outside of a new installation, there is no supported method to rotate or change the platform CA in this release.
@@ -70,30 +91,9 @@ Topics  Overview Use default platform-generated CA Customize platform-generated 
     </item>
     
     <item>
-      <title>NCN Boot Workflow</title>
-      <link>/docs-csm/en-13/background/ncn_boot_workflow/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:46 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/background/ncn_boot_workflow/</guid>
-      <description>NCN Boot Workflow Non-compute nodes can boot from two sources:
- Network/PXE Disk  Topics  Determine the current boot order Reasons to change the boot order after CSM install Determine if NCNs booted via disk or PXE Set BMCs to DHCP Boot order overview Setting boot order Trimming boot order Example boot orders Reverting changes Locating USB device  Determine the current boot order Under normal operations, the NCNs use the following boot order:</description>
-    </item>
-    
-    <item>
-      <title>Non-compute Node Bios</title>
-      <link>/docs-csm/en-13/background/ncn_bios/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:46 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/background/ncn_bios/</guid>
-      <description>Non-Compute Node BIOS This page specifies the BIOS settings that are desirable for non-compute nodes.
- NOTES
- Any tunables on this page are in the interest of performance and stability. If either of those facets seem to be infringed by any of the content on this page, then contact HPE Cray for support. The table below declares desired settings; unlisted settings should remain at vendor-default. This table may be expanded as new settings are adjusted.</description>
-    </item>
-    
-    <item>
       <title>Non-compute Nodes</title>
       <link>/docs-csm/en-13/background/readme/</link>
-      <pubDate>Thu, 08 Sep 2022 03:45:46 +0000</pubDate>
+      <pubDate>Fri, 09 Sep 2022 03:44:24 +0000</pubDate>
       
       <guid>/docs-csm/en-13/background/readme/</guid>
       <description>Non-Compute Nodes This page gives a high-level overview of the environment present on the Non-Compute Nodes (NCNs).
