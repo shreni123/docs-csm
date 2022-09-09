@@ -22,7 +22,7 @@ CSM 1.3 contains approximately 500 changes spanning bug fixes, new feature devel
 * **PowerDNS**: Changed powerdns-manager SLS error message to debug
 * **PowerDNS**: Fixed bug that caused powerdns-manager and externaldns-manager to update the same record
 * **PowerDNS**: Fixed a bug that could cause PowerDNS to intermittently crash when performing a lookup for an existing TSIG key
-* **PowerDNS**: PowerDNS will now retry attempts to add a TSIG key
+* **PowerDNS**: powerdns-manager will now retry attempts to add a TSIG key
 * **PowerDNS**: powerdns-manager will now create PTR records that are not created by external-dns
 * **Unbound**: Changed cray-dns-unbound MaxUnavailable default to 1 to avoid issues when evicting pods from NCNs
 
