@@ -450,7 +450,7 @@ information for this system has not yet been prepared.
       > **`NOTE`** This step is needed only for fresh installs where `system_config.yaml` is missing from the `prep/` directory.
 
       ```bash
-      pit# cd ${PITDATA}/prep && ln ${SYSTEM_NAME}/system_config.yaml
+      linux# cd ${PITDATA}/prep && ln ${SYSTEM_NAME}/system_config.yaml
       ```
 
    1. Continue to the next step to apply the `csi-config` workarounds.
@@ -471,8 +471,7 @@ Follow the procedures to [Prepare `site-init`](prepare_site_init.md) directory f
 
 ## 4. Prepopulate LiveCD Daemons Configuration and NCN Artifacts
 
-Now that the configuration is generated, we can populate the LiveCD with the generated files.
-
+Now that the configuration is generated, the next step is to populate the LiveCD with the generated files.
 This will enable SSH, and other services when the LiveCD starts.
 
 1. Set system name.
@@ -755,12 +754,11 @@ On first login (over SSH or at local console) the LiveCD will prompt the adminis
    pit# echo $CSM_PATH
    ```
 
-1. Install Goss Tests and Server
+1. Install Goss tests.
 
    The following assumes the `CSM_PATH` environment variable is set to the absolute path of the unpacked CSM release.
 
    ```bash
-   pit# rpm -Uvh --force $(find ${CSM_PATH}/rpm/ -name "goss-servers*.rpm" | sort -V | tail -1)
    pit# rpm -Uvh --force $(find ${CSM_PATH}/rpm/ -name "csm-testing*.rpm" | sort -V | tail -1)
    ```
 

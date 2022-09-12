@@ -65,7 +65,6 @@ artifact's
 Artifactory
 artifacts
 ArubaOS-CX
-ASes
 ASICs
 backdoor
 backend
@@ -552,6 +551,7 @@ V1.20.13
 v1.3
 v1.3.x
 v1.30.16
+v1.3.0
 V1.3.0
 v1.4
 v1.4.
@@ -612,6 +612,10 @@ Init
 Init
 
 - install/configure_management_network.md
+# To allow Site Init
+Init
+
+- install/create_cabinets_yaml.md
 # To allow Site Init
 Init
 
