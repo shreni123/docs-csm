@@ -8,10 +8,12 @@ Perform the following steps **on `ncn-m001`**.
    cray init
    ```
 
-1. Run the script to ensure the local BOOTRAID has a valid kernel and initrd.
+1. Run the script to ensure the local `BOOTRAID` has a valid kernel and initrd.
 
     ```screen
-    /opt/cray/tests/install/ncn/scripts/validate-bootraid-artifacts.sh
+    pdsh -S -b -w $(grep -oP 'ncn-\w\d+' /etc/hosts | sort -u |  tr -t '\n' ',') '
+    /opt/cray/tests/install/ncn/scripts/check_bootloader.sh
+    '
     ```
 
 ## Workaround: CASMINST-2015
