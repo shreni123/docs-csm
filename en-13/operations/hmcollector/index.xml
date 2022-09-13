@@ -6,11 +6,11 @@
     <description>Recent content in Hmcollector on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 12 Sep 2022 03:57:58 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/hmcollector/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 03:56:14 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/hmcollector/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Adjust Hm Collector Ingress Replicas And Resource Limits</title>
       <link>/docs-csm/en-13/operations/hmcollector/adjust_hmcollector_resource_limits_requests/</link>
-      <pubDate>Mon, 12 Sep 2022 03:56:10 +0000</pubDate>
+      <pubDate>Tue, 13 Sep 2022 03:54:03 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/hmcollector/adjust_hmcollector_resource_limits_requests/</guid>
       <description>Adjust HM Collector Ingress Replicas and Resource Limits  Replica count and resource limit tuning guidance Customize cray-hms-hmcollector in customizations.yaml Redeploy cray-hms-hmcollector with new customizations  Replica count and resource limit tuning guidance Inspect current resource usage (ncn-mw#) View resource usage of the containers in the cray-hms-hmcollector-ingress pods:
