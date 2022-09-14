@@ -6,11 +6,11 @@
     <description>Recent content in Dell Installation And Configuration Guide on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 13 Sep 2022 03:54:32 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/network/management_network/dell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Sep 2022 03:50:08 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/network/management_network/dell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configure System Images</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/system_images/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:35 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:11 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/system_images/</guid>
       <description>Configure System Images Dell switches support active and standby images.
@@ -23,7 +23,7 @@ show boot detail Expected Results  Administrators can upload an image to the swi
     <item>
       <title>Configure Virtual Local Access Networks (vlans)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/vlan/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:35 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:11 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/vlan/</guid>
       <description>Configure Virtual Local Access Networks (VLANs) VLANs allow for the logical grouping of switch interfaces, enabling communication as if all connected devices were on the same isolated network.
@@ -35,7 +35,7 @@ show vlan [VLAN] Expected Results  Administrators can create a VLAN Administrato
     <item>
       <title>Configure Vlan Interface</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/vlan_interface/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:35 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:11 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/vlan_interface/</guid>
       <description>Configure VLAN Interface The switch also supports classic L3 VLAN interfaces.
@@ -48,7 +48,7 @@ show interface vlan Expected Results  Administrators can configure the VLAN Admi
     <item>
       <title>Perform An Upgrade On Dell Switches</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/upgrade/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:35 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:11 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/upgrade/</guid>
       <description>Perform an Upgrade on Dell Switches How to perform an upgrade on the Dell switches.
@@ -64,7 +64,7 @@ reload Back to Index</description>
     <item>
       <title>Vlan Trunking 802.1q</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/vlan_trunking_8021q/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:35 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:11 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/vlan_trunking_8021q/</guid>
       <description>VLAN Trunking 802.1Q A trunk port carries packets on one or more specified VLANs. Packet that ingress on a trunk port are in the VLAN specified in its 802.1Q header, or native VLAN if the packet has no 802.1Q header. A packet that egresses through a trunk port will have an 802.1Q header if it has a nonzero VLAN ID. Any packet that ingresses on a trunk port tagged with a VLAN that the port does not trunk is dropped.</description>
@@ -73,7 +73,7 @@ reload Back to Index</description>
     <item>
       <title>Configure Physical Interfaces</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/physical_interfaces/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/physical_interfaces/</guid>
       <description>Configure Physical Interfaces Ethernet port interfaces are enabled by default.
@@ -86,7 +86,7 @@ show configuration Expected Results  The switch recognizes the transceiver witho
     <item>
       <title>Configure Qos</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/qos/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/qos/</guid>
       <description>Configure QoS Network traffic is processed based on classification and policies that are created and applied to the traffic.
@@ -100,7 +100,7 @@ trust-map dot1p dot1p-trust-map trust-map dot1p dot1p-trust-map Back to Index</d
     <item>
       <title>Configure Remote Logging</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/remote_logging/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/remote_logging/</guid>
       <description>Configure Remote Logging Configure remote logging to view log files from the switch on a remote server. This functionality is enabled by syslog.
@@ -111,7 +111,7 @@ logging server dell.com severity log-info Expected Results  Administrators can c
     <item>
       <title>Configure Secure Shell (SSH)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/ssh/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/ssh/</guid>
       <description>Configure Secure Shell (SSH) SSH server enables an SSH client to make a secure and encrypted connection to a switch. Currently, switches support SSH version 2.0 only. The user authentication mechanisms supported for SSH are public key authentication and password authentication (RADIUS, TACACS+, or locally stored password). Secure File Transfer Protocol (SFTP) provides file transfer. SSH Server and sftp-client via the copy command are supported for managing the router.
@@ -121,7 +121,7 @@ Configuration Commands The SSH server is enabled by default.</description>
     <item>
       <title>Configure Snmpv2c Community</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/snmp-community/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/snmp-community/</guid>
       <description>Configure SNMPv2c Community The switch supports SNMPv2c community-based security for read-only access.
@@ -133,7 +133,7 @@ show snmp community Expected Results  Administrators can configure the community
     <item>
       <title>Dell Snmpv3 Users</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/snmpv3_users/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/snmpv3_users/</guid>
       <description>Dell SNMPv3 Users SNMPv3 supports cryptographic security by a combination of authenticating and encrypting the SNMP protocol packets over the network. Read-only access is currently supported. The admin user can add or remove SNMPv3 users.
@@ -144,7 +144,7 @@ snmp-server user &amp;lt;USER&amp;gt; cray-reds-group 3 auth md5 &amp;lt;A-PASS&
     <item>
       <title>Reset Dell Switch Configuration</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/reset/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:34 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:10 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/reset/</guid>
       <description>Reset Dell Switch Configuration How to reset Dell switch configuration:
@@ -154,7 +154,7 @@ delete startup-config Back to Index</description>
     <item>
       <title>Configure Link Aggregation Group (lag)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/lag/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/lag/</guid>
       <description>Configure Link Aggregation Group (LAG) Link aggregation allows administrators to assign multiple physical links to one logical link that functions as a single, higher-speed link providing dramatically increased bandwidth.
@@ -168,7 +168,7 @@ interface ethernet 1/1/1 switch(conf-if-eth1/1/1)#channel-group 10 mode active S
     <item>
       <title>Configure Locator Led</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/locator_led/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/locator_led/</guid>
       <description>Configure Locator LED The Locator LED is an LED in the front of the chassis that can turn on or flash. This is a useful feature when guiding someone to the switch during a &amp;ldquo;remote hands&amp;rdquo; situation, such as asking an engineer to run a cable to the switch.
@@ -180,7 +180,7 @@ location-led system 1 off Expected Results  The Locator LED is in the off state 
     <item>
       <title>Configure Loopback Interface</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/loopback/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/loopback/</guid>
       <description>Configure Loopback Interface Loopbacks can be thought of as internal virtual interfaces. Loopback interfaces are not bound to a physical port and are used for device management and routing protocols.
@@ -190,7 +190,7 @@ Configuration Commands interface loopback LOOPBACK ip address IP-ADDR/&amp;lt;SU
     <item>
       <title>Configure Management Interface</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/management_interface/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/management_interface/</guid>
       <description>Configure Management Interface The management interface can be used to gain remote management access to the switch. The management interface is accessible using the mgmt VRF and is separate from the data plane interfaces, which are in the default VRF.
@@ -202,7 +202,7 @@ interface mgmt 1/1/1 Configure an IP address and mask on the Management interfac
     <item>
       <title>Configure Multiple Spanning Tree Protocol (mstp)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/mstp/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/mstp/</guid>
       <description>Configure Multiple Spanning Tree Protocol (MSTP) MSTP (802.1s) ensures that only one active path exists between any two nodes in a spanning-tree instance. A spanning-tree instance comprises a unique set of VLANs. MSTP instances significantly improve network resource utilization while maintaining a loop-free environment.
@@ -214,7 +214,7 @@ show spanning-tree mst Expected Results  Spanning-tree mode is configured Spanni
     <item>
       <title>Link Layer Discovery Protocol (lldp)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/lldp/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/lldp/</guid>
       <description>Link layer discovery protocol (LLDP) By default, LLDP is enabled for each interface and globally. Administrators can disable LLDP on an interface or globally. If LLDP is disabled globally, LLDP is disabled on all interfaces irrespective of whether LLDP is previously enabled or disabled on an interface. When administrators enable LLDP globally, the LLDP configuration at the interface level takes precedence over the global LLDP configuration.
@@ -224,7 +224,7 @@ Configuration Commands Disable the LLDPDU transmit or receive in INTERFACE mode:
     <item>
       <title>Network Time Protocol (NTP) Client</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/ntp/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:33 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:09 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/ntp/</guid>
       <description>Network Time Protocol (NTP) Client Summary of NTP from RFC-1305 Network Time Protocol (Version 3):
@@ -235,7 +235,7 @@ Configuration Commands Disable the LLDPDU transmit or receive in INTERFACE mode:
     <item>
       <title>Back Up A Switch Configuration</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/backup/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/backup/</guid>
       <description>Back Up a Switch Configuration The following command copies the running configuration or the startup configuration to a remote location as a file.
@@ -243,18 +243,9 @@ copy running-configuration {config://filepath | home://filepath | ftp://userid:p
     </item>
     
     <item>
-      <title>Configure Access Control Links (ACLs)</title>
-      <link>/docs-csm/en-13/operations/network/management_network/dell/acl/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/network/management_network/dell/acl/</guid>
-      <description>Configure Access Control Links (ACLs) ACLs are used to help improve network performance and restrict network usage by creating policies to eliminate unwanted IP traffic by filtering packets where they enter the switch on layer 2 and layer 3 interfaces. An ACL is an ordered list of one or more access control list entries (ACEs) prioritized by sequence number. An incoming packet is matched sequentially against each entry in an ACL.</description>
-    </item>
-    
-    <item>
       <title>Configure Address Resolution Protocol (arp)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/arp/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/arp/</guid>
       <description>Configure Address Resolution Protocol (ARP) ARP is commonly used for mapping IPv4 addresses to MAC addresses.
@@ -266,7 +257,7 @@ show ip arp Expected Results  Administrators are able to ping the connected devi
     <item>
       <title>Configure Domain Name</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/domain_name/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/domain_name/</guid>
       <description>Configure Domain Name A domain name is a name to identify the person, group, or organization that controls the devices within an area. An example of a domain name could be us.cray.com.
@@ -278,7 +269,7 @@ show domain-name Expected Results  Administrators can configure the domain name 
     <item>
       <title>Configure Domain Name System (DNS) Client</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/dns-client/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/dns-client/</guid>
       <description>Configure Domain Name System (DNS) Client The Domain Name System (DNS) translates domain and host names to and from IP addresses. A DNS client resolves hostnames to IP addresses by querying assigned DNS servers for the appropriate IP address.
@@ -290,7 +281,7 @@ ip domain-list NAME Expected Results  Administrators can configure the DNS clien
     <item>
       <title>Configure Hostnames</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/hostname/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/hostname/</guid>
       <description>Configure Hostnames A hostname is a human-friendly name used to identify a device. An example of a hostname could be the name Test.
@@ -302,7 +293,7 @@ show hostname Example Output hostname switch-test show hostname Expected Results
     <item>
       <title>Configure Internet Group Multicast Protocol (igmp)</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/igmp/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:32 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:08 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/igmp/</guid>
       <description>Configure Internet Group Multicast Protocol (IGMP) The Internet Group Multicast Protocol (IGMP) is a communications protocol used by hosts and adjacent routers on IP networks to establish multicast group memberships. The host joins a multicast-group by sending a join request message towards the network router, and responds to queries sent from the network router by dispatching a join report.
@@ -310,9 +301,18 @@ Configuration Command ip igmp snooping enable Expected Results show ip igmp-snoo
     </item>
     
     <item>
+      <title>Configure Access Control Links (ACLs)</title>
+      <link>/docs-csm/en-13/operations/network/management_network/dell/acl/</link>
+      <pubDate>Wed, 14 Sep 2022 03:50:07 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/network/management_network/dell/acl/</guid>
+      <description>Configure Access Control Links (ACLs) ACLs are used to help improve network performance and restrict network usage by creating policies to eliminate unwanted IP traffic by filtering packets where they enter the switch on layer 2 and layer 3 interfaces. An ACL is an ordered list of one or more access control list entries (ACEs) prioritized by sequence number. An incoming packet is matched sequentially against each entry in an ACL.</description>
+    </item>
+    
+    <item>
       <title>Dell Installation And Configuration Guide</title>
       <link>/docs-csm/en-13/operations/network/management_network/dell/readme/</link>
-      <pubDate>Tue, 13 Sep 2022 03:54:31 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:50:07 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/network/management_network/dell/readme/</guid>
       <description>Dell Installation and Configuration Guide This documentation helps network administrators and support personnel install and manage Dell network devices in a CSM install.

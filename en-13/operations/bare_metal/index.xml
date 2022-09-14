@@ -6,11 +6,11 @@
     <description>Recent content in Bare Metal on Cray System Management (CSM)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 13 Sep 2022 03:55:47 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/bare_metal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Sep 2022 03:51:26 +0000</lastBuildDate><atom:link href="/docs-csm/en-13/operations/bare_metal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Change Credentials On Servertech Pdus</title>
       <link>/docs-csm/en-13/operations/bare_metal/change_servertech_pdu_credentials/</link>
-      <pubDate>Tue, 13 Sep 2022 03:53:42 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:49:16 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/bare_metal/change_servertech_pdu_credentials/</guid>
       <description>Change Credentials on ServerTech PDUs This procedure changes password used by the admn user on ServerTech PDUs. This procedure should be used to update all ServerTech PDUs in the system to the same global credentials.
@@ -19,9 +19,20 @@ Prerequisites  The ServerTech PDUs must be accessible via a workstation or lapto
     </item>
     
     <item>
+      <title>Fresh Install Setting NodeBMC And Routerbmc Redfish Credentials</title>
+      <link>/docs-csm/en-13/operations/bare_metal/change_river_bmc_credentials/</link>
+      <pubDate>Wed, 14 Sep 2022 03:49:16 +0000</pubDate>
+      
+      <guid>/docs-csm/en-13/operations/bare_metal/change_river_bmc_credentials/</guid>
+      <description>Fresh Install: Setting NodeBMC and RouterBMC Redfish Credentials These steps are performed before the installation of Shasta System Management or HPCM management software stacks. The goal is to set the BMC Redfish credentials to values that the management software will be expecting so that all software systems work smoothly with the Redfish hardware.
+Prerequisites Before doing these operations, the following is assumed:
+ There is a workstation or laptop which can access all target BMCs.</description>
+    </item>
+    
+    <item>
       <title>Bare-metal Steps</title>
       <link>/docs-csm/en-13/operations/bare_metal/bare-metal/</link>
-      <pubDate>Tue, 13 Sep 2022 03:53:41 +0000</pubDate>
+      <pubDate>Wed, 14 Sep 2022 03:49:15 +0000</pubDate>
       
       <guid>/docs-csm/en-13/operations/bare_metal/bare-metal/</guid>
       <description>Bare-Metal Steps This section provides information on what needs to be done before an initial install of CSM.
@@ -29,17 +40,6 @@ Air-Cooled BMC Credentials It is necessary to set the default credentials of all
 This procedure is outlined in Change Air-Cooled BMC Credentials.
 Liquid-Cooled BMC Credentials As with air-cooled BMCs, liquid-cooled BMCs also need their credentials changed.
 This procedure is outlined in Change Liquid-Cooled BMC Credentials.</description>
-    </item>
-    
-    <item>
-      <title>Fresh Install Setting NodeBMC And Routerbmc Redfish Credentials</title>
-      <link>/docs-csm/en-13/operations/bare_metal/change_river_bmc_credentials/</link>
-      <pubDate>Tue, 13 Sep 2022 03:53:41 +0000</pubDate>
-      
-      <guid>/docs-csm/en-13/operations/bare_metal/change_river_bmc_credentials/</guid>
-      <description>Fresh Install: Setting NodeBMC and RouterBMC Redfish Credentials These steps are performed before the installation of Shasta System Management or HPCM management software stacks. The goal is to set the BMC Redfish credentials to values that the management software will be expecting so that all software systems work smoothly with the Redfish hardware.
-Prerequisites Before doing these operations, the following is assumed:
- There is a workstation or laptop which can access all target BMCs.</description>
     </item>
     
   </channel>
